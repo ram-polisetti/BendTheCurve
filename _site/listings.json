@@ -1,12 +1,30 @@
 [
   {
+    "listing": "/posts.html",
+    "items": [
+      "/posts/bend-the-curve-intro/index.html",
+      "/posts/Hahaha copy/index.html",
+      "/posts/welcome/index.html",
+      "/posts/Hahaha/index.html",
+      "/posts/post-with-code/index.html",
+      "/posts/intro-to-sklearn/index.html",
+      "/posts/intro-to-pytorch/index.html",
+      "/posts/data-preprocessing/index.html",
+      "/posts/data-viz-plotly/index.html"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
       "/posts/bend-the-curve-intro/index.html",
       "/posts/Hahaha copy/index.html",
       "/posts/welcome/index.html",
       "/posts/Hahaha/index.html",
-      "/posts/post-with-code/index.html"
+      "/posts/post-with-code/index.html",
+      "/posts/intro-to-sklearn/index.html",
+      "/posts/intro-to-pytorch/index.html",
+      "/posts/data-preprocessing/index.html",
+      "/posts/data-viz-plotly/index.html"
     ]
   }
 ]

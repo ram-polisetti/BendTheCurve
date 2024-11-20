@@ -6,23 +6,64 @@ website:
   title: "BendThe-Curve"
   site-url: "https://ram-polisetti.github.io/BendTheCurve/"
   repo-url: "https://github.com/ram-polisetti/BendTheCurve"
+  page-navigation: true
   navbar:
+    background: dark
+    search: true
+    left:
+      - text: "Home"
+        file: index.qmd
+      - text: "Posts"
+        file: posts.qmd
+      - text: "About"
+        file: about.qmd
     right:
-      - about.qmd
       - icon: github
         href: https://github.com/ram-polisetti/BendTheCurve
       - icon: twitter
         href: https://twitter.com
 
+  sidebar:
+    style: docked
+    contents:
+      - section: "Topics"
+        contents:
+          - text: "Machine Learning"
+            href: posts.qmd#category=machine-learning
+          - text: "Deep Learning"
+            href: posts.qmd#category=deep-learning
+          - text: "Data Science"
+            href: posts.qmd#category=data-science
+          - text: "Data Visualization"
+            href: posts.qmd#category=data-visualization
+          - text: "Python"
+            href: posts.qmd#category=python
+          - text: "Tutorials"
+            href: posts.qmd#category=tutorial
+
 format:
   html:
-    theme: cosmo
-    css: styles.css
+    theme:
+      light: [flatly, styles.scss]
+      dark: [darkly, styles.scss]
+    code-link: true
+    code-copy: true
+    code-fold: show
+    highlight-style: github
     toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    fig-responsive: true
+    citations-hover: true
+    footnotes-hover: true
 
 execute:
   freeze: auto
   warning: false
   error: false
+  daemon: false
 
 jupyter: python3
+
+python:
+  path: "/Users/rampolisetti/Github/bendthecurve"

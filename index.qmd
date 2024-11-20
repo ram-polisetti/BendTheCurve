@@ -1,12 +1,29 @@
 ---
 title: "BendThe-Curve"
+subtitle: "A Journey Through Machine Learning & Data Science"
 listing:
   contents: posts
   sort: "date desc"
-  type: default
+  type: grid
   categories: true
   sort-ui: true
   filter-ui: true
+  fields: [date, title, reading-time, description, categories, image]
+  max-items: 3
+  feed: true
 page-layout: full
 title-block-banner: true
 ---
+
+## Welcome to BendThe-Curve! 🚀
+
+This blog documents my journey through the fascinating world of Machine Learning and Data Science. Here, I share:
+
+- 📊 Data Analysis Projects
+- 🤖 Machine Learning Experiments
+- 🐍 Python Programming Tips
+- 📚 Learning Resources & Insights
+
+### Latest Posts
+
+Below are my most recent explorations. Check out the [Posts](/posts.qmd) page for the complete collection.

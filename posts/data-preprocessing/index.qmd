@@ -1,0 +1,147 @@
+---
+title: "Data Preprocessing in Python"
+author: "Ram Polisetti"
+date: "2024-03-19"
+categories: [data-science, python, tutorial, machine-learning]
+image: "preprocessing.png"
+description: "A comprehensive guide to data preprocessing techniques in Python, covering handling missing values, scaling, and feature engineering."
+---
+
+# Data Preprocessing in Python
+
+Data preprocessing is a crucial step in any data science project. In this post, we'll explore common preprocessing techniques and how to implement them using Python's popular data science libraries.
+
+## Setup and Sample Data
+
+```{python}
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.impute import SimpleImputer
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set random seed and plot style
+np.random.seed(42)
+plt.style.use('default')
+sns.set_theme()
+
+# Create sample dataset with common preprocessing challenges
+n_samples = 1000
+data = {
+    'age': np.random.normal(35, 10, n_samples),
+    'income': np.random.lognormal(10, 1, n_samples),
+    'education_years': np.random.randint(8, 22, n_samples),
+    'job_category': np.random.choice(['Tech', 'Finance', 'Healthcare', 'Other'], n_samples),
+    'satisfaction_score': np.random.randint(1, 11, n_samples)
+}
+
+# Add some missing values
+df = pd.DataFrame(data)
+df.loc[np.random.choice(n_samples, 100), 'income'] = np.nan
+df.loc[np.random.choice(n_samples, 50), 'education_years'] = np.nan
+df.loc[np.random.choice(n_samples, 30), 'job_category'] = np.nan
+
+# Display initial data info
+print("Initial Dataset Info:")
+print(df.info())
+print("\nMissing Values:")
+print(df.isnull().sum())
+```
+
+## Handling Missing Values
+
+```{python}
+# Function to handle missing values
+def handle_missing_values(df):
+    # Numeric columns: fill with median
+    numeric_imputer = SimpleImputer(strategy='median')
+    df[['income', 'education_years']] = numeric_imputer.fit_transform(df[['income', 'education_years']])
+    
+    # Categorical columns: fill with mode
+    categorical_imputer = SimpleImputer(strategy='most_frequent')
+    df[['job_category']] = categorical_imputer.fit_transform(df[['job_category']])
+    
+    return df
+
+# Handle missing values
+df_clean = df.copy()
+df_clean = handle_missing_values(df_clean)
+
+print("\nMissing Values After Imputation:")
+print(df_clean.isnull().sum())
+```
+
+## Feature Scaling
+
+```{python}
+# Scale numeric features
+scaler = StandardScaler()
+numeric_cols = ['age', 'income', 'education_years']
+df_clean[numeric_cols] = scaler.fit_transform(df_clean[numeric_cols])
+
+# Visualize scaled features
+plt.figure(figsize=(15, 5))
+for i, col in enumerate(numeric_cols, 1):
+    plt.subplot(1, 3, i)
+    sns.histplot(df_clean[col], bins=30, kde=True)
+    plt.title(f'Distribution of Scaled {col}')
+plt.tight_layout()
+plt.show()
+```
+
+## Categorical Encoding
+
+```{python}
+# Encode categorical variables
+label_encoder = LabelEncoder()
+df_clean['job_category_encoded'] = label_encoder.fit_transform(df_clean['job_category'])
+
+# Visualize categorical distribution
+plt.figure(figsize=(10, 5))
+sns.countplot(data=df_clean, x='job_category')
+plt.title('Distribution of Job Categories')
+plt.xticks(rotation=45)
+plt.show()
+```
+
+## Feature Engineering
+
+```{python}
+# Create new features
+df_clean['income_per_education'] = np.exp(df_clean['income']) / (df_clean['education_years'] + 1)  # Add 1 to avoid division by zero
+df_clean['is_high_satisfaction'] = (df_clean['satisfaction_score'] >= 8).astype(int)
+
+# Visualize engineered features
+plt.figure(figsize=(12, 5))
+
+plt.subplot(1, 2, 1)
+sns.boxplot(data=df_clean, x='job_category', y='income_per_education')
+plt.title('Income per Education Year by Job Category')
+plt.xticks(rotation=45)
+
+plt.subplot(1, 2, 2)
+sns.barplot(data=df_clean, x='job_category', y='is_high_satisfaction')
+plt.title('High Satisfaction Rate by Job Category')
+plt.xticks(rotation=45)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Key Takeaways
+
+In this tutorial, we learned essential data preprocessing techniques:
+
+1. Handling missing values using imputation
+2. Scaling numeric features
+3. Encoding categorical variables
+4. Creating new features through feature engineering
+
+These techniques are crucial for preparing your data for machine learning models. In future posts, we'll explore:
+- Advanced feature engineering techniques
+- Handling imbalanced datasets
+- Dealing with outliers
+- Automated feature selection
+
+Stay tuned!

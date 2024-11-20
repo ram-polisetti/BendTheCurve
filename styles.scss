@@ -1,0 +1,135 @@
+/*-- scss:defaults --*/
+
+// Import fonts
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;800&display=swap');
+
+// Colors
+$primary: #2C3E50;
+$secondary: #95A5A6;
+$success: #18BC9C;
+$info: #3498DB;
+$warning: #F39C12;
+$danger: #E74C3C;
+$light: #ECF0F1;
+$dark: #2C3E50;
+
+// Base document colors
+$body-bg: #FFFFFF;
+$body-color: $dark;
+$link-color: $info;
+$selection-bg: $info;
+
+// Font families
+$font-family-sans-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace: "Fira Code", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+// Headings
+$headings-font-weight: 600;
+$headings-color: $primary;
+
+/*-- scss:rules --*/
+
+// Custom styles
+.navbar {
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.sidebar {
+    font-family: $font-family-sans-serif;
+    
+    .sidebar-title {
+        font-weight: 600;
+    }
+}
+
+// Code blocks
+pre {
+    border-radius: 4px;
+    border: 1px solid #e1e4e8;
+    background-color: #f6f8fa;
+}
+
+.cell-output pre {
+    margin-top: 0.5em;
+    background-color: #f8f9fa;
+    border: 1px solid #eaecef;
+}
+
+// Cards for blog posts
+.quarto-grid-item {
+    border-radius: 8px;
+    transition: transform 0.2s;
+    
+    &:hover {
+        transform: translateY(-3px);
+    }
+    
+    .card {
+        border: none;
+        box-shadow: 0 4px 6px rgba(0,0,0,.1);
+        
+        .card-title {
+            font-weight: 600;
+        }
+        
+        .card-subtitle {
+            color: $secondary;
+        }
+    }
+}
+
+// Category pills
+.quarto-category {
+    background-color: $light;
+    color: $dark;
+    padding: 0.2em 0.8em;
+    border-radius: 1em;
+    font-size: 0.8em;
+    font-weight: 500;
+    
+    &:hover {
+        background-color: $info;
+        color: white;
+    }
+}
+
+// Table of contents
+#toc-title {
+    font-weight: 600;
+    color: $primary;
+}
+
+// Figures
+figure {
+    margin: 1.5em 0;
+    
+    figcaption {
+        margin-top: 0.5em;
+        font-size: 0.9em;
+        color: $secondary;
+    }
+}
+
+// Dark mode adjustments
+[data-theme="dark"] {
+    pre {
+        background-color: #2d333b;
+        border-color: #444c56;
+    }
+    
+    .cell-output pre {
+        background-color: #22272e;
+        border-color: #373e47;
+    }
+    
+    .quarto-category {
+        background-color: #373e47;
+        color: #adbac7;
+    }
+}
+
+// Math equations
+.math {
+    font-size: 1.1em;
+}
