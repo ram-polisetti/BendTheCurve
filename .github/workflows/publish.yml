@@ -3,22 +3,31 @@ name: Publish to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
-  publish:
+  build-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Check out
+      - name: Check out repository
         uses: actions/checkout@v3
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          version: pre-release
+          version: 1.3.450
 
-      - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
+      - name: Install TinyTeX
+        uses: quarto-dev/quarto-actions/setup-tinytex@v2
+        
+      - name: Render Quarto Project
+        run: |
+          quarto render
+          
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          folder: _site
+          branch: gh-pages

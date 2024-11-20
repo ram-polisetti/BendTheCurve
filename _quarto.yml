@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: _site
 
 website:
   title: "BendThe-Curve"
@@ -9,10 +10,12 @@ website:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
+        href: https://github.com/ram-polisetti/BendTheCurve
       - icon: twitter
         href: https://twitter.com
+
 format:
   html:
     theme: cosmo
     css: styles.css
+    toc: true
