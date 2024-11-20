@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>BendThe-Curve</title>
+<link>https://ram-polisetti.github.io/BendTheCurve/posts.html</link>
+<atom:link href="https://ram-polisetti.github.io/BendTheCurve/posts.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.5.57</generator>
+<lastBuildDate>Wed, 20 Nov 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Welcome to BendTheCurve</title>
+  <dc:creator>Ram Polisetti</dc:creator>
+  <link>https://ram-polisetti.github.io/BendTheCurve/posts/bend-the-curve-intro/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="welcome-to-bendthecurve" class="level1">
+<h1>Welcome to BendTheCurve</h1>
+<p>I’m excited to introduce BendTheCurve, a platform dedicated to exploring and sharing insights about data science, machine learning, and their real-world applications. Here, we’ll dive deep into:</p>
+<section id="what-to-expect" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-expect">What to Expect</h2>
+<ul>
+<li><strong>Data Science Insights</strong>: Regular posts about data analysis, visualization, and interpretation</li>
+<li><strong>Machine Learning Deep Dives</strong>: Exploring both basic and advanced ML concepts</li>
+<li><strong>Practical Tutorials</strong>: Hands-on guides and code examples</li>
+<li><strong>Industry Applications</strong>: Real-world case studies and applications</li>
+</ul>
+</section>
+<section id="join-the-journey" class="level2">
+<h2 class="anchored" data-anchor-id="join-the-journey">Join the Journey</h2>
+<p>Whether you’re a beginner in data science or an experienced practitioner, BendTheCurve aims to provide valuable content that helps you grow in your data science journey.</p>
+<p>Stay tuned for upcoming posts!</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>welcome</category>
+  <category>introduction</category>
+  <guid>https://ram-polisetti.github.io/BendTheCurve/posts/bend-the-curve-intro/</guid>
+  <pubDate>Wed, 20 Nov 2024 05:00:00 GMT</pubDate>
+  <media:content url="https://ram-polisetti.github.io/BendTheCurve/posts/bend-the-curve-intro/image.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Welcome To My Blog</title>
+  <dc:creator>Tristan O&#39;Malley</dc:creator>
+  <link>https://ram-polisetti.github.io/BendTheCurve/posts/Hahaha copy/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This is the first post in a Quarto blog. Welcome!</p>
+<p><img src="https://ram-polisetti.github.io/BendTheCurve/posts/Hahaha copy/thumbnail.jpg" class="img-fluid"></p>
+<p>Since this post doesn’t specify an explicit <code>image</code>, the first image in the post will be used in the listing page of posts.</p>
+
+
+
+ ]]></description>
+  <category>news</category>
+  <guid>https://ram-polisetti.github.io/BendTheCurve/posts/Hahaha copy/</guid>
+  <pubDate>Sun, 17 Nov 2024 05:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Welcome To My Blog</title>
+  <dc:creator>Tristan O&#39;Malley</dc:creator>
+  <link>https://ram-polisetti.github.io/BendTheCurve/posts/welcome/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This is the first post in a Quarto blog. Welcome!</p>
+<p><img src="https://ram-polisetti.github.io/BendTheCurve/posts/welcome/thumbnail.jpg" class="img-fluid"></p>
+<p>Since this post doesn’t specify an explicit <code>image</code>, the first image in the post will be used in the listing page of posts.</p>
+
+
+
+ ]]></description>
+  <category>news</category>
+  <guid>https://ram-polisetti.github.io/BendTheCurve/posts/welcome/</guid>
+  <pubDate>Sun, 17 Nov 2024 05:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Welcome To My Blog</title>
+  <dc:creator>Tristan O&#39;Malley</dc:creator>
+  <link>https://ram-polisetti.github.io/BendTheCurve/posts/Hahaha/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This is the first post in a Quarto blog. Welcome!</p>
+<p><img src="https://ram-polisetti.github.io/BendTheCurve/posts/Hahaha/thumbnail.jpg" class="img-fluid"></p>
+<p>Since this post doesn’t specify an explicit <code>image</code>, the first image in the post will be used in the listing page of posts.</p>
+
+
+
+ ]]></description>
+  <category>news</category>
+  <guid>https://ram-polisetti.github.io/BendTheCurve/posts/Hahaha/</guid>
+  <pubDate>Sun, 17 Nov 2024 05:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Data Analysis with Python</title>
+  <dc:creator>Ram Polisetti</dc:creator>
+  <link>https://ram-polisetti.github.io/BendTheCurve/posts/post-with-code/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="data-analysis-with-python-utilities" class="level1">
+<h1>Data Analysis with Python Utilities</h1>
+<p>In this post, we’ll demonstrate how to use our custom utility functions for data analysis and visualization. We’ll analyze a sample dataset of daily temperature readings.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>First, let’s import our utility functions and create some sample data:</p>
+<div id="5ac49154" class="cell" data-execution_count="1">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Add project root to Python path</span></span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> sys</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> os</span>
+<span id="cb1-4">sys.path.append(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'/Users/rampolisetti/Github/bendthecurve'</span>)</span>
+<span id="cb1-5"></span>
+<span id="cb1-6"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-7"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span>
+<span id="cb1-8"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> datetime <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> datetime, timedelta</span>
+<span id="cb1-9"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> utils.plotting <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> plot_distribution, time_series_plot</span>
+<span id="cb1-10"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> utils.data_prep <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> create_features</span>
+<span id="cb1-11"></span>
+<span id="cb1-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create sample temperature data</span></span>
+<span id="cb1-13">np.random.seed(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42</span>)</span>
+<span id="cb1-14">dates <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.date_range(start<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'2023-01-01'</span>, end<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'2023-12-31'</span>, freq<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'D'</span>)</span>
+<span id="cb1-15">temperatures <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.random.normal(loc<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>, scale<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(dates))</span>
+<span id="cb1-16">temperatures <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> temperatures <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> np.sin(np.arange(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(dates)) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> np.pi <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">365</span>)  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Add seasonal pattern</span></span>
+<span id="cb1-17"></span>
+<span id="cb1-18"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create DataFrame</span></span>
+<span id="cb1-19">df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.DataFrame({</span>
+<span id="cb1-20">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'date'</span>: dates,</span>
+<span id="cb1-21">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'temperature'</span>: temperatures</span>
+<span id="cb1-22">})</span></code></pre></div>
+</details>
+</div>
+</section>
+<section id="data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="data-analysis">Data Analysis</h2>
+<p>Let’s analyze the distribution of temperatures and create some time-based features:</p>
+<div id="b3683249" class="cell" data-execution_count="2">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Plot temperature distribution</span></span>
+<span id="cb2-2">fig1 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plot_distribution(</span>
+<span id="cb2-3">    df[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'temperature'</span>],</span>
+<span id="cb2-4">    title<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Distribution of Daily Temperatures'</span>,</span>
+<span id="cb2-5">    xlabel<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Temperature (°C)'</span>,</span>
+<span id="cb2-6">    bins<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span></span>
+<span id="cb2-7">)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://ram-polisetti.github.io/BendTheCurve/posts/post-with-code/index_files/figure-html/cell-3-output-1.png" width="808" height="523" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, let’s look at the time series with a 7-day moving average:</p>
+<div id="63ed223e" class="cell" data-execution_count="3">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create time series plot</span></span>
+<span id="cb3-2">fig2 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> time_series_plot(</span>
+<span id="cb3-3">    df.set_index(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'date'</span>)[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'temperature'</span>],</span>
+<span id="cb3-4">    title<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Daily Temperatures Over Time'</span>,</span>
+<span id="cb3-5">    ylabel<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Temperature (°C)'</span>,</span>
+<span id="cb3-6">    rolling_window<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span></span>
+<span id="cb3-7">)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://ram-polisetti.github.io/BendTheCurve/posts/post-with-code/index_files/figure-html/cell-4-output-1.png" width="957" height="559" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="feature-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="feature-engineering">Feature Engineering</h2>
+<p>We can use our utility functions to create time-based features:</p>
+<div id="684ebfbb" class="cell" data-execution_count="4">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create time-based features</span></span>
+<span id="cb4-2">df_features <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> create_features(</span>
+<span id="cb4-3">    df,</span>
+<span id="cb4-4">    date_column<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'date'</span>,</span>
+<span id="cb4-5">    cyclical_features<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span></span>
+<span id="cb4-6">)</span>
+<span id="cb4-7"></span>
+<span id="cb4-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Display the first few rows with new features</span></span>
+<span id="cb4-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">DataFrame with engineered features:"</span>)</span>
+<span id="cb4-10"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(df_features.head())</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+DataFrame with engineered features:
+        date  temperature  year  month  day  day_of_week  month_sin  \
+0 2023-01-01    22.483571  2023      1    1            6        0.5   
+1 2023-01-02    19.480812  2023      1    2            0        0.5   
+2 2023-01-03    23.582659  2023      1    3            1        0.5   
+3 2023-01-04    28.131346  2023      1    4            2        0.5   
+4 2023-01-05    19.517257  2023      1    5            3        0.5   
+
+   month_cos   dow_sin   dow_cos  
+0   0.866025 -0.781831  0.623490  
+1   0.866025  0.000000  1.000000  
+2   0.866025  0.781831  0.623490  
+3   0.866025  0.974928 -0.222521  
+4   0.866025  0.433884 -0.900969  </code></pre>
+</div>
+</div>
+</section>
+<section id="analysis-of-seasonal-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-of-seasonal-patterns">Analysis of Seasonal Patterns</h2>
+<p>Let’s examine how temperature varies by month using a box plot:</p>
+<div id="9be4e8cb" class="cell" data-execution_count="5">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> seaborn <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sns</span>
+<span id="cb6-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb6-3"></span>
+<span id="cb6-4">plt.figure(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">12</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>))</span>
+<span id="cb6-5">sns.boxplot(data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>df_features, x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'month'</span>, y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'temperature'</span>)</span>
+<span id="cb6-6">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Temperature Distribution by Month'</span>)</span>
+<span id="cb6-7">plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Month'</span>)</span>
+<span id="cb6-8">plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Temperature (°C)'</span>)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>Text(0, 0.5, 'Temperature (°C)')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://ram-polisetti.github.io/BendTheCurve/posts/post-with-code/index_files/figure-html/cell-6-output-2.png" width="957" height="523" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This example demonstrates how our utility functions make it easy to: 1. Create informative visualizations 2. Add time-based features 3. Analyze seasonal patterns</p>
+<p>In future posts, we’ll explore more advanced analyses using these utilities.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>analysis</category>
+  <category>python</category>
+  <category>visualization</category>
+  <guid>https://ram-polisetti.github.io/BendTheCurve/posts/post-with-code/</guid>
+  <pubDate>Tue, 19 Mar 2024 04:00:00 GMT</pubDate>
+  <media:content url="https://ram-polisetti.github.io/BendTheCurve/posts/post-with-code/image.jpg" medium="image" type="image/jpeg"/>
+</item>
+</channel>
+</rss>

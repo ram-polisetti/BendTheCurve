@@ -1,73 +1,24 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "ML Journey Posts",
     "section": "",
-    "text": "About this blog"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nWelcome to BendTheCurve\n\n\n1 min\n\n\n\nwelcome\n\n\nintroduction\n\n\n\n\n\n\n\nNov 20, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n1 min\n\n\n\nnews\n\n\n\n\n\n\n\nNov 17, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n1 min\n\n\n\nnews\n\n\n\n\n\n\n\nNov 17, 2024\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n1 min\n\n\n\nnews\n\n\n\n\n\n\n\nNov 17, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Analysis with Python\n\n\n2 min\n\n\n\nanalysis\n\n\npython\n\n\nvisualization\n\n\n\n\n\n\n\nMar 19, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/Hahaha/index.html",
-    "href": "posts/Hahaha/index.html",
-    "title": "Welcome To My Blog",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BendThe-Curve",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+    "text": "This blog documents my journey through the fascinating world of Machine Learning and Data Science. Here, I share:\n\n📊 Data Analysis Projects\n🤖 Machine Learning Experiments\n🐍 Python Programming Tips\n📚 Learning Resources & Insights\n\n\n\nBelow are my most recent explorations. Check out the Posts page for the complete collection."
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
+    "objectID": "index.html#welcome-to-bendthe-curve",
+    "href": "index.html#welcome-to-bendthe-curve",
+    "title": "BendThe-Curve",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
-  },
-  {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Data Analysis with Python",
-    "section": "",
-    "text": "In this post, we’ll demonstrate how to use our custom utility functions for data analysis and visualization. We’ll analyze a sample dataset of daily temperature readings.\n\n\nFirst, let’s import our utility functions and create some sample data:\n\n# Add project root to Python path\nimport sys\nimport os\nsys.path.append('/Users/rampolisetti/Github/bendthecurve')\n\nimport numpy as np\nimport pandas as pd\nfrom datetime import datetime, timedelta\nfrom utils.plotting import plot_distribution, time_series_plot\nfrom utils.data_prep import create_features\n\n# Create sample temperature data\nnp.random.seed(42)\ndates = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')\ntemperatures = np.random.normal(loc=20, scale=5, size=len(dates))\ntemperatures = temperatures + 10 * np.sin(np.arange(len(dates)) * 2 * np.pi / 365)  # Add seasonal pattern\n\n# Create DataFrame\ndf = pd.DataFrame({\n    'date': dates,\n    'temperature': temperatures\n})\n\n\n\n\nLet’s analyze the distribution of temperatures and create some time-based features:\n\n# Plot temperature distribution\nfig1 = plot_distribution(\n    df['temperature'],\n    title='Distribution of Daily Temperatures',\n    xlabel='Temperature (°C)',\n    bins=30\n)\n\n\n\n\n\n\n\n\nNow, let’s look at the time series with a 7-day moving average:\n\n# Create time series plot\nfig2 = time_series_plot(\n    df.set_index('date')['temperature'],\n    title='Daily Temperatures Over Time',\n    ylabel='Temperature (°C)',\n    rolling_window=7\n)\n\n\n\n\n\n\n\n\n\n\n\nWe can use our utility functions to create time-based features:\n\n# Create time-based features\ndf_features = create_features(\n    df,\n    date_column='date',\n    cyclical_features=True\n)\n\n# Display the first few rows with new features\nprint(\"\\nDataFrame with engineered features:\")\nprint(df_features.head())\n\n\nDataFrame with engineered features:\n        date  temperature  year  month  day  day_of_week  month_sin  \\\n0 2023-01-01    22.483571  2023      1    1            6        0.5   \n1 2023-01-02    19.480812  2023      1    2            0        0.5   \n2 2023-01-03    23.582659  2023      1    3            1        0.5   \n3 2023-01-04    28.131346  2023      1    4            2        0.5   \n4 2023-01-05    19.517257  2023      1    5            3        0.5   \n\n   month_cos   dow_sin   dow_cos  \n0   0.866025 -0.781831  0.623490  \n1   0.866025  0.000000  1.000000  \n2   0.866025  0.781831  0.623490  \n3   0.866025  0.974928 -0.222521  \n4   0.866025  0.433884 -0.900969  \n\n\n\n\n\nLet’s examine how temperature varies by month using a box plot:\n\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n\nplt.figure(figsize=(12, 6))\nsns.boxplot(data=df_features, x='month', y='temperature')\nplt.title('Temperature Distribution by Month')\nplt.xlabel('Month')\nplt.ylabel('Temperature (°C)')\n\nText(0, 0.5, 'Temperature (°C)')\n\n\n\n\n\n\n\n\n\n\n\n\nThis example demonstrates how our utility functions make it easy to: 1. Create informative visualizations 2. Add time-based features 3. Analyze seasonal patterns\nIn future posts, we’ll explore more advanced analyses using these utilities."
-  },
-  {
-    "objectID": "posts/post-with-code/index.html#setup",
-    "href": "posts/post-with-code/index.html#setup",
-    "title": "Data Analysis with Python",
-    "section": "",
-    "text": "First, let’s import our utility functions and create some sample data:\n\n# Add project root to Python path\nimport sys\nimport os\nsys.path.append('/Users/rampolisetti/Github/bendthecurve')\n\nimport numpy as np\nimport pandas as pd\nfrom datetime import datetime, timedelta\nfrom utils.plotting import plot_distribution, time_series_plot\nfrom utils.data_prep import create_features\n\n# Create sample temperature data\nnp.random.seed(42)\ndates = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')\ntemperatures = np.random.normal(loc=20, scale=5, size=len(dates))\ntemperatures = temperatures + 10 * np.sin(np.arange(len(dates)) * 2 * np.pi / 365)  # Add seasonal pattern\n\n# Create DataFrame\ndf = pd.DataFrame({\n    'date': dates,\n    'temperature': temperatures\n})"
-  },
-  {
-    "objectID": "posts/post-with-code/index.html#data-analysis",
-    "href": "posts/post-with-code/index.html#data-analysis",
-    "title": "Data Analysis with Python",
-    "section": "",
-    "text": "Let’s analyze the distribution of temperatures and create some time-based features:\n\n# Plot temperature distribution\nfig1 = plot_distribution(\n    df['temperature'],\n    title='Distribution of Daily Temperatures',\n    xlabel='Temperature (°C)',\n    bins=30\n)\n\n\n\n\n\n\n\n\nNow, let’s look at the time series with a 7-day moving average:\n\n# Create time series plot\nfig2 = time_series_plot(\n    df.set_index('date')['temperature'],\n    title='Daily Temperatures Over Time',\n    ylabel='Temperature (°C)',\n    rolling_window=7\n)"
-  },
-  {
-    "objectID": "posts/post-with-code/index.html#feature-engineering",
-    "href": "posts/post-with-code/index.html#feature-engineering",
-    "title": "Data Analysis with Python",
-    "section": "",
-    "text": "We can use our utility functions to create time-based features:\n\n# Create time-based features\ndf_features = create_features(\n    df,\n    date_column='date',\n    cyclical_features=True\n)\n\n# Display the first few rows with new features\nprint(\"\\nDataFrame with engineered features:\")\nprint(df_features.head())\n\n\nDataFrame with engineered features:\n        date  temperature  year  month  day  day_of_week  month_sin  \\\n0 2023-01-01    22.483571  2023      1    1            6        0.5   \n1 2023-01-02    19.480812  2023      1    2            0        0.5   \n2 2023-01-03    23.582659  2023      1    3            1        0.5   \n3 2023-01-04    28.131346  2023      1    4            2        0.5   \n4 2023-01-05    19.517257  2023      1    5            3        0.5   \n\n   month_cos   dow_sin   dow_cos  \n0   0.866025 -0.781831  0.623490  \n1   0.866025  0.000000  1.000000  \n2   0.866025  0.781831  0.623490  \n3   0.866025  0.974928 -0.222521  \n4   0.866025  0.433884 -0.900969"
-  },
-  {
-    "objectID": "posts/post-with-code/index.html#analysis-of-seasonal-patterns",
-    "href": "posts/post-with-code/index.html#analysis-of-seasonal-patterns",
-    "title": "Data Analysis with Python",
-    "section": "",
-    "text": "Let’s examine how temperature varies by month using a box plot:\n\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n\nplt.figure(figsize=(12, 6))\nsns.boxplot(data=df_features, x='month', y='temperature')\nplt.title('Temperature Distribution by Month')\nplt.xlabel('Month')\nplt.ylabel('Temperature (°C)')\n\nText(0, 0.5, 'Temperature (°C)')"
-  },
-  {
-    "objectID": "posts/post-with-code/index.html#conclusion",
-    "href": "posts/post-with-code/index.html#conclusion",
-    "title": "Data Analysis with Python",
-    "section": "",
-    "text": "This example demonstrates how our utility functions make it easy to: 1. Create informative visualizations 2. Add time-based features 3. Analyze seasonal patterns\nIn future posts, we’ll explore more advanced analyses using these utilities."
-  },
-  {
-    "objectID": "posts/Hahaha copy/index.html",
-    "href": "posts/Hahaha copy/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+    "text": "This blog documents my journey through the fascinating world of Machine Learning and Data Science. Here, I share:\n\n📊 Data Analysis Projects\n🤖 Machine Learning Experiments\n🐍 Python Programming Tips\n📚 Learning Resources & Insights\n\n\n\nBelow are my most recent explorations. Check out the Posts page for the complete collection."
   },
   {
     "objectID": "posts/bend-the-curve-intro/index.html",
@@ -91,10 +42,94 @@
     "text": "Whether you’re a beginner in data science or an experienced practitioner, BendTheCurve aims to provide valuable content that helps you grow in your data science journey.\nStay tuned for upcoming posts!"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BendThe-Curve",
+    "objectID": "posts/Hahaha copy/index.html",
+    "href": "posts/Hahaha copy/index.html",
+    "title": "Welcome To My Blog",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nWelcome to BendTheCurve\n\n\n\n\n\n\nwelcome\n\n\nintroduction\n\n\n\n\n\n\n\n\n\nNov 20, 2024\n\n\nRam Polisetti\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nNov 17, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nNov 17, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nNov 17, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\n\n\n\n\n\n\nData Analysis with Python\n\n\n\n\n\n\nanalysis\n\n\npython\n\n\nvisualization\n\n\n\n\n\n\n\n\n\nMar 19, 2024\n\n\nRam Polisetti\n\n\n\n\n\n\nNo matching items"
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Data Analysis with Python",
+    "section": "",
+    "text": "In this post, we’ll demonstrate how to use our custom utility functions for data analysis and visualization. We’ll analyze a sample dataset of daily temperature readings.\n\n\nFirst, let’s import our utility functions and create some sample data:\n\n\nCode\n# Add project root to Python path\nimport sys\nimport os\nsys.path.append('/Users/rampolisetti/Github/bendthecurve')\n\nimport numpy as np\nimport pandas as pd\nfrom datetime import datetime, timedelta\nfrom utils.plotting import plot_distribution, time_series_plot\nfrom utils.data_prep import create_features\n\n# Create sample temperature data\nnp.random.seed(42)\ndates = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')\ntemperatures = np.random.normal(loc=20, scale=5, size=len(dates))\ntemperatures = temperatures + 10 * np.sin(np.arange(len(dates)) * 2 * np.pi / 365)  # Add seasonal pattern\n\n# Create DataFrame\ndf = pd.DataFrame({\n    'date': dates,\n    'temperature': temperatures\n})\n\n\n\n\n\nLet’s analyze the distribution of temperatures and create some time-based features:\n\n\nCode\n# Plot temperature distribution\nfig1 = plot_distribution(\n    df['temperature'],\n    title='Distribution of Daily Temperatures',\n    xlabel='Temperature (°C)',\n    bins=30\n)\n\n\n\n\n\n\n\n\n\nNow, let’s look at the time series with a 7-day moving average:\n\n\nCode\n# Create time series plot\nfig2 = time_series_plot(\n    df.set_index('date')['temperature'],\n    title='Daily Temperatures Over Time',\n    ylabel='Temperature (°C)',\n    rolling_window=7\n)\n\n\n\n\n\n\n\n\n\n\n\n\nWe can use our utility functions to create time-based features:\n\n\nCode\n# Create time-based features\ndf_features = create_features(\n    df,\n    date_column='date',\n    cyclical_features=True\n)\n\n# Display the first few rows with new features\nprint(\"\\nDataFrame with engineered features:\")\nprint(df_features.head())\n\n\n\nDataFrame with engineered features:\n        date  temperature  year  month  day  day_of_week  month_sin  \\\n0 2023-01-01    22.483571  2023      1    1            6        0.5   \n1 2023-01-02    19.480812  2023      1    2            0        0.5   \n2 2023-01-03    23.582659  2023      1    3            1        0.5   \n3 2023-01-04    28.131346  2023      1    4            2        0.5   \n4 2023-01-05    19.517257  2023      1    5            3        0.5   \n\n   month_cos   dow_sin   dow_cos  \n0   0.866025 -0.781831  0.623490  \n1   0.866025  0.000000  1.000000  \n2   0.866025  0.781831  0.623490  \n3   0.866025  0.974928 -0.222521  \n4   0.866025  0.433884 -0.900969  \n\n\n\n\n\nLet’s examine how temperature varies by month using a box plot:\n\n\nCode\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n\nplt.figure(figsize=(12, 6))\nsns.boxplot(data=df_features, x='month', y='temperature')\nplt.title('Temperature Distribution by Month')\nplt.xlabel('Month')\nplt.ylabel('Temperature (°C)')\n\n\nText(0, 0.5, 'Temperature (°C)')\n\n\n\n\n\n\n\n\n\n\n\n\nThis example demonstrates how our utility functions make it easy to: 1. Create informative visualizations 2. Add time-based features 3. Analyze seasonal patterns\nIn future posts, we’ll explore more advanced analyses using these utilities."
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#setup",
+    "href": "posts/post-with-code/index.html#setup",
+    "title": "Data Analysis with Python",
+    "section": "",
+    "text": "First, let’s import our utility functions and create some sample data:\n\n\nCode\n# Add project root to Python path\nimport sys\nimport os\nsys.path.append('/Users/rampolisetti/Github/bendthecurve')\n\nimport numpy as np\nimport pandas as pd\nfrom datetime import datetime, timedelta\nfrom utils.plotting import plot_distribution, time_series_plot\nfrom utils.data_prep import create_features\n\n# Create sample temperature data\nnp.random.seed(42)\ndates = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')\ntemperatures = np.random.normal(loc=20, scale=5, size=len(dates))\ntemperatures = temperatures + 10 * np.sin(np.arange(len(dates)) * 2 * np.pi / 365)  # Add seasonal pattern\n\n# Create DataFrame\ndf = pd.DataFrame({\n    'date': dates,\n    'temperature': temperatures\n})"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#data-analysis",
+    "href": "posts/post-with-code/index.html#data-analysis",
+    "title": "Data Analysis with Python",
+    "section": "",
+    "text": "Let’s analyze the distribution of temperatures and create some time-based features:\n\n\nCode\n# Plot temperature distribution\nfig1 = plot_distribution(\n    df['temperature'],\n    title='Distribution of Daily Temperatures',\n    xlabel='Temperature (°C)',\n    bins=30\n)\n\n\n\n\n\n\n\n\n\nNow, let’s look at the time series with a 7-day moving average:\n\n\nCode\n# Create time series plot\nfig2 = time_series_plot(\n    df.set_index('date')['temperature'],\n    title='Daily Temperatures Over Time',\n    ylabel='Temperature (°C)',\n    rolling_window=7\n)"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#feature-engineering",
+    "href": "posts/post-with-code/index.html#feature-engineering",
+    "title": "Data Analysis with Python",
+    "section": "",
+    "text": "We can use our utility functions to create time-based features:\n\n\nCode\n# Create time-based features\ndf_features = create_features(\n    df,\n    date_column='date',\n    cyclical_features=True\n)\n\n# Display the first few rows with new features\nprint(\"\\nDataFrame with engineered features:\")\nprint(df_features.head())\n\n\n\nDataFrame with engineered features:\n        date  temperature  year  month  day  day_of_week  month_sin  \\\n0 2023-01-01    22.483571  2023      1    1            6        0.5   \n1 2023-01-02    19.480812  2023      1    2            0        0.5   \n2 2023-01-03    23.582659  2023      1    3            1        0.5   \n3 2023-01-04    28.131346  2023      1    4            2        0.5   \n4 2023-01-05    19.517257  2023      1    5            3        0.5   \n\n   month_cos   dow_sin   dow_cos  \n0   0.866025 -0.781831  0.623490  \n1   0.866025  0.000000  1.000000  \n2   0.866025  0.781831  0.623490  \n3   0.866025  0.974928 -0.222521  \n4   0.866025  0.433884 -0.900969"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#analysis-of-seasonal-patterns",
+    "href": "posts/post-with-code/index.html#analysis-of-seasonal-patterns",
+    "title": "Data Analysis with Python",
+    "section": "",
+    "text": "Let’s examine how temperature varies by month using a box plot:\n\n\nCode\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n\nplt.figure(figsize=(12, 6))\nsns.boxplot(data=df_features, x='month', y='temperature')\nplt.title('Temperature Distribution by Month')\nplt.xlabel('Month')\nplt.ylabel('Temperature (°C)')\n\n\nText(0, 0.5, 'Temperature (°C)')"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#conclusion",
+    "href": "posts/post-with-code/index.html#conclusion",
+    "title": "Data Analysis with Python",
+    "section": "",
+    "text": "This example demonstrates how our utility functions make it easy to: 1. Create informative visualizations 2. Add time-based features 3. Analyze seasonal patterns\nIn future posts, we’ll explore more advanced analyses using these utilities."
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "posts/Hahaha/index.html",
+    "href": "posts/Hahaha/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Hi! I’m Ram Polisetti, a passionate learner exploring the world of Machine Learning and Data Science. Through BendThe-Curve, I document my learning journey, share insights, and build a community of fellow ML enthusiasts."
+  },
+  {
+    "objectID": "about.html#about-me",
+    "href": "about.html#about-me",
+    "title": "About",
+    "section": "",
+    "text": "Hi! I’m Ram Polisetti, a passionate learner exploring the world of Machine Learning and Data Science. Through BendThe-Curve, I document my learning journey, share insights, and build a community of fellow ML enthusiasts."
+  },
+  {
+    "objectID": "about.html#why-bendthe-curve",
+    "href": "about.html#why-bendthe-curve",
+    "title": "About",
+    "section": "Why “BendThe-Curve”?",
+    "text": "Why “BendThe-Curve”?\nThe name “BendThe-Curve” represents the exponential growth in learning and understanding that comes with consistent practice and exploration in the field of Machine Learning. It’s about:\n\n📈 Accelerating the learning process\n🎯 Finding optimal solutions\n🔄 Continuous improvement\n🌱 Growing together as a community"
+  },
+  {
+    "objectID": "about.html#blog-focus",
+    "href": "about.html#blog-focus",
+    "title": "About",
+    "section": "Blog Focus",
+    "text": "Blog Focus\nThis blog covers:\n\nMachine Learning Algorithms & Applications\nData Analysis & Visualization\nPython Programming\nReal-world ML Projects\nLearning Resources & Tips\n\nFeel free to reach out through any of the social links above. Let’s learn and grow together!"
   }
 ]
