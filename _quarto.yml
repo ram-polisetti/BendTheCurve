@@ -63,7 +63,7 @@ execute:
   error: false
   daemon: false
 
-jupyter: quarto-blog
+jupyter: python3
 
 python:
   path: "/Users/rampolisetti/Github/bendthecurve"
