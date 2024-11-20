@@ -7,11 +7,25 @@
     "text": "About this blog"
   },
   {
-    "objectID": "posts/post-with-code copy/index.html",
-    "href": "posts/post-with-code copy/index.html",
-    "title": "Post With Code",
+    "objectID": "posts/bend-the-curve-intro/index.html",
+    "href": "posts/bend-the-curve-intro/index.html",
+    "title": "Welcome to BendTheCurve",
     "section": "",
-    "text": "This is a post with executable code."
+    "text": "I’m excited to introduce BendTheCurve, a platform dedicated to exploring and sharing insights about data science, machine learning, and their real-world applications. Here, we’ll dive deep into:\n\n\n\nData Science Insights: Regular posts about data analysis, visualization, and interpretation\nMachine Learning Deep Dives: Exploring both basic and advanced ML concepts\nPractical Tutorials: Hands-on guides and code examples\nIndustry Applications: Real-world case studies and applications\n\n\n\n\nWhether you’re a beginner in data science or an experienced practitioner, BendTheCurve aims to provide valuable content that helps you grow in your data science journey.\nStay tuned for upcoming posts!"
+  },
+  {
+    "objectID": "posts/bend-the-curve-intro/index.html#what-to-expect",
+    "href": "posts/bend-the-curve-intro/index.html#what-to-expect",
+    "title": "Welcome to BendTheCurve",
+    "section": "",
+    "text": "Data Science Insights: Regular posts about data analysis, visualization, and interpretation\nMachine Learning Deep Dives: Exploring both basic and advanced ML concepts\nPractical Tutorials: Hands-on guides and code examples\nIndustry Applications: Real-world case studies and applications"
+  },
+  {
+    "objectID": "posts/bend-the-curve-intro/index.html#join-the-journey",
+    "href": "posts/bend-the-curve-intro/index.html#join-the-journey",
+    "title": "Welcome to BendTheCurve",
+    "section": "",
+    "text": "Whether you’re a beginner in data science or an experienced practitioner, BendTheCurve aims to provide valuable content that helps you grow in your data science journey.\nStay tuned for upcoming posts!"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -32,6 +46,6 @@
     "href": "index.html",
     "title": "BendThe-Curve",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nNov 20, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nNov 20, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nNov 17, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nNov 20, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to BendTheCurve\n\n\n\n\n\n\nwelcome\n\n\nintroduction\n\n\n\n\n\n\n\n\n\nNov 20, 2024\n\n\nRam Polisetti\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nNov 17, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   }
 ]
