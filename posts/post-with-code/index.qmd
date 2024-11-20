@@ -1,9 +1,107 @@
 ---
-title: "Post With Code"
-author: "Harlow Malloc"
-date: "2024-11-20"
-categories: [news, code, analysis]
+title: "Data Analysis with Python"
+author: "Ram Polisetti"
+date: "2024-03-19"
+categories: [analysis, python, visualization]
 image: "image.jpg"
 ---
 
-This is a post with executable code.
+# Data Analysis with Python Utilities
+
+In this post, we'll demonstrate how to use our custom utility functions for data analysis and visualization. We'll analyze a sample dataset of daily temperature readings.
+
+## Setup
+
+First, let's import our utility functions and create some sample data:
+
+```{python}
+# Add project root to Python path
+import sys
+import os
+sys.path.append('/Users/rampolisetti/Github/bendthecurve')
+
+import numpy as np
+import pandas as pd
+from datetime import datetime, timedelta
+from utils.plotting import plot_distribution, time_series_plot
+from utils.data_prep import create_features
+
+# Create sample temperature data
+np.random.seed(42)
+dates = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')
+temperatures = np.random.normal(loc=20, scale=5, size=len(dates))
+temperatures = temperatures + 10 * np.sin(np.arange(len(dates)) * 2 * np.pi / 365)  # Add seasonal pattern
+
+# Create DataFrame
+df = pd.DataFrame({
+    'date': dates,
+    'temperature': temperatures
+})
+```
+
+## Data Analysis
+
+Let's analyze the distribution of temperatures and create some time-based features:
+
+```{python}
+# Plot temperature distribution
+fig1 = plot_distribution(
+    df['temperature'],
+    title='Distribution of Daily Temperatures',
+    xlabel='Temperature (°C)',
+    bins=30
+)
+```
+
+Now, let's look at the time series with a 7-day moving average:
+
+```{python}
+# Create time series plot
+fig2 = time_series_plot(
+    df.set_index('date')['temperature'],
+    title='Daily Temperatures Over Time',
+    ylabel='Temperature (°C)',
+    rolling_window=7
+)
+```
+
+## Feature Engineering
+
+We can use our utility functions to create time-based features:
+
+```{python}
+# Create time-based features
+df_features = create_features(
+    df,
+    date_column='date',
+    cyclical_features=True
+)
+
+# Display the first few rows with new features
+print("\nDataFrame with engineered features:")
+print(df_features.head())
+```
+
+## Analysis of Seasonal Patterns
+
+Let's examine how temperature varies by month using a box plot:
+
+```{python}
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(12, 6))
+sns.boxplot(data=df_features, x='month', y='temperature')
+plt.title('Temperature Distribution by Month')
+plt.xlabel('Month')
+plt.ylabel('Temperature (°C)')
+```
+
+## Conclusion
+
+This example demonstrates how our utility functions make it easy to:
+1. Create informative visualizations
+2. Add time-based features
+3. Analyze seasonal patterns
+
+In future posts, we'll explore more advanced analyses using these utilities.
