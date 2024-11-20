@@ -3,6 +3,8 @@ project:
 
 website:
   title: "BendThe-Curve"
+  site-url: "https://ram-polisetti.github.io/BendTheCurve/"
+  repo-url: "https://github.com/ram-polisetti/BendTheCurve"
   navbar:
     right:
       - about.qmd
