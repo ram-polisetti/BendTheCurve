@@ -220,6 +220,187 @@ Where:
 - $B$ is number of bootstrap samples
 - $\beta$ is base learner stability
 
+## Practical Stability Analysis
+
+Let's implement some stability measures and visualize them:
+
+```{python}
+class StabilityAnalyzer:
+    def __init__(self, model_class, **model_params):
+        self.model_class = model_class
+        self.model_params = model_params
+        
+    def measure_hypothesis_stability(self, X, y, n_perturbations=10):
+        """Measure hypothesis stability by perturbing data points"""
+        m = len(X)
+        stabilities = []
+        
+        # Original model
+        base_model = self.model_class(**self.model_params)
+        base_model.fit(X, y)
+        base_preds = base_model.predict(X)
+        
+        for _ in range(n_perturbations):
+            # Randomly replace one point
+            idx = np.random.randint(m)
+            X_perturbed = X.copy()
+            y_perturbed = y.copy()
+            
+            # Add small noise to selected point
+            X_perturbed[idx] += np.random.normal(0, 0.1, X.shape[1])
+            
+            # Train perturbed model
+            perturbed_model = self.model_class(**self.model_params)
+            perturbed_model.fit(X_perturbed, y_perturbed)
+            perturbed_preds = perturbed_model.predict(X)
+            
+            # Calculate stability measure
+            stability = np.mean(np.abs(base_preds - perturbed_preds))
+            stabilities.append(stability)
+            
+        return np.mean(stabilities), np.std(stabilities)
+
+# Example usage with Ridge Regression
+def compare_model_stability():
+    # Generate synthetic data
+    np.random.seed(42)
+    X = np.random.randn(100, 2)
+    y = 0.5 * X[:, 0] + 0.3 * X[:, 1] + np.random.normal(0, 0.1, 100)
+    
+    # Compare stability with different regularization strengths
+    alphas = [0.01, 0.1, 1.0, 10.0]
+    stabilities = []
+    errors = []
+    
+    for alpha in alphas:
+        analyzer = StabilityAnalyzer(Ridge, alpha=alpha)
+        stability, error = analyzer.measure_hypothesis_stability(X, y)
+        stabilities.append(stability)
+        errors.append(error)
+    
+    # Plot results
+    plt.figure(figsize=(10, 6))
+    plt.errorbar(alphas, stabilities, yerr=errors, fmt='o-', capsize=5)
+    plt.xscale('log')
+    plt.xlabel('Regularization Strength (α)')
+    plt.ylabel('Stability Measure')
+    plt.title('Model Stability vs Regularization')
+    plt.grid(True, alpha=0.3)
+    plt.show()
+
+compare_model_stability()
+```
+
+:::{.callout-tip}
+## Interpreting Stability Results
+Lower values indicate more stable models. Notice how increasing regularization generally improves stability.
+:::
+
+## Cross-Validation Stability
+
+Let's visualize how different cross-validation strategies affect stability:
+
+```{python}
+def analyze_cv_stability(n_splits=[2, 5, 10], n_repeats=10):
+    """Analyze stability across different CV splits"""
+    from sklearn.model_selection import KFold
+    
+    # Generate data
+    X = np.random.randn(200, 2)
+    y = 0.5 * X[:, 0] + 0.3 * X[:, 1] + np.random.normal(0, 0.1, 200)
+    
+    results = {k: [] for k in n_splits}
+    
+    for k in n_splits:
+        for _ in range(n_repeats):
+            # Create k-fold split
+            kf = KFold(n_splits=k, shuffle=True)
+            fold_scores = []
+            
+            for train_idx, val_idx in kf.split(X):
+                # Train model
+                model = Ridge(alpha=1.0)
+                model.fit(X[train_idx], y[train_idx])
+                
+                # Get score
+                score = model.score(X[val_idx], y[val_idx])
+                fold_scores.append(score)
+            
+            # Calculate stability of scores
+            results[k].append(np.std(fold_scores))
+    
+    # Plot results
+    plt.figure(figsize=(10, 6))
+    plt.boxplot([results[k] for k in n_splits], labels=[f'{k}-fold' for k in n_splits])
+    plt.ylabel('Score Stability (std)')
+    plt.xlabel('Cross-Validation Strategy')
+    plt.title('Cross-Validation Stability Analysis')
+    plt.grid(True, alpha=0.3)
+    plt.show()
+
+analyze_cv_stability()
+```
+
+:::{.callout-note}
+## Cross-Validation Insight
+More folds generally lead to more stable results but require more computational resources.
+:::
+
+## Ensemble Stability
+
+Let's implement and visualize the stability of ensemble methods:
+
+```{python}
+def analyze_ensemble_stability(n_estimators=[1, 5, 10, 20]):
+    """Analyze how ensemble size affects stability"""
+    from sklearn.ensemble import BaggingRegressor
+    
+    # Generate data
+    X = np.random.randn(150, 2)
+    y = 0.5 * X[:, 0] + 0.3 * X[:, 1] + np.random.normal(0, 0.1, 150)
+    
+    # Test data for stability measurement
+    X_test = np.random.randn(50, 2)
+    
+    stabilities = []
+    errors = []
+    
+    for n in n_estimators:
+        # Create multiple ensembles with same size
+        predictions = []
+        for _ in range(10):
+            model = BaggingRegressor(
+                estimator=Ridge(alpha=1.0),
+                n_estimators=n,
+                random_state=None
+            )
+            model.fit(X, y)
+            predictions.append(model.predict(X_test))
+        
+        # Calculate stability across different ensemble instances
+        stability = np.mean([np.std(pred) for pred in zip(*predictions)])
+        error = np.std([np.std(pred) for pred in zip(*predictions)])
+        
+        stabilities.append(stability)
+        errors.append(error)
+    
+    # Plot results
+    plt.figure(figsize=(10, 6))
+    plt.errorbar(n_estimators, stabilities, yerr=errors, fmt='o-', capsize=5)
+    plt.xlabel('Number of Estimators')
+    plt.ylabel('Prediction Stability')
+    plt.title('Ensemble Size vs. Prediction Stability')
+    plt.grid(True, alpha=0.3)
+    plt.show()
+
+analyze_ensemble_stability()
+```
+
+:::{.callout-tip}
+## Ensemble Benefits
+Larger ensembles tend to have more stable predictions, demonstrating the "wisdom of crowds" effect.
+:::
+
 ## Applications
 
 ### 1. Regularized Learning

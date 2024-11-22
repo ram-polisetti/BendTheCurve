@@ -7557,790 +7557,6 @@ Common Pitfalls
   <media:content url="https://ram-polisetti.github.io/BendTheCurve/posts/statistical-learning-theory/statistical_learning.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
-  <title>Algorithmic Stability and Learning Theory</title>
-  <dc:creator>Ram Polisetti</dc:creator>
-  <link>https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<section id="algorithmic-stability-and-learning-theory" class="level1">
-<h1>Algorithmic Stability and Learning Theory</h1>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Learning Objectives
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>By the end of this article, you will: 1. Understand what algorithmic stability means and why it matters 2. Learn different types of stability measures 3. See how stability affects model generalization 4. Practice implementing stability checks 5. Learn best practices for developing stable models</p>
-</div>
-</div>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Imagine building a house of cards . If a slight breeze can topple it, we’d say it’s unstable. Similarly, in machine learning, we want our models to be stable - small changes in the training data shouldn’t cause dramatic changes in predictions.</p>
-<div id="00fdce4d" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb1-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> plt</span>
-<span id="cb1-3"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> seaborn <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> sns</span>
-<span id="cb1-4"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.linear_model <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> Ridge</span>
-<span id="cb1-5"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.preprocessing <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> StandardScaler</span>
-<span id="cb1-6"></span>
-<span id="cb1-7"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Set random seed for reproducibility</span></span>
-<span id="cb1-8">np.random.seed(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">42</span>)</span></code></pre></div>
-</details>
-</div>
-</section>
-<section id="understanding-stability-through-examples" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-stability-through-examples">1. Understanding Stability Through Examples</h2>
-<p>Let’s visualize what stability means with a simple example:</p>
-<div id="eb53d301" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> generate_data(n_samples<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">100</span>):</span>
-<span id="cb2-2">    X <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.linspace(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>, n_samples).reshape(<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb2-3">    y <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> X.ravel() <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> np.sin(X.ravel()) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> np.random.normal(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>, n_samples)</span>
-<span id="cb2-4">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> X, y</span>
-<span id="cb2-5"></span>
-<span id="cb2-6"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> plot_stability_comparison(alpha1<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>, alpha2<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10.0</span>):</span>
-<span id="cb2-7">    X, y <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> generate_data()</span>
-<span id="cb2-8">    </span>
-<span id="cb2-9">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Create two models with different regularization</span></span>
-<span id="cb2-10">    model1 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> Ridge(alpha<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>alpha1)</span>
-<span id="cb2-11">    model2 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> Ridge(alpha<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>alpha2)</span>
-<span id="cb2-12">    </span>
-<span id="cb2-13">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Fit models</span></span>
-<span id="cb2-14">    model1.fit(X, y)</span>
-<span id="cb2-15">    model2.fit(X, y)</span>
-<span id="cb2-16">    </span>
-<span id="cb2-17">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Generate predictions</span></span>
-<span id="cb2-18">    X_test <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.linspace(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">200</span>).reshape(<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb2-19">    y_pred1 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> model1.predict(X_test)</span>
-<span id="cb2-20">    y_pred2 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> model2.predict(X_test)</span>
-<span id="cb2-21">    </span>
-<span id="cb2-22">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Plot results</span></span>
-<span id="cb2-23">    plt.figure(figsize<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">12</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">6</span>))</span>
-<span id="cb2-24">    plt.scatter(X, y, color<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'blue'</span>, alpha<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.5</span>, label<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Data points'</span>)</span>
-<span id="cb2-25">    plt.plot(X_test, y_pred1, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'r-'</span>, label<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f'Less stable (α=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>alpha1<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">)'</span>)</span>
-<span id="cb2-26">    plt.plot(X_test, y_pred2, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'g-'</span>, label<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f'More stable (α=</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>alpha2<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">)'</span>)</span>
-<span id="cb2-27">    plt.title(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Stability Comparison: Effect of Regularization'</span>)</span>
-<span id="cb2-28">    plt.xlabel(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'X'</span>)</span>
-<span id="cb2-29">    plt.ylabel(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'y'</span>)</span>
-<span id="cb2-30">    plt.legend()</span>
-<span id="cb2-31">    plt.show()</span>
-<span id="cb2-32"></span>
-<span id="cb2-33">plot_stability_comparison()</span></code></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/index_files/figure-html/cell-3-output-1.png" width="948" height="523" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Key Insight
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Notice how the more stable model (green line) is less sensitive to individual data points, while the less stable model (red line) overfits to the noise in the data.</p>
-</div>
-</div>
-</section>
-<section id="fundamental-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="fundamental-concepts">Fundamental Concepts</h2>
-<section id="stability-definitions" class="level3">
-<h3 class="anchored" data-anchor-id="stability-definitions">1. Stability Definitions</h3>
-<p>Hypothesis stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cell(A_S,z)%20-%20%5Cell(A_%7BS%5Ei%7D,z)%7C%20%5Cleq%20%5Cbeta_m%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?A_S"> is algorithm output on dataset <img src="https://latex.codecogs.com/png.latex?S"> - <img src="https://latex.codecogs.com/png.latex?S%5Ei"> is dataset with i-th example replaced - <img src="https://latex.codecogs.com/png.latex?%5Cbeta_m"> is stability coefficient</p>
-<p>Uniform stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csup_%7BS,z,i%7D%7C%5Cell(A_S,z)%20-%20%5Cell(A_%7BS%5Ei%7D,z)%7C%20%5Cleq%20%5Cbeta%0A"></p>
-</section>
-<section id="loss-stability" class="level3">
-<h3 class="anchored" data-anchor-id="loss-stability">2. Loss Stability</h3>
-<p>Point-wise loss stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cell(h_S,z)%20-%20%5Cell(h_%7BS%5Ei%7D,z)%7C%20%5Cleq%20%5Cbeta%0A"></p>
-<p>Average loss stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cmathbb%7BE%7D_%7Bz%20%5Csim%20%5Cmathcal%7BD%7D%7D%5B%5Cell(h_S,z)%20-%20%5Cell(h_%7BS%5Ei%7D,z)%5D%7C%20%5Cleq%20%5Cbeta%0A"></p>
-</section>
-<section id="generalization-bounds" class="level3">
-<h3 class="anchored" data-anchor-id="generalization-bounds">3. Generalization Bounds</h3>
-<p>McDiarmid’s inequality based bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%7CR(A_S)%20-%20%5Chat%7BR%7D_S(A_S)%7C%20%3E%20%5Cepsilon)%20%5Cleq%202%5Cexp(-%5Cfrac%7B2m%5Cepsilon%5E2%7D%7B(4%5Cbeta)%5E2%7D)%0A"></p>
-<p>Expected generalization error:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cmathbb%7BE%7D%5BR(A_S)%20-%20%5Chat%7BR%7D_S(A_S)%5D%7C%20%5Cleq%20%5Cbeta%0A"></p>
-</section>
-</section>
-<section id="types-of-stability" class="level2">
-<h2 class="anchored" data-anchor-id="types-of-stability">Types of Stability</h2>
-<section id="strong-stability" class="level3">
-<h3 class="anchored" data-anchor-id="strong-stability">1. Strong Stability</h3>
-<p>Definition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csup_%7BS,S':%20%7CS%20%5Ctriangle%20S'%7C%20=%202%7D%5C%7CA_S%20-%20A_%7BS'%7D%5C%7C%20%5Cleq%20%5Cbeta_m%0A"></p>
-<p>Generalization bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%7CR(A_S)%20-%20%5Chat%7BR%7D_S(A_S)%7C%20%3E%20%5Cepsilon)%20%5Cleq%202%5Cexp(-%5Cfrac%7Bm%5Cepsilon%5E2%7D%7B2%5Cbeta_m%5E2%7D)%0A"></p>
-</section>
-<section id="cross-validation-stability" class="level3">
-<h3 class="anchored" data-anchor-id="cross-validation-stability">2. Cross-Validation Stability</h3>
-<p>Leave-one-out stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cmathbb%7BE%7D_%7BS,z%7D%5B%5Cell(A_S,z)%20-%20%5Cell(A_%7BS%5E%7B-i%7D%7D,z)%5D%7C%20%5Cleq%20%5Cbeta_m%0A"></p>
-<p>k-fold stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cmathbb%7BE%7D_%7BS,z%7D%5B%5Cell(A_S,z)%20-%20%5Cell(A_%7BS_k%7D,z)%5D%7C%20%5Cleq%20%5Cbeta_m%0A"></p>
-</section>
-<section id="algorithmic-robustness" class="level3">
-<h3 class="anchored" data-anchor-id="algorithmic-robustness">3. Algorithmic Robustness</h3>
-<p><img src="https://latex.codecogs.com/png.latex?(K,%5Cepsilon(%5Ccdot))">-robustness:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP_%7BS,z%7D(%7C%5Cell(A_S,z)%20-%20%5Cell(A_S,z')%7C%20%3E%20%5Cepsilon(m))%20%5Cleq%20K/m%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?z,z'"> are in same partition - <img src="https://latex.codecogs.com/png.latex?K"> is number of partitions - <img src="https://latex.codecogs.com/png.latex?%5Cepsilon(m)"> is robustness parameter</p>
-</section>
-</section>
-<section id="stability-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="stability-analysis">Stability Analysis</h2>
-<section id="regularization-and-stability" class="level3">
-<h3 class="anchored" data-anchor-id="regularization-and-stability">1. Regularization and Stability</h3>
-<p>Tikhonov regularization:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AA_S%20=%20%5Carg%5Cmin_%7Bh%20%5Cin%20%5Cmathcal%7BH%7D%7D%20%5Cfrac%7B1%7D%7Bm%7D%5Csum_%7Bi=1%7D%5Em%20%5Cell(h,z_i)%20+%20%5Clambda%5C%7Ch%5C%7C%5E2%0A"></p>
-<p>Stability bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta%20%5Cleq%20%5Cfrac%7BL%5E2%7D%7B2m%5Clambda%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?L"> is Lipschitz constant - <img src="https://latex.codecogs.com/png.latex?%5Clambda"> is regularization parameter</p>
-</section>
-<section id="gradient-methods" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-methods">2. Gradient Methods</h3>
-<p>Gradient descent stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5C%7Cw_t%20-%20w_t'%5C%7C%20%5Cleq%20(1+%5Ceta%20L)%5Et%5C%7Cw_0%20-%20w_0'%5C%7C%0A"></p>
-<p>SGD stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5B%5C%7Cw_t%20-%20w_t'%5C%7C%5E2%5D%20%5Cleq%20%5Cfrac%7B%5Ceta%5E2L%5E2%7D%7B2m%7D%0A"></p>
-</section>
-<section id="ensemble-methods" class="level3">
-<h3 class="anchored" data-anchor-id="ensemble-methods">3. Ensemble Methods</h3>
-<p>Bagging stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7B%5Ctext%7Bbag%7D%7D%20%5Cleq%20%5Cfrac%7B%5Cbeta%7D%7B%5Csqrt%7BB%7D%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?B"> is number of bootstrap samples - <img src="https://latex.codecogs.com/png.latex?%5Cbeta"> is base learner stability</p>
-</section>
-</section>
-<section id="applications" class="level2">
-<h2 class="anchored" data-anchor-id="applications">Applications</h2>
-<section id="regularized-learning" class="level3">
-<h3 class="anchored" data-anchor-id="regularized-learning">1. Regularized Learning</h3>
-<p>Ridge regression stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7B%5Ctext%7Bridge%7D%7D%20%5Cleq%20%5Cfrac%7B4M%5E2%7D%7Bm%5Clambda%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?M"> is bound on features - <img src="https://latex.codecogs.com/png.latex?%5Clambda"> is regularization</p>
-</section>
-<section id="online-learning" class="level3">
-<h3 class="anchored" data-anchor-id="online-learning">2. Online Learning</h3>
-<p>Online stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5B%5C%7Cw_t%20-%20w_t'%5C%7C%5D%20%5Cleq%20%5Cfrac%7B2G%7D%7B%5Clambda%5Csqrt%7Bt%7D%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?G"> is gradient bound - <img src="https://latex.codecogs.com/png.latex?t"> is iteration number</p>
-</section>
-<section id="deep-learning" class="level3">
-<h3 class="anchored" data-anchor-id="deep-learning">3. Deep Learning</h3>
-<p>Dropout stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7B%5Ctext%7Bdropout%7D%7D%20%5Cleq%20%5Cfrac%7Bp(1-p)L%5E2%7D%7Bm%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?p"> is dropout probability - <img src="https://latex.codecogs.com/png.latex?L"> is network Lipschitz constant</p>
-</section>
-</section>
-<section id="advanced-topics" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="local-stability" class="level3">
-<h3 class="anchored" data-anchor-id="local-stability">1. Local Stability</h3>
-<p>Definition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cell(A_S,z)%20-%20%5Cell(A_%7BS%5Ei%7D,z)%7C%20%5Cleq%20%5Cbeta(z)%0A"></p>
-<p>Adaptive bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%7CR(A_S)%20-%20%5Chat%7BR%7D_S(A_S)%7C%20%3E%20%5Cepsilon)%20%5Cleq%202%5Cexp(-%5Cfrac%7B2m%5Cepsilon%5E2%7D%7B%5Cmathbb%7BE%7D%5B%5Cbeta(Z)%5E2%5D%7D)%0A"></p>
-</section>
-<section id="distribution-stability" class="level3">
-<h3 class="anchored" data-anchor-id="distribution-stability">2. Distribution Stability</h3>
-<p>Definition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5C%7C%5Cmathcal%7BD%7D_%7BA_S%7D%20-%20%5Cmathcal%7BD%7D_%7BA_%7BS%5Ei%7D%7D%5C%7C_1%20%5Cleq%20%5Cbeta%0A"></p>
-<p>Generalization:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cmathbb%7BE%7D%5BR(A_S)%5D%20-%20%5Cmathbb%7BE%7D%5B%5Chat%7BR%7D_S(A_S)%5D%7C%20%5Cleq%20%5Cbeta%0A"></p>
-</section>
-<section id="algorithmic-privacy" class="level3">
-<h3 class="anchored" data-anchor-id="algorithmic-privacy">3. Algorithmic Privacy</h3>
-<p>Differential privacy:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(A_S%20%5Cin%20E)%20%5Cleq%20e%5E%5Cepsilon%20P(A_%7BS'%7D%20%5Cin%20E)%0A"></p>
-<p>Privacy-stability relationship:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta%20%5Cleq%20%5Cepsilon%20L%0A"></p>
-</section>
-</section>
-<section id="theoretical-results" class="level2">
-<h2 class="anchored" data-anchor-id="theoretical-results">Theoretical Results</h2>
-<section id="stability-hierarchy" class="level3">
-<h3 class="anchored" data-anchor-id="stability-hierarchy">1. Stability Hierarchy</h3>
-<p>Relationships:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BUniform%7D%20%5Cimplies%20%5Ctext%7BHypothesis%7D%20%5Cimplies%20%5Ctext%7BPoint-wise%7D%20%5Cimplies%20%5Ctext%7BAverage%7D%0A"></p>
-<p>Equivalence conditions:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7B%5Ctext%7Buniform%7D%7D%20=%20%5Cbeta_%7B%5Ctext%7Bhypothesis%7D%7D%20%5Ciff%20%5Ctext%7Bconvex%20loss%7D%0A"></p>
-</section>
-<section id="lower-bounds" class="level3">
-<h3 class="anchored" data-anchor-id="lower-bounds">2. Lower Bounds</h3>
-<p>Minimal stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_m%20%5Cgeq%20%5COmega(%5Cfrac%7B1%7D%7B%5Csqrt%7Bm%7D%7D)%0A"></p>
-<p>Optimal rates:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_m%20=%20%5CTheta(%5Cfrac%7B1%7D%7Bm%7D)%0A"></p>
-</section>
-<section id="composition-theorems" class="level3">
-<h3 class="anchored" data-anchor-id="composition-theorems">3. Composition Theorems</h3>
-<p>Serial composition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7BA%20%5Ccirc%20B%7D%20%5Cleq%20%5Cbeta_A%20+%20%5Cbeta_B%0A"></p>
-<p>Parallel composition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7B%5Ctext%7Bparallel%7D%7D%20%5Cleq%20%5Cmax_i%20%5Cbeta_i%0A"></p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="algorithm-design" class="level3">
-<h3 class="anchored" data-anchor-id="algorithm-design">1. Algorithm Design</h3>
-<ol type="1">
-<li>Regularization:
-<ul>
-<li>Choose appropriate <img src="https://latex.codecogs.com/png.latex?%5Clambda"></li>
-<li>Balance stability-accuracy</li>
-<li>Adaptive regularization</li>
-</ul></li>
-<li>Optimization:
-<ul>
-<li>Step size selection</li>
-<li>Batch size impact</li>
-<li>Momentum effects</li>
-</ul></li>
-<li>Architecture:
-<ul>
-<li>Layer stability</li>
-<li>Skip connections</li>
-<li>Normalization impact</li>
-</ul></li>
-</ol>
-</section>
-<section id="stability-measures" class="level3">
-<h3 class="anchored" data-anchor-id="stability-measures">2. Stability Measures</h3>
-<ol type="1">
-<li>Empirical Stability:
-<ul>
-<li>Leave-one-out estimates</li>
-<li>Bootstrap estimates</li>
-<li>Cross-validation</li>
-</ul></li>
-<li>Theoretical Bounds:
-<ul>
-<li>Lipschitz constants</li>
-<li>Condition numbers</li>
-<li>Spectral norms</li>
-</ul></li>
-<li>Monitoring:
-<ul>
-<li>Stability metrics</li>
-<li>Generalization gaps</li>
-<li>Validation curves</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="model-selection" class="level3">
-<h3 class="anchored" data-anchor-id="model-selection">1. Model Selection</h3>
-<ol type="1">
-<li>Stability Analysis:
-<ul>
-<li>Cross-validation stability</li>
-<li>Parameter sensitivity</li>
-<li>Model robustness</li>
-</ul></li>
-<li>Regularization:
-<ul>
-<li>Multiple techniques</li>
-<li>Adaptive schemes</li>
-<li>Stability-based selection</li>
-</ul></li>
-<li>Validation:
-<ul>
-<li>Stability metrics</li>
-<li>Generalization bounds</li>
-<li>Robustness checks</li>
-</ul></li>
-</ol>
-</section>
-<section id="training-strategy" class="level3">
-<h3 class="anchored" data-anchor-id="training-strategy">2. Training Strategy</h3>
-<ol type="1">
-<li>Optimization:
-<ul>
-<li>Stable algorithms</li>
-<li>Adaptive methods</li>
-<li>Early stopping</li>
-</ul></li>
-<li>Data Processing:
-<ul>
-<li>Robust preprocessing</li>
-<li>Feature stability</li>
-<li>Outlier handling</li>
-</ul></li>
-<li>Evaluation:
-<ul>
-<li>Stability measures</li>
-<li>Confidence bounds</li>
-<li>Sensitivity analysis</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="interactive-stability-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="interactive-stability-analysis">Interactive Stability Analysis</h2>
-<p>Let’s create an interactive tool to measure stability:</p>
-<div id="678b4034" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> measure_stability(model, X, y, n_perturbations<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>):</span>
-<span id="cb3-2">    predictions <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> []</span>
-<span id="cb3-3">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> _ <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(n_perturbations):</span>
-<span id="cb3-4">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Add small random noise to data</span></span>
-<span id="cb3-5">        X_perturbed <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> X <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> np.random.normal(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>, X.shape)</span>
-<span id="cb3-6">        model.fit(X_perturbed, y)</span>
-<span id="cb3-7">        predictions.append(model.predict(X))</span>
-<span id="cb3-8">    </span>
-<span id="cb3-9">    <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Calculate stability score (lower is more stable)</span></span>
-<span id="cb3-10">    stability_score <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.std(predictions, axis<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>).mean()</span>
-<span id="cb3-11">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> stability_score</span>
-<span id="cb3-12"></span>
-<span id="cb3-13"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Compare stability of different models</span></span>
-<span id="cb3-14">X, y <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> generate_data()</span>
-<span id="cb3-15">models <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> {</span>
-<span id="cb3-16">    <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Ridge (α=0.1)'</span>: Ridge(alpha<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>),</span>
-<span id="cb3-17">    <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Ridge (α=1.0)'</span>: Ridge(alpha<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.0</span>),</span>
-<span id="cb3-18">    <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Ridge (α=10.0)'</span>: Ridge(alpha<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10.0</span>)</span>
-<span id="cb3-19">}</span>
-<span id="cb3-20"></span>
-<span id="cb3-21"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> name, model <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> models.items():</span>
-<span id="cb3-22">    score <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> measure_stability(model, X, y)</span>
-<span id="cb3-23">    <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>name<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> stability score: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>score<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:.4f}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Ridge (α=0.1) stability score: 0.0066
-Ridge (α=1.0) stability score: 0.0066
-Ridge (α=10.0) stability score: 0.0070</code></pre>
-</div>
-</div>
-</section>
-<section id="code-implementation" class="level2">
-<h2 class="anchored" data-anchor-id="code-implementation">Code Implementation</h2>
-<p>Here’s a practical implementation of stability monitoring:</p>
-<div id="5c7263d2" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">class</span> StabilityMonitor:</span>
-<span id="cb5-2">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, model, threshold<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>):</span>
-<span id="cb5-3">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.model <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> model</span>
-<span id="cb5-4">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.threshold <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> threshold</span>
-<span id="cb5-5">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.history <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> []</span>
-<span id="cb5-6">    </span>
-<span id="cb5-7">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> check_stability(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>, X, y, n_splits<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>):</span>
-<span id="cb5-8">        <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.model_selection <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> KFold</span>
-<span id="cb5-9">        predictions <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> []</span>
-<span id="cb5-10">        kf <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> KFold(n_splits<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>n_splits, shuffle<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span>)</span>
-<span id="cb5-11">        </span>
-<span id="cb5-12">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> train_idx, _ <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> kf.split(X):</span>
-<span id="cb5-13">            X_subset <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> X[train_idx]</span>
-<span id="cb5-14">            y_subset <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> y[train_idx]</span>
-<span id="cb5-15">            <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.model.fit(X_subset, y_subset)</span>
-<span id="cb5-16">            predictions.append(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.model.predict(X))</span>
-<span id="cb5-17">        </span>
-<span id="cb5-18">        stability_score <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> np.std(predictions, axis<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>).mean()</span>
-<span id="cb5-19">        <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.history.append(stability_score)</span>
-<span id="cb5-20">        </span>
-<span id="cb5-21">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> stability_score <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&lt;=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">self</span>.threshold</span>
-<span id="cb5-22"></span>
-<span id="cb5-23"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Example usage</span></span>
-<span id="cb5-24">monitor <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> StabilityMonitor(Ridge(alpha<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.0</span>))</span>
-<span id="cb5-25">is_stable <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> monitor.check_stability(X, y)</span>
-<span id="cb5-26"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Model is stable: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>is_stable<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Model is stable: True</code></pre>
-</div>
-</div>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Theory:
-<ul>
-<li>“Stability and Generalization” by Bousquet and Elisseeff</li>
-<li>“Learning, Testing, and the Stability Approach” by Shalev-Shwartz et al.</li>
-<li>“Stability and Learning Theory” by Mukherjee et al.</li>
-</ul></li>
-<li>Methods:
-<ul>
-<li>“Algorithmic Stability and Uniform Convergence” by Kearns and Ron</li>
-<li>“Stability and Instance-Based Learning” by Devroye and Wagner</li>
-<li>“Stable Learning Algorithms” by Kutin and Niyogi</li>
-</ul></li>
-<li>Applications:
-<ul>
-<li>“Stability in Machine Learning” by Hardt et al.</li>
-<li>“Deep Learning and Stability” by Hardt and Ma</li>
-<li>“Stability-Based Generalization Analysis” by Poggio et al.</li>
-</ul></li>
-</ol>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>machine-learning</category>
-  <category>theory</category>
-  <category>mathematics</category>
-  <category>stability</category>
-  <guid>https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/</guid>
-  <pubDate>Tue, 19 Mar 2024 04:00:00 GMT</pubDate>
-  <media:content url="https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/stability.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
   <title>PAC Learning Theory and VC Dimension</title>
   <dc:creator>Ram Polisetti</dc:creator>
   <link>https://ram-polisetti.github.io/BendTheCurve/posts/pac-learning-theory/</link>
@@ -9565,6 +8781,1521 @@ Practical Application
   <guid>https://ram-polisetti.github.io/BendTheCurve/posts/computational-learning-theory/</guid>
   <pubDate>Tue, 19 Mar 2024 04:00:00 GMT</pubDate>
   <media:content url="https://ram-polisetti.github.io/BendTheCurve/posts/computational-learning-theory/computational_theory.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Algorithmic Stability and Learning Theory</title>
+  <dc:creator>Ram Polisetti</dc:creator>
+  <link>https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="algorithmic-stability-and-learning-theory" class="level1">
+<h1>Algorithmic Stability and Learning Theory</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this article, you will: 1. Understand what algorithmic stability means and why it matters 2. Learn different types of stability measures 3. See how stability affects model generalization 4. Practice implementing stability checks 5. Learn best practices for developing stable models</p>
+</div>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Imagine building a house of cards . If a slight breeze can topple it, we’d say it’s unstable. Similarly, in machine learning, we want our models to be stable - small changes in the training data shouldn’t cause dramatic changes in predictions.</p>
+<div id="b26f635f" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> seaborn <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sns</span>
+<span id="cb1-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> sklearn.linear_model <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Ridge</span>
+<span id="cb1-5"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> sklearn.preprocessing <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> StandardScaler</span>
+<span id="cb1-6"></span>
+<span id="cb1-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Set random seed for reproducibility</span></span>
+<span id="cb1-8">np.random.seed(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42</span>)</span></code></pre></div>
+</details>
+</div>
+</section>
+<section id="understanding-stability-through-examples" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-stability-through-examples">1. Understanding Stability Through Examples</h2>
+<p>Let’s visualize what stability means with a simple example:</p>
+<div id="56e3895d" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> generate_data(n_samples<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>):</span>
+<span id="cb2-2">    X <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.linspace(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, n_samples).reshape(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-3">    y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> X.ravel() <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> np.sin(X.ravel()) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> np.random.normal(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>, n_samples)</span>
+<span id="cb2-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> X, y</span>
+<span id="cb2-5"></span>
+<span id="cb2-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> plot_stability_comparison(alpha1<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>, alpha2<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10.0</span>):</span>
+<span id="cb2-7">    X, y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> generate_data()</span>
+<span id="cb2-8">    </span>
+<span id="cb2-9">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create two models with different regularization</span></span>
+<span id="cb2-10">    model1 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Ridge(alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>alpha1)</span>
+<span id="cb2-11">    model2 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Ridge(alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>alpha2)</span>
+<span id="cb2-12">    </span>
+<span id="cb2-13">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Fit models</span></span>
+<span id="cb2-14">    model1.fit(X, y)</span>
+<span id="cb2-15">    model2.fit(X, y)</span>
+<span id="cb2-16">    </span>
+<span id="cb2-17">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Generate predictions</span></span>
+<span id="cb2-18">    X_test <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.linspace(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>).reshape(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-19">    y_pred1 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model1.predict(X_test)</span>
+<span id="cb2-20">    y_pred2 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model2.predict(X_test)</span>
+<span id="cb2-21">    </span>
+<span id="cb2-22">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Plot results</span></span>
+<span id="cb2-23">    plt.figure(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">12</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>))</span>
+<span id="cb2-24">    plt.scatter(X, y, color<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'blue'</span>, alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, label<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Data points'</span>)</span>
+<span id="cb2-25">    plt.plot(X_test, y_pred1, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'r-'</span>, label<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'Less stable (α=</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>alpha1<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">)'</span>)</span>
+<span id="cb2-26">    plt.plot(X_test, y_pred2, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'g-'</span>, label<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'More stable (α=</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>alpha2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">)'</span>)</span>
+<span id="cb2-27">    plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Stability Comparison: Effect of Regularization'</span>)</span>
+<span id="cb2-28">    plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'X'</span>)</span>
+<span id="cb2-29">    plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'y'</span>)</span>
+<span id="cb2-30">    plt.legend()</span>
+<span id="cb2-31">    plt.show()</span>
+<span id="cb2-32"></span>
+<span id="cb2-33">plot_stability_comparison()</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/index_files/figure-html/cell-3-output-1.png" width="948" height="523" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key Insight
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice how the more stable model (green line) is less sensitive to individual data points, while the less stable model (red line) overfits to the noise in the data.</p>
+</div>
+</div>
+</section>
+<section id="fundamental-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="fundamental-concepts">Fundamental Concepts</h2>
+<section id="stability-definitions" class="level3">
+<h3 class="anchored" data-anchor-id="stability-definitions">1. Stability Definitions</h3>
+<p>Hypothesis stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cell(A_S,z)%20-%20%5Cell(A_%7BS%5Ei%7D,z)%7C%20%5Cleq%20%5Cbeta_m%0A"></p>
+<p>Where: - <img src="https://latex.codecogs.com/png.latex?A_S"> is algorithm output on dataset <img src="https://latex.codecogs.com/png.latex?S"> - <img src="https://latex.codecogs.com/png.latex?S%5Ei"> is dataset with i-th example replaced - <img src="https://latex.codecogs.com/png.latex?%5Cbeta_m"> is stability coefficient</p>
+<p>Uniform stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csup_%7BS,z,i%7D%7C%5Cell(A_S,z)%20-%20%5Cell(A_%7BS%5Ei%7D,z)%7C%20%5Cleq%20%5Cbeta%0A"></p>
+</section>
+<section id="loss-stability" class="level3">
+<h3 class="anchored" data-anchor-id="loss-stability">2. Loss Stability</h3>
+<p>Point-wise loss stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cell(h_S,z)%20-%20%5Cell(h_%7BS%5Ei%7D,z)%7C%20%5Cleq%20%5Cbeta%0A"></p>
+<p>Average loss stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cmathbb%7BE%7D_%7Bz%20%5Csim%20%5Cmathcal%7BD%7D%7D%5B%5Cell(h_S,z)%20-%20%5Cell(h_%7BS%5Ei%7D,z)%5D%7C%20%5Cleq%20%5Cbeta%0A"></p>
+</section>
+<section id="generalization-bounds" class="level3">
+<h3 class="anchored" data-anchor-id="generalization-bounds">3. Generalization Bounds</h3>
+<p>McDiarmid’s inequality based bound:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%7CR(A_S)%20-%20%5Chat%7BR%7D_S(A_S)%7C%20%3E%20%5Cepsilon)%20%5Cleq%202%5Cexp(-%5Cfrac%7B2m%5Cepsilon%5E2%7D%7B(4%5Cbeta)%5E2%7D)%0A"></p>
+<p>Expected generalization error:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cmathbb%7BE%7D%5BR(A_S)%20-%20%5Chat%7BR%7D_S(A_S)%5D%7C%20%5Cleq%20%5Cbeta%0A"></p>
+</section>
+</section>
+<section id="types-of-stability" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-stability">Types of Stability</h2>
+<section id="strong-stability" class="level3">
+<h3 class="anchored" data-anchor-id="strong-stability">1. Strong Stability</h3>
+<p>Definition:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csup_%7BS,S':%20%7CS%20%5Ctriangle%20S'%7C%20=%202%7D%5C%7CA_S%20-%20A_%7BS'%7D%5C%7C%20%5Cleq%20%5Cbeta_m%0A"></p>
+<p>Generalization bound:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%7CR(A_S)%20-%20%5Chat%7BR%7D_S(A_S)%7C%20%3E%20%5Cepsilon)%20%5Cleq%202%5Cexp(-%5Cfrac%7Bm%5Cepsilon%5E2%7D%7B2%5Cbeta_m%5E2%7D)%0A"></p>
+</section>
+<section id="cross-validation-stability" class="level3">
+<h3 class="anchored" data-anchor-id="cross-validation-stability">2. Cross-Validation Stability</h3>
+<p>Leave-one-out stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cmathbb%7BE%7D_%7BS,z%7D%5B%5Cell(A_S,z)%20-%20%5Cell(A_%7BS%5E%7B-i%7D%7D,z)%5D%7C%20%5Cleq%20%5Cbeta_m%0A"></p>
+<p>k-fold stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cmathbb%7BE%7D_%7BS,z%7D%5B%5Cell(A_S,z)%20-%20%5Cell(A_%7BS_k%7D,z)%5D%7C%20%5Cleq%20%5Cbeta_m%0A"></p>
+</section>
+<section id="algorithmic-robustness" class="level3">
+<h3 class="anchored" data-anchor-id="algorithmic-robustness">3. Algorithmic Robustness</h3>
+<p><img src="https://latex.codecogs.com/png.latex?(K,%5Cepsilon(%5Ccdot))">-robustness:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP_%7BS,z%7D(%7C%5Cell(A_S,z)%20-%20%5Cell(A_S,z')%7C%20%3E%20%5Cepsilon(m))%20%5Cleq%20K/m%0A"></p>
+<p>Where: - <img src="https://latex.codecogs.com/png.latex?z,z'"> are in same partition - <img src="https://latex.codecogs.com/png.latex?K"> is number of partitions - <img src="https://latex.codecogs.com/png.latex?%5Cepsilon(m)"> is robustness parameter</p>
+</section>
+</section>
+<section id="stability-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="stability-analysis">Stability Analysis</h2>
+<section id="regularization-and-stability" class="level3">
+<h3 class="anchored" data-anchor-id="regularization-and-stability">1. Regularization and Stability</h3>
+<p>Tikhonov regularization:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AA_S%20=%20%5Carg%5Cmin_%7Bh%20%5Cin%20%5Cmathcal%7BH%7D%7D%20%5Cfrac%7B1%7D%7Bm%7D%5Csum_%7Bi=1%7D%5Em%20%5Cell(h,z_i)%20+%20%5Clambda%5C%7Ch%5C%7C%5E2%0A"></p>
+<p>Stability bound:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta%20%5Cleq%20%5Cfrac%7BL%5E2%7D%7B2m%5Clambda%7D%0A"></p>
+<p>Where: - <img src="https://latex.codecogs.com/png.latex?L"> is Lipschitz constant - <img src="https://latex.codecogs.com/png.latex?%5Clambda"> is regularization parameter</p>
+</section>
+<section id="gradient-methods" class="level3">
+<h3 class="anchored" data-anchor-id="gradient-methods">2. Gradient Methods</h3>
+<p>Gradient descent stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5C%7Cw_t%20-%20w_t'%5C%7C%20%5Cleq%20(1+%5Ceta%20L)%5Et%5C%7Cw_0%20-%20w_0'%5C%7C%0A"></p>
+<p>SGD stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5B%5C%7Cw_t%20-%20w_t'%5C%7C%5E2%5D%20%5Cleq%20%5Cfrac%7B%5Ceta%5E2L%5E2%7D%7B2m%7D%0A"></p>
+</section>
+<section id="ensemble-methods" class="level3">
+<h3 class="anchored" data-anchor-id="ensemble-methods">3. Ensemble Methods</h3>
+<p>Bagging stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7B%5Ctext%7Bbag%7D%7D%20%5Cleq%20%5Cfrac%7B%5Cbeta%7D%7B%5Csqrt%7BB%7D%7D%0A"></p>
+<p>Where: - <img src="https://latex.codecogs.com/png.latex?B"> is number of bootstrap samples - <img src="https://latex.codecogs.com/png.latex?%5Cbeta"> is base learner stability</p>
+</section>
+</section>
+<section id="practical-stability-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="practical-stability-analysis">Practical Stability Analysis</h2>
+<p>Let’s implement some stability measures and visualize them:</p>
+<div id="0c07dfc3" class="cell" data-execution_count="3">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> StabilityAnalyzer:</span>
+<span id="cb3-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, model_class, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>model_params):</span>
+<span id="cb3-3">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model_class <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model_class</span>
+<span id="cb3-4">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model_params <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model_params</span>
+<span id="cb3-5">        </span>
+<span id="cb3-6">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> measure_hypothesis_stability(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, X, y, n_perturbations<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>):</span>
+<span id="cb3-7">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Measure hypothesis stability by perturbing data points"""</span></span>
+<span id="cb3-8">        m <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(X)</span>
+<span id="cb3-9">        stabilities <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb3-10">        </span>
+<span id="cb3-11">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Original model</span></span>
+<span id="cb3-12">        base_model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model_class(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model_params)</span>
+<span id="cb3-13">        base_model.fit(X, y)</span>
+<span id="cb3-14">        base_preds <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> base_model.predict(X)</span>
+<span id="cb3-15">        </span>
+<span id="cb3-16">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> _ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(n_perturbations):</span>
+<span id="cb3-17">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Randomly replace one point</span></span>
+<span id="cb3-18">            idx <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.random.randint(m)</span>
+<span id="cb3-19">            X_perturbed <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> X.copy()</span>
+<span id="cb3-20">            y_perturbed <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> y.copy()</span>
+<span id="cb3-21">            </span>
+<span id="cb3-22">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Add small noise to selected point</span></span>
+<span id="cb3-23">            X_perturbed[idx] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> np.random.normal(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>, X.shape[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>])</span>
+<span id="cb3-24">            </span>
+<span id="cb3-25">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Train perturbed model</span></span>
+<span id="cb3-26">            perturbed_model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model_class(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model_params)</span>
+<span id="cb3-27">            perturbed_model.fit(X_perturbed, y_perturbed)</span>
+<span id="cb3-28">            perturbed_preds <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> perturbed_model.predict(X)</span>
+<span id="cb3-29">            </span>
+<span id="cb3-30">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Calculate stability measure</span></span>
+<span id="cb3-31">            stability <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.mean(np.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">abs</span>(base_preds <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> perturbed_preds))</span>
+<span id="cb3-32">            stabilities.append(stability)</span>
+<span id="cb3-33">            </span>
+<span id="cb3-34">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> np.mean(stabilities), np.std(stabilities)</span>
+<span id="cb3-35"></span>
+<span id="cb3-36"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Example usage with Ridge Regression</span></span>
+<span id="cb3-37"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> compare_model_stability():</span>
+<span id="cb3-38">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Generate synthetic data</span></span>
+<span id="cb3-39">    np.random.seed(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42</span>)</span>
+<span id="cb3-40">    X <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.random.randn(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb3-41">    y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> X[:, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> X[:, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> np.random.normal(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>)</span>
+<span id="cb3-42">    </span>
+<span id="cb3-43">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Compare stability with different regularization strengths</span></span>
+<span id="cb3-44">    alphas <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.01</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10.0</span>]</span>
+<span id="cb3-45">    stabilities <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb3-46">    errors <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb3-47">    </span>
+<span id="cb3-48">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> alpha <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> alphas:</span>
+<span id="cb3-49">        analyzer <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> StabilityAnalyzer(Ridge, alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>alpha)</span>
+<span id="cb3-50">        stability, error <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> analyzer.measure_hypothesis_stability(X, y)</span>
+<span id="cb3-51">        stabilities.append(stability)</span>
+<span id="cb3-52">        errors.append(error)</span>
+<span id="cb3-53">    </span>
+<span id="cb3-54">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Plot results</span></span>
+<span id="cb3-55">    plt.figure(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>))</span>
+<span id="cb3-56">    plt.errorbar(alphas, stabilities, yerr<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>errors, fmt<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'o-'</span>, capsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>)</span>
+<span id="cb3-57">    plt.xscale(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'log'</span>)</span>
+<span id="cb3-58">    plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Regularization Strength (α)'</span>)</span>
+<span id="cb3-59">    plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Stability Measure'</span>)</span>
+<span id="cb3-60">    plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Model Stability vs Regularization'</span>)</span>
+<span id="cb3-61">    plt.grid(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>)</span>
+<span id="cb3-62">    plt.show()</span>
+<span id="cb3-63"></span>
+<span id="cb3-64">compare_model_stability()</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/index_files/figure-html/cell-4-output-1.png" width="838" height="525" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Interpreting Stability Results
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Lower values indicate more stable models. Notice how increasing regularization generally improves stability.</p>
+</div>
+</div>
+</section>
+<section id="cross-validation-stability-1" class="level2">
+<h2 class="anchored" data-anchor-id="cross-validation-stability-1">Cross-Validation Stability</h2>
+<p>Let’s visualize how different cross-validation strategies affect stability:</p>
+<div id="75784afe" class="cell" data-execution_count="4">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> analyze_cv_stability(n_splits<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>], n_repeats<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>):</span>
+<span id="cb4-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Analyze stability across different CV splits"""</span></span>
+<span id="cb4-3">    <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> sklearn.model_selection <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> KFold</span>
+<span id="cb4-4">    </span>
+<span id="cb4-5">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Generate data</span></span>
+<span id="cb4-6">    X <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.random.randn(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb4-7">    y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> X[:, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> X[:, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> np.random.normal(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>)</span>
+<span id="cb4-8">    </span>
+<span id="cb4-9">    results <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {k: [] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> k <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> n_splits}</span>
+<span id="cb4-10">    </span>
+<span id="cb4-11">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> k <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> n_splits:</span>
+<span id="cb4-12">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> _ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(n_repeats):</span>
+<span id="cb4-13">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create k-fold split</span></span>
+<span id="cb4-14">            kf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> KFold(n_splits<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>k, shuffle<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb4-15">            fold_scores <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb4-16">            </span>
+<span id="cb4-17">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> train_idx, val_idx <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> kf.split(X):</span>
+<span id="cb4-18">                <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Train model</span></span>
+<span id="cb4-19">                model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Ridge(alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>)</span>
+<span id="cb4-20">                model.fit(X[train_idx], y[train_idx])</span>
+<span id="cb4-21">                </span>
+<span id="cb4-22">                <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Get score</span></span>
+<span id="cb4-23">                score <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.score(X[val_idx], y[val_idx])</span>
+<span id="cb4-24">                fold_scores.append(score)</span>
+<span id="cb4-25">            </span>
+<span id="cb4-26">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Calculate stability of scores</span></span>
+<span id="cb4-27">            results[k].append(np.std(fold_scores))</span>
+<span id="cb4-28">    </span>
+<span id="cb4-29">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Plot results</span></span>
+<span id="cb4-30">    plt.figure(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>))</span>
+<span id="cb4-31">    plt.boxplot([results[k] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> k <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> n_splits], labels<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>k<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">-fold'</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> k <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> n_splits])</span>
+<span id="cb4-32">    plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Score Stability (std)'</span>)</span>
+<span id="cb4-33">    plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Cross-Validation Strategy'</span>)</span>
+<span id="cb4-34">    plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Cross-Validation Stability Analysis'</span>)</span>
+<span id="cb4-35">    plt.grid(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>)</span>
+<span id="cb4-36">    plt.show()</span>
+<span id="cb4-37"></span>
+<span id="cb4-38">analyze_cv_stability()</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/index_files/figure-html/cell-5-output-1.png" width="838" height="523" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cross-Validation Insight
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>More folds generally lead to more stable results but require more computational resources.</p>
+</div>
+</div>
+</section>
+<section id="ensemble-stability" class="level2">
+<h2 class="anchored" data-anchor-id="ensemble-stability">Ensemble Stability</h2>
+<p>Let’s implement and visualize the stability of ensemble methods:</p>
+<div id="e5ef74e6" class="cell" data-execution_count="5">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> analyze_ensemble_stability(n_estimators<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>]):</span>
+<span id="cb5-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Analyze how ensemble size affects stability"""</span></span>
+<span id="cb5-3">    <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> sklearn.ensemble <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> BaggingRegressor</span>
+<span id="cb5-4">    </span>
+<span id="cb5-5">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Generate data</span></span>
+<span id="cb5-6">    X <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.random.randn(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">150</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb5-7">    y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> X[:, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> X[:, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> np.random.normal(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">150</span>)</span>
+<span id="cb5-8">    </span>
+<span id="cb5-9">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Test data for stability measurement</span></span>
+<span id="cb5-10">    X_test <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.random.randn(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb5-11">    </span>
+<span id="cb5-12">    stabilities <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb5-13">    errors <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb5-14">    </span>
+<span id="cb5-15">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> n <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> n_estimators:</span>
+<span id="cb5-16">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create multiple ensembles with same size</span></span>
+<span id="cb5-17">        predictions <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb5-18">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> _ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>):</span>
+<span id="cb5-19">            model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> BaggingRegressor(</span>
+<span id="cb5-20">                estimator<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>Ridge(alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>),</span>
+<span id="cb5-21">                n_estimators<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>n,</span>
+<span id="cb5-22">                random_state<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb5-23">            )</span>
+<span id="cb5-24">            model.fit(X, y)</span>
+<span id="cb5-25">            predictions.append(model.predict(X_test))</span>
+<span id="cb5-26">        </span>
+<span id="cb5-27">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Calculate stability across different ensemble instances</span></span>
+<span id="cb5-28">        stability <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.mean([np.std(pred) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> pred <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">zip</span>(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>predictions)])</span>
+<span id="cb5-29">        error <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.std([np.std(pred) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> pred <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">zip</span>(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>predictions)])</span>
+<span id="cb5-30">        </span>
+<span id="cb5-31">        stabilities.append(stability)</span>
+<span id="cb5-32">        errors.append(error)</span>
+<span id="cb5-33">    </span>
+<span id="cb5-34">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Plot results</span></span>
+<span id="cb5-35">    plt.figure(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>))</span>
+<span id="cb5-36">    plt.errorbar(n_estimators, stabilities, yerr<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>errors, fmt<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'o-'</span>, capsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>)</span>
+<span id="cb5-37">    plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Number of Estimators'</span>)</span>
+<span id="cb5-38">    plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Prediction Stability'</span>)</span>
+<span id="cb5-39">    plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Ensemble Size vs. Prediction Stability'</span>)</span>
+<span id="cb5-40">    plt.grid(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>)</span>
+<span id="cb5-41">    plt.show()</span>
+<span id="cb5-42"></span>
+<span id="cb5-43">analyze_ensemble_stability()</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/index_files/figure-html/cell-6-output-1.png" width="838" height="523" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ensemble Benefits
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Larger ensembles tend to have more stable predictions, demonstrating the “wisdom of crowds” effect.</p>
+</div>
+</div>
+</section>
+<section id="applications" class="level2">
+<h2 class="anchored" data-anchor-id="applications">Applications</h2>
+<section id="regularized-learning" class="level3">
+<h3 class="anchored" data-anchor-id="regularized-learning">1. Regularized Learning</h3>
+<p>Ridge regression stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7B%5Ctext%7Bridge%7D%7D%20%5Cleq%20%5Cfrac%7B4M%5E2%7D%7Bm%5Clambda%7D%0A"></p>
+<p>Where: - <img src="https://latex.codecogs.com/png.latex?M"> is bound on features - <img src="https://latex.codecogs.com/png.latex?%5Clambda"> is regularization</p>
+</section>
+<section id="online-learning" class="level3">
+<h3 class="anchored" data-anchor-id="online-learning">2. Online Learning</h3>
+<p>Online stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5B%5C%7Cw_t%20-%20w_t'%5C%7C%5D%20%5Cleq%20%5Cfrac%7B2G%7D%7B%5Clambda%5Csqrt%7Bt%7D%7D%0A"></p>
+<p>Where: - <img src="https://latex.codecogs.com/png.latex?G"> is gradient bound - <img src="https://latex.codecogs.com/png.latex?t"> is iteration number</p>
+</section>
+<section id="deep-learning" class="level3">
+<h3 class="anchored" data-anchor-id="deep-learning">3. Deep Learning</h3>
+<p>Dropout stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7B%5Ctext%7Bdropout%7D%7D%20%5Cleq%20%5Cfrac%7Bp(1-p)L%5E2%7D%7Bm%7D%0A"></p>
+<p>Where: - <img src="https://latex.codecogs.com/png.latex?p"> is dropout probability - <img src="https://latex.codecogs.com/png.latex?L"> is network Lipschitz constant</p>
+</section>
+</section>
+<section id="advanced-topics" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
+<section id="local-stability" class="level3">
+<h3 class="anchored" data-anchor-id="local-stability">1. Local Stability</h3>
+<p>Definition:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cell(A_S,z)%20-%20%5Cell(A_%7BS%5Ei%7D,z)%7C%20%5Cleq%20%5Cbeta(z)%0A"></p>
+<p>Adaptive bound:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%7CR(A_S)%20-%20%5Chat%7BR%7D_S(A_S)%7C%20%3E%20%5Cepsilon)%20%5Cleq%202%5Cexp(-%5Cfrac%7B2m%5Cepsilon%5E2%7D%7B%5Cmathbb%7BE%7D%5B%5Cbeta(Z)%5E2%5D%7D)%0A"></p>
+</section>
+<section id="distribution-stability" class="level3">
+<h3 class="anchored" data-anchor-id="distribution-stability">2. Distribution Stability</h3>
+<p>Definition:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5C%7C%5Cmathcal%7BD%7D_%7BA_S%7D%20-%20%5Cmathcal%7BD%7D_%7BA_%7BS%5Ei%7D%7D%5C%7C_1%20%5Cleq%20%5Cbeta%0A"></p>
+<p>Generalization:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cmathbb%7BE%7D%5BR(A_S)%5D%20-%20%5Cmathbb%7BE%7D%5B%5Chat%7BR%7D_S(A_S)%5D%7C%20%5Cleq%20%5Cbeta%0A"></p>
+</section>
+<section id="algorithmic-privacy" class="level3">
+<h3 class="anchored" data-anchor-id="algorithmic-privacy">3. Algorithmic Privacy</h3>
+<p>Differential privacy:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(A_S%20%5Cin%20E)%20%5Cleq%20e%5E%5Cepsilon%20P(A_%7BS'%7D%20%5Cin%20E)%0A"></p>
+<p>Privacy-stability relationship:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta%20%5Cleq%20%5Cepsilon%20L%0A"></p>
+</section>
+</section>
+<section id="theoretical-results" class="level2">
+<h2 class="anchored" data-anchor-id="theoretical-results">Theoretical Results</h2>
+<section id="stability-hierarchy" class="level3">
+<h3 class="anchored" data-anchor-id="stability-hierarchy">1. Stability Hierarchy</h3>
+<p>Relationships:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BUniform%7D%20%5Cimplies%20%5Ctext%7BHypothesis%7D%20%5Cimplies%20%5Ctext%7BPoint-wise%7D%20%5Cimplies%20%5Ctext%7BAverage%7D%0A"></p>
+<p>Equivalence conditions:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7B%5Ctext%7Buniform%7D%7D%20=%20%5Cbeta_%7B%5Ctext%7Bhypothesis%7D%7D%20%5Ciff%20%5Ctext%7Bconvex%20loss%7D%0A"></p>
+</section>
+<section id="lower-bounds" class="level3">
+<h3 class="anchored" data-anchor-id="lower-bounds">2. Lower Bounds</h3>
+<p>Minimal stability:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_m%20%5Cgeq%20%5COmega(%5Cfrac%7B1%7D%7B%5Csqrt%7Bm%7D%7D)%0A"></p>
+<p>Optimal rates:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_m%20=%20%5CTheta(%5Cfrac%7B1%7D%7Bm%7D)%0A"></p>
+</section>
+<section id="composition-theorems" class="level3">
+<h3 class="anchored" data-anchor-id="composition-theorems">3. Composition Theorems</h3>
+<p>Serial composition:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7BA%20%5Ccirc%20B%7D%20%5Cleq%20%5Cbeta_A%20+%20%5Cbeta_B%0A"></p>
+<p>Parallel composition:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbeta_%7B%5Ctext%7Bparallel%7D%7D%20%5Cleq%20%5Cmax_i%20%5Cbeta_i%0A"></p>
+</section>
+</section>
+<section id="implementation-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
+<section id="algorithm-design" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-design">1. Algorithm Design</h3>
+<ol type="1">
+<li>Regularization:
+<ul>
+<li>Choose appropriate <img src="https://latex.codecogs.com/png.latex?%5Clambda"></li>
+<li>Balance stability-accuracy</li>
+<li>Adaptive regularization</li>
+</ul></li>
+<li>Optimization:
+<ul>
+<li>Step size selection</li>
+<li>Batch size impact</li>
+<li>Momentum effects</li>
+</ul></li>
+<li>Architecture:
+<ul>
+<li>Layer stability</li>
+<li>Skip connections</li>
+<li>Normalization impact</li>
+</ul></li>
+</ol>
+</section>
+<section id="stability-measures" class="level3">
+<h3 class="anchored" data-anchor-id="stability-measures">2. Stability Measures</h3>
+<ol type="1">
+<li>Empirical Stability:
+<ul>
+<li>Leave-one-out estimates</li>
+<li>Bootstrap estimates</li>
+<li>Cross-validation</li>
+</ul></li>
+<li>Theoretical Bounds:
+<ul>
+<li>Lipschitz constants</li>
+<li>Condition numbers</li>
+<li>Spectral norms</li>
+</ul></li>
+<li>Monitoring:
+<ul>
+<li>Stability metrics</li>
+<li>Generalization gaps</li>
+<li>Validation curves</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<section id="model-selection" class="level3">
+<h3 class="anchored" data-anchor-id="model-selection">1. Model Selection</h3>
+<ol type="1">
+<li>Stability Analysis:
+<ul>
+<li>Cross-validation stability</li>
+<li>Parameter sensitivity</li>
+<li>Model robustness</li>
+</ul></li>
+<li>Regularization:
+<ul>
+<li>Multiple techniques</li>
+<li>Adaptive schemes</li>
+<li>Stability-based selection</li>
+</ul></li>
+<li>Validation:
+<ul>
+<li>Stability metrics</li>
+<li>Generalization bounds</li>
+<li>Robustness checks</li>
+</ul></li>
+</ol>
+</section>
+<section id="training-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="training-strategy">2. Training Strategy</h3>
+<ol type="1">
+<li>Optimization:
+<ul>
+<li>Stable algorithms</li>
+<li>Adaptive methods</li>
+<li>Early stopping</li>
+</ul></li>
+<li>Data Processing:
+<ul>
+<li>Robust preprocessing</li>
+<li>Feature stability</li>
+<li>Outlier handling</li>
+</ul></li>
+<li>Evaluation:
+<ul>
+<li>Stability measures</li>
+<li>Confidence bounds</li>
+<li>Sensitivity analysis</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="interactive-stability-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="interactive-stability-analysis">Interactive Stability Analysis</h2>
+<p>Let’s create an interactive tool to measure stability:</p>
+<div id="e26ae1eb" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> measure_stability(model, X, y, n_perturbations<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>):</span>
+<span id="cb6-2">    predictions <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb6-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> _ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(n_perturbations):</span>
+<span id="cb6-4">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Add small random noise to data</span></span>
+<span id="cb6-5">        X_perturbed <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> X <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> np.random.normal(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>, X.shape)</span>
+<span id="cb6-6">        model.fit(X_perturbed, y)</span>
+<span id="cb6-7">        predictions.append(model.predict(X))</span>
+<span id="cb6-8">    </span>
+<span id="cb6-9">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Calculate stability score (lower is more stable)</span></span>
+<span id="cb6-10">    stability_score <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.std(predictions, axis<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>).mean()</span>
+<span id="cb6-11">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> stability_score</span>
+<span id="cb6-12"></span>
+<span id="cb6-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Compare stability of different models</span></span>
+<span id="cb6-14">X, y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> generate_data()</span>
+<span id="cb6-15">models <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {</span>
+<span id="cb6-16">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Ridge (α=0.1)'</span>: Ridge(alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>),</span>
+<span id="cb6-17">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Ridge (α=1.0)'</span>: Ridge(alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>),</span>
+<span id="cb6-18">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Ridge (α=10.0)'</span>: Ridge(alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10.0</span>)</span>
+<span id="cb6-19">}</span>
+<span id="cb6-20"></span>
+<span id="cb6-21"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> name, model <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> models.items():</span>
+<span id="cb6-22">    score <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> measure_stability(model, X, y)</span>
+<span id="cb6-23">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> stability score: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>score<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:.4f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ridge (α=0.1) stability score: 0.0078
+Ridge (α=1.0) stability score: 0.0060
+Ridge (α=10.0) stability score: 0.0065</code></pre>
+</div>
+</div>
+</section>
+<section id="code-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="code-implementation">Code Implementation</h2>
+<p>Here’s a practical implementation of stability monitoring:</p>
+<div id="917c9a56" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> StabilityMonitor:</span>
+<span id="cb8-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, model, threshold<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>):</span>
+<span id="cb8-3">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model</span>
+<span id="cb8-4">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.threshold <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> threshold</span>
+<span id="cb8-5">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.history <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb8-6">    </span>
+<span id="cb8-7">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> check_stability(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, X, y, n_splits<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>):</span>
+<span id="cb8-8">        <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> sklearn.model_selection <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> KFold</span>
+<span id="cb8-9">        predictions <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb8-10">        kf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> KFold(n_splits<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>n_splits, shuffle<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb8-11">        </span>
+<span id="cb8-12">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> train_idx, _ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> kf.split(X):</span>
+<span id="cb8-13">            X_subset <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> X[train_idx]</span>
+<span id="cb8-14">            y_subset <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> y[train_idx]</span>
+<span id="cb8-15">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model.fit(X_subset, y_subset)</span>
+<span id="cb8-16">            predictions.append(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.model.predict(X))</span>
+<span id="cb8-17">        </span>
+<span id="cb8-18">        stability_score <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.std(predictions, axis<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>).mean()</span>
+<span id="cb8-19">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.history.append(stability_score)</span>
+<span id="cb8-20">        </span>
+<span id="cb8-21">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> stability_score <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.threshold</span>
+<span id="cb8-22"></span>
+<span id="cb8-23"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Example usage</span></span>
+<span id="cb8-24">monitor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> StabilityMonitor(Ridge(alpha<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>))</span>
+<span id="cb8-25">is_stable <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> monitor.check_stability(X, y)</span>
+<span id="cb8-26"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Model is stable: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>is_stable<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model is stable: True</code></pre>
+</div>
+</div>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Theory:
+<ul>
+<li>“Stability and Generalization” by Bousquet and Elisseeff</li>
+<li>“Learning, Testing, and the Stability Approach” by Shalev-Shwartz et al.</li>
+<li>“Stability and Learning Theory” by Mukherjee et al.</li>
+</ul></li>
+<li>Methods:
+<ul>
+<li>“Algorithmic Stability and Uniform Convergence” by Kearns and Ron</li>
+<li>“Stability and Instance-Based Learning” by Devroye and Wagner</li>
+<li>“Stable Learning Algorithms” by Kutin and Niyogi</li>
+</ul></li>
+<li>Applications:
+<ul>
+<li>“Stability in Machine Learning” by Hardt et al.</li>
+<li>“Deep Learning and Stability” by Hardt and Ma</li>
+<li>“Stability-Based Generalization Analysis” by Poggio et al.</li>
+</ul></li>
+</ol>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>machine-learning</category>
+  <category>theory</category>
+  <category>mathematics</category>
+  <category>stability</category>
+  <guid>https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/</guid>
+  <pubDate>Tue, 19 Mar 2024 04:00:00 GMT</pubDate>
+  <media:content url="https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/stability.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>
