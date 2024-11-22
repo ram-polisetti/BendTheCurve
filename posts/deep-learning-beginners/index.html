@@ -23,6 +23,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -285,6 +319,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#the-basic-building-block-neurons" id="toc-the-basic-building-block-neurons" class="nav-link" data-scroll-target="#the-basic-building-block-neurons">1. The Basic Building Block: Neurons</a></li>
   <li><a href="#layers-of-neurons" id="toc-layers-of-neurons" class="nav-link" data-scroll-target="#layers-of-neurons">2. Layers of Neurons</a></li>
   </ul></li>
+  <li><a href="#practical-deep-learning" id="toc-practical-deep-learning" class="nav-link" data-scroll-target="#practical-deep-learning">Practical Deep Learning</a>
+  <ul class="collapse">
+  <li><a href="#your-first-neural-network" id="toc-your-first-neural-network" class="nav-link" data-scroll-target="#your-first-neural-network">1. Your First Neural Network</a></li>
+  </ul></li>
   <li><a href="#how-neural-networks-learn" id="toc-how-neural-networks-learn" class="nav-link" data-scroll-target="#how-neural-networks-learn">How Neural Networks Learn</a>
   <ul class="collapse">
   <li><a href="#the-learning-process" id="toc-the-learning-process" class="nav-link" data-scroll-target="#the-learning-process">1. The Learning Process</a></li>
@@ -332,11 +370,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#learning-path" id="toc-learning-path" class="nav-link" data-scroll-target="#learning-path">2. Learning Path</a></li>
   <li><a href="#tools-and-frameworks" id="toc-tools-and-frameworks" class="nav-link" data-scroll-target="#tools-and-frameworks">3. Tools and Frameworks</a></li>
   </ul></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a>
+  <li><a href="#projects-to-try" id="toc-projects-to-try" class="nav-link" data-scroll-target="#projects-to-try">Projects to Try</a>
   <ul class="collapse">
-  <li><a href="#online-courses" id="toc-online-courses" class="nav-link" data-scroll-target="#online-courses">1. Online Courses</a></li>
-  <li><a href="#books" id="toc-books" class="nav-link" data-scroll-target="#books">2. Books</a></li>
-  <li><a href="#practice-resources" id="toc-practice-resources" class="nav-link" data-scroll-target="#practice-resources">3. Practice Resources</a></li>
+  <li><a href="#resources-for-learning" id="toc-resources-for-learning" class="nav-link" data-scroll-target="#resources-for-learning">Resources for Learning</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -351,31 +387,137 @@ ul.task-list li input[type="checkbox"] {
 <p>The first time I encountered deep learning, I was amazed by its ability to solve problems that seemed impossible just a few years ago. From beating world champions at complex games to generating art that could pass for human-made, deep learning has transformed the landscape of artificial intelligence. But what makes this technology so powerful, and how does it actually work?</p>
 <section id="the-brain-inspired-technology" class="level2">
 <h2 class="anchored" data-anchor-id="the-brain-inspired-technology">The Brain-Inspired Technology</h2>
-<p>Imagine trying to teach a ### The Brain Connection Think of it like this: - Your brain has billions of neurons - Each neuron connects to thousands of others - They work together to process information - Deep learning mimics this structure</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key Insight
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Deep learning is inspired by how our brains work, but it’s a simplified model. Understanding this connection helps grasp the basic concepts more intuitively.</p>
+</div>
+</div>
+<p>Think of it like this: - Your brain has billions of neurons working together to help you recognize faces, understand speech, and make decisions - Each neuron is like a tiny processor, taking in information and deciding whether to pass it on - Deep learning creates artificial versions of these networks to solve complex problems</p>
+<p>Let’s break it down with a simple example:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Real-World Example: Face Recognition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When you see a friend’s face: 1. Your eyes capture the image (Input Layer) 2. Your brain processes features like eyes, nose, mouth (Hidden Layers) 3. You recognize who it is (Output Layer)</p>
+<p>A deep learning system works similarly!</p>
+</div>
+</div>
 </section>
 <section id="neural-networks-explained" class="level2">
 <h2 class="anchored" data-anchor-id="neural-networks-explained">Neural Networks Explained</h2>
 <section id="the-basic-building-block-neurons" class="level3">
 <h3 class="anchored" data-anchor-id="the-basic-building-block-neurons">1. The Basic Building Block: Neurons</h3>
-<p>Imagine a neuron as a simple calculator that: - Takes in multiple numbers (inputs) - Multiplies each by a weight (importance) - Adds them all up - Decides whether to “fire” based on the sum</p>
-<p>Example: - Inputs: [0.2, 0.7, 0.1] - Weights: [0.8, 0.3, 0.5] - Sum: (0.2 × 0.8) + (0.7 × 0.3) + (0.1 × 0.5) = 0.41 - Then decides whether to activate based on this sum</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Concept</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Python Example</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>An artificial neuron is like a simple calculator that: - Takes inputs (like numbers from 0 to 1) - Weighs their importance - Makes a decision based on the total</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simple_neuron(inputs, weights):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Multiply inputs by weights and sum them up</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> np.dot(inputs, weights)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Decision function (activation)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="cf">if</span> total <span class="op">&gt;</span> <span class="fl">0.5</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>inputs <span class="op">=</span> np.array([<span class="fl">0.2</span>, <span class="fl">0.7</span>, <span class="fl">0.1</span>])  <span class="co"># Input values</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>weights <span class="op">=</span> np.array([<span class="fl">0.8</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>])  <span class="co"># How important each input is</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> simple_neuron(inputs, weights)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Neuron output: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="layers-of-neurons" class="level3">
 <h3 class="anchored" data-anchor-id="layers-of-neurons">2. Layers of Neurons</h3>
-<p>Think of layers like assembly lines: 1. Input Layer - Receives raw data - Like our senses receiving information</p>
-<ol start="2" type="1">
-<li>Hidden Layers
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Understanding Network Depth
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The “deep” in deep learning comes from having multiple layers. Each layer: - Learns different levels of features - Builds upon previous layers - Increases the network’s ability to learn complex patterns</p>
+</div>
+</div>
+<p>Let’s visualize it:</p>
+<pre><code>Input → [Layer 1] → [Layer 2] → [Layer 3] → Output
+      ↑          ↑          ↑          ↑
+Basic     Simple     Complex    Final
+Data    Patterns   Features   Decision</code></pre>
+</section>
+</section>
+<section id="practical-deep-learning" class="level2">
+<h2 class="anchored" data-anchor-id="practical-deep-learning">Practical Deep Learning</h2>
+<section id="your-first-neural-network" class="level3">
+<h3 class="anchored" data-anchor-id="your-first-neural-network">1. Your First Neural Network</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Code</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Explanation</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow <span class="im">import</span> keras</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simple neural network</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> keras.Sequential([</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    keras.layers.Dense(<span class="dv">4</span>, activation<span class="op">=</span><span class="st">'relu'</span>, input_shape<span class="op">=</span>(<span class="dv">3</span>,)),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    keras.layers.Dense(<span class="dv">2</span>, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    keras.layers.Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">'sigmoid'</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Example data</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([[<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>],</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>              [<span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>]])</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">1</span>])</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>, loss<span class="op">=</span><span class="st">'binary_crossentropy'</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>model.fit(X, y, epochs<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>This code: 1. Creates a 3-layer neural network 2. Takes 3 numbers as input 3. Processes them through 2 hidden layers 4. Makes a yes/no prediction</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Common Pitfalls
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li>Process information</li>
-<li>Find patterns</li>
-<li>Transform data</li>
-</ul></li>
-<li>Output Layer
-<ul>
-<li>Makes final decisions</li>
-<li>Provides predictions</li>
-</ul></li>
-</ol>
+<li>Don’t use too many layers for simple problems</li>
+<li>Start with small networks and grow as needed</li>
+<li>Always split your data into training and testing sets</li>
+</ul>
+</div>
+</div>
 </section>
 </section>
 <section id="how-neural-networks-learn" class="level2">
@@ -518,19 +660,48 @@ ul.task-list li input[type="checkbox"] {
 <p>Popular options: - PyTorch - TensorFlow - Keras - Fast.ai</p>
 </section>
 </section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<section id="online-courses" class="level3">
-<h3 class="anchored" data-anchor-id="online-courses">1. Online Courses</h3>
-<p>Best options: - Fast.ai - Coursera Deep Learning - Stanford CS231n - Deep Learning.AI</p>
-</section>
-<section id="books" class="level3">
-<h3 class="anchored" data-anchor-id="books">2. Books</h3>
-<p>Recommended reading: - “Deep Learning with Python” - “Grokking Deep Learning” - “Deep Learning” by Goodfellow - “Neural Networks from Scratch”</p>
-</section>
-<section id="practice-resources" class="level3">
-<h3 class="anchored" data-anchor-id="practice-resources">3. Practice Resources</h3>
-<p>Where to practice: - Kaggle competitions - Google Colab - GitHub projects - Online tutorials</p>
+<section id="projects-to-try" class="level2">
+<h2 class="anchored" data-anchor-id="projects-to-try">Projects to Try</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hands-On Learning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Start with these beginner-friendly projects: 1. <strong>Image Classification</strong>: Identify handwritten digits using MNIST dataset 2. <strong>Text Classification</strong>: Build a simple sentiment analyzer 3. <strong>Prediction</strong>: Create a basic price prediction model</p>
+</div>
+</div>
+<section id="resources-for-learning" class="level3">
+<h3 class="anchored" data-anchor-id="resources-for-learning">Resources for Learning</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Online Courses</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Books</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">Tools</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<ul>
+<li>Fast.ai - Practical Deep Learning for Coders</li>
+<li>Coursera - Deep Learning Specialization</li>
+<li>TensorFlow’s Official Tutorials</li>
+</ul>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<ul>
+<li>“Deep Learning with Python” by François Chollet</li>
+<li>“Grokking Deep Learning” by Andrew Trask</li>
+</ul>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<ul>
+<li>Google Colab (free GPU access)</li>
+<li>TensorFlow and Keras</li>
+<li>PyTorch</li>
+</ul>
+</div>
+</div>
+</div>
 <p>Remember: Deep learning is powerful but requires patience to learn. Start with simple concepts, practice regularly, and gradually tackle more complex topics. Focus on understanding rather than memorizing, and always experiment with code to reinforce your learning.</p>
 
 

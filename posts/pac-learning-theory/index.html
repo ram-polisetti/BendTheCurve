@@ -8,7 +8,7 @@
 
 <meta name="author" content="Ram Polisetti">
 <meta name="dcterms.date" content="2024-03-19">
-<meta name="description" content="A rigorous exploration of PAC learning theory and VC dimension, covering fundamental bounds, sample complexity, and learnability.">
+<meta name="description" content="A beginner-friendly guide to PAC learning theory and VC dimension with interactive visualizations and practical examples.">
 
 <title>PAC Learning Theory and VC Dimension – BendThe-Curve</title>
 <style>
@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -200,7 +234,7 @@ window.Quarto = {
       <h1 class="title">PAC Learning Theory and VC Dimension</h1>
                   <div>
         <div class="description">
-          A rigorous exploration of PAC learning theory and VC dimension, covering fundamental bounds, sample complexity, and learnability.
+          A beginner-friendly guide to PAC learning theory and VC dimension with interactive visualizations and practical examples.
         </div>
       </div>
                           <div class="quarto-categories">
@@ -311,49 +345,35 @@ window.Quarto = {
   <ul>
   <li><a href="#pac-learning-theory-and-vc-dimension" id="toc-pac-learning-theory-and-vc-dimension" class="nav-link active" data-scroll-target="#pac-learning-theory-and-vc-dimension">PAC Learning Theory and VC Dimension</a>
   <ul class="collapse">
-  <li><a href="#pac-learning-framework" id="toc-pac-learning-framework" class="nav-link" data-scroll-target="#pac-learning-framework">PAC Learning Framework</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#pac-learning-visualization" id="toc-pac-learning-visualization" class="nav-link" data-scroll-target="#pac-learning-visualization">1. PAC Learning Visualization</a></li>
+  <li><a href="#vc-dimension-explorer" id="toc-vc-dimension-explorer" class="nav-link" data-scroll-target="#vc-dimension-explorer">2. VC Dimension Explorer</a></li>
+  <li><a href="#theoretical-foundations" id="toc-theoretical-foundations" class="nav-link" data-scroll-target="#theoretical-foundations">Theoretical Foundations</a>
+  <ul class="collapse">
+  <li><a href="#pac-learning-framework" id="toc-pac-learning-framework" class="nav-link" data-scroll-target="#pac-learning-framework">1. PAC Learning Framework</a></li>
+  <li><a href="#sample-complexity" id="toc-sample-complexity" class="nav-link" data-scroll-target="#sample-complexity">2. Sample Complexity</a></li>
+  <li><a href="#vc-dimension-theory" id="toc-vc-dimension-theory" class="nav-link" data-scroll-target="#vc-dimension-theory">3. VC Dimension Theory</a></li>
+  <li><a href="#generalization-bounds" id="toc-generalization-bounds" class="nav-link" data-scroll-target="#generalization-bounds">4. Generalization Bounds</a></li>
+  </ul></li>
+  <li><a href="#pac-learning-framework-1" id="toc-pac-learning-framework-1" class="nav-link" data-scroll-target="#pac-learning-framework-1">PAC Learning Framework</a>
   <ul class="collapse">
   <li><a href="#basic-definitions" id="toc-basic-definitions" class="nav-link" data-scroll-target="#basic-definitions">1. Basic Definitions</a></li>
-  <li><a href="#sample-complexity" id="toc-sample-complexity" class="nav-link" data-scroll-target="#sample-complexity">2. Sample Complexity</a></li>
-  <li><a href="#agnostic-pac-learning" id="toc-agnostic-pac-learning" class="nav-link" data-scroll-target="#agnostic-pac-learning">3. Agnostic PAC Learning</a></li>
   </ul></li>
-  <li><a href="#vc-theory" id="toc-vc-theory" class="nav-link" data-scroll-target="#vc-theory">VC Theory</a>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
   <ul class="collapse">
-  <li><a href="#vc-dimension" id="toc-vc-dimension" class="nav-link" data-scroll-target="#vc-dimension">1. VC Dimension</a></li>
-  <li><a href="#vc-generalization-bounds" id="toc-vc-generalization-bounds" class="nav-link" data-scroll-target="#vc-generalization-bounds">2. VC Generalization Bounds</a></li>
-  <li><a href="#rademacher-complexity" id="toc-rademacher-complexity" class="nav-link" data-scroll-target="#rademacher-complexity">3. Rademacher Complexity</a></li>
-  </ul></li>
-  <li><a href="#advanced-pac-concepts" id="toc-advanced-pac-concepts" class="nav-link" data-scroll-target="#advanced-pac-concepts">Advanced PAC Concepts</a>
-  <ul class="collapse">
-  <li><a href="#sample-compression" id="toc-sample-compression" class="nav-link" data-scroll-target="#sample-compression">1. Sample Compression</a></li>
-  <li><a href="#boosting-in-pac-framework" id="toc-boosting-in-pac-framework" class="nav-link" data-scroll-target="#boosting-in-pac-framework">2. Boosting in PAC Framework</a></li>
-  <li><a href="#online-learning" id="toc-online-learning" class="nav-link" data-scroll-target="#online-learning">3. Online Learning</a></li>
-  </ul></li>
-  <li><a href="#learnability-analysis" id="toc-learnability-analysis" class="nav-link" data-scroll-target="#learnability-analysis">Learnability Analysis</a>
-  <ul class="collapse">
-  <li><a href="#consistency" id="toc-consistency" class="nav-link" data-scroll-target="#consistency">1. Consistency</a></li>
-  <li><a href="#uniform-convergence" id="toc-uniform-convergence" class="nav-link" data-scroll-target="#uniform-convergence">2. Uniform Convergence</a></li>
+  <li><a href="#rademacher-complexity" id="toc-rademacher-complexity" class="nav-link" data-scroll-target="#rademacher-complexity">1. Rademacher Complexity</a></li>
+  <li><a href="#agnostic-pac-learning" id="toc-agnostic-pac-learning" class="nav-link" data-scroll-target="#agnostic-pac-learning">2. Agnostic PAC Learning</a></li>
   <li><a href="#structural-risk-minimization" id="toc-structural-risk-minimization" class="nav-link" data-scroll-target="#structural-risk-minimization">3. Structural Risk Minimization</a></li>
   </ul></li>
-  <li><a href="#advanced-bounds" id="toc-advanced-bounds" class="nav-link" data-scroll-target="#advanced-bounds">Advanced Bounds</a>
-  <ul class="collapse">
-  <li><a href="#local-rademacher-complexity" id="toc-local-rademacher-complexity" class="nav-link" data-scroll-target="#local-rademacher-complexity">1. Local Rademacher Complexity</a></li>
-  <li><a href="#margin-based-bounds" id="toc-margin-based-bounds" class="nav-link" data-scroll-target="#margin-based-bounds">2. Margin-Based Bounds</a></li>
-  <li><a href="#stability-based-bounds" id="toc-stability-based-bounds" class="nav-link" data-scroll-target="#stability-based-bounds">3. Stability-Based Bounds</a></li>
+  <li><a href="#practical-implementation" id="toc-practical-implementation" class="nav-link" data-scroll-target="#practical-implementation">Practical Implementation</a></li>
   </ul></li>
-  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a>
-  <ul class="collapse">
-  <li><a href="#linear-classification" id="toc-linear-classification" class="nav-link" data-scroll-target="#linear-classification">1. Linear Classification</a></li>
-  <li><a href="#neural-networks" id="toc-neural-networks" class="nav-link" data-scroll-target="#neural-networks">2. Neural Networks</a></li>
-  <li><a href="#kernel-methods" id="toc-kernel-methods" class="nav-link" data-scroll-target="#kernel-methods">3. Kernel Methods</a></li>
-  </ul></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
-  <ul class="collapse">
-  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">1. Model Selection</a></li>
-  <li><a href="#algorithm-design" id="toc-algorithm-design" class="nav-link" data-scroll-target="#algorithm-design">2. Algorithm Design</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul></li>
+  <li><a href="#generate-synthetic-dataset-with-proper-parameters" id="toc-generate-synthetic-dataset-with-proper-parameters" class="nav-link" data-scroll-target="#generate-synthetic-dataset-with-proper-parameters">Generate synthetic dataset with proper parameters</a></li>
+  <li><a href="#scale-the-features-for-better-svm-performance" id="toc-scale-the-features-for-better-svm-performance" class="nav-link" data-scroll-target="#scale-the-features-for-better-svm-performance">Scale the features for better SVM performance</a></li>
+  <li><a href="#create-and-train-the-memory-efficient-learner" id="toc-create-and-train-the-memory-efficient-learner" class="nav-link" data-scroll-target="#create-and-train-the-memory-efficient-learner">Create and train the memory-efficient learner</a></li>
+  <li><a href="#create-subplots-with-proper-spacing" id="toc-create-subplots-with-proper-spacing" class="nav-link" data-scroll-target="#create-subplots-with-proper-spacing">Create subplots with proper spacing</a></li>
+  <li><a href="#plot-1-space-time-tradeoff" id="toc-plot-1-space-time-tradeoff" class="nav-link" data-scroll-target="#plot-1-space-time-tradeoff">Plot 1: Space-Time Tradeoff</a></li>
+  <li><a href="#plot-2-memory-vs-accuracy" id="toc-plot-2-memory-vs-accuracy" class="nav-link" data-scroll-target="#plot-2-memory-vs-accuracy">Plot 2: Memory vs Accuracy</a></li>
+  <li><a href="#improve-plot-aesthetics" id="toc-improve-plot-aesthetics" class="nav-link" data-scroll-target="#improve-plot-aesthetics">Improve plot aesthetics</a></li>
   </ul>
 </nav>
     </div>
@@ -366,44 +386,185 @@ window.Quarto = {
 
 <section id="pac-learning-theory-and-vc-dimension" class="level1">
 <h1>PAC Learning Theory and VC Dimension</h1>
-<section id="pac-learning-framework" class="level2">
-<h2 class="anchored" data-anchor-id="pac-learning-framework">PAC Learning Framework</h2>
-<section id="basic-definitions" class="level3">
-<h3 class="anchored" data-anchor-id="basic-definitions">1. Basic Definitions</h3>
-<p>PAC learning definition: - Hypothesis class <span class="math inline">\(\mathcal{H}\)</span> - Instance space <span class="math inline">\(\mathcal{X}\)</span> - Target concept <span class="math inline">\(c: \mathcal{X} \to \{0,1\}\)</span> - Distribution <span class="math inline">\(\mathcal{D}\)</span> over <span class="math inline">\(\mathcal{X}\)</span></p>
-<p>PAC requirements:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this article, you will: 1. Understand PAC learning intuitively and mathematically 2. Visualize VC dimension in practice 3. Calculate sample complexity for real problems 4. Implement PAC learning algorithms 5. Apply VC theory to model selection</p>
+</div>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Imagine you’re teaching a robot to recognize apples . How can you be “probably approximately correct” about its ability to recognize any apple? PAC learning theory gives us the mathematical framework to answer such questions.</p>
+<div id="8e32648e" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification, make_circles</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> learning_curve</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Set random seed for reproducibility</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="pac-learning-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="pac-learning-visualization">1. PAC Learning Visualization</h2>
+<p>Let’s visualize what “probably approximately correct” means:</p>
+<div id="c24ec661" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visualize_pac_learning(n_samples<span class="op">=</span><span class="dv">100</span>, noise_level<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate synthetic dataset</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    X, y <span class="op">=</span> make_circles(n_samples<span class="op">=</span>n_samples, noise<span class="op">=</span>noise_level, factor<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Train models with different sample sizes</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    sample_sizes <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">50</span>, n_samples]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.ravel()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, size <span class="kw">in</span> <span class="bu">enumerate</span>(sample_sizes):</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Train model on subset</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> SVC(kernel<span class="op">=</span><span class="st">'rbf'</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.random.choice(n_samples, size<span class="op">=</span>size, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        model.fit(X[idx], y[idx])</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create grid for decision boundary</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        xx, yy <span class="op">=</span> np.meshgrid(np.linspace(X[:, <span class="dv">0</span>].<span class="bu">min</span>()<span class="op">-</span><span class="fl">0.5</span>, X[:, <span class="dv">0</span>].<span class="bu">max</span>()<span class="op">+</span><span class="fl">0.5</span>, <span class="dv">100</span>),</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                            np.linspace(X[:, <span class="dv">1</span>].<span class="bu">min</span>()<span class="op">-</span><span class="fl">0.5</span>, X[:, <span class="dv">1</span>].<span class="bu">max</span>()<span class="op">+</span><span class="fl">0.5</span>, <span class="dv">100</span>))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        Z <span class="op">=</span> model.predict(np.c_[xx.ravel(), yy.ravel()])</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        Z <span class="op">=</span> Z.reshape(xx.shape)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Plot</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        axes[i].contourf(xx, yy, Z, alpha<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        axes[i].scatter(X[:, <span class="dv">0</span>], X[:, <span class="dv">1</span>], c<span class="op">=</span>y, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        axes[i].set_title(<span class="ss">f'Training samples: </span><span class="sc">{</span>size<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>visualize_pac_learning()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-3-output-1.png" width="1142" height="1141" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key Insight
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice how the decision boundary becomes more stable and accurate as we increase the sample size. This is PAC learning in action!</p>
+</div>
+</div>
+</section>
+<section id="vc-dimension-explorer" class="level2">
+<h2 class="anchored" data-anchor-id="vc-dimension-explorer">2. VC Dimension Explorer</h2>
+<p>Let’s create an interactive tool to explore VC dimension:</p>
+<div id="b128207c" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> explore_vc_dimension(n_points<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generate_points(n):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.random.rand(n, <span class="dv">2</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> plot_linear_classifier(ax, points, labels):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(points) <span class="op">&gt;=</span> <span class="dv">2</span>:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            model <span class="op">=</span> SVC(kernel<span class="op">=</span><span class="st">'linear'</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                model.fit(points, labels)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Plot decision boundary</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                xx, yy <span class="op">=</span> np.meshgrid(np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                                   np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                Z <span class="op">=</span> model.predict(np.c_[xx.ravel(), yy.ravel()])</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                Z <span class="op">=</span> Z.reshape(xx.shape)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                ax.contourf(xx, yy, Z, alpha<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span>:</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                <span class="cf">pass</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Plot points</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        colors <span class="op">=</span> [<span class="st">'red'</span> <span class="cf">if</span> l <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">'blue'</span> <span class="cf">for</span> l <span class="kw">in</span> labels]</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        ax.scatter(points[:, <span class="dv">0</span>], points[:, <span class="dv">1</span>], c<span class="op">=</span>colors)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate different labelings</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    points <span class="op">=</span> generate_points(<span class="dv">3</span>)  <span class="co"># Try with 3 points</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    all_labels <span class="op">=</span> [[<span class="bu">int</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">format</span>(j, <span class="ss">f'0</span><span class="sc">{</span><span class="dv">3</span><span class="sc">}</span><span class="ss">b'</span>)] </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>                 <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span><span class="op">**</span><span class="dv">3</span>)]</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">8</span>))</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.ravel()</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, labels <span class="kw">in</span> <span class="bu">enumerate</span>(all_labels):</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        plot_linear_classifier(axes[i], points, labels)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        axes[i].set_title(<span class="ss">f'Labeling </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>explore_vc_dimension()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-4-output-1.png" width="1526" height="757" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Understanding VC Dimension
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The plots above show different possible labelings of 3 points. A linear classifier (VC dimension = 3) can shatter these points in most, but not all configurations.</p>
+</div>
+</div>
+</section>
+<section id="theoretical-foundations" class="level2">
+<h2 class="anchored" data-anchor-id="theoretical-foundations">Theoretical Foundations</h2>
+<section id="pac-learning-framework" class="level3">
+<h3 class="anchored" data-anchor-id="pac-learning-framework">1. PAC Learning Framework</h3>
+<p>The PAC (Probably Approximately Correct) learning framework provides theoretical guarantees for learning algorithms:</p>
 <p><span class="math display">\[
 P_{S \sim \mathcal{D}^m}(\text{error}_\mathcal{D}(h_S) \leq \epsilon) \geq 1-\delta
 \]</span></p>
-<p>Where: - <span class="math inline">\(\epsilon\)</span> is accuracy parameter - <span class="math inline">\(\delta\)</span> is confidence parameter - <span class="math inline">\(m\)</span> is sample size - <span class="math inline">\(h_S\)</span> is learned hypothesis</p>
+<p>Where: - <span class="math inline">\(\epsilon\)</span> is the accuracy parameter (how close to perfect) - <span class="math inline">\(\delta\)</span> is the confidence parameter (how sure we are) - <span class="math inline">\(m\)</span> is the sample size - <span class="math inline">\(h_S\)</span> is the learned hypothesis</p>
 </section>
 <section id="sample-complexity" class="level3">
 <h3 class="anchored" data-anchor-id="sample-complexity">2. Sample Complexity</h3>
-<p>Fundamental bound:</p>
+<p>The fundamental bound for sample complexity:</p>
 <p><span class="math display">\[
 m \geq \frac{1}{\epsilon}\left(\ln|\mathcal{H}| + \ln\frac{1}{\delta}\right)
 \]</span></p>
-<p>Realizable case:</p>
+<p>For the realizable case (when perfect classification is possible):</p>
 <p><span class="math display">\[
 m \geq \frac{1}{\epsilon}\left(\ln\frac{1}{\delta}\right)
 \]</span></p>
 </section>
-<section id="agnostic-pac-learning" class="level3">
-<h3 class="anchored" data-anchor-id="agnostic-pac-learning">3. Agnostic PAC Learning</h3>
-<p>Error bound:</p>
-<p><span class="math display">\[
-\text{error}_\mathcal{D}(h) \leq \min_{h' \in \mathcal{H}}\text{error}_\mathcal{D}(h') + \epsilon
-\]</span></p>
-<p>Sample complexity:</p>
-<p><span class="math display">\[
-m \geq \frac{2}{\epsilon^2}\left(\ln|\mathcal{H}| + \ln\frac{2}{\delta}\right)
-\]</span></p>
-</section>
-</section>
-<section id="vc-theory" class="level2">
-<h2 class="anchored" data-anchor-id="vc-theory">VC Theory</h2>
-<section id="vc-dimension" class="level3">
-<h3 class="anchored" data-anchor-id="vc-dimension">1. VC Dimension</h3>
+<section id="vc-dimension-theory" class="level3">
+<h3 class="anchored" data-anchor-id="vc-dimension-theory">3. VC Dimension Theory</h3>
+<p>The VC dimension of a hypothesis class <span class="math inline">\(\mathcal{H}\)</span> is the largest number of points that can be shattered (assigned any possible labeling) by <span class="math inline">\(\mathcal{H}\)</span>.</p>
 <p>Growth function:</p>
 <p><span class="math display">\[
 \Pi_\mathcal{H}(m) = \max_{x_1,...,x_m \in \mathcal{X}}|\{(h(x_1),...,h(x_m)): h \in \mathcal{H}\}|
@@ -413,242 +574,199 @@ m \geq \frac{2}{\epsilon^2}\left(\ln|\mathcal{H}| + \ln\frac{2}{\delta}\right)
 \text{If VC}(\mathcal{H}) = d, \text{ then } \Pi_\mathcal{H}(m) \leq \sum_{i=0}^d \binom{m}{i}
 \]</span></p>
 </section>
-<section id="vc-generalization-bounds" class="level3">
-<h3 class="anchored" data-anchor-id="vc-generalization-bounds">2. VC Generalization Bounds</h3>
-<p>Fundamental theorem:</p>
+<section id="generalization-bounds" class="level3">
+<h3 class="anchored" data-anchor-id="generalization-bounds">4. Generalization Bounds</h3>
+<p>The fundamental theorem of learning theory:</p>
 <p><span class="math display">\[
 P(\sup_{h \in \mathcal{H}}|\text{error}_\mathcal{D}(h) - \widehat{\text{error}}_S(h)| &gt; \epsilon) \leq 4\Pi_\mathcal{H}(2m)\exp(-\frac{m\epsilon^2}{8})
 \]</span></p>
-<p>Sample complexity:</p>
+<p>Sample complexity in terms of VC dimension:</p>
 <p><span class="math display">\[
 m = O\left(\frac{d}{\epsilon^2}\ln\frac{1}{\epsilon} + \frac{1}{\epsilon^2}\ln\frac{1}{\delta}\right)
 \]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key Insight
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The VC dimension (<span class="math inline">\(d\)</span>) appears in the sample complexity bound, showing how model complexity affects learning guarantees.</p>
+</div>
+</div>
 </section>
+</section>
+<section id="pac-learning-framework-1" class="level2">
+<h2 class="anchored" data-anchor-id="pac-learning-framework-1">PAC Learning Framework</h2>
+<section id="basic-definitions" class="level3">
+<h3 class="anchored" data-anchor-id="basic-definitions">1. Basic Definitions</h3>
+<p>Let’s make PAC learning concrete with an example:</p>
+<div id="1c007355" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PACLearner:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, epsilon<span class="op">=</span><span class="fl">0.1</span>, delta<span class="op">=</span><span class="fl">0.05</span>):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.epsilon <span class="op">=</span> epsilon  <span class="co"># accuracy parameter</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.delta <span class="op">=</span> delta    <span class="co"># confidence parameter</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> required_samples(<span class="va">self</span>, vc_dim):</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Calculate required sample size using VC bound"""</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">int</span>(np.ceil((<span class="dv">8</span><span class="op">/</span><span class="va">self</span>.epsilon) <span class="op">*</span> </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                         (<span class="dv">2</span><span class="op">*</span>vc_dim <span class="op">*</span> np.log2(<span class="dv">16</span><span class="op">/</span><span class="va">self</span>.epsilon) <span class="op">+</span> </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                          np.log2(<span class="dv">2</span><span class="op">/</span><span class="va">self</span>.delta))))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Train model with PAC guarantees"""</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        n_samples <span class="op">=</span> <span class="bu">len</span>(X)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        required <span class="op">=</span> <span class="va">self</span>.required_samples(vc_dim<span class="op">=</span><span class="dv">3</span>)  <span class="co"># for linear classifier</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> n_samples <span class="op">&lt;</span> required:</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Warning: Need at least </span><span class="sc">{</span>required<span class="sc">}</span><span class="ss"> samples for PAC guarantees"</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> SVC(kernel<span class="op">=</span><span class="st">'linear'</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model.fit(X, y)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, X):</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.model.predict(X)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_classification(n_samples<span class="op">=</span><span class="dv">1000</span>, n_features<span class="op">=</span><span class="dv">2</span>, n_redundant<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>                          n_informative<span class="op">=</span><span class="dv">2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>learner <span class="op">=</span> PACLearner(epsilon<span class="op">=</span><span class="fl">0.1</span>, delta<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Required samples: </span><span class="sc">{</span>learner<span class="sc">.</span>required_samples(vc_dim<span class="op">=</span><span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>learner.fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Required samples: 3941
+Warning: Need at least 3941 samples for PAC guarantees</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>&lt;__main__.PACLearner at 0x16c51beb0&gt;</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practical PAC Learning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Choose your desired accuracy (ε) and confidence (δ)</li>
+<li>Calculate required sample size using VC dimension</li>
+<li>Collect enough samples to meet PAC guarantees</li>
+<li>Train your model on the collected samples</li>
+</ol>
+</div>
+</div>
+</section>
+</section>
+<section id="advanced-topics" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
 <section id="rademacher-complexity" class="level3">
-<h3 class="anchored" data-anchor-id="rademacher-complexity">3. Rademacher Complexity</h3>
-<p>Definition:</p>
+<h3 class="anchored" data-anchor-id="rademacher-complexity">1. Rademacher Complexity</h3>
+<p>Rademacher complexity measures the richness of a hypothesis class:</p>
 <p><span class="math display">\[
 \mathfrak{R}_S(\mathcal{H}) = \mathbb{E}_\sigma\left[\sup_{h \in \mathcal{H}}\frac{1}{m}\sum_{i=1}^m \sigma_i h(x_i)\right]
 \]</span></p>
-<p>Generalization bound:</p>
-<p><span class="math display">\[
-P(\sup_{h \in \mathcal{H}}|\text{error}_\mathcal{D}(h) - \widehat{\text{error}}_S(h)| \leq 2\mathfrak{R}_m(\mathcal{H}) + \sqrt{\frac{2\ln(2/\delta)}{m}}) \geq 1-\delta
-\]</span></p>
 </section>
-</section>
-<section id="advanced-pac-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-pac-concepts">Advanced PAC Concepts</h2>
-<section id="sample-compression" class="level3">
-<h3 class="anchored" data-anchor-id="sample-compression">1. Sample Compression</h3>
-<p>Compression scheme:</p>
+<section id="agnostic-pac-learning" class="level3">
+<h3 class="anchored" data-anchor-id="agnostic-pac-learning">2. Agnostic PAC Learning</h3>
+<p>For the non-realizable case:</p>
 <p><span class="math display">\[
-\kappa: \cup_{m=1}^\infty (\mathcal{X} \times \{0,1\})^m \to \cup_{i=1}^k (\mathcal{X} \times \{0,1\})^i
+\text{error}_\mathcal{D}(h) \leq \min_{h' \in \mathcal{H}}\text{error}_\mathcal{D}(h') + \epsilon
 \]</span></p>
-<p>Bound:</p>
+<p>Sample complexity:</p>
 <p><span class="math display">\[
-m \geq O\left(\frac{k}{\epsilon}\log\frac{1}{\epsilon} + \frac{1}{\epsilon}\log\frac{1}{\delta}\right)
-\]</span></p>
-</section>
-<section id="boosting-in-pac-framework" class="level3">
-<h3 class="anchored" data-anchor-id="boosting-in-pac-framework">2. Boosting in PAC Framework</h3>
-<p>Weak learning condition:</p>
-<p><span class="math display">\[
-P(\text{error}_\mathcal{D}(h) \leq \frac{1}{2} - \gamma) \geq 1-\delta
-\]</span></p>
-<p>Strong learning guarantee:</p>
-<p><span class="math display">\[
-P(\text{error}_\mathcal{D}(H) \leq \epsilon) \geq 1-\delta
-\]</span></p>
-</section>
-<section id="online-learning" class="level3">
-<h3 class="anchored" data-anchor-id="online-learning">3. Online Learning</h3>
-<p>Mistake bound:</p>
-<p><span class="math display">\[
-M \leq O\left(\frac{d}{\gamma^2}\log\frac{1}{\gamma}\right)
-\]</span></p>
-<p>Where: - <span class="math inline">\(M\)</span> is number of mistakes - <span class="math inline">\(d\)</span> is VC dimension - <span class="math inline">\(\gamma\)</span> is margin</p>
-</section>
-</section>
-<section id="learnability-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="learnability-analysis">Learnability Analysis</h2>
-<section id="consistency" class="level3">
-<h3 class="anchored" data-anchor-id="consistency">1. Consistency</h3>
-<p>Empirical Risk Minimization (ERM):</p>
-<p><span class="math display">\[
-h_S = \arg\min_{h \in \mathcal{H}}\widehat{\text{error}}_S(h)
-\]</span></p>
-<p>Consistency condition:</p>
-<p><span class="math display">\[
-\lim_{m \to \infty}P(\text{error}_\mathcal{D}(h_S) &gt; \inf_{h \in \mathcal{H}}\text{error}_\mathcal{D}(h) + \epsilon) = 0
-\]</span></p>
-</section>
-<section id="uniform-convergence" class="level3">
-<h3 class="anchored" data-anchor-id="uniform-convergence">2. Uniform Convergence</h3>
-<p>Double sampling:</p>
-<p><span class="math display">\[
-P_{S,S'}(|\widehat{\text{error}}_S(h) - \widehat{\text{error}}_{S'}(h)| &gt; \epsilon) \leq \delta
-\]</span></p>
-<p>Symmetrization bound:</p>
-<p><span class="math display">\[
-P(\sup_{h \in \mathcal{H}}|\text{error}_\mathcal{D}(h) - \widehat{\text{error}}_S(h)| &gt; 2\epsilon) \leq 2P(\sup_{h \in \mathcal{H}}|\widehat{\text{error}}_S(h) - \widehat{\text{error}}_{S'}(h)| &gt; \epsilon)
+m \geq \frac{2}{\epsilon^2}\left(\ln|\mathcal{H}| + \ln\frac{2}{\delta}\right)
 \]</span></p>
 </section>
 <section id="structural-risk-minimization" class="level3">
 <h3 class="anchored" data-anchor-id="structural-risk-minimization">3. Structural Risk Minimization</h3>
-<p>Nested hypothesis classes:</p>
-<p><span class="math display">\[
-\mathcal{H}_1 \subset \mathcal{H}_2 \subset ... \subset \mathcal{H}_k
-\]</span></p>
-<p>Penalty term:</p>
+<p>For nested hypothesis classes <span class="math inline">\(\mathcal{H}_1 \subset \mathcal{H}_2 \subset ... \subset \mathcal{H}_k\)</span>:</p>
 <p><span class="math display">\[
 \text{pen}(h) = \sqrt{\frac{\text{VC}(\mathcal{H}(h))\ln(em/\text{VC}(\mathcal{H}(h))) + \ln(1/\delta)}{m}}
 \]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practical Application
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use structural risk minimization to automatically select model complexity based on your dataset size.</p>
+</div>
+</div>
 </section>
 </section>
-<section id="advanced-bounds" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-bounds">Advanced Bounds</h2>
-<section id="local-rademacher-complexity" class="level3">
-<h3 class="anchored" data-anchor-id="local-rademacher-complexity">1. Local Rademacher Complexity</h3>
-<p>Local complexity:</p>
-<p><span class="math display">\[
-\mathfrak{R}_S(\mathcal{H}, r) = \mathbb{E}_\sigma\left[\sup_{h \in \mathcal{H}: \widehat{\text{error}}_S(h) \leq r}\frac{1}{m}\sum_{i=1}^m \sigma_i h(x_i)\right]
-\]</span></p>
-<p>Fixed point equation:</p>
-<p><span class="math display">\[
-r^* = \inf\{r &gt; 0: \mathfrak{R}_S(\mathcal{H}, r) \leq r/4\}
-\]</span></p>
-</section>
-<section id="margin-based-bounds" class="level3">
-<h3 class="anchored" data-anchor-id="margin-based-bounds">2. Margin-Based Bounds</h3>
-<p>Margin loss:</p>
-<p><span class="math display">\[
-\ell_\gamma(yf(x)) = \begin{cases}
-1 &amp; \text{if } yf(x) \leq 0 \\
-1-\frac{yf(x)}{\gamma} &amp; \text{if } 0 &lt; yf(x) \leq \gamma \\
-0 &amp; \text{if } yf(x) &gt; \gamma
-\end{cases}
-\]</span></p>
-<p>Margin bound:</p>
-<p><span class="math display">\[
-P(\text{error}_\mathcal{D}(h) \leq \widehat{\text{error}}_\gamma(h) + O(\sqrt{\frac{d\ln(1/\gamma)}{m\gamma^2}})) \geq 1-\delta
-\]</span></p>
-</section>
-<section id="stability-based-bounds" class="level3">
-<h3 class="anchored" data-anchor-id="stability-based-bounds">3. Stability-Based Bounds</h3>
-<p>Uniform stability:</p>
-<p><span class="math display">\[
-\sup_{S,z,i}|\ell(A_S,z) - \ell(A_{S^i},z)| \leq \beta
-\]</span></p>
-<p>Generalization bound:</p>
-<p><span class="math display">\[
-P(|\text{error}_\mathcal{D}(A_S) - \widehat{\text{error}}_S(A_S)| \leq \epsilon) \geq 1-2\exp(-\frac{m\epsilon^2}{2\beta^2})
-\]</span></p>
+<section id="practical-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="practical-implementation">Practical Implementation</h2>
+<p>Here’s a complete example of PAC learning in practice:</p>
+<p>#| code-fold: false class MemoryEfficientLearner: def <strong>init</strong>(self, max_memory=1000): self.max_memory = max_memory self.model = None</p>
+<pre><code>def fit_with_memory_constraint(self, X, y):
+    n_samples = len(X)
+    batch_size = min(self.max_memory, n_samples)
+    
+    # Simulate streaming learning
+    times = []
+    memories = []
+    accuracies = []
+    
+    for batch_end in range(batch_size, n_samples + batch_size, batch_size):
+        batch_start = batch_end - batch_size
+        X_batch = X[batch_start:batch_end]
+        y_batch = y[batch_start:batch_end]
+        
+        start_time = time.time()
+        if self.model is None:
+            self.model = SVC(kernel='linear')
+        self.model.fit(X_batch, y_batch)
+        
+        times.append(time.time() - start_time)
+        memories.append(batch_size * X.shape[1] * 8)  # Approximate memory in bytes
+        accuracies.append(self.model.score(X_batch, y_batch))
+    
+    return times, memories, accuracies</code></pre>
 </section>
 </section>
-<section id="applications" class="level2">
-<h2 class="anchored" data-anchor-id="applications">Applications</h2>
-<section id="linear-classification" class="level3">
-<h3 class="anchored" data-anchor-id="linear-classification">1. Linear Classification</h3>
-<p>VC dimension: - Hyperplanes in <span class="math inline">\(\mathbb{R}^d\)</span>: <span class="math inline">\(d+1\)</span> - Homogeneous hyperplanes: <span class="math inline">\(d\)</span></p>
-<p>Sample complexity:</p>
-<p><span class="math display">\[
-m = O\left(\frac{d}{\epsilon}\ln\frac{1}{\epsilon} + \frac{1}{\epsilon}\ln\frac{1}{\delta}\right)
-\]</span></p>
+<section id="generate-synthetic-dataset-with-proper-parameters" class="level1">
+<h1>Generate synthetic dataset with proper parameters</h1>
+<p>X, y = make_classification( n_samples=2000, n_features=2, n_informative=2, # All features are informative n_redundant=0, # No redundant features n_repeated=0, # No repeated features n_classes=2, random_state=42 )</p>
 </section>
-<section id="neural-networks" class="level3">
-<h3 class="anchored" data-anchor-id="neural-networks">2. Neural Networks</h3>
-<p>VC dimension bound:</p>
-<p><span class="math display">\[
-\text{VC}(\text{NN}) \leq O(WL\log W)
-\]</span></p>
-<p>Where: - <span class="math inline">\(W\)</span> is number of weights - <span class="math inline">\(L\)</span> is number of layers</p>
+<section id="scale-the-features-for-better-svm-performance" class="level1">
+<h1>Scale the features for better SVM performance</h1>
+<p>from sklearn.preprocessing import StandardScaler scaler = StandardScaler() X = scaler.fit_transform(X)</p>
 </section>
-<section id="kernel-methods" class="level3">
-<h3 class="anchored" data-anchor-id="kernel-methods">3. Kernel Methods</h3>
-<p>Effective dimension:</p>
-<p><span class="math display">\[
-d_\text{eff}(\lambda) = \text{tr}(K(K+\lambda mI)^{-1})
-\]</span></p>
-<p>Sample complexity:</p>
-<p><span class="math display">\[
-m = O\left(\frac{d_\text{eff}(\lambda)}{\epsilon^2} + \frac{\log(1/\delta)}{\epsilon^2}\right)
-\]</span></p>
+<section id="create-and-train-the-memory-efficient-learner" class="level1">
+<h1>Create and train the memory-efficient learner</h1>
+<p>learner = MemoryEfficientLearner(max_memory=500) times, memories, accuracies = learner.fit_with_memory_constraint(X, y)</p>
 </section>
+<section id="create-subplots-with-proper-spacing" class="level1">
+<h1>Create subplots with proper spacing</h1>
+<p>fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))</p>
 </section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="model-selection" class="level3">
-<h3 class="anchored" data-anchor-id="model-selection">1. Model Selection</h3>
-<ol type="1">
-<li>Complexity Control:
-<ul>
-<li>VC dimension analysis</li>
-<li>Rademacher complexity</li>
-<li>Stability measures</li>
-</ul></li>
-<li>Regularization:
-<ul>
-<li>Theoretical guarantees</li>
-<li>Sample complexity</li>
-<li>Generalization bounds</li>
-</ul></li>
-<li>Validation:
-<ul>
-<li>PAC bounds</li>
-<li>Cross-validation theory</li>
-<li>Hold-out guarantees</li>
-</ul></li>
-</ol>
+<section id="plot-1-space-time-tradeoff" class="level1">
+<h1>Plot 1: Space-Time Tradeoff</h1>
+<p>ax1.plot(memories, times, ‘go-’, linewidth=2, markersize=8) ax1.set_xlabel(‘Memory usage (bytes)’) ax1.set_ylabel(‘Training time (seconds)’) ax1.set_title(‘Space-Time Tradeoff’) ax1.grid(True, alpha=0.3)</p>
 </section>
-<section id="algorithm-design" class="level3">
-<h3 class="anchored" data-anchor-id="algorithm-design">2. Algorithm Design</h3>
-<ol type="1">
-<li>Learning Rate:
-<ul>
-<li>Sample complexity analysis</li>
-<li>Convergence guarantees</li>
-<li>Stability considerations</li>
-</ul></li>
-<li>Architecture:
-<ul>
-<li>VC dimension bounds</li>
-<li>Capacity control</li>
-<li>Expressivity analysis</li>
-</ul></li>
-<li>Optimization:
-<ul>
-<li>Generalization bounds</li>
-<li>Stability analysis</li>
-<li>Convergence rates</li>
-</ul></li>
-</ol>
+<section id="plot-2-memory-vs-accuracy" class="level1">
+<h1>Plot 2: Memory vs Accuracy</h1>
+<p>ax2.plot(memories, accuracies, ‘bo-’, linewidth=2, markersize=8) ax2.set_xlabel(‘Memory usage (bytes)’) ax2.set_ylabel(‘Accuracy’) ax2.set_title(‘Memory-Accuracy Tradeoff’) ax2.grid(True, alpha=0.3)</p>
 </section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Theory:
-<ul>
-<li>“A Theory of the Learnable” by Valiant</li>
-<li>“Foundations of Machine Learning” by Mohri et al.</li>
-<li>“Understanding Machine Learning” by Shalev-Shwartz and Ben-David</li>
-</ul></li>
-<li>Advanced Topics:
-<ul>
-<li>“Statistical Learning Theory” by Vapnik</li>
-<li>“The Nature of Statistical Learning Theory” by Vapnik</li>
-<li>“Learning from Data” by Abu-Mostafa et al.</li>
-</ul></li>
-<li>Applications:
-<ul>
-<li>“Neural Network Learning” by Anthony and Bartlett</li>
-<li>“Kernel Methods in Machine Learning” by Hofmann et al.</li>
-<li>“Theory of Classification” by Devroye et al.</li>
-</ul></li>
-</ol>
+<section id="improve-plot-aesthetics" class="level1">
+<h1>Improve plot aesthetics</h1>
+<p>plt.tight_layout() for ax in [ax1, ax2]: ax.spines[‘top’].set_visible(False) ax.spines[‘right’].set_visible(False)</p>
+<p>plt.show()</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

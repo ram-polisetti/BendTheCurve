@@ -4,9 +4,7 @@
     "items": [
       "/posts/bend-the-curve-intro/index.html",
       "/posts/advanced-neural-architectures/index.html",
-      "/posts/algorithmic-stability/index.html",
       "/posts/causal-inference/index.html",
-      "/posts/computational-learning-theory/index.html",
       "/posts/deep-learning-beginners/index.html",
       "/posts/generative-models/index.html",
       "/posts/information-theory-ml/index.html",
@@ -17,10 +15,12 @@
       "/posts/online-learning/index.html",
       "/posts/optimization-algorithms/index.html",
       "/posts/optimization-theory/index.html",
-      "/posts/pac-learning-theory/index.html",
       "/posts/probabilistic-graphical-models/index.html",
       "/posts/reinforcement-learning-basics/index.html",
-      "/posts/statistical-learning-theory/index.html"
+      "/posts/statistical-learning-theory/index.html",
+      "/posts/pac-learning-theory/index.html",
+      "/posts/computational-learning-theory/index.html",
+      "/posts/algorithmic-stability/index.html"
     ]
   },
   {
