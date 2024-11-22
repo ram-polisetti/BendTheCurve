@@ -11,19 +11,8 @@ website:
   site-url: "https://ram-polisetti.github.io/BendTheCurve/"
   repo-url: "https://github.com/ram-polisetti/BendTheCurve"
   page-navigation: true
-  comments:
-    giscus:
-      repo: ram-polisetti/BendTheCurve
-      repo-id: your-repo-id
-      category: Comments
-      category-id: your-category-id
-      mapping: pathname
-      reactions-enabled: true
-      loading: lazy
-      input-position: bottom
-      theme: light
+  comments: false
   navbar:
-    background: dark
     search: true
     left:
       - text: "Home"
@@ -71,8 +60,9 @@ listing:
 format:
   html:
     theme:
-      light: [flatly, styles.scss]
-      dark: [darkly, styles.scss]
+      light: flatly
+      dark: darkly
+    css: styles.css
     code-link: true
     code-copy: true
     code-fold: show

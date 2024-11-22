@@ -18,7 +18,3 @@ I'm excited to introduce BendTheCurve, a platform dedicated to exploring and sha
 - **Industry Applications**: Real-world case studies and applications
 
 ## Join the Journey
-
-Whether you're a beginner in data science or an experienced practitioner, BendTheCurve aims to provide valuable content that helps you grow in your data science journey.
-
-Stay tuned for upcoming posts!
