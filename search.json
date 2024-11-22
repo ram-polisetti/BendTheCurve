@@ -599,7 +599,7 @@
     "href": "posts/bend-the-curve-intro/index.html",
     "title": "Welcome to BendTheCurve",
     "section": "",
-    "text": "I’m excited to introduce BendTheCurve, a platform dedicated to exploring and sharing insights about data science, machine learning, and their real-world applications. Here, we’ll dive deep into:\n\n\n\nData Science Insights: Regular posts about data analysis, visualization, and interpretation\nMachine Learning Deep Dives: Exploring both basic and advanced ML concepts\nPractical Tutorials: Hands-on guides and code examples\nIndustry Applications: Real-world case studies and applications\n\n\n\n\nWhether you’re a beginner in data science or an experienced practitioner, BendTheCurve aims to provide valuable content that helps you grow in your data science journey.\nStay tuned for upcoming posts!"
+    "text": "I’m excited to introduce BendTheCurve, a platform dedicated to exploring and sharing insights about data science, machine learning, and their real-world applications. Here, we’ll dive deep into:\n\n\n\nData Science Insights: Regular posts about data analysis, visualization, and interpretation\nMachine Learning Deep Dives: Exploring both basic and advanced ML concepts\nPractical Tutorials: Hands-on guides and code examples\nIndustry Applications: Real-world case studies and applications"
   },
   {
     "objectID": "posts/bend-the-curve-intro/index.html#what-to-expect",
@@ -607,13 +607,6 @@
     "title": "Welcome to BendTheCurve",
     "section": "",
     "text": "Data Science Insights: Regular posts about data analysis, visualization, and interpretation\nMachine Learning Deep Dives: Exploring both basic and advanced ML concepts\nPractical Tutorials: Hands-on guides and code examples\nIndustry Applications: Real-world case studies and applications"
-  },
-  {
-    "objectID": "posts/bend-the-curve-intro/index.html#join-the-journey",
-    "href": "posts/bend-the-curve-intro/index.html#join-the-journey",
-    "title": "Welcome to BendTheCurve",
-    "section": "",
-    "text": "Whether you’re a beginner in data science or an experienced practitioner, BendTheCurve aims to provide valuable content that helps you grow in your data science journey.\nStay tuned for upcoming posts!"
   },
   {
     "objectID": "posts/advanced-neural-architectures/index.html",
@@ -726,27 +719,6 @@
     "title": "About",
     "section": "",
     "text": "Hi! I’m Ram Polisetti, a passionate learner exploring the world of Machine Learning and Data Science. Through BendThe-Curve, I document my learning journey, share insights, and build a community of fellow ML enthusiasts."
-  },
-  {
-    "objectID": "about.html#about-me",
-    "href": "about.html#about-me",
-    "title": "About",
-    "section": "",
-    "text": "Hi! I’m Ram Polisetti, a passionate learner exploring the world of Machine Learning and Data Science. Through BendThe-Curve, I document my learning journey, share insights, and build a community of fellow ML enthusiasts."
-  },
-  {
-    "objectID": "about.html#why-bendthe-curve",
-    "href": "about.html#why-bendthe-curve",
-    "title": "About",
-    "section": "Why “BendThe-Curve”?",
-    "text": "Why “BendThe-Curve”?\nThe name “BendThe-Curve” represents the exponential growth in learning and understanding that comes with consistent practice and exploration in the field of Machine Learning. It’s about:\n\n📈 Accelerating the learning process\n🎯 Finding optimal solutions\n🔄 Continuous improvement\n🌱 Growing together as a community"
-  },
-  {
-    "objectID": "about.html#blog-focus",
-    "href": "about.html#blog-focus",
-    "title": "About",
-    "section": "Blog Focus",
-    "text": "Blog Focus\nThis blog covers:\n\nMachine Learning Algorithms & Applications\nData Analysis & Visualization\nPython Programming\nReal-world ML Projects\nLearning Resources & Tips\n\nFeel free to reach out through any of the social links above. Let’s learn and grow together!"
   },
   {
     "objectID": "posts.html",
