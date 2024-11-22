@@ -8,9 +8,9 @@
 
 <meta name="author" content="Ram Polisetti">
 <meta name="dcterms.date" content="2024-03-19">
-<meta name="description" content="A rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.">
+<meta name="description" content="A rigorous exploration of probabilistic graphical models, covering mathematical foundations, inference algorithms, and learning methods.">
 
-<title>Optimization Theory in Machine Learning – BendThe-Curve</title>
+<title>Probabilistic Graphical Models: Mathematical Foundations – BendThe-Curve</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -188,7 +188,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Optimization Theory in Machine Learning</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Probabilistic Graphical Models: Mathematical Foundations</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -198,17 +198,17 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Optimization Theory in Machine Learning</h1>
+      <h1 class="title">Probabilistic Graphical Models: Mathematical Foundations</h1>
                   <div>
         <div class="description">
-          A rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.
+          A rigorous exploration of probabilistic graphical models, covering mathematical foundations, inference algorithms, and learning methods.
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">machine-learning</div>
-                <div class="quarto-category">optimization</div>
+                <div class="quarto-category">probabilistic-models</div>
                 <div class="quarto-category">mathematics</div>
-                <div class="quarto-category">theory</div>
+                <div class="quarto-category">bayesian</div>
               </div>
                   </div>
   </div>
@@ -310,54 +310,52 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#optimization-theory-in-machine-learning" id="toc-optimization-theory-in-machine-learning" class="nav-link active" data-scroll-target="#optimization-theory-in-machine-learning">Optimization Theory in Machine Learning</a>
+  <li><a href="#probabilistic-graphical-models" id="toc-probabilistic-graphical-models" class="nav-link active" data-scroll-target="#probabilistic-graphical-models">Probabilistic Graphical Models</a>
   <ul class="collapse">
-  <li><a href="#convex-analysis" id="toc-convex-analysis" class="nav-link" data-scroll-target="#convex-analysis">Convex Analysis</a>
+  <li><a href="#bayesian-networks" id="toc-bayesian-networks" class="nav-link" data-scroll-target="#bayesian-networks">Bayesian Networks</a>
   <ul class="collapse">
-  <li><a href="#convex-sets-and-functions" id="toc-convex-sets-and-functions" class="nav-link" data-scroll-target="#convex-sets-and-functions">1. Convex Sets and Functions</a></li>
-  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties">2. Properties</a></li>
-  <li><a href="#strong-convexity" id="toc-strong-convexity" class="nav-link" data-scroll-target="#strong-convexity">3. Strong Convexity</a></li>
+  <li><a href="#factorization" id="toc-factorization" class="nav-link" data-scroll-target="#factorization">1. Factorization</a></li>
+  <li><a href="#conditional-independence" id="toc-conditional-independence" class="nav-link" data-scroll-target="#conditional-independence">2. Conditional Independence</a></li>
   </ul></li>
-  <li><a href="#optimality-conditions" id="toc-optimality-conditions" class="nav-link" data-scroll-target="#optimality-conditions">Optimality Conditions</a>
+  <li><a href="#markov-random-fields" id="toc-markov-random-fields" class="nav-link" data-scroll-target="#markov-random-fields">Markov Random Fields</a>
   <ul class="collapse">
-  <li><a href="#first-order-conditions" id="toc-first-order-conditions" class="nav-link" data-scroll-target="#first-order-conditions">1. First-Order Conditions</a></li>
-  <li><a href="#second-order-conditions" id="toc-second-order-conditions" class="nav-link" data-scroll-target="#second-order-conditions">2. Second-Order Conditions</a></li>
-  <li><a href="#saddle-point-conditions" id="toc-saddle-point-conditions" class="nav-link" data-scroll-target="#saddle-point-conditions">3. Saddle Point Conditions</a></li>
+  <li><a href="#gibbs-distribution" id="toc-gibbs-distribution" class="nav-link" data-scroll-target="#gibbs-distribution">1. Gibbs Distribution</a></li>
+  <li><a href="#hammersley-clifford-theorem" id="toc-hammersley-clifford-theorem" class="nav-link" data-scroll-target="#hammersley-clifford-theorem">2. Hammersley-Clifford Theorem</a></li>
   </ul></li>
-  <li><a href="#gradient-methods" id="toc-gradient-methods" class="nav-link" data-scroll-target="#gradient-methods">Gradient Methods</a>
+  <li><a href="#inference-algorithms" id="toc-inference-algorithms" class="nav-link" data-scroll-target="#inference-algorithms">Inference Algorithms</a>
   <ul class="collapse">
-  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent">1. Gradient Descent</a></li>
-  <li><a href="#accelerated-methods" id="toc-accelerated-methods" class="nav-link" data-scroll-target="#accelerated-methods">2. Accelerated Methods</a></li>
-  <li><a href="#stochastic-methods" id="toc-stochastic-methods" class="nav-link" data-scroll-target="#stochastic-methods">3. Stochastic Methods</a></li>
+  <li><a href="#variable-elimination" id="toc-variable-elimination" class="nav-link" data-scroll-target="#variable-elimination">1. Variable Elimination</a></li>
+  <li><a href="#belief-propagation" id="toc-belief-propagation" class="nav-link" data-scroll-target="#belief-propagation">2. Belief Propagation</a></li>
+  <li><a href="#junction-tree-algorithm" id="toc-junction-tree-algorithm" class="nav-link" data-scroll-target="#junction-tree-algorithm">3. Junction Tree Algorithm</a></li>
   </ul></li>
-  <li><a href="#non-convex-optimization" id="toc-non-convex-optimization" class="nav-link" data-scroll-target="#non-convex-optimization">Non-Convex Optimization</a>
+  <li><a href="#learning-methods" id="toc-learning-methods" class="nav-link" data-scroll-target="#learning-methods">Learning Methods</a>
   <ul class="collapse">
-  <li><a href="#local-minima" id="toc-local-minima" class="nav-link" data-scroll-target="#local-minima">1. Local Minima</a></li>
-  <li><a href="#escape-from-saddle-points" id="toc-escape-from-saddle-points" class="nav-link" data-scroll-target="#escape-from-saddle-points">2. Escape from Saddle Points</a></li>
-  <li><a href="#global-optimization" id="toc-global-optimization" class="nav-link" data-scroll-target="#global-optimization">3. Global Optimization</a></li>
-  </ul></li>
-  <li><a href="#modern-optimization-methods" id="toc-modern-optimization-methods" class="nav-link" data-scroll-target="#modern-optimization-methods">Modern Optimization Methods</a>
-  <ul class="collapse">
-  <li><a href="#adaptive-methods" id="toc-adaptive-methods" class="nav-link" data-scroll-target="#adaptive-methods">1. Adaptive Methods</a></li>
-  <li><a href="#natural-gradient" id="toc-natural-gradient" class="nav-link" data-scroll-target="#natural-gradient">2. Natural Gradient</a></li>
-  <li><a href="#second-order-methods" id="toc-second-order-methods" class="nav-link" data-scroll-target="#second-order-methods">3. Second-Order Methods</a></li>
-  </ul></li>
-  <li><a href="#constrained-optimization" id="toc-constrained-optimization" class="nav-link" data-scroll-target="#constrained-optimization">Constrained Optimization</a>
-  <ul class="collapse">
-  <li><a href="#projected-gradient" id="toc-projected-gradient" class="nav-link" data-scroll-target="#projected-gradient">1. Projected Gradient</a></li>
-  <li><a href="#proximal-methods" id="toc-proximal-methods" class="nav-link" data-scroll-target="#proximal-methods">2. Proximal Methods</a></li>
-  <li><a href="#augmented-lagrangian" id="toc-augmented-lagrangian" class="nav-link" data-scroll-target="#augmented-lagrangian">3. Augmented Lagrangian</a></li>
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation">1. Maximum Likelihood Estimation</a></li>
+  <li><a href="#bayesian-parameter-learning" id="toc-bayesian-parameter-learning" class="nav-link" data-scroll-target="#bayesian-parameter-learning">2. Bayesian Parameter Learning</a></li>
+  <li><a href="#structure-learning" id="toc-structure-learning" class="nav-link" data-scroll-target="#structure-learning">3. Structure Learning</a></li>
   </ul></li>
   <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
   <ul class="collapse">
-  <li><a href="#distributed-optimization" id="toc-distributed-optimization" class="nav-link" data-scroll-target="#distributed-optimization">1. Distributed Optimization</a></li>
-  <li><a href="#online-optimization" id="toc-online-optimization" class="nav-link" data-scroll-target="#online-optimization">2. Online Optimization</a></li>
-  <li><a href="#zeroth-order-optimization" id="toc-zeroth-order-optimization" class="nav-link" data-scroll-target="#zeroth-order-optimization">3. Zeroth-Order Optimization</a></li>
+  <li><a href="#variational-inference" id="toc-variational-inference" class="nav-link" data-scroll-target="#variational-inference">1. Variational Inference</a></li>
+  <li><a href="#mcmc-methods" id="toc-mcmc-methods" class="nav-link" data-scroll-target="#mcmc-methods">2. MCMC Methods</a></li>
+  <li><a href="#conditional-random-fields" id="toc-conditional-random-fields" class="nav-link" data-scroll-target="#conditional-random-fields">3. Conditional Random Fields</a></li>
+  </ul></li>
+  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
+  <ul class="collapse">
+  <li><a href="#numerical-stability" id="toc-numerical-stability" class="nav-link" data-scroll-target="#numerical-stability">1. Numerical Stability</a></li>
+  <li><a href="#sparse-representations" id="toc-sparse-representations" class="nav-link" data-scroll-target="#sparse-representations">2. Sparse Representations</a></li>
+  <li><a href="#parallelization" id="toc-parallelization" class="nav-link" data-scroll-target="#parallelization">3. Parallelization</a></li>
   </ul></li>
   <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
   <ul class="collapse">
-  <li><a href="#algorithm-selection" id="toc-algorithm-selection" class="nav-link" data-scroll-target="#algorithm-selection">1. Algorithm Selection</a></li>
-  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">2. Implementation</a></li>
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">1. Model Selection</a></li>
+  <li><a href="#performance-optimization" id="toc-performance-optimization" class="nav-link" data-scroll-target="#performance-optimization">2. Performance Optimization</a></li>
+  </ul></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a>
+  <ul class="collapse">
+  <li><a href="#medical-diagnosis" id="toc-medical-diagnosis" class="nav-link" data-scroll-target="#medical-diagnosis">1. Medical Diagnosis</a></li>
+  <li><a href="#computer-vision" id="toc-computer-vision" class="nav-link" data-scroll-target="#computer-vision">2. Computer Vision</a></li>
+  <li><a href="#natural-language-processing" id="toc-natural-language-processing" class="nav-link" data-scroll-target="#natural-language-processing">3. Natural Language Processing</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
@@ -371,318 +369,251 @@ window.Quarto = {
 
 
 
-<section id="optimization-theory-in-machine-learning" class="level1">
-<h1>Optimization Theory in Machine Learning</h1>
-<section id="convex-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="convex-analysis">Convex Analysis</h2>
-<section id="convex-sets-and-functions" class="level3">
-<h3 class="anchored" data-anchor-id="convex-sets-and-functions">1. Convex Sets and Functions</h3>
-<p>Convex set definition:</p>
+<section id="probabilistic-graphical-models" class="level1">
+<h1>Probabilistic Graphical Models</h1>
+<section id="bayesian-networks" class="level2">
+<h2 class="anchored" data-anchor-id="bayesian-networks">Bayesian Networks</h2>
+<section id="factorization" class="level3">
+<h3 class="anchored" data-anchor-id="factorization">1. Factorization</h3>
+<p>Joint probability factorization:</p>
 <p><span class="math display">\[
-\theta x + (1-\theta)y \in C, \forall x,y \in C, \theta \in [0,1]
+P(X_1, ..., X_n) = \prod_{i=1}^n P(X_i | \text{Pa}(X_i))
 \]</span></p>
-<p>Convex function:</p>
-<p><span class="math display">\[
-f(\theta x + (1-\theta)y) \leq \theta f(x) + (1-\theta)f(y)
-\]</span></p>
+<p>Where: - <span class="math inline">\(X_i\)</span> are random variables - <span class="math inline">\(\text{Pa}(X_i)\)</span> are parents of <span class="math inline">\(X_i\)</span> in the graph</p>
 </section>
-<section id="properties" class="level3">
-<h3 class="anchored" data-anchor-id="properties">2. Properties</h3>
-<p>First-order characterization:</p>
+<section id="conditional-independence" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-independence">2. Conditional Independence</h3>
+<p>D-separation criterion: - Two nodes are d-separated if all paths between them are blocked - A path is blocked if: * Contains a collider not in evidence * Contains a non-collider in evidence</p>
+<p>Formal definition:</p>
 <p><span class="math display">\[
-f(y) \geq f(x) + \nabla f(x)^T(y-x)
-\]</span></p>
-<p>Second-order characterization:</p>
-<p><span class="math display">\[
-\nabla^2 f(x) \succeq 0
-\]</span></p>
-</section>
-<section id="strong-convexity" class="level3">
-<h3 class="anchored" data-anchor-id="strong-convexity">3. Strong Convexity</h3>
-<p>Definition:</p>
-<p><span class="math display">\[
-f(y) \geq f(x) + \nabla f(x)^T(y-x) + \frac{\mu}{2}\|y-x\|^2
-\]</span></p>
-<p>Quadratic growth:</p>
-<p><span class="math display">\[
-f(x) - f(x^*) \geq \frac{\mu}{2}\|x-x^*\|^2
+X \perp\!\!\!\perp Y | Z \iff P(X|Y,Z) = P(X|Z)
 \]</span></p>
 </section>
 </section>
-<section id="optimality-conditions" class="level2">
-<h2 class="anchored" data-anchor-id="optimality-conditions">Optimality Conditions</h2>
-<section id="first-order-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="first-order-conditions">1. First-Order Conditions</h3>
-<p>Unconstrained:</p>
+<section id="markov-random-fields" class="level2">
+<h2 class="anchored" data-anchor-id="markov-random-fields">Markov Random Fields</h2>
+<section id="gibbs-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="gibbs-distribution">1. Gibbs Distribution</h3>
+<p>Joint distribution representation:</p>
 <p><span class="math display">\[
-\nabla f(x^*) = 0
+P(X = x) = \frac{1}{Z}\exp\left(-\sum_{c \in \mathcal{C}} \psi_c(x_c)\right)
 \]</span></p>
-<p>Constrained (KKT):</p>
+<p>Where: - <span class="math inline">\(\mathcal{C}\)</span> is the set of cliques - <span class="math inline">\(\psi_c\)</span> are potential functions - <span class="math inline">\(Z\)</span> is the partition function:</p>
+<p><span class="math display">\[
+Z = \sum_x \exp\left(-\sum_{c \in \mathcal{C}} \psi_c(x_c)\right)
+\]</span></p>
+</section>
+<section id="hammersley-clifford-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="hammersley-clifford-theorem">2. Hammersley-Clifford Theorem</h3>
+<p>Equivalence between positive distributions and Gibbs distributions:</p>
+<p><span class="math display">\[
+P(X = x) &gt; 0 \iff P(X = x) = \frac{1}{Z}\prod_{c \in \mathcal{C}} \phi_c(x_c)
+\]</span></p>
+<p>Where: - <span class="math inline">\(\phi_c\)</span> are non-negative factors</p>
+</section>
+</section>
+<section id="inference-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="inference-algorithms">Inference Algorithms</h2>
+<section id="variable-elimination" class="level3">
+<h3 class="anchored" data-anchor-id="variable-elimination">1. Variable Elimination</h3>
+<p>Complexity for tree-structured graphs:</p>
+<p><span class="math display">\[
+O(n \cdot d^{w})
+\]</span></p>
+<p>Where: - <span class="math inline">\(n\)</span> is number of variables - <span class="math inline">\(d\)</span> is domain size - <span class="math inline">\(w\)</span> is tree width</p>
+<p>Algorithm steps: 1. Choose elimination ordering 2. For each variable: - Multiply relevant factors - Sum out variable</p>
+</section>
+<section id="belief-propagation" class="level3">
+<h3 class="anchored" data-anchor-id="belief-propagation">2. Belief Propagation</h3>
+<p>Message passing equations:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\nabla_x \mathcal{L}(x^*,\lambda^*) &amp;= 0 \\
-g_i(x^*) &amp;\leq 0 \\
-\lambda_i^* g_i(x^*) &amp;= 0 \\
-\lambda_i^* &amp;\geq 0
+\mu_{i \to j}(x_j) &amp;= \sum_{x_i} \phi_i(x_i)\phi_{ij}(x_i,x_j)\prod_{k \in N(i)\backslash j} \mu_{k \to i}(x_i) \\
+b_i(x_i) &amp;\propto \phi_i(x_i)\prod_{j \in N(i)} \mu_{j \to i}(x_i)
 \end{aligned}
 \]</span></p>
+<p>Where: - <span class="math inline">\(\mu_{i \to j}\)</span> is message from i to j - <span class="math inline">\(b_i\)</span> is belief at node i - <span class="math inline">\(N(i)\)</span> is neighbors of i</p>
 </section>
-<section id="second-order-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-conditions">2. Second-Order Conditions</h3>
-<p>Unconstrained:</p>
+<section id="junction-tree-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="junction-tree-algorithm">3. Junction Tree Algorithm</h3>
+<p>Clique tree construction: 1. Moralize graph 2. Triangulate 3. Find maximal cliques 4. Build junction tree</p>
+<p>Running intersection property:</p>
 <p><span class="math display">\[
-\nabla^2 f(x^*) \succeq 0
+S_{ij} = C_i \cap C_j \subseteq C_k
 \]</span></p>
-<p>Constrained:</p>
-<p><span class="math display">\[
-y^T\nabla^2_{xx}\mathcal{L}(x^*,\lambda^*)y \geq 0
-\]</span></p>
-</section>
-<section id="saddle-point-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="saddle-point-conditions">3. Saddle Point Conditions</h3>
-<p>Minimax:</p>
-<p><span class="math display">\[
-\mathcal{L}(x^*,\lambda) \leq \mathcal{L}(x^*,\lambda^*) \leq \mathcal{L}(x,\lambda^*)
-\]</span></p>
-<p>Duality gap:</p>
-<p><span class="math display">\[
-f(x^*) - g(\lambda^*) = 0
-\]</span></p>
+<p>For any cliques <span class="math inline">\(C_i\)</span>, <span class="math inline">\(C_j\)</span>, and clique <span class="math inline">\(C_k\)</span> on path between them.</p>
 </section>
 </section>
-<section id="gradient-methods" class="level2">
-<h2 class="anchored" data-anchor-id="gradient-methods">Gradient Methods</h2>
-<section id="gradient-descent" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-descent">1. Gradient Descent</h3>
-<p>Update rule:</p>
+<section id="learning-methods" class="level2">
+<h2 class="anchored" data-anchor-id="learning-methods">Learning Methods</h2>
+<section id="maximum-likelihood-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-likelihood-estimation">1. Maximum Likelihood Estimation</h3>
+<p>Objective function:</p>
 <p><span class="math display">\[
-x_{k+1} = x_k - \eta_k\nabla f(x_k)
+\hat{\theta}_{MLE} = \arg\max_\theta \sum_{i=1}^N \log P(x^{(i)}|\theta)
 \]</span></p>
-<p>Convergence rate (convex):</p>
+<p>For complete data in Bayesian networks:</p>
 <p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{\|x_0-x^*\|^2}{2\eta k}
+\hat{\theta}_{ijk} = \frac{N_{ijk}}{\sum_k N_{ijk}}
+\]</span></p>
+<p>Where: - <span class="math inline">\(N_{ijk}\)</span> is count of <span class="math inline">\(X_i=k\)</span> with parent configuration j</p>
+</section>
+<section id="bayesian-parameter-learning" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-parameter-learning">2. Bayesian Parameter Learning</h3>
+<p>Posterior distribution:</p>
+<p><span class="math display">\[
+P(\theta|D) \propto P(D|\theta)P(\theta)
+\]</span></p>
+<p>With Dirichlet prior:</p>
+<p><span class="math display">\[
+\theta_{ijk} \sim \text{Dir}(\alpha_{ijk})
+\]</span></p>
+<p>Posterior parameters:</p>
+<p><span class="math display">\[
+\alpha_{ijk}^{\text{post}} = \alpha_{ijk} + N_{ijk}
 \]</span></p>
 </section>
-<section id="accelerated-methods" class="level3">
-<h3 class="anchored" data-anchor-id="accelerated-methods">2. Accelerated Methods</h3>
-<p>Nesterov’s acceleration:</p>
+<section id="structure-learning" class="level3">
+<h3 class="anchored" data-anchor-id="structure-learning">3. Structure Learning</h3>
+<p>Score-based learning objective:</p>
 <p><span class="math display">\[
-\begin{aligned}
-y_k &amp;= x_k + \beta_k(x_k - x_{k-1}) \\
-x_{k+1} &amp;= y_k - \eta_k\nabla f(y_k)
-\end{aligned}
+G^* = \arg\max_G \text{score}(G:D)
 \]</span></p>
-<p>Convergence rate:</p>
+<p>Common scores: 1. BIC score:</p>
 <p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{2L\|x_0-x^*\|^2}{(k+1)^2}
+\text{BIC}(G:D) = \ell(D|\hat{\theta}, G) - \frac{\log N}{2}|G|
 \]</span></p>
-</section>
-<section id="stochastic-methods" class="level3">
-<h3 class="anchored" data-anchor-id="stochastic-methods">3. Stochastic Methods</h3>
-<p>SGD update:</p>
+<ol start="2" type="1">
+<li>Bayesian score:</li>
+</ol>
 <p><span class="math display">\[
-x_{k+1} = x_k - \eta_k\nabla f_{i_k}(x_k)
-\]</span></p>
-<p>Convergence rate:</p>
-<p><span class="math display">\[
-\mathbb{E}[f(x_k) - f(x^*)] \leq \frac{L\|x_0-x^*\|^2}{2k} + \frac{L\sigma^2}{2}\sum_{t=1}^k \eta_t^2
-\]</span></p>
-</section>
-</section>
-<section id="non-convex-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="non-convex-optimization">Non-Convex Optimization</h2>
-<section id="local-minima" class="level3">
-<h3 class="anchored" data-anchor-id="local-minima">1. Local Minima</h3>
-<p>First-order condition:</p>
-<p><span class="math display">\[
-\|\nabla f(x^*)\| \leq \epsilon
-\]</span></p>
-<p>Second-order condition:</p>
-<p><span class="math display">\[
-\lambda_{\min}(\nabla^2 f(x^*)) \geq -\sqrt{\epsilon}
-\]</span></p>
-</section>
-<section id="escape-from-saddle-points" class="level3">
-<h3 class="anchored" data-anchor-id="escape-from-saddle-points">2. Escape from Saddle Points</h3>
-<p>Perturbed gradient descent:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta\nabla f(x_k) + \xi_k
-\]</span></p>
-<p>Where: - <span class="math inline">\(\xi_k \sim \mathcal{N}(0,\sigma^2I)\)</span></p>
-</section>
-<section id="global-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="global-optimization">3. Global Optimization</h3>
-<p>Branch and bound:</p>
-<p><span class="math display">\[
-\text{LB}(R) \leq \min_{x \in R} f(x) \leq \text{UB}(R)
-\]</span></p>
-<p>Simulated annealing:</p>
-<p><span class="math display">\[
-P(\text{accept}) = \exp(-\frac{\Delta E}{T_k})
-\]</span></p>
-</section>
-</section>
-<section id="modern-optimization-methods" class="level2">
-<h2 class="anchored" data-anchor-id="modern-optimization-methods">Modern Optimization Methods</h2>
-<section id="adaptive-methods" class="level3">
-<h3 class="anchored" data-anchor-id="adaptive-methods">1. Adaptive Methods</h3>
-<p>AdaGrad:</p>
-<p><span class="math display">\[
-x_{t+1,i} = x_{t,i} - \frac{\eta}{\sqrt{\sum_{s=1}^t g_{s,i}^2}}g_{t,i}
-\]</span></p>
-<p>Adam:</p>
-<p><span class="math display">\[
-\begin{aligned}
-m_t &amp;= \beta_1 m_{t-1} + (1-\beta_1)g_t \\
-v_t &amp;= \beta_2 v_{t-1} + (1-\beta_2)g_t^2 \\
-\hat{m}_t &amp;= \frac{m_t}{1-\beta_1^t} \\
-\hat{v}_t &amp;= \frac{v_t}{1-\beta_2^t} \\
-x_{t+1} &amp;= x_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon}\hat{m}_t
-\end{aligned}
-\]</span></p>
-</section>
-<section id="natural-gradient" class="level3">
-<h3 class="anchored" data-anchor-id="natural-gradient">2. Natural Gradient</h3>
-<p>Fisher information:</p>
-<p><span class="math display">\[
-F(x) = \mathbb{E}_{p(y|x)}[\nabla \log p(y|x)\nabla \log p(y|x)^T]
-\]</span></p>
-<p>Update rule:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta F(x_k)^{-1}\nabla f(x_k)
-\]</span></p>
-</section>
-<section id="second-order-methods" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-methods">3. Second-Order Methods</h3>
-<p>Newton’s method:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - [\nabla^2 f(x_k)]^{-1}\nabla f(x_k)
-\]</span></p>
-<p>BFGS update:</p>
-<p><span class="math display">\[
-B_{k+1} = B_k + \frac{y_ky_k^T}{y_k^Ts_k} - \frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}
-\]</span></p>
-</section>
-</section>
-<section id="constrained-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="constrained-optimization">Constrained Optimization</h2>
-<section id="projected-gradient" class="level3">
-<h3 class="anchored" data-anchor-id="projected-gradient">1. Projected Gradient</h3>
-<p>Update rule:</p>
-<p><span class="math display">\[
-x_{k+1} = \Pi_C(x_k - \eta_k\nabla f(x_k))
-\]</span></p>
-<p>Convergence rate:</p>
-<p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{\|x_0-x^*\|^2}{2\eta k}
-\]</span></p>
-</section>
-<section id="proximal-methods" class="level3">
-<h3 class="anchored" data-anchor-id="proximal-methods">2. Proximal Methods</h3>
-<p>Proximal operator:</p>
-<p><span class="math display">\[
-\text{prox}_{\eta g}(x) = \arg\min_y \{g(y) + \frac{1}{2\eta}\|y-x\|^2\}
-\]</span></p>
-<p>ISTA update:</p>
-<p><span class="math display">\[
-x_{k+1} = \text{prox}_{\eta g}(x_k - \eta\nabla f(x_k))
-\]</span></p>
-</section>
-<section id="augmented-lagrangian" class="level3">
-<h3 class="anchored" data-anchor-id="augmented-lagrangian">3. Augmented Lagrangian</h3>
-<p>Function:</p>
-<p><span class="math display">\[
-\mathcal{L}_\rho(x,\lambda) = f(x) + \lambda^Tg(x) + \frac{\rho}{2}\|g(x)\|^2
-\]</span></p>
-<p>Update rules:</p>
-<p><span class="math display">\[
-\begin{aligned}
-x_{k+1} &amp;= \arg\min_x \mathcal{L}_\rho(x,\lambda_k) \\
-\lambda_{k+1} &amp;= \lambda_k + \rho g(x_{k+1})
-\end{aligned}
+P(G|D) \propto P(D|G)P(G)
 \]</span></p>
 </section>
 </section>
 <section id="advanced-topics" class="level2">
 <h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="distributed-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="distributed-optimization">1. Distributed Optimization</h3>
-<p>ADMM algorithm:</p>
+<section id="variational-inference" class="level3">
+<h3 class="anchored" data-anchor-id="variational-inference">1. Variational Inference</h3>
+<p>Evidence lower bound (ELBO):</p>
 <p><span class="math display">\[
-\begin{aligned}
-x_{k+1} &amp;= \arg\min_x \mathcal{L}_\rho(x,z_k,y_k) \\
-z_{k+1} &amp;= \arg\min_z \mathcal{L}_\rho(x_{k+1},z,y_k) \\
-y_{k+1} &amp;= y_k + \rho(Ax_{k+1} + Bz_{k+1} - c)
-\end{aligned}
+\mathcal{L}(q) = \mathbb{E}_q[\log p(x,z)] - \mathbb{E}_q[\log q(z)]
+\]</span></p>
+<p>Mean field approximation:</p>
+<p><span class="math display">\[
+q(z) = \prod_i q_i(z_i)
+\]</span></p>
+<p>Update equations:</p>
+<p><span class="math display">\[
+\log q_j^*(z_j) = \mathbb{E}_{q_{-j}}[\log p(x,z)] + \text{const}
 \]</span></p>
 </section>
-<section id="online-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="online-optimization">2. Online Optimization</h3>
-<p>Regret bound:</p>
+<section id="mcmc-methods" class="level3">
+<h3 class="anchored" data-anchor-id="mcmc-methods">2. MCMC Methods</h3>
+<p>Metropolis-Hastings acceptance ratio:</p>
 <p><span class="math display">\[
-R_T \leq O(\sqrt{T})
+\alpha = \min\left(1, \frac{p(x')q(x|x')}{p(x)q(x'|x)}\right)
 \]</span></p>
-<p>Follow-the-regularized-leader:</p>
+<p>Gibbs sampling update:</p>
 <p><span class="math display">\[
-x_{t+1} = \arg\min_x \{\eta\sum_{s=1}^t \ell_s(x) + R(x)\}
+x_i^{(t+1)} \sim p(x_i|x_{-i}^{(t)})
 \]</span></p>
 </section>
-<section id="zeroth-order-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="zeroth-order-optimization">3. Zeroth-Order Optimization</h3>
-<p>Gradient estimation:</p>
+<section id="conditional-random-fields" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-random-fields">3. Conditional Random Fields</h3>
+<p>Linear-chain CRF probability:</p>
 <p><span class="math display">\[
-\hat{\nabla} f(x) = \frac{d}{r}f(x+r\xi)\xi
+P(y|x) = \frac{1}{Z(x)}\exp\left(\sum_{t=1}^T\sum_k \lambda_k f_k(y_t,y_{t-1},x_t)\right)
 \]</span></p>
-<p>Where: - <span class="math inline">\(\xi \sim \text{Unif}(\mathbb{S}^{d-1})\)</span></p>
+<p>Where: - <span class="math inline">\(f_k\)</span> are feature functions - <span class="math inline">\(\lambda_k\)</span> are weights - <span class="math inline">\(Z(x)\)</span> is normalization factor</p>
+</section>
+</section>
+<section id="implementation-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
+<section id="numerical-stability" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-stability">1. Numerical Stability</h3>
+<p>Log-space computations:</p>
+<p><span class="math display">\[
+\log\sum_i \exp(x_i) = \max_i x_i + \log\sum_i \exp(x_i - \max_i x_i)
+\]</span></p>
+</section>
+<section id="sparse-representations" class="level3">
+<h3 class="anchored" data-anchor-id="sparse-representations">2. Sparse Representations</h3>
+<p>Efficient factor operations: - Sparse matrices for CPTs - Vectorized operations - Caching intermediate results</p>
+</section>
+<section id="parallelization" class="level3">
+<h3 class="anchored" data-anchor-id="parallelization">3. Parallelization</h3>
+<p>Parallel message passing: - Tree-structured graphs - Junction tree clusters - Mini-batch learning</p>
 </section>
 </section>
 <section id="best-practices" class="level2">
 <h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="algorithm-selection" class="level3">
-<h3 class="anchored" data-anchor-id="algorithm-selection">1. Algorithm Selection</h3>
+<section id="model-selection" class="level3">
+<h3 class="anchored" data-anchor-id="model-selection">1. Model Selection</h3>
 <ol type="1">
-<li>Problem Structure:
+<li>Network Structure:
 <ul>
-<li>Convexity</li>
-<li>Smoothness</li>
-<li>Constraints</li>
+<li>Expert knowledge</li>
+<li>Causal relationships</li>
+<li>Data-driven learning</li>
 </ul></li>
-<li>Data Properties:
+<li>Inference Method:
 <ul>
-<li>Size</li>
-<li>Dimensionality</li>
-<li>Sparsity</li>
+<li>Exact vs approximate</li>
+<li>Graph structure</li>
+<li>Domain size</li>
 </ul></li>
-<li>Computational Resources:
+<li>Learning Approach:
 <ul>
-<li>Memory</li>
-<li>Processing power</li>
-<li>Time constraints</li>
+<li>Data completeness</li>
+<li>Prior knowledge</li>
+<li>Computational resources</li>
 </ul></li>
 </ol>
 </section>
-<section id="implementation" class="level3">
-<h3 class="anchored" data-anchor-id="implementation">2. Implementation</h3>
+<section id="performance-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="performance-optimization">2. Performance Optimization</h3>
 <ol type="1">
-<li>Initialization:
+<li>Variable Ordering:
 <ul>
-<li>Parameter scaling</li>
-<li>Random seeding</li>
-<li>Warm start</li>
+<li>Min-fill heuristic</li>
+<li>Min-degree ordering</li>
+<li>Weighted variants</li>
 </ul></li>
-<li>Monitoring:
+<li>Message Scheduling:
 <ul>
-<li>Convergence</li>
-<li>Stability</li>
-<li>Resource usage</li>
+<li>Residual belief propagation</li>
+<li>Priority-based updates</li>
+<li>Asynchronous methods</li>
 </ul></li>
-<li>Tuning:
+<li>Memory Management:
 <ul>
-<li>Learning rates</li>
-<li>Momentum</li>
-<li>Regularization</li>
+<li>Factor caching</li>
+<li>Message memoization</li>
+<li>Sparse representations</li>
 </ul></li>
 </ol>
+</section>
+</section>
+<section id="applications" class="level2">
+<h2 class="anchored" data-anchor-id="applications">Applications</h2>
+<section id="medical-diagnosis" class="level3">
+<h3 class="anchored" data-anchor-id="medical-diagnosis">1. Medical Diagnosis</h3>
+<p>Network structure: - Diseases as root nodes - Symptoms as leaf nodes - Test results as intermediate nodes</p>
+<p>Inference tasks: - Diagnostic reasoning - Predictive reasoning - Intercausal reasoning</p>
+</section>
+<section id="computer-vision" class="level3">
+<h3 class="anchored" data-anchor-id="computer-vision">2. Computer Vision</h3>
+<p>MRF applications: - Image segmentation - Stereo matching - Image restoration</p>
+<p>Energy function:</p>
+<p><span class="math display">\[
+E(x) = \sum_i \phi_i(x_i) + \sum_{i,j} \phi_{ij}(x_i,x_j)
+\]</span></p>
+</section>
+<section id="natural-language-processing" class="level3">
+<h3 class="anchored" data-anchor-id="natural-language-processing">3. Natural Language Processing</h3>
+<p>Linear-chain CRFs: - Part-of-speech tagging - Named entity recognition - Sequence labeling</p>
+<p>Feature templates: - Word features - Context windows - Transition features</p>
 </section>
 </section>
 <section id="references" class="level2">
@@ -690,21 +621,21 @@ x_{t+1} = \arg\min_x \{\eta\sum_{s=1}^t \ell_s(x) + R(x)\}
 <ol type="1">
 <li>Theory:
 <ul>
-<li>“Convex Optimization” by Boyd and Vandenberghe</li>
-<li>“Introductory Lectures on Convex Optimization” by Nesterov</li>
-<li>“Optimization Methods for Large-Scale Machine Learning” by Bottou et al.</li>
+<li>“Probabilistic Graphical Models” by Koller and Friedman</li>
+<li>“Pattern Recognition and Machine Learning” by Bishop</li>
+<li>“Information Theory, Inference, and Learning Algorithms” by MacKay</li>
 </ul></li>
-<li>Methods:
+<li>Algorithms:
 <ul>
-<li>“Numerical Optimization” by Nocedal and Wright</li>
-<li>“First-Order Methods in Optimization” by Beck</li>
-<li>“Proximal Algorithms” by Parikh and Boyd</li>
+<li>“Understanding Belief Propagation and its Generalizations” by Yedidia et al.</li>
+<li>“An Introduction to MCMC for Machine Learning” by Andrieu et al.</li>
+<li>“Structured Prediction for Natural Language Processing” by Smith</li>
 </ul></li>
 <li>Applications:
 <ul>
-<li>“Deep Learning” by Goodfellow et al.</li>
-<li>“Optimization for Machine Learning” by Sra et al.</li>
-<li>“Large Scale Optimization in Machine Learning” by Shalev-Shwartz and Zhang</li>
+<li>“Medical Applications of Artificial Intelligence” by Dua and Acharya</li>
+<li>“Computer Vision: A Modern Approach” by Forsyth and Ponce</li>
+<li>“Speech and Language Processing” by Jurafsky and Martin</li>
 </ul></li>
 </ol>
 

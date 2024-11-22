@@ -8,9 +8,9 @@
 
 <meta name="author" content="Ram Polisetti">
 <meta name="dcterms.date" content="2024-03-19">
-<meta name="description" content="A rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.">
+<meta name="description" content="A rigorous exploration of information theory principles and their applications in machine learning algorithms.">
 
-<title>Optimization Theory in Machine Learning – BendThe-Curve</title>
+<title>Information Theory in Machine Learning – BendThe-Curve</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -188,7 +188,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Optimization Theory in Machine Learning</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Information Theory in Machine Learning</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -198,15 +198,15 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Optimization Theory in Machine Learning</h1>
+      <h1 class="title">Information Theory in Machine Learning</h1>
                   <div>
         <div class="description">
-          A rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.
+          A rigorous exploration of information theory principles and their applications in machine learning algorithms.
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">machine-learning</div>
-                <div class="quarto-category">optimization</div>
+                <div class="quarto-category">information-theory</div>
                 <div class="quarto-category">mathematics</div>
                 <div class="quarto-category">theory</div>
               </div>
@@ -310,54 +310,54 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#optimization-theory-in-machine-learning" id="toc-optimization-theory-in-machine-learning" class="nav-link active" data-scroll-target="#optimization-theory-in-machine-learning">Optimization Theory in Machine Learning</a>
+  <li><a href="#information-theory-in-machine-learning" id="toc-information-theory-in-machine-learning" class="nav-link active" data-scroll-target="#information-theory-in-machine-learning">Information Theory in Machine Learning</a>
   <ul class="collapse">
-  <li><a href="#convex-analysis" id="toc-convex-analysis" class="nav-link" data-scroll-target="#convex-analysis">Convex Analysis</a>
+  <li><a href="#fundamental-concepts" id="toc-fundamental-concepts" class="nav-link" data-scroll-target="#fundamental-concepts">Fundamental Concepts</a>
   <ul class="collapse">
-  <li><a href="#convex-sets-and-functions" id="toc-convex-sets-and-functions" class="nav-link" data-scroll-target="#convex-sets-and-functions">1. Convex Sets and Functions</a></li>
-  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties">2. Properties</a></li>
-  <li><a href="#strong-convexity" id="toc-strong-convexity" class="nav-link" data-scroll-target="#strong-convexity">3. Strong Convexity</a></li>
+  <li><a href="#shannon-entropy" id="toc-shannon-entropy" class="nav-link" data-scroll-target="#shannon-entropy">1. Shannon Entropy</a></li>
+  <li><a href="#differential-entropy" id="toc-differential-entropy" class="nav-link" data-scroll-target="#differential-entropy">2. Differential Entropy</a></li>
+  <li><a href="#mutual-information" id="toc-mutual-information" class="nav-link" data-scroll-target="#mutual-information">3. Mutual Information</a></li>
   </ul></li>
-  <li><a href="#optimality-conditions" id="toc-optimality-conditions" class="nav-link" data-scroll-target="#optimality-conditions">Optimality Conditions</a>
+  <li><a href="#information-theoretic-measures" id="toc-information-theoretic-measures" class="nav-link" data-scroll-target="#information-theoretic-measures">Information-Theoretic Measures</a>
   <ul class="collapse">
-  <li><a href="#first-order-conditions" id="toc-first-order-conditions" class="nav-link" data-scroll-target="#first-order-conditions">1. First-Order Conditions</a></li>
-  <li><a href="#second-order-conditions" id="toc-second-order-conditions" class="nav-link" data-scroll-target="#second-order-conditions">2. Second-Order Conditions</a></li>
-  <li><a href="#saddle-point-conditions" id="toc-saddle-point-conditions" class="nav-link" data-scroll-target="#saddle-point-conditions">3. Saddle Point Conditions</a></li>
+  <li><a href="#kullback-leibler-divergence" id="toc-kullback-leibler-divergence" class="nav-link" data-scroll-target="#kullback-leibler-divergence">1. Kullback-Leibler Divergence</a></li>
+  <li><a href="#jensen-shannon-divergence" id="toc-jensen-shannon-divergence" class="nav-link" data-scroll-target="#jensen-shannon-divergence">2. Jensen-Shannon Divergence</a></li>
+  <li><a href="#cross-entropy" id="toc-cross-entropy" class="nav-link" data-scroll-target="#cross-entropy">3. Cross-Entropy</a></li>
   </ul></li>
-  <li><a href="#gradient-methods" id="toc-gradient-methods" class="nav-link" data-scroll-target="#gradient-methods">Gradient Methods</a>
+  <li><a href="#applications-in-machine-learning" id="toc-applications-in-machine-learning" class="nav-link" data-scroll-target="#applications-in-machine-learning">Applications in Machine Learning</a>
   <ul class="collapse">
-  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent">1. Gradient Descent</a></li>
-  <li><a href="#accelerated-methods" id="toc-accelerated-methods" class="nav-link" data-scroll-target="#accelerated-methods">2. Accelerated Methods</a></li>
-  <li><a href="#stochastic-methods" id="toc-stochastic-methods" class="nav-link" data-scroll-target="#stochastic-methods">3. Stochastic Methods</a></li>
+  <li><a href="#maximum-entropy-principle" id="toc-maximum-entropy-principle" class="nav-link" data-scroll-target="#maximum-entropy-principle">1. Maximum Entropy Principle</a></li>
+  <li><a href="#information-bottleneck" id="toc-information-bottleneck" class="nav-link" data-scroll-target="#information-bottleneck">2. Information Bottleneck</a></li>
+  <li><a href="#mutual-information-neural-estimation" id="toc-mutual-information-neural-estimation" class="nav-link" data-scroll-target="#mutual-information-neural-estimation">3. Mutual Information Neural Estimation</a></li>
   </ul></li>
-  <li><a href="#non-convex-optimization" id="toc-non-convex-optimization" class="nav-link" data-scroll-target="#non-convex-optimization">Non-Convex Optimization</a>
+  <li><a href="#information-theory-in-deep-learning" id="toc-information-theory-in-deep-learning" class="nav-link" data-scroll-target="#information-theory-in-deep-learning">Information Theory in Deep Learning</a>
   <ul class="collapse">
-  <li><a href="#local-minima" id="toc-local-minima" class="nav-link" data-scroll-target="#local-minima">1. Local Minima</a></li>
-  <li><a href="#escape-from-saddle-points" id="toc-escape-from-saddle-points" class="nav-link" data-scroll-target="#escape-from-saddle-points">2. Escape from Saddle Points</a></li>
-  <li><a href="#global-optimization" id="toc-global-optimization" class="nav-link" data-scroll-target="#global-optimization">3. Global Optimization</a></li>
+  <li><a href="#information-plane-analysis" id="toc-information-plane-analysis" class="nav-link" data-scroll-target="#information-plane-analysis">1. Information Plane Analysis</a></li>
+  <li><a href="#variational-information-maximization" id="toc-variational-information-maximization" class="nav-link" data-scroll-target="#variational-information-maximization">2. Variational Information Maximization</a></li>
+  <li><a href="#information-dropout" id="toc-information-dropout" class="nav-link" data-scroll-target="#information-dropout">3. Information Dropout</a></li>
   </ul></li>
-  <li><a href="#modern-optimization-methods" id="toc-modern-optimization-methods" class="nav-link" data-scroll-target="#modern-optimization-methods">Modern Optimization Methods</a>
+  <li><a href="#advanced-applications" id="toc-advanced-applications" class="nav-link" data-scroll-target="#advanced-applications">Advanced Applications</a>
   <ul class="collapse">
-  <li><a href="#adaptive-methods" id="toc-adaptive-methods" class="nav-link" data-scroll-target="#adaptive-methods">1. Adaptive Methods</a></li>
-  <li><a href="#natural-gradient" id="toc-natural-gradient" class="nav-link" data-scroll-target="#natural-gradient">2. Natural Gradient</a></li>
-  <li><a href="#second-order-methods" id="toc-second-order-methods" class="nav-link" data-scroll-target="#second-order-methods">3. Second-Order Methods</a></li>
+  <li><a href="#generative-models" id="toc-generative-models" class="nav-link" data-scroll-target="#generative-models">1. Generative Models</a></li>
+  <li><a href="#representation-learning" id="toc-representation-learning" class="nav-link" data-scroll-target="#representation-learning">2. Representation Learning</a></li>
+  <li><a href="#model-compression" id="toc-model-compression" class="nav-link" data-scroll-target="#model-compression">3. Model Compression</a></li>
   </ul></li>
-  <li><a href="#constrained-optimization" id="toc-constrained-optimization" class="nav-link" data-scroll-target="#constrained-optimization">Constrained Optimization</a>
+  <li><a href="#theoretical-insights" id="toc-theoretical-insights" class="nav-link" data-scroll-target="#theoretical-insights">Theoretical Insights</a>
   <ul class="collapse">
-  <li><a href="#projected-gradient" id="toc-projected-gradient" class="nav-link" data-scroll-target="#projected-gradient">1. Projected Gradient</a></li>
-  <li><a href="#proximal-methods" id="toc-proximal-methods" class="nav-link" data-scroll-target="#proximal-methods">2. Proximal Methods</a></li>
-  <li><a href="#augmented-lagrangian" id="toc-augmented-lagrangian" class="nav-link" data-scroll-target="#augmented-lagrangian">3. Augmented Lagrangian</a></li>
+  <li><a href="#learning-dynamics" id="toc-learning-dynamics" class="nav-link" data-scroll-target="#learning-dynamics">1. Learning Dynamics</a></li>
+  <li><a href="#generalization-bounds" id="toc-generalization-bounds" class="nav-link" data-scroll-target="#generalization-bounds">2. Generalization Bounds</a></li>
+  <li><a href="#optimization-perspective" id="toc-optimization-perspective" class="nav-link" data-scroll-target="#optimization-perspective">3. Optimization Perspective</a></li>
   </ul></li>
-  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
+  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
   <ul class="collapse">
-  <li><a href="#distributed-optimization" id="toc-distributed-optimization" class="nav-link" data-scroll-target="#distributed-optimization">1. Distributed Optimization</a></li>
-  <li><a href="#online-optimization" id="toc-online-optimization" class="nav-link" data-scroll-target="#online-optimization">2. Online Optimization</a></li>
-  <li><a href="#zeroth-order-optimization" id="toc-zeroth-order-optimization" class="nav-link" data-scroll-target="#zeroth-order-optimization">3. Zeroth-Order Optimization</a></li>
+  <li><a href="#numerical-stability" id="toc-numerical-stability" class="nav-link" data-scroll-target="#numerical-stability">1. Numerical Stability</a></li>
+  <li><a href="#estimation-methods" id="toc-estimation-methods" class="nav-link" data-scroll-target="#estimation-methods">2. Estimation Methods</a></li>
+  <li><a href="#batch-processing" id="toc-batch-processing" class="nav-link" data-scroll-target="#batch-processing">3. Batch Processing</a></li>
   </ul></li>
   <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
   <ul class="collapse">
-  <li><a href="#algorithm-selection" id="toc-algorithm-selection" class="nav-link" data-scroll-target="#algorithm-selection">1. Algorithm Selection</a></li>
-  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">2. Implementation</a></li>
+  <li><a href="#model-design" id="toc-model-design" class="nav-link" data-scroll-target="#model-design">1. Model Design</a></li>
+  <li><a href="#training-strategy" id="toc-training-strategy" class="nav-link" data-scroll-target="#training-strategy">2. Training Strategy</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
@@ -371,316 +371,274 @@ window.Quarto = {
 
 
 
-<section id="optimization-theory-in-machine-learning" class="level1">
-<h1>Optimization Theory in Machine Learning</h1>
-<section id="convex-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="convex-analysis">Convex Analysis</h2>
-<section id="convex-sets-and-functions" class="level3">
-<h3 class="anchored" data-anchor-id="convex-sets-and-functions">1. Convex Sets and Functions</h3>
-<p>Convex set definition:</p>
+<section id="information-theory-in-machine-learning" class="level1">
+<h1>Information Theory in Machine Learning</h1>
+<section id="fundamental-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="fundamental-concepts">Fundamental Concepts</h2>
+<section id="shannon-entropy" class="level3">
+<h3 class="anchored" data-anchor-id="shannon-entropy">1. Shannon Entropy</h3>
+<p>Self-information of an event:</p>
 <p><span class="math display">\[
-\theta x + (1-\theta)y \in C, \forall x,y \in C, \theta \in [0,1]
+I(x) = -\log_2 p(x)
 \]</span></p>
-<p>Convex function:</p>
+<p>Entropy of a discrete distribution:</p>
 <p><span class="math display">\[
-f(\theta x + (1-\theta)y) \leq \theta f(x) + (1-\theta)f(y)
+H(X) = -\sum_{x \in \mathcal{X}} p(x)\log_2 p(x)
+\]</span></p>
+<p>Properties: 1. Non-negativity: <span class="math inline">\(H(X) \geq 0\)</span> 2. Maximum entropy: <span class="math inline">\(H(X) \leq \log_2|\mathcal{X}|\)</span> 3. Chain rule: <span class="math inline">\(H(X,Y) = H(X) + H(Y|X)\)</span></p>
+</section>
+<section id="differential-entropy" class="level3">
+<h3 class="anchored" data-anchor-id="differential-entropy">2. Differential Entropy</h3>
+<p>For continuous distributions:</p>
+<p><span class="math display">\[
+h(X) = -\int_{\mathcal{X}} p(x)\log p(x)dx
+\]</span></p>
+<p>Gaussian distribution entropy:</p>
+<p><span class="math display">\[
+h(\mathcal{N}(\mu,\sigma^2)) = \frac{1}{2}\log_2(2\pi e\sigma^2)
 \]</span></p>
 </section>
-<section id="properties" class="level3">
-<h3 class="anchored" data-anchor-id="properties">2. Properties</h3>
-<p>First-order characterization:</p>
-<p><span class="math display">\[
-f(y) \geq f(x) + \nabla f(x)^T(y-x)
-\]</span></p>
-<p>Second-order characterization:</p>
-<p><span class="math display">\[
-\nabla^2 f(x) \succeq 0
-\]</span></p>
-</section>
-<section id="strong-convexity" class="level3">
-<h3 class="anchored" data-anchor-id="strong-convexity">3. Strong Convexity</h3>
+<section id="mutual-information" class="level3">
+<h3 class="anchored" data-anchor-id="mutual-information">3. Mutual Information</h3>
 <p>Definition:</p>
 <p><span class="math display">\[
-f(y) \geq f(x) + \nabla f(x)^T(y-x) + \frac{\mu}{2}\|y-x\|^2
+I(X;Y) = \sum_{x,y} p(x,y)\log_2\frac{p(x,y)}{p(x)p(y)}
 \]</span></p>
-<p>Quadratic growth:</p>
-<p><span class="math display">\[
-f(x) - f(x^*) \geq \frac{\mu}{2}\|x-x^*\|^2
-\]</span></p>
-</section>
-</section>
-<section id="optimality-conditions" class="level2">
-<h2 class="anchored" data-anchor-id="optimality-conditions">Optimality Conditions</h2>
-<section id="first-order-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="first-order-conditions">1. First-Order Conditions</h3>
-<p>Unconstrained:</p>
-<p><span class="math display">\[
-\nabla f(x^*) = 0
-\]</span></p>
-<p>Constrained (KKT):</p>
+<p>Alternative forms:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\nabla_x \mathcal{L}(x^*,\lambda^*) &amp;= 0 \\
-g_i(x^*) &amp;\leq 0 \\
-\lambda_i^* g_i(x^*) &amp;= 0 \\
-\lambda_i^* &amp;\geq 0
-\end{aligned}
-\]</span></p>
-</section>
-<section id="second-order-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-conditions">2. Second-Order Conditions</h3>
-<p>Unconstrained:</p>
-<p><span class="math display">\[
-\nabla^2 f(x^*) \succeq 0
-\]</span></p>
-<p>Constrained:</p>
-<p><span class="math display">\[
-y^T\nabla^2_{xx}\mathcal{L}(x^*,\lambda^*)y \geq 0
-\]</span></p>
-</section>
-<section id="saddle-point-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="saddle-point-conditions">3. Saddle Point Conditions</h3>
-<p>Minimax:</p>
-<p><span class="math display">\[
-\mathcal{L}(x^*,\lambda) \leq \mathcal{L}(x^*,\lambda^*) \leq \mathcal{L}(x,\lambda^*)
-\]</span></p>
-<p>Duality gap:</p>
-<p><span class="math display">\[
-f(x^*) - g(\lambda^*) = 0
-\]</span></p>
-</section>
-</section>
-<section id="gradient-methods" class="level2">
-<h2 class="anchored" data-anchor-id="gradient-methods">Gradient Methods</h2>
-<section id="gradient-descent" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-descent">1. Gradient Descent</h3>
-<p>Update rule:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta_k\nabla f(x_k)
-\]</span></p>
-<p>Convergence rate (convex):</p>
-<p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{\|x_0-x^*\|^2}{2\eta k}
-\]</span></p>
-</section>
-<section id="accelerated-methods" class="level3">
-<h3 class="anchored" data-anchor-id="accelerated-methods">2. Accelerated Methods</h3>
-<p>Nesterov’s acceleration:</p>
-<p><span class="math display">\[
-\begin{aligned}
-y_k &amp;= x_k + \beta_k(x_k - x_{k-1}) \\
-x_{k+1} &amp;= y_k - \eta_k\nabla f(y_k)
-\end{aligned}
-\]</span></p>
-<p>Convergence rate:</p>
-<p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{2L\|x_0-x^*\|^2}{(k+1)^2}
-\]</span></p>
-</section>
-<section id="stochastic-methods" class="level3">
-<h3 class="anchored" data-anchor-id="stochastic-methods">3. Stochastic Methods</h3>
-<p>SGD update:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta_k\nabla f_{i_k}(x_k)
-\]</span></p>
-<p>Convergence rate:</p>
-<p><span class="math display">\[
-\mathbb{E}[f(x_k) - f(x^*)] \leq \frac{L\|x_0-x^*\|^2}{2k} + \frac{L\sigma^2}{2}\sum_{t=1}^k \eta_t^2
-\]</span></p>
-</section>
-</section>
-<section id="non-convex-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="non-convex-optimization">Non-Convex Optimization</h2>
-<section id="local-minima" class="level3">
-<h3 class="anchored" data-anchor-id="local-minima">1. Local Minima</h3>
-<p>First-order condition:</p>
-<p><span class="math display">\[
-\|\nabla f(x^*)\| \leq \epsilon
-\]</span></p>
-<p>Second-order condition:</p>
-<p><span class="math display">\[
-\lambda_{\min}(\nabla^2 f(x^*)) \geq -\sqrt{\epsilon}
-\]</span></p>
-</section>
-<section id="escape-from-saddle-points" class="level3">
-<h3 class="anchored" data-anchor-id="escape-from-saddle-points">2. Escape from Saddle Points</h3>
-<p>Perturbed gradient descent:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta\nabla f(x_k) + \xi_k
-\]</span></p>
-<p>Where: - <span class="math inline">\(\xi_k \sim \mathcal{N}(0,\sigma^2I)\)</span></p>
-</section>
-<section id="global-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="global-optimization">3. Global Optimization</h3>
-<p>Branch and bound:</p>
-<p><span class="math display">\[
-\text{LB}(R) \leq \min_{x \in R} f(x) \leq \text{UB}(R)
-\]</span></p>
-<p>Simulated annealing:</p>
-<p><span class="math display">\[
-P(\text{accept}) = \exp(-\frac{\Delta E}{T_k})
-\]</span></p>
-</section>
-</section>
-<section id="modern-optimization-methods" class="level2">
-<h2 class="anchored" data-anchor-id="modern-optimization-methods">Modern Optimization Methods</h2>
-<section id="adaptive-methods" class="level3">
-<h3 class="anchored" data-anchor-id="adaptive-methods">1. Adaptive Methods</h3>
-<p>AdaGrad:</p>
-<p><span class="math display">\[
-x_{t+1,i} = x_{t,i} - \frac{\eta}{\sqrt{\sum_{s=1}^t g_{s,i}^2}}g_{t,i}
-\]</span></p>
-<p>Adam:</p>
-<p><span class="math display">\[
-\begin{aligned}
-m_t &amp;= \beta_1 m_{t-1} + (1-\beta_1)g_t \\
-v_t &amp;= \beta_2 v_{t-1} + (1-\beta_2)g_t^2 \\
-\hat{m}_t &amp;= \frac{m_t}{1-\beta_1^t} \\
-\hat{v}_t &amp;= \frac{v_t}{1-\beta_2^t} \\
-x_{t+1} &amp;= x_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon}\hat{m}_t
-\end{aligned}
-\]</span></p>
-</section>
-<section id="natural-gradient" class="level3">
-<h3 class="anchored" data-anchor-id="natural-gradient">2. Natural Gradient</h3>
-<p>Fisher information:</p>
-<p><span class="math display">\[
-F(x) = \mathbb{E}_{p(y|x)}[\nabla \log p(y|x)\nabla \log p(y|x)^T]
-\]</span></p>
-<p>Update rule:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta F(x_k)^{-1}\nabla f(x_k)
-\]</span></p>
-</section>
-<section id="second-order-methods" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-methods">3. Second-Order Methods</h3>
-<p>Newton’s method:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - [\nabla^2 f(x_k)]^{-1}\nabla f(x_k)
-\]</span></p>
-<p>BFGS update:</p>
-<p><span class="math display">\[
-B_{k+1} = B_k + \frac{y_ky_k^T}{y_k^Ts_k} - \frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}
-\]</span></p>
-</section>
-</section>
-<section id="constrained-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="constrained-optimization">Constrained Optimization</h2>
-<section id="projected-gradient" class="level3">
-<h3 class="anchored" data-anchor-id="projected-gradient">1. Projected Gradient</h3>
-<p>Update rule:</p>
-<p><span class="math display">\[
-x_{k+1} = \Pi_C(x_k - \eta_k\nabla f(x_k))
-\]</span></p>
-<p>Convergence rate:</p>
-<p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{\|x_0-x^*\|^2}{2\eta k}
-\]</span></p>
-</section>
-<section id="proximal-methods" class="level3">
-<h3 class="anchored" data-anchor-id="proximal-methods">2. Proximal Methods</h3>
-<p>Proximal operator:</p>
-<p><span class="math display">\[
-\text{prox}_{\eta g}(x) = \arg\min_y \{g(y) + \frac{1}{2\eta}\|y-x\|^2\}
-\]</span></p>
-<p>ISTA update:</p>
-<p><span class="math display">\[
-x_{k+1} = \text{prox}_{\eta g}(x_k - \eta\nabla f(x_k))
-\]</span></p>
-</section>
-<section id="augmented-lagrangian" class="level3">
-<h3 class="anchored" data-anchor-id="augmented-lagrangian">3. Augmented Lagrangian</h3>
-<p>Function:</p>
-<p><span class="math display">\[
-\mathcal{L}_\rho(x,\lambda) = f(x) + \lambda^Tg(x) + \frac{\rho}{2}\|g(x)\|^2
-\]</span></p>
-<p>Update rules:</p>
-<p><span class="math display">\[
-\begin{aligned}
-x_{k+1} &amp;= \arg\min_x \mathcal{L}_\rho(x,\lambda_k) \\
-\lambda_{k+1} &amp;= \lambda_k + \rho g(x_{k+1})
+I(X;Y) &amp;= H(X) - H(X|Y) \\
+&amp;= H(Y) - H(Y|X) \\
+&amp;= H(X) + H(Y) - H(X,Y)
 \end{aligned}
 \]</span></p>
 </section>
 </section>
-<section id="advanced-topics" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="distributed-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="distributed-optimization">1. Distributed Optimization</h3>
-<p>ADMM algorithm:</p>
+<section id="information-theoretic-measures" class="level2">
+<h2 class="anchored" data-anchor-id="information-theoretic-measures">Information-Theoretic Measures</h2>
+<section id="kullback-leibler-divergence" class="level3">
+<h3 class="anchored" data-anchor-id="kullback-leibler-divergence">1. Kullback-Leibler Divergence</h3>
+<p>Definition:</p>
+<p><span class="math display">\[
+D_{KL}(P\|Q) = \sum_{x} P(x)\log_2\frac{P(x)}{Q(x)}
+\]</span></p>
+<p>Properties: 1. Non-negativity: <span class="math inline">\(D_{KL}(P\|Q) \geq 0\)</span> 2. <span class="math inline">\(D_{KL}(P\|Q) = 0\)</span> iff P = Q 3. Asymmetry: <span class="math inline">\(D_{KL}(P\|Q) \neq D_{KL}(Q\|P)\)</span></p>
+</section>
+<section id="jensen-shannon-divergence" class="level3">
+<h3 class="anchored" data-anchor-id="jensen-shannon-divergence">2. Jensen-Shannon Divergence</h3>
+<p>Symmetric measure:</p>
+<p><span class="math display">\[
+JSD(P\|Q) = \frac{1}{2}D_{KL}(P\|M) + \frac{1}{2}D_{KL}(Q\|M)
+\]</span></p>
+<p>Where: - <span class="math inline">\(M = \frac{1}{2}(P + Q)\)</span></p>
+<p>Properties: 1. Symmetry: <span class="math inline">\(JSD(P\|Q) = JSD(Q\|P)\)</span> 2. Bounded: <span class="math inline">\(0 \leq JSD(P\|Q) \leq 1\)</span> 3. Square root is a metric</p>
+</section>
+<section id="cross-entropy" class="level3">
+<h3 class="anchored" data-anchor-id="cross-entropy">3. Cross-Entropy</h3>
+<p>Definition:</p>
+<p><span class="math display">\[
+H(P,Q) = -\sum_{x} P(x)\log Q(x)
+\]</span></p>
+<p>Relation to KL divergence:</p>
+<p><span class="math display">\[
+H(P,Q) = H(P) + D_{KL}(P\|Q)
+\]</span></p>
+</section>
+</section>
+<section id="applications-in-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="applications-in-machine-learning">Applications in Machine Learning</h2>
+<section id="maximum-entropy-principle" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-entropy-principle">1. Maximum Entropy Principle</h3>
+<p>Objective function:</p>
+<p><span class="math display">\[
+\max_{p} H(p) \text{ subject to } \mathbb{E}_p[f_i] = \mu_i
+\]</span></p>
+<p>Solution form:</p>
+<p><span class="math display">\[
+p^*(x) = \frac{1}{Z(\lambda)}\exp\left(\sum_i \lambda_i f_i(x)\right)
+\]</span></p>
+</section>
+<section id="information-bottleneck" class="level3">
+<h3 class="anchored" data-anchor-id="information-bottleneck">2. Information Bottleneck</h3>
+<p>Objective:</p>
+<p><span class="math display">\[
+\min_{p(t|x)} I(X;T) - \beta I(T;Y)
+\]</span></p>
+<p>Solution characterization:</p>
+<p><span class="math display">\[
+p(t|x) = \frac{p(t)}{Z(x,\beta)}\exp\left(-\beta D_{KL}(p(y|x)\|p(y|t))\right)
+\]</span></p>
+</section>
+<section id="mutual-information-neural-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="mutual-information-neural-estimation">3. Mutual Information Neural Estimation</h3>
+<p>MINE estimator:</p>
+<p><span class="math display">\[
+I_\theta(X,Y) = \sup_{\theta \in \Theta} \mathbb{E}_{P_{XY}}[T_\theta] - \log\mathbb{E}_{P_X \otimes P_Y}[e^{T_\theta}]
+\]</span></p>
+</section>
+</section>
+<section id="information-theory-in-deep-learning" class="level2">
+<h2 class="anchored" data-anchor-id="information-theory-in-deep-learning">Information Theory in Deep Learning</h2>
+<section id="information-plane-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="information-plane-analysis">1. Information Plane Analysis</h3>
+<p>Layer-wise information:</p>
 <p><span class="math display">\[
 \begin{aligned}
-x_{k+1} &amp;= \arg\min_x \mathcal{L}_\rho(x,z_k,y_k) \\
-z_{k+1} &amp;= \arg\min_z \mathcal{L}_\rho(x_{k+1},z,y_k) \\
-y_{k+1} &amp;= y_k + \rho(Ax_{k+1} + Bz_{k+1} - c)
+I(X;T_l) &amp;= \text{Information about input} \\
+I(T_l;Y) &amp;= \text{Information about output}
 \end{aligned}
 \]</span></p>
 </section>
-<section id="online-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="online-optimization">2. Online Optimization</h3>
-<p>Regret bound:</p>
+<section id="variational-information-maximization" class="level3">
+<h3 class="anchored" data-anchor-id="variational-information-maximization">2. Variational Information Maximization</h3>
+<p>Lower bound:</p>
 <p><span class="math display">\[
-R_T \leq O(\sqrt{T})
-\]</span></p>
-<p>Follow-the-regularized-leader:</p>
-<p><span class="math display">\[
-x_{t+1} = \arg\min_x \{\eta\sum_{s=1}^t \ell_s(x) + R(x)\}
+I(X;Y) \geq \mathbb{E}_{p(x,y)}[\log q_\theta(y|x)] + h(Y)
 \]</span></p>
 </section>
-<section id="zeroth-order-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="zeroth-order-optimization">3. Zeroth-Order Optimization</h3>
-<p>Gradient estimation:</p>
+<section id="information-dropout" class="level3">
+<h3 class="anchored" data-anchor-id="information-dropout">3. Information Dropout</h3>
+<p>Dropout probability:</p>
 <p><span class="math display">\[
-\hat{\nabla} f(x) = \frac{d}{r}f(x+r\xi)\xi
+p(z|x) = \mathcal{N}(z|\mu(x), \alpha(x)\sigma^2)
 \]</span></p>
-<p>Where: - <span class="math inline">\(\xi \sim \text{Unif}(\mathbb{S}^{d-1})\)</span></p>
+<p>Cost function:</p>
+<p><span class="math display">\[
+\mathcal{L} = \mathbb{E}[\log p(y|z)] - \beta D_{KL}(p(z|x)\|r(z))
+\]</span></p>
+</section>
+</section>
+<section id="advanced-applications" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-applications">Advanced Applications</h2>
+<section id="generative-models" class="level3">
+<h3 class="anchored" data-anchor-id="generative-models">1. Generative Models</h3>
+<p>VAE ELBO:</p>
+<p><span class="math display">\[
+\mathcal{L} = \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] - D_{KL}(q_\phi(z|x)\|p(z))
+\]</span></p>
+<p>GAN objective:</p>
+<p><span class="math display">\[
+\min_G \max_D V(D,G) = \mathbb{E}_{x\sim p_{data}}[\log D(x)] + \mathbb{E}_{z\sim p_z}[\log(1-D(G(z)))]
+\]</span></p>
+</section>
+<section id="representation-learning" class="level3">
+<h3 class="anchored" data-anchor-id="representation-learning">2. Representation Learning</h3>
+<p>InfoNCE loss:</p>
+<p><span class="math display">\[
+\mathcal{L}_N = -\mathbb{E}\left[\log \frac{e^{f(x,y)/\tau}}{\sum_{i=1}^N e^{f(x,y_i)/\tau}}\right]
+\]</span></p>
+<p>Contrastive predictive coding:</p>
+<p><span class="math display">\[
+\mathcal{L}_{CPC} = -\sum_{k=1}^K \mathbb{E}\left[\log \frac{e^{f_k(c_t,x_{t+k})}}{e^{f_k(c_t,x_{t+k})} + \sum_{j=1}^N e^{f_k(c_t,x_j)}}\right]
+\]</span></p>
+</section>
+<section id="model-compression" class="level3">
+<h3 class="anchored" data-anchor-id="model-compression">3. Model Compression</h3>
+<p>Information bottleneck objective:</p>
+<p><span class="math display">\[
+\min_{p(t|x)} I(X;T) \text{ subject to } I(T;Y) \geq I_0
+\]</span></p>
+<p>Rate-distortion theory:</p>
+<p><span class="math display">\[
+R(D) = \min_{p(t|x): \mathbb{E}[d(X,T)] \leq D} I(X;T)
+\]</span></p>
+</section>
+</section>
+<section id="theoretical-insights" class="level2">
+<h2 class="anchored" data-anchor-id="theoretical-insights">Theoretical Insights</h2>
+<section id="learning-dynamics" class="level3">
+<h3 class="anchored" data-anchor-id="learning-dynamics">1. Learning Dynamics</h3>
+<p>Information dynamics:</p>
+<p><span class="math display">\[
+\frac{d}{dt}I(X;T_t) = \mathbb{E}\left[\text{tr}\left(\frac{\partial^2 I}{\partial T^2}\frac{dT}{dt}\frac{dT}{dt}^T\right)\right]
+\]</span></p>
+</section>
+<section id="generalization-bounds" class="level3">
+<h3 class="anchored" data-anchor-id="generalization-bounds">2. Generalization Bounds</h3>
+<p>PAC-Bayes bound:</p>
+<p><span class="math display">\[
+\text{gen-error} \leq \frac{D_{KL}(Q\|P) + \log\frac{2\sqrt{n}}{\delta}}{2n}
+\]</span></p>
+</section>
+<section id="optimization-perspective" class="level3">
+<h3 class="anchored" data-anchor-id="optimization-perspective">3. Optimization Perspective</h3>
+<p>Natural gradient:</p>
+<p><span class="math display">\[
+\dot{\theta} = F^{-1}(\theta)\nabla_\theta \mathcal{L}
+\]</span></p>
+<p>Where: - <span class="math inline">\(F(\theta)\)</span> is the Fisher information matrix</p>
+</section>
+</section>
+<section id="implementation-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
+<section id="numerical-stability" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-stability">1. Numerical Stability</h3>
+<p>Log-sum-exp trick:</p>
+<p><span class="math display">\[
+\log\sum_i e^{x_i} = a + \log\sum_i e^{x_i-a}
+\]</span></p>
+<p>Where: - <span class="math inline">\(a = \max_i x_i\)</span></p>
+</section>
+<section id="estimation-methods" class="level3">
+<h3 class="anchored" data-anchor-id="estimation-methods">2. Estimation Methods</h3>
+<p>KDE entropy estimator:</p>
+<p><span class="math display">\[
+\hat{H}(X) = -\frac{1}{n}\sum_{i=1}^n \log\frac{1}{n}\sum_{j=1}^n K_h(x_i-x_j)
+\]</span></p>
+</section>
+<section id="batch-processing" class="level3">
+<h3 class="anchored" data-anchor-id="batch-processing">3. Batch Processing</h3>
+<p>Mini-batch mutual information:</p>
+<p><span class="math display">\[
+\hat{I}(X;Y) = \frac{1}{B}\sum_{i=1}^B \log\frac{p(x_i,y_i)}{\hat{p}(x_i)\hat{p}(y_i)}
+\]</span></p>
 </section>
 </section>
 <section id="best-practices" class="level2">
 <h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="algorithm-selection" class="level3">
-<h3 class="anchored" data-anchor-id="algorithm-selection">1. Algorithm Selection</h3>
+<section id="model-design" class="level3">
+<h3 class="anchored" data-anchor-id="model-design">1. Model Design</h3>
 <ol type="1">
-<li>Problem Structure:
+<li>Information Flow:
 <ul>
-<li>Convexity</li>
-<li>Smoothness</li>
-<li>Constraints</li>
+<li>Monitor layer-wise information</li>
+<li>Balance compression and preservation</li>
+<li>Use information bottlenecks</li>
 </ul></li>
-<li>Data Properties:
+<li>Architecture Choice:
 <ul>
-<li>Size</li>
-<li>Dimensionality</li>
-<li>Sparsity</li>
+<li>Consider mutual information</li>
+<li>Information capacity</li>
+<li>Bottleneck dimensions</li>
 </ul></li>
-<li>Computational Resources:
+<li>Regularization:
 <ul>
-<li>Memory</li>
-<li>Processing power</li>
-<li>Time constraints</li>
+<li>Information dropout</li>
+<li>Mutual information constraints</li>
+<li>Entropy regularization</li>
 </ul></li>
 </ol>
 </section>
-<section id="implementation" class="level3">
-<h3 class="anchored" data-anchor-id="implementation">2. Implementation</h3>
+<section id="training-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="training-strategy">2. Training Strategy</h3>
 <ol type="1">
-<li>Initialization:
+<li>Optimization:
 <ul>
-<li>Parameter scaling</li>
-<li>Random seeding</li>
-<li>Warm start</li>
+<li>Natural gradients</li>
+<li>Information-based learning rates</li>
+<li>Adaptive methods</li>
 </ul></li>
 <li>Monitoring:
 <ul>
-<li>Convergence</li>
-<li>Stability</li>
-<li>Resource usage</li>
+<li>Information plane dynamics</li>
+<li>Compression metrics</li>
+<li>Mutual information estimates</li>
 </ul></li>
-<li>Tuning:
+<li>Validation:
 <ul>
-<li>Learning rates</li>
-<li>Momentum</li>
-<li>Regularization</li>
+<li>Cross-entropy</li>
+<li>KL divergence</li>
+<li>Information efficiency</li>
 </ul></li>
 </ol>
 </section>
@@ -690,21 +648,21 @@ x_{t+1} = \arg\min_x \{\eta\sum_{s=1}^t \ell_s(x) + R(x)\}
 <ol type="1">
 <li>Theory:
 <ul>
-<li>“Convex Optimization” by Boyd and Vandenberghe</li>
-<li>“Introductory Lectures on Convex Optimization” by Nesterov</li>
-<li>“Optimization Methods for Large-Scale Machine Learning” by Bottou et al.</li>
+<li>“Elements of Information Theory” by Cover and Thomas</li>
+<li>“Information Theory, Inference, and Learning Algorithms” by MacKay</li>
+<li>“Deep Learning and the Information Bottleneck Principle” by Tishby and Zaslavsky</li>
 </ul></li>
 <li>Methods:
 <ul>
-<li>“Numerical Optimization” by Nocedal and Wright</li>
-<li>“First-Order Methods in Optimization” by Beck</li>
-<li>“Proximal Algorithms” by Parikh and Boyd</li>
+<li>“Deep Learning with Information Theoretic Learning” by Principe</li>
+<li>“Information Theory and Statistics” by Csiszár and Shields</li>
+<li>“Information Theory and Machine Learning” by Amari</li>
 </ul></li>
 <li>Applications:
 <ul>
 <li>“Deep Learning” by Goodfellow et al.</li>
-<li>“Optimization for Machine Learning” by Sra et al.</li>
-<li>“Large Scale Optimization in Machine Learning” by Shalev-Shwartz and Zhang</li>
+<li>“Pattern Recognition and Machine Learning” by Bishop</li>
+<li>“Machine Learning: A Probabilistic Perspective” by Murphy</li>
 </ul></li>
 </ol>
 

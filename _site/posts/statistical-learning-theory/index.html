@@ -8,9 +8,9 @@
 
 <meta name="author" content="Ram Polisetti">
 <meta name="dcterms.date" content="2024-03-19">
-<meta name="description" content="A rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.">
+<meta name="description" content="A rigorous exploration of statistical learning theory and concentration inequalities, covering fundamental bounds and their applications in machine learning.">
 
-<title>Optimization Theory in Machine Learning – BendThe-Curve</title>
+<title>Statistical Learning Theory and Concentration Inequalities – BendThe-Curve</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -188,7 +188,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Optimization Theory in Machine Learning</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Statistical Learning Theory and Concentration Inequalities</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -198,17 +198,17 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Optimization Theory in Machine Learning</h1>
+      <h1 class="title">Statistical Learning Theory and Concentration Inequalities</h1>
                   <div>
         <div class="description">
-          A rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.
+          A rigorous exploration of statistical learning theory and concentration inequalities, covering fundamental bounds and their applications in machine learning.
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">machine-learning</div>
-                <div class="quarto-category">optimization</div>
-                <div class="quarto-category">mathematics</div>
                 <div class="quarto-category">theory</div>
+                <div class="quarto-category">mathematics</div>
+                <div class="quarto-category">statistics</div>
               </div>
                   </div>
   </div>
@@ -310,54 +310,53 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#optimization-theory-in-machine-learning" id="toc-optimization-theory-in-machine-learning" class="nav-link active" data-scroll-target="#optimization-theory-in-machine-learning">Optimization Theory in Machine Learning</a>
+  <li><a href="#statistical-learning-theory-and-concentration-inequalities" id="toc-statistical-learning-theory-and-concentration-inequalities" class="nav-link active" data-scroll-target="#statistical-learning-theory-and-concentration-inequalities">Statistical Learning Theory and Concentration Inequalities</a>
   <ul class="collapse">
-  <li><a href="#convex-analysis" id="toc-convex-analysis" class="nav-link" data-scroll-target="#convex-analysis">Convex Analysis</a>
+  <li><a href="#concentration-inequalities" id="toc-concentration-inequalities" class="nav-link" data-scroll-target="#concentration-inequalities">Concentration Inequalities</a>
   <ul class="collapse">
-  <li><a href="#convex-sets-and-functions" id="toc-convex-sets-and-functions" class="nav-link" data-scroll-target="#convex-sets-and-functions">1. Convex Sets and Functions</a></li>
-  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties">2. Properties</a></li>
-  <li><a href="#strong-convexity" id="toc-strong-convexity" class="nav-link" data-scroll-target="#strong-convexity">3. Strong Convexity</a></li>
+  <li><a href="#markovs-inequality" id="toc-markovs-inequality" class="nav-link" data-scroll-target="#markovs-inequality">1. Markov’s Inequality</a></li>
+  <li><a href="#chebyshevs-inequality" id="toc-chebyshevs-inequality" class="nav-link" data-scroll-target="#chebyshevs-inequality">2. Chebyshev’s Inequality</a></li>
+  <li><a href="#hoeffdings-inequality" id="toc-hoeffdings-inequality" class="nav-link" data-scroll-target="#hoeffdings-inequality">3. Hoeffding’s Inequality</a></li>
   </ul></li>
-  <li><a href="#optimality-conditions" id="toc-optimality-conditions" class="nav-link" data-scroll-target="#optimality-conditions">Optimality Conditions</a>
+  <li><a href="#advanced-concentration-results" id="toc-advanced-concentration-results" class="nav-link" data-scroll-target="#advanced-concentration-results">Advanced Concentration Results</a>
   <ul class="collapse">
-  <li><a href="#first-order-conditions" id="toc-first-order-conditions" class="nav-link" data-scroll-target="#first-order-conditions">1. First-Order Conditions</a></li>
-  <li><a href="#second-order-conditions" id="toc-second-order-conditions" class="nav-link" data-scroll-target="#second-order-conditions">2. Second-Order Conditions</a></li>
-  <li><a href="#saddle-point-conditions" id="toc-saddle-point-conditions" class="nav-link" data-scroll-target="#saddle-point-conditions">3. Saddle Point Conditions</a></li>
+  <li><a href="#bernsteins-inequality" id="toc-bernsteins-inequality" class="nav-link" data-scroll-target="#bernsteins-inequality">1. Bernstein’s Inequality</a></li>
+  <li><a href="#mcdiarmids-inequality" id="toc-mcdiarmids-inequality" class="nav-link" data-scroll-target="#mcdiarmids-inequality">2. McDiarmid’s Inequality</a></li>
+  <li><a href="#talagrands-inequality" id="toc-talagrands-inequality" class="nav-link" data-scroll-target="#talagrands-inequality">3. Talagrand’s Inequality</a></li>
   </ul></li>
-  <li><a href="#gradient-methods" id="toc-gradient-methods" class="nav-link" data-scroll-target="#gradient-methods">Gradient Methods</a>
+  <li><a href="#statistical-learning-bounds" id="toc-statistical-learning-bounds" class="nav-link" data-scroll-target="#statistical-learning-bounds">Statistical Learning Bounds</a>
   <ul class="collapse">
-  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent">1. Gradient Descent</a></li>
-  <li><a href="#accelerated-methods" id="toc-accelerated-methods" class="nav-link" data-scroll-target="#accelerated-methods">2. Accelerated Methods</a></li>
-  <li><a href="#stochastic-methods" id="toc-stochastic-methods" class="nav-link" data-scroll-target="#stochastic-methods">3. Stochastic Methods</a></li>
+  <li><a href="#uniform-convergence" id="toc-uniform-convergence" class="nav-link" data-scroll-target="#uniform-convergence">1. Uniform Convergence</a></li>
+  <li><a href="#symmetrization" id="toc-symmetrization" class="nav-link" data-scroll-target="#symmetrization">2. Symmetrization</a></li>
+  <li><a href="#rademacher-complexity" id="toc-rademacher-complexity" class="nav-link" data-scroll-target="#rademacher-complexity">3. Rademacher Complexity</a></li>
   </ul></li>
-  <li><a href="#non-convex-optimization" id="toc-non-convex-optimization" class="nav-link" data-scroll-target="#non-convex-optimization">Non-Convex Optimization</a>
+  <li><a href="#local-analysis" id="toc-local-analysis" class="nav-link" data-scroll-target="#local-analysis">Local Analysis</a>
   <ul class="collapse">
-  <li><a href="#local-minima" id="toc-local-minima" class="nav-link" data-scroll-target="#local-minima">1. Local Minima</a></li>
-  <li><a href="#escape-from-saddle-points" id="toc-escape-from-saddle-points" class="nav-link" data-scroll-target="#escape-from-saddle-points">2. Escape from Saddle Points</a></li>
-  <li><a href="#global-optimization" id="toc-global-optimization" class="nav-link" data-scroll-target="#global-optimization">3. Global Optimization</a></li>
+  <li><a href="#local-rademacher-complexity" id="toc-local-rademacher-complexity" class="nav-link" data-scroll-target="#local-rademacher-complexity">1. Local Rademacher Complexity</a></li>
+  <li><a href="#localized-uniform-convergence" id="toc-localized-uniform-convergence" class="nav-link" data-scroll-target="#localized-uniform-convergence">2. Localized Uniform Convergence</a></li>
+  <li><a href="#peeling" id="toc-peeling" class="nav-link" data-scroll-target="#peeling">3. Peeling</a></li>
   </ul></li>
-  <li><a href="#modern-optimization-methods" id="toc-modern-optimization-methods" class="nav-link" data-scroll-target="#modern-optimization-methods">Modern Optimization Methods</a>
+  <li><a href="#advanced-theory" id="toc-advanced-theory" class="nav-link" data-scroll-target="#advanced-theory">Advanced Theory</a>
   <ul class="collapse">
-  <li><a href="#adaptive-methods" id="toc-adaptive-methods" class="nav-link" data-scroll-target="#adaptive-methods">1. Adaptive Methods</a></li>
-  <li><a href="#natural-gradient" id="toc-natural-gradient" class="nav-link" data-scroll-target="#natural-gradient">2. Natural Gradient</a></li>
-  <li><a href="#second-order-methods" id="toc-second-order-methods" class="nav-link" data-scroll-target="#second-order-methods">3. Second-Order Methods</a></li>
+  <li><a href="#stability-theory" id="toc-stability-theory" class="nav-link" data-scroll-target="#stability-theory">1. Stability Theory</a></li>
+  <li><a href="#compression-schemes" id="toc-compression-schemes" class="nav-link" data-scroll-target="#compression-schemes">2. Compression Schemes</a></li>
+  <li><a href="#pac-bayesian-theory" id="toc-pac-bayesian-theory" class="nav-link" data-scroll-target="#pac-bayesian-theory">3. PAC-Bayesian Theory</a></li>
   </ul></li>
-  <li><a href="#constrained-optimization" id="toc-constrained-optimization" class="nav-link" data-scroll-target="#constrained-optimization">Constrained Optimization</a>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a>
   <ul class="collapse">
-  <li><a href="#projected-gradient" id="toc-projected-gradient" class="nav-link" data-scroll-target="#projected-gradient">1. Projected Gradient</a></li>
-  <li><a href="#proximal-methods" id="toc-proximal-methods" class="nav-link" data-scroll-target="#proximal-methods">2. Proximal Methods</a></li>
-  <li><a href="#augmented-lagrangian" id="toc-augmented-lagrangian" class="nav-link" data-scroll-target="#augmented-lagrangian">3. Augmented Lagrangian</a></li>
+  <li><a href="#high-dimensional-statistics" id="toc-high-dimensional-statistics" class="nav-link" data-scroll-target="#high-dimensional-statistics">1. High-Dimensional Statistics</a></li>
+  <li><a href="#random-matrices" id="toc-random-matrices" class="nav-link" data-scroll-target="#random-matrices">2. Random Matrices</a></li>
+  <li><a href="#empirical-processes" id="toc-empirical-processes" class="nav-link" data-scroll-target="#empirical-processes">3. Empirical Processes</a></li>
   </ul></li>
-  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
+  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
   <ul class="collapse">
-  <li><a href="#distributed-optimization" id="toc-distributed-optimization" class="nav-link" data-scroll-target="#distributed-optimization">1. Distributed Optimization</a></li>
-  <li><a href="#online-optimization" id="toc-online-optimization" class="nav-link" data-scroll-target="#online-optimization">2. Online Optimization</a></li>
-  <li><a href="#zeroth-order-optimization" id="toc-zeroth-order-optimization" class="nav-link" data-scroll-target="#zeroth-order-optimization">3. Zeroth-Order Optimization</a></li>
+  <li><a href="#sample-size-selection" id="toc-sample-size-selection" class="nav-link" data-scroll-target="#sample-size-selection">1. Sample Size Selection</a></li>
+  <li><a href="#bound-selection" id="toc-bound-selection" class="nav-link" data-scroll-target="#bound-selection">2. Bound Selection</a></li>
   </ul></li>
   <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
   <ul class="collapse">
-  <li><a href="#algorithm-selection" id="toc-algorithm-selection" class="nav-link" data-scroll-target="#algorithm-selection">1. Algorithm Selection</a></li>
-  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">2. Implementation</a></li>
+  <li><a href="#analysis-strategy" id="toc-analysis-strategy" class="nav-link" data-scroll-target="#analysis-strategy">1. Analysis Strategy</a></li>
+  <li><a href="#practical-guidelines" id="toc-practical-guidelines" class="nav-link" data-scroll-target="#practical-guidelines">2. Practical Guidelines</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
@@ -371,316 +370,283 @@ window.Quarto = {
 
 
 
-<section id="optimization-theory-in-machine-learning" class="level1">
-<h1>Optimization Theory in Machine Learning</h1>
-<section id="convex-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="convex-analysis">Convex Analysis</h2>
-<section id="convex-sets-and-functions" class="level3">
-<h3 class="anchored" data-anchor-id="convex-sets-and-functions">1. Convex Sets and Functions</h3>
-<p>Convex set definition:</p>
+<section id="statistical-learning-theory-and-concentration-inequalities" class="level1">
+<h1>Statistical Learning Theory and Concentration Inequalities</h1>
+<section id="concentration-inequalities" class="level2">
+<h2 class="anchored" data-anchor-id="concentration-inequalities">Concentration Inequalities</h2>
+<section id="markovs-inequality" class="level3">
+<h3 class="anchored" data-anchor-id="markovs-inequality">1. Markov’s Inequality</h3>
+<p>Basic form:</p>
 <p><span class="math display">\[
-\theta x + (1-\theta)y \in C, \forall x,y \in C, \theta \in [0,1]
+P(X \geq a) \leq \frac{\mathbb{E}[X]}{a}
 \]</span></p>
-<p>Convex function:</p>
+<p>For non-negative random variables.</p>
+<p>Moment version:</p>
 <p><span class="math display">\[
-f(\theta x + (1-\theta)y) \leq \theta f(x) + (1-\theta)f(y)
-\]</span></p>
-</section>
-<section id="properties" class="level3">
-<h3 class="anchored" data-anchor-id="properties">2. Properties</h3>
-<p>First-order characterization:</p>
-<p><span class="math display">\[
-f(y) \geq f(x) + \nabla f(x)^T(y-x)
-\]</span></p>
-<p>Second-order characterization:</p>
-<p><span class="math display">\[
-\nabla^2 f(x) \succeq 0
+P(|X| \geq a) \leq \frac{\mathbb{E}[|X|^r]}{a^r}
 \]</span></p>
 </section>
-<section id="strong-convexity" class="level3">
-<h3 class="anchored" data-anchor-id="strong-convexity">3. Strong Convexity</h3>
+<section id="chebyshevs-inequality" class="level3">
+<h3 class="anchored" data-anchor-id="chebyshevs-inequality">2. Chebyshev’s Inequality</h3>
+<p>Basic form:</p>
+<p><span class="math display">\[
+P(|X - \mu| \geq t) \leq \frac{\sigma^2}{t^2}
+\]</span></p>
+<p>Moment version:</p>
+<p><span class="math display">\[
+P(|X - \mathbb{E}[X]| \geq t) \leq \frac{\text{Var}(X)}{t^2}
+\]</span></p>
+</section>
+<section id="hoeffdings-inequality" class="level3">
+<h3 class="anchored" data-anchor-id="hoeffdings-inequality">3. Hoeffding’s Inequality</h3>
+<p>Sum of bounded variables:</p>
+<p><span class="math display">\[
+P(\frac{1}{n}\sum_{i=1}^n X_i - \mathbb{E}[X] \geq t) \leq \exp(-\frac{2nt^2}{(b-a)^2})
+\]</span></p>
+<p>Martingale version:</p>
+<p><span class="math display">\[
+P(S_n - S_0 \geq t) \leq \exp(-\frac{2t^2}{\sum_{i=1}^n (b_i-a_i)^2})
+\]</span></p>
+</section>
+</section>
+<section id="advanced-concentration-results" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-concentration-results">Advanced Concentration Results</h2>
+<section id="bernsteins-inequality" class="level3">
+<h3 class="anchored" data-anchor-id="bernsteins-inequality">1. Bernstein’s Inequality</h3>
+<p>Variance-based bound:</p>
+<p><span class="math display">\[
+P(\frac{1}{n}\sum_{i=1}^n (X_i - \mathbb{E}[X_i]) \geq t) \leq \exp(-\frac{nt^2}{2\sigma^2 + 2Mt/3})
+\]</span></p>
+<p>Where: - <span class="math inline">\(|X_i| \leq M\)</span> - <span class="math inline">\(\text{Var}(X_i) \leq \sigma^2\)</span></p>
+</section>
+<section id="mcdiarmids-inequality" class="level3">
+<h3 class="anchored" data-anchor-id="mcdiarmids-inequality">2. McDiarmid’s Inequality</h3>
+<p>Bounded differences:</p>
+<p><span class="math display">\[
+P(f(X_1,...,X_n) - \mathbb{E}[f] \geq t) \leq \exp(-\frac{2t^2}{\sum_{i=1}^n c_i^2})
+\]</span></p>
+<p>Where: - <span class="math inline">\(|f(x) - f(x')| \leq c_i\)</span> when <span class="math inline">\(x,x'\)</span> differ in i-th coordinate</p>
+</section>
+<section id="talagrands-inequality" class="level3">
+<h3 class="anchored" data-anchor-id="talagrands-inequality">3. Talagrand’s Inequality</h3>
+<p>Convex distance:</p>
+<p><span class="math display">\[
+P(|Z - M(Z)| \geq t) \leq 4\exp(-\frac{t^2}{4\sigma^2})
+\]</span></p>
+<p>Where: - <span class="math inline">\(Z\)</span> is supremum of empirical process - <span class="math inline">\(M(Z)\)</span> is median</p>
+</section>
+</section>
+<section id="statistical-learning-bounds" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-learning-bounds">Statistical Learning Bounds</h2>
+<section id="uniform-convergence" class="level3">
+<h3 class="anchored" data-anchor-id="uniform-convergence">1. Uniform Convergence</h3>
+<p>Fundamental theorem:</p>
+<p><span class="math display">\[
+P(\sup_{h \in \mathcal{H}}|\hat{R}_n(h) - R(h)| &gt; \epsilon) \leq 8\mathcal{N}(\epsilon/8)\exp(-n\epsilon^2/128)
+\]</span></p>
+<p>Where: - <span class="math inline">\(\mathcal{N}(\epsilon)\)</span> is covering number - <span class="math inline">\(R(h)\)</span> is true risk - <span class="math inline">\(\hat{R}_n(h)\)</span> is empirical risk</p>
+</section>
+<section id="symmetrization" class="level3">
+<h3 class="anchored" data-anchor-id="symmetrization">2. Symmetrization</h3>
+<p>Basic inequality:</p>
+<p><span class="math display">\[
+P(\sup_{h \in \mathcal{H}}|R(h) - \hat{R}_n(h)| &gt; 2\epsilon) \leq 2P(\sup_{h \in \mathcal{H}}|\hat{R}_n(h) - \hat{R}'_n(h)| &gt; \epsilon)
+\]</span></p>
+<p>Ghost sample technique:</p>
+<p><span class="math display">\[
+\mathbb{E}[\sup_{h \in \mathcal{H}}|R(h) - \hat{R}_n(h)|] \leq 2\mathbb{E}[\sup_{h \in \mathcal{H}}|\frac{1}{n}\sum_{i=1}^n \sigma_i h(X_i)|]
+\]</span></p>
+</section>
+<section id="rademacher-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="rademacher-complexity">3. Rademacher Complexity</h3>
 <p>Definition:</p>
 <p><span class="math display">\[
-f(y) \geq f(x) + \nabla f(x)^T(y-x) + \frac{\mu}{2}\|y-x\|^2
+\mathfrak{R}_n(\mathcal{H}) = \mathbb{E}_{\sigma,S}[\sup_{h \in \mathcal{H}}\frac{1}{n}\sum_{i=1}^n \sigma_i h(x_i)]
 \]</span></p>
-<p>Quadratic growth:</p>
+<p>Generalization bound:</p>
 <p><span class="math display">\[
-f(x) - f(x^*) \geq \frac{\mu}{2}\|x-x^*\|^2
+P(\sup_{h \in \mathcal{H}}|R(h) - \hat{R}_n(h)| \leq 2\mathfrak{R}_n(\mathcal{H}) + \sqrt{\frac{\ln(2/\delta)}{2n}}) \geq 1-\delta
 \]</span></p>
 </section>
 </section>
-<section id="optimality-conditions" class="level2">
-<h2 class="anchored" data-anchor-id="optimality-conditions">Optimality Conditions</h2>
-<section id="first-order-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="first-order-conditions">1. First-Order Conditions</h3>
-<p>Unconstrained:</p>
+<section id="local-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="local-analysis">Local Analysis</h2>
+<section id="local-rademacher-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="local-rademacher-complexity">1. Local Rademacher Complexity</h3>
+<p>Definition:</p>
 <p><span class="math display">\[
-\nabla f(x^*) = 0
+\mathfrak{R}_n(\mathcal{H}, r) = \mathbb{E}_{\sigma}[\sup_{h \in \mathcal{H}: P(h-h^*)^2 \leq r}\frac{1}{n}\sum_{i=1}^n \sigma_i h(X_i)]
 \]</span></p>
-<p>Constrained (KKT):</p>
+<p>Fixed point:</p>
 <p><span class="math display">\[
-\begin{aligned}
-\nabla_x \mathcal{L}(x^*,\lambda^*) &amp;= 0 \\
-g_i(x^*) &amp;\leq 0 \\
-\lambda_i^* g_i(x^*) &amp;= 0 \\
-\lambda_i^* &amp;\geq 0
-\end{aligned}
+r^* = \inf\{r &gt; 0: \mathfrak{R}_n(\mathcal{H}, r) \leq r/4\}
 \]</span></p>
 </section>
-<section id="second-order-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-conditions">2. Second-Order Conditions</h3>
-<p>Unconstrained:</p>
+<section id="localized-uniform-convergence" class="level3">
+<h3 class="anchored" data-anchor-id="localized-uniform-convergence">2. Localized Uniform Convergence</h3>
+<p>Bound:</p>
 <p><span class="math display">\[
-\nabla^2 f(x^*) \succeq 0
+P(\sup_{h \in B(h^*,r)}|R(h) - \hat{R}_n(h)| &gt; \epsilon) \leq \mathcal{N}(r,\epsilon/4)\exp(-n\epsilon^2/8)
 \]</span></p>
-<p>Constrained:</p>
-<p><span class="math display">\[
-y^T\nabla^2_{xx}\mathcal{L}(x^*,\lambda^*)y \geq 0
-\]</span></p>
+<p>Where: - <span class="math inline">\(B(h^*,r)\)</span> is ball around optimal hypothesis</p>
 </section>
-<section id="saddle-point-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="saddle-point-conditions">3. Saddle Point Conditions</h3>
-<p>Minimax:</p>
+<section id="peeling" class="level3">
+<h3 class="anchored" data-anchor-id="peeling">3. Peeling</h3>
+<p>Geometric slicing:</p>
 <p><span class="math display">\[
-\mathcal{L}(x^*,\lambda) \leq \mathcal{L}(x^*,\lambda^*) \leq \mathcal{L}(x,\lambda^*)
-\]</span></p>
-<p>Duality gap:</p>
-<p><span class="math display">\[
-f(x^*) - g(\lambda^*) = 0
+P(\exists h: |R(h) - \hat{R}_n(h)| &gt; \epsilon\sqrt{R(h)}) \leq \sum_{j=0}^\infty P(\sup_{h: R(h) \in [2^j\alpha,2^{j+1}\alpha]}|R(h) - \hat{R}_n(h)| &gt; \epsilon\sqrt{2^j\alpha})
 \]</span></p>
 </section>
 </section>
-<section id="gradient-methods" class="level2">
-<h2 class="anchored" data-anchor-id="gradient-methods">Gradient Methods</h2>
-<section id="gradient-descent" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-descent">1. Gradient Descent</h3>
-<p>Update rule:</p>
+<section id="advanced-theory" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-theory">Advanced Theory</h2>
+<section id="stability-theory" class="level3">
+<h3 class="anchored" data-anchor-id="stability-theory">1. Stability Theory</h3>
+<p>Algorithmic stability:</p>
 <p><span class="math display">\[
-x_{k+1} = x_k - \eta_k\nabla f(x_k)
+|\ell(A_S,z) - \ell(A_{S^i},z)| \leq \beta
 \]</span></p>
-<p>Convergence rate (convex):</p>
+<p>Generalization bound:</p>
 <p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{\|x_0-x^*\|^2}{2\eta k}
-\]</span></p>
-</section>
-<section id="accelerated-methods" class="level3">
-<h3 class="anchored" data-anchor-id="accelerated-methods">2. Accelerated Methods</h3>
-<p>Nesterov’s acceleration:</p>
-<p><span class="math display">\[
-\begin{aligned}
-y_k &amp;= x_k + \beta_k(x_k - x_{k-1}) \\
-x_{k+1} &amp;= y_k - \eta_k\nabla f(y_k)
-\end{aligned}
-\]</span></p>
-<p>Convergence rate:</p>
-<p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{2L\|x_0-x^*\|^2}{(k+1)^2}
+P(|R(A_S) - \hat{R}_n(A_S)| &gt; \epsilon) \leq 2\exp(-\frac{n\epsilon^2}{2\beta^2})
 \]</span></p>
 </section>
-<section id="stochastic-methods" class="level3">
-<h3 class="anchored" data-anchor-id="stochastic-methods">3. Stochastic Methods</h3>
-<p>SGD update:</p>
+<section id="compression-schemes" class="level3">
+<h3 class="anchored" data-anchor-id="compression-schemes">2. Compression Schemes</h3>
+<p>Sample compression:</p>
 <p><span class="math display">\[
-x_{k+1} = x_k - \eta_k\nabla f_{i_k}(x_k)
+m \geq k\log\frac{em}{k} + \log\frac{1}{\delta}
 \]</span></p>
-<p>Convergence rate:</p>
+<p>Where: - <span class="math inline">\(k\)</span> is size of compression set - <span class="math inline">\(m\)</span> is sample size</p>
+</section>
+<section id="pac-bayesian-theory" class="level3">
+<h3 class="anchored" data-anchor-id="pac-bayesian-theory">3. PAC-Bayesian Theory</h3>
+<p>KL-divergence bound:</p>
 <p><span class="math display">\[
-\mathbb{E}[f(x_k) - f(x^*)] \leq \frac{L\|x_0-x^*\|^2}{2k} + \frac{L\sigma^2}{2}\sum_{t=1}^k \eta_t^2
+R(Q) \leq \hat{R}_n(Q) + \sqrt{\frac{KL(Q\|P) + \ln\frac{2\sqrt{n}}{\delta}}{2n}}
 \]</span></p>
 </section>
 </section>
-<section id="non-convex-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="non-convex-optimization">Non-Convex Optimization</h2>
-<section id="local-minima" class="level3">
-<h3 class="anchored" data-anchor-id="local-minima">1. Local Minima</h3>
-<p>First-order condition:</p>
+<section id="applications" class="level2">
+<h2 class="anchored" data-anchor-id="applications">Applications</h2>
+<section id="high-dimensional-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="high-dimensional-statistics">1. High-Dimensional Statistics</h3>
+<p>Sparse recovery:</p>
 <p><span class="math display">\[
-\|\nabla f(x^*)\| \leq \epsilon
+\|\hat{\beta} - \beta^*\|_2 \leq \sqrt{\frac{s\log p}{n}}
 \]</span></p>
-<p>Second-order condition:</p>
-<p><span class="math display">\[
-\lambda_{\min}(\nabla^2 f(x^*)) \geq -\sqrt{\epsilon}
-\]</span></p>
+<p>Where: - <span class="math inline">\(s\)</span> is sparsity - <span class="math inline">\(p\)</span> is dimension</p>
 </section>
-<section id="escape-from-saddle-points" class="level3">
-<h3 class="anchored" data-anchor-id="escape-from-saddle-points">2. Escape from Saddle Points</h3>
-<p>Perturbed gradient descent:</p>
+<section id="random-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="random-matrices">2. Random Matrices</h3>
+<p>Matrix Bernstein:</p>
 <p><span class="math display">\[
-x_{k+1} = x_k - \eta\nabla f(x_k) + \xi_k
+P(\|\sum_{i=1}^n X_i\| \geq t) \leq 2d\exp(-\frac{t^2/2}{\sigma^2 + Mt/3})
 \]</span></p>
-<p>Where: - <span class="math inline">\(\xi_k \sim \mathcal{N}(0,\sigma^2I)\)</span></p>
+<p>Where: - <span class="math inline">\(\|X_i\| \leq M\)</span> - <span class="math inline">\(\|\mathbb{E}[X_iX_i^T]\| \leq \sigma^2\)</span></p>
 </section>
-<section id="global-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="global-optimization">3. Global Optimization</h3>
-<p>Branch and bound:</p>
+<section id="empirical-processes" class="level3">
+<h3 class="anchored" data-anchor-id="empirical-processes">3. Empirical Processes</h3>
+<p>Maximal inequality:</p>
 <p><span class="math display">\[
-\text{LB}(R) \leq \min_{x \in R} f(x) \leq \text{UB}(R)
-\]</span></p>
-<p>Simulated annealing:</p>
-<p><span class="math display">\[
-P(\text{accept}) = \exp(-\frac{\Delta E}{T_k})
+\mathbb{E}[\sup_{f \in \mathcal{F}}|\sum_{i=1}^n \epsilon_i f(X_i)|] \leq K\sqrt{n}\int_0^\infty \sqrt{\log N(\epsilon,\mathcal{F},L_2)}d\epsilon
 \]</span></p>
 </section>
 </section>
-<section id="modern-optimization-methods" class="level2">
-<h2 class="anchored" data-anchor-id="modern-optimization-methods">Modern Optimization Methods</h2>
-<section id="adaptive-methods" class="level3">
-<h3 class="anchored" data-anchor-id="adaptive-methods">1. Adaptive Methods</h3>
-<p>AdaGrad:</p>
-<p><span class="math display">\[
-x_{t+1,i} = x_{t,i} - \frac{\eta}{\sqrt{\sum_{s=1}^t g_{s,i}^2}}g_{t,i}
-\]</span></p>
-<p>Adam:</p>
-<p><span class="math display">\[
-\begin{aligned}
-m_t &amp;= \beta_1 m_{t-1} + (1-\beta_1)g_t \\
-v_t &amp;= \beta_2 v_{t-1} + (1-\beta_2)g_t^2 \\
-\hat{m}_t &amp;= \frac{m_t}{1-\beta_1^t} \\
-\hat{v}_t &amp;= \frac{v_t}{1-\beta_2^t} \\
-x_{t+1} &amp;= x_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon}\hat{m}_t
-\end{aligned}
-\]</span></p>
+<section id="implementation-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
+<section id="sample-size-selection" class="level3">
+<h3 class="anchored" data-anchor-id="sample-size-selection">1. Sample Size Selection</h3>
+<ol type="1">
+<li>Fixed Confidence:
+<ul>
+<li>Error tolerance</li>
+<li>Confidence level</li>
+<li>Complexity measure</li>
+</ul></li>
+<li>Fixed Width:
+<ul>
+<li>Precision requirement</li>
+<li>Coverage probability</li>
+<li>Dimension impact</li>
+</ul></li>
+<li>Sequential:
+<ul>
+<li>Stopping rules</li>
+<li>Error control</li>
+<li>Efficiency</li>
+</ul></li>
+</ol>
 </section>
-<section id="natural-gradient" class="level3">
-<h3 class="anchored" data-anchor-id="natural-gradient">2. Natural Gradient</h3>
-<p>Fisher information:</p>
-<p><span class="math display">\[
-F(x) = \mathbb{E}_{p(y|x)}[\nabla \log p(y|x)\nabla \log p(y|x)^T]
-\]</span></p>
-<p>Update rule:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta F(x_k)^{-1}\nabla f(x_k)
-\]</span></p>
-</section>
-<section id="second-order-methods" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-methods">3. Second-Order Methods</h3>
-<p>Newton’s method:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - [\nabla^2 f(x_k)]^{-1}\nabla f(x_k)
-\]</span></p>
-<p>BFGS update:</p>
-<p><span class="math display">\[
-B_{k+1} = B_k + \frac{y_ky_k^T}{y_k^Ts_k} - \frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}
-\]</span></p>
-</section>
-</section>
-<section id="constrained-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="constrained-optimization">Constrained Optimization</h2>
-<section id="projected-gradient" class="level3">
-<h3 class="anchored" data-anchor-id="projected-gradient">1. Projected Gradient</h3>
-<p>Update rule:</p>
-<p><span class="math display">\[
-x_{k+1} = \Pi_C(x_k - \eta_k\nabla f(x_k))
-\]</span></p>
-<p>Convergence rate:</p>
-<p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{\|x_0-x^*\|^2}{2\eta k}
-\]</span></p>
-</section>
-<section id="proximal-methods" class="level3">
-<h3 class="anchored" data-anchor-id="proximal-methods">2. Proximal Methods</h3>
-<p>Proximal operator:</p>
-<p><span class="math display">\[
-\text{prox}_{\eta g}(x) = \arg\min_y \{g(y) + \frac{1}{2\eta}\|y-x\|^2\}
-\]</span></p>
-<p>ISTA update:</p>
-<p><span class="math display">\[
-x_{k+1} = \text{prox}_{\eta g}(x_k - \eta\nabla f(x_k))
-\]</span></p>
-</section>
-<section id="augmented-lagrangian" class="level3">
-<h3 class="anchored" data-anchor-id="augmented-lagrangian">3. Augmented Lagrangian</h3>
-<p>Function:</p>
-<p><span class="math display">\[
-\mathcal{L}_\rho(x,\lambda) = f(x) + \lambda^Tg(x) + \frac{\rho}{2}\|g(x)\|^2
-\]</span></p>
-<p>Update rules:</p>
-<p><span class="math display">\[
-\begin{aligned}
-x_{k+1} &amp;= \arg\min_x \mathcal{L}_\rho(x,\lambda_k) \\
-\lambda_{k+1} &amp;= \lambda_k + \rho g(x_{k+1})
-\end{aligned}
-\]</span></p>
-</section>
-</section>
-<section id="advanced-topics" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="distributed-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="distributed-optimization">1. Distributed Optimization</h3>
-<p>ADMM algorithm:</p>
-<p><span class="math display">\[
-\begin{aligned}
-x_{k+1} &amp;= \arg\min_x \mathcal{L}_\rho(x,z_k,y_k) \\
-z_{k+1} &amp;= \arg\min_z \mathcal{L}_\rho(x_{k+1},z,y_k) \\
-y_{k+1} &amp;= y_k + \rho(Ax_{k+1} + Bz_{k+1} - c)
-\end{aligned}
-\]</span></p>
-</section>
-<section id="online-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="online-optimization">2. Online Optimization</h3>
-<p>Regret bound:</p>
-<p><span class="math display">\[
-R_T \leq O(\sqrt{T})
-\]</span></p>
-<p>Follow-the-regularized-leader:</p>
-<p><span class="math display">\[
-x_{t+1} = \arg\min_x \{\eta\sum_{s=1}^t \ell_s(x) + R(x)\}
-\]</span></p>
-</section>
-<section id="zeroth-order-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="zeroth-order-optimization">3. Zeroth-Order Optimization</h3>
-<p>Gradient estimation:</p>
-<p><span class="math display">\[
-\hat{\nabla} f(x) = \frac{d}{r}f(x+r\xi)\xi
-\]</span></p>
-<p>Where: - <span class="math inline">\(\xi \sim \text{Unif}(\mathbb{S}^{d-1})\)</span></p>
+<section id="bound-selection" class="level3">
+<h3 class="anchored" data-anchor-id="bound-selection">2. Bound Selection</h3>
+<ol type="1">
+<li>Problem Structure:
+<ul>
+<li>Independence</li>
+<li>Boundedness</li>
+<li>Moment conditions</li>
+</ul></li>
+<li>Sample Properties:
+<ul>
+<li>Size</li>
+<li>Distribution</li>
+<li>Dependence</li>
+</ul></li>
+<li>Computational:
+<ul>
+<li>Tightness</li>
+<li>Simplicity</li>
+<li>Tractability</li>
+</ul></li>
+</ol>
 </section>
 </section>
 <section id="best-practices" class="level2">
 <h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="algorithm-selection" class="level3">
-<h3 class="anchored" data-anchor-id="algorithm-selection">1. Algorithm Selection</h3>
+<section id="analysis-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="analysis-strategy">1. Analysis Strategy</h3>
 <ol type="1">
-<li>Problem Structure:
+<li>Problem Formulation:
 <ul>
-<li>Convexity</li>
-<li>Smoothness</li>
-<li>Constraints</li>
+<li>Identify assumptions</li>
+<li>Choose metrics</li>
+<li>Set objectives</li>
 </ul></li>
-<li>Data Properties:
+<li>Bound Selection:
 <ul>
-<li>Size</li>
-<li>Dimensionality</li>
-<li>Sparsity</li>
+<li>Match assumptions</li>
+<li>Consider tightness</li>
+<li>Balance complexity</li>
 </ul></li>
-<li>Computational Resources:
+<li>Implementation:
 <ul>
-<li>Memory</li>
-<li>Processing power</li>
-<li>Time constraints</li>
+<li>Numerical stability</li>
+<li>Computational efficiency</li>
+<li>Error handling</li>
 </ul></li>
 </ol>
 </section>
-<section id="implementation" class="level3">
-<h3 class="anchored" data-anchor-id="implementation">2. Implementation</h3>
+<section id="practical-guidelines" class="level3">
+<h3 class="anchored" data-anchor-id="practical-guidelines">2. Practical Guidelines</h3>
 <ol type="1">
-<li>Initialization:
+<li>Sample Size:
 <ul>
-<li>Parameter scaling</li>
-<li>Random seeding</li>
-<li>Warm start</li>
+<li>Conservative estimates</li>
+<li>Safety margins</li>
+<li>Power analysis</li>
+</ul></li>
+<li>Validation:
+<ul>
+<li>Cross-validation</li>
+<li>Bootstrap</li>
+<li>Permutation tests</li>
 </ul></li>
 <li>Monitoring:
 <ul>
-<li>Convergence</li>
-<li>Stability</li>
-<li>Resource usage</li>
-</ul></li>
-<li>Tuning:
-<ul>
-<li>Learning rates</li>
-<li>Momentum</li>
-<li>Regularization</li>
+<li>Convergence checks</li>
+<li>Stability measures</li>
+<li>Error tracking</li>
 </ul></li>
 </ol>
 </section>
@@ -690,21 +656,21 @@ x_{t+1} = \arg\min_x \{\eta\sum_{s=1}^t \ell_s(x) + R(x)\}
 <ol type="1">
 <li>Theory:
 <ul>
-<li>“Convex Optimization” by Boyd and Vandenberghe</li>
-<li>“Introductory Lectures on Convex Optimization” by Nesterov</li>
-<li>“Optimization Methods for Large-Scale Machine Learning” by Bottou et al.</li>
+<li>“Concentration Inequalities” by Boucheron et al.</li>
+<li>“Statistical Learning Theory” by Vapnik</li>
+<li>“High-Dimensional Probability” by Vershynin</li>
 </ul></li>
 <li>Methods:
 <ul>
-<li>“Numerical Optimization” by Nocedal and Wright</li>
-<li>“First-Order Methods in Optimization” by Beck</li>
-<li>“Proximal Algorithms” by Parikh and Boyd</li>
+<li>“Empirical Processes in M-Estimation” by van der Vaart and Wellner</li>
+<li>“Random Matrices: High Dimensional Phenomena” by Davidson and Szarek</li>
+<li>“Theory of Classification” by Devroye et al.</li>
 </ul></li>
 <li>Applications:
 <ul>
-<li>“Deep Learning” by Goodfellow et al.</li>
-<li>“Optimization for Machine Learning” by Sra et al.</li>
-<li>“Large Scale Optimization in Machine Learning” by Shalev-Shwartz and Zhang</li>
+<li>“Statistical Learning Theory and Applications” by Bousquet et al.</li>
+<li>“High-Dimensional Statistics” by Wainwright</li>
+<li>“Machine Learning Theory” by Mohri et al.</li>
 </ul></li>
 </ol>
 

@@ -4,17 +4,17 @@ subtitle: "Exploring AI, ML, Deep Learning & Data Science"
 listing:
   contents: posts
   sort: "date desc"
-  type: grid
+  type: default
   sort-ui: true
   filter-ui: true
-  fields: [date, title, reading-time, description, image]
+  fields: [date, title, reading-time, description]
   max-items: 3
   feed: true
 page-layout: full
 title-block-banner: true
 ---
 
-## Why This Blog? 
+## Why This Blog?
 
 I've always wanted to start a blog, but something held me back. The thought of not having a fixed topic or wondering if it would be interesting enough kept me from taking that first step. As time passed, my interests evolved, and I gained more experience in different areas.
 

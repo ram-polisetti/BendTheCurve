@@ -1,6 +1,10 @@
 project:
   type: website
   output-dir: _site
+  # Exclude advanced posts that require heavy computation
+  render:
+    - "*.qmd"
+    - "!advanced_posts/"
 
 website:
   title: "BendThe-Curve"
@@ -51,6 +55,18 @@ website:
             href: posts.qmd#category=python
           - text: "Tutorials"
             href: posts.qmd#category=tutorial
+      - section: "Advanced Topics"
+        contents:
+          - text: "Note: Advanced posts with heavy computations are currently under maintenance"
+
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+  feed: true
 
 format:
   html:

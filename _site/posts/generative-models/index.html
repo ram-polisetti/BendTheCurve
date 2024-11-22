@@ -8,9 +8,9 @@
 
 <meta name="author" content="Ram Polisetti">
 <meta name="dcterms.date" content="2024-03-19">
-<meta name="description" content="A rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.">
+<meta name="description" content="A rigorous mathematical exploration of generative models, including GANs, VAEs, and diffusion models.">
 
-<title>Optimization Theory in Machine Learning – BendThe-Curve</title>
+<title>Generative Models: Mathematical Foundations and Architectures – BendThe-Curve</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -188,7 +188,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Optimization Theory in Machine Learning</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Generative Models: Mathematical Foundations and Architectures</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -198,17 +198,17 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Optimization Theory in Machine Learning</h1>
+      <h1 class="title">Generative Models: Mathematical Foundations and Architectures</h1>
                   <div>
         <div class="description">
-          A rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.
+          A rigorous mathematical exploration of generative models, including GANs, VAEs, and diffusion models.
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">machine-learning</div>
-                <div class="quarto-category">optimization</div>
+                <div class="quarto-category">generative-models</div>
+                <div class="quarto-category">deep-learning</div>
                 <div class="quarto-category">mathematics</div>
-                <div class="quarto-category">theory</div>
               </div>
                   </div>
   </div>
@@ -310,54 +310,57 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#optimization-theory-in-machine-learning" id="toc-optimization-theory-in-machine-learning" class="nav-link active" data-scroll-target="#optimization-theory-in-machine-learning">Optimization Theory in Machine Learning</a>
+  <li><a href="#generative-models-mathematical-foundations" id="toc-generative-models-mathematical-foundations" class="nav-link active" data-scroll-target="#generative-models-mathematical-foundations">Generative Models: Mathematical Foundations</a>
   <ul class="collapse">
-  <li><a href="#convex-analysis" id="toc-convex-analysis" class="nav-link" data-scroll-target="#convex-analysis">Convex Analysis</a>
+  <li><a href="#variational-autoencoders-vaes" id="toc-variational-autoencoders-vaes" class="nav-link" data-scroll-target="#variational-autoencoders-vaes">Variational Autoencoders (VAEs)</a>
   <ul class="collapse">
-  <li><a href="#convex-sets-and-functions" id="toc-convex-sets-and-functions" class="nav-link" data-scroll-target="#convex-sets-and-functions">1. Convex Sets and Functions</a></li>
-  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties">2. Properties</a></li>
-  <li><a href="#strong-convexity" id="toc-strong-convexity" class="nav-link" data-scroll-target="#strong-convexity">3. Strong Convexity</a></li>
+  <li><a href="#evidence-lower-bound-elbo" id="toc-evidence-lower-bound-elbo" class="nav-link" data-scroll-target="#evidence-lower-bound-elbo">1. Evidence Lower Bound (ELBO)</a></li>
+  <li><a href="#reparameterization-trick" id="toc-reparameterization-trick" class="nav-link" data-scroll-target="#reparameterization-trick">2. Reparameterization Trick</a></li>
   </ul></li>
-  <li><a href="#optimality-conditions" id="toc-optimality-conditions" class="nav-link" data-scroll-target="#optimality-conditions">Optimality Conditions</a>
+  <li><a href="#generative-adversarial-networks-gans" id="toc-generative-adversarial-networks-gans" class="nav-link" data-scroll-target="#generative-adversarial-networks-gans">Generative Adversarial Networks (GANs)</a>
   <ul class="collapse">
-  <li><a href="#first-order-conditions" id="toc-first-order-conditions" class="nav-link" data-scroll-target="#first-order-conditions">1. First-Order Conditions</a></li>
-  <li><a href="#second-order-conditions" id="toc-second-order-conditions" class="nav-link" data-scroll-target="#second-order-conditions">2. Second-Order Conditions</a></li>
-  <li><a href="#saddle-point-conditions" id="toc-saddle-point-conditions" class="nav-link" data-scroll-target="#saddle-point-conditions">3. Saddle Point Conditions</a></li>
+  <li><a href="#minimax-objective" id="toc-minimax-objective" class="nav-link" data-scroll-target="#minimax-objective">1. Minimax Objective</a></li>
+  <li><a href="#wasserstein-distance" id="toc-wasserstein-distance" class="nav-link" data-scroll-target="#wasserstein-distance">2. Wasserstein Distance</a></li>
+  <li><a href="#gradient-penalty" id="toc-gradient-penalty" class="nav-link" data-scroll-target="#gradient-penalty">3. Gradient Penalty</a></li>
   </ul></li>
-  <li><a href="#gradient-methods" id="toc-gradient-methods" class="nav-link" data-scroll-target="#gradient-methods">Gradient Methods</a>
+  <li><a href="#diffusion-models" id="toc-diffusion-models" class="nav-link" data-scroll-target="#diffusion-models">Diffusion Models</a>
   <ul class="collapse">
-  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent">1. Gradient Descent</a></li>
-  <li><a href="#accelerated-methods" id="toc-accelerated-methods" class="nav-link" data-scroll-target="#accelerated-methods">2. Accelerated Methods</a></li>
-  <li><a href="#stochastic-methods" id="toc-stochastic-methods" class="nav-link" data-scroll-target="#stochastic-methods">3. Stochastic Methods</a></li>
+  <li><a href="#forward-process" id="toc-forward-process" class="nav-link" data-scroll-target="#forward-process">1. Forward Process</a></li>
+  <li><a href="#reverse-process" id="toc-reverse-process" class="nav-link" data-scroll-target="#reverse-process">2. Reverse Process</a></li>
   </ul></li>
-  <li><a href="#non-convex-optimization" id="toc-non-convex-optimization" class="nav-link" data-scroll-target="#non-convex-optimization">Non-Convex Optimization</a>
+  <li><a href="#advanced-architectures" id="toc-advanced-architectures" class="nav-link" data-scroll-target="#advanced-architectures">Advanced Architectures</a>
   <ul class="collapse">
-  <li><a href="#local-minima" id="toc-local-minima" class="nav-link" data-scroll-target="#local-minima">1. Local Minima</a></li>
-  <li><a href="#escape-from-saddle-points" id="toc-escape-from-saddle-points" class="nav-link" data-scroll-target="#escape-from-saddle-points">2. Escape from Saddle Points</a></li>
-  <li><a href="#global-optimization" id="toc-global-optimization" class="nav-link" data-scroll-target="#global-optimization">3. Global Optimization</a></li>
+  <li><a href="#normalizing-flows" id="toc-normalizing-flows" class="nav-link" data-scroll-target="#normalizing-flows">1. Normalizing Flows</a></li>
+  <li><a href="#autoregressive-models" id="toc-autoregressive-models" class="nav-link" data-scroll-target="#autoregressive-models">2. Autoregressive Models</a></li>
+  <li><a href="#energy-based-models" id="toc-energy-based-models" class="nav-link" data-scroll-target="#energy-based-models">3. Energy-Based Models</a></li>
   </ul></li>
-  <li><a href="#modern-optimization-methods" id="toc-modern-optimization-methods" class="nav-link" data-scroll-target="#modern-optimization-methods">Modern Optimization Methods</a>
+  <li><a href="#training-dynamics" id="toc-training-dynamics" class="nav-link" data-scroll-target="#training-dynamics">Training Dynamics</a>
   <ul class="collapse">
-  <li><a href="#adaptive-methods" id="toc-adaptive-methods" class="nav-link" data-scroll-target="#adaptive-methods">1. Adaptive Methods</a></li>
-  <li><a href="#natural-gradient" id="toc-natural-gradient" class="nav-link" data-scroll-target="#natural-gradient">2. Natural Gradient</a></li>
-  <li><a href="#second-order-methods" id="toc-second-order-methods" class="nav-link" data-scroll-target="#second-order-methods">3. Second-Order Methods</a></li>
+  <li><a href="#mode-collapse-in-gans" id="toc-mode-collapse-in-gans" class="nav-link" data-scroll-target="#mode-collapse-in-gans">1. Mode Collapse in GANs</a></li>
+  <li><a href="#vae-posterior-collapse" id="toc-vae-posterior-collapse" class="nav-link" data-scroll-target="#vae-posterior-collapse">2. VAE Posterior Collapse</a></li>
+  <li><a href="#diffusion-model-training" id="toc-diffusion-model-training" class="nav-link" data-scroll-target="#diffusion-model-training">3. Diffusion Model Training</a></li>
   </ul></li>
-  <li><a href="#constrained-optimization" id="toc-constrained-optimization" class="nav-link" data-scroll-target="#constrained-optimization">Constrained Optimization</a>
+  <li><a href="#advanced-training-techniques" id="toc-advanced-training-techniques" class="nav-link" data-scroll-target="#advanced-training-techniques">Advanced Training Techniques</a>
   <ul class="collapse">
-  <li><a href="#projected-gradient" id="toc-projected-gradient" class="nav-link" data-scroll-target="#projected-gradient">1. Projected Gradient</a></li>
-  <li><a href="#proximal-methods" id="toc-proximal-methods" class="nav-link" data-scroll-target="#proximal-methods">2. Proximal Methods</a></li>
-  <li><a href="#augmented-lagrangian" id="toc-augmented-lagrangian" class="nav-link" data-scroll-target="#augmented-lagrangian">3. Augmented Lagrangian</a></li>
+  <li><a href="#progressive-growing" id="toc-progressive-growing" class="nav-link" data-scroll-target="#progressive-growing">1. Progressive Growing</a></li>
+  <li><a href="#style-mixing" id="toc-style-mixing" class="nav-link" data-scroll-target="#style-mixing">2. Style Mixing</a></li>
+  <li><a href="#adaptive-instance-normalization-adain" id="toc-adaptive-instance-normalization-adain" class="nav-link" data-scroll-target="#adaptive-instance-normalization-adain">3. Adaptive Instance Normalization (AdaIN)</a></li>
   </ul></li>
-  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
+  <li><a href="#evaluation-metrics" id="toc-evaluation-metrics" class="nav-link" data-scroll-target="#evaluation-metrics">Evaluation Metrics</a>
   <ul class="collapse">
-  <li><a href="#distributed-optimization" id="toc-distributed-optimization" class="nav-link" data-scroll-target="#distributed-optimization">1. Distributed Optimization</a></li>
-  <li><a href="#online-optimization" id="toc-online-optimization" class="nav-link" data-scroll-target="#online-optimization">2. Online Optimization</a></li>
-  <li><a href="#zeroth-order-optimization" id="toc-zeroth-order-optimization" class="nav-link" data-scroll-target="#zeroth-order-optimization">3. Zeroth-Order Optimization</a></li>
+  <li><a href="#inception-score" id="toc-inception-score" class="nav-link" data-scroll-target="#inception-score">1. Inception Score</a></li>
+  <li><a href="#fréchet-inception-distance" id="toc-fréchet-inception-distance" class="nav-link" data-scroll-target="#fréchet-inception-distance">2. Fréchet Inception Distance</a></li>
+  <li><a href="#precision-and-recall" id="toc-precision-and-recall" class="nav-link" data-scroll-target="#precision-and-recall">3. Precision and Recall</a></li>
+  </ul></li>
+  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
+  <ul class="collapse">
+  <li><a href="#architectural-choices" id="toc-architectural-choices" class="nav-link" data-scroll-target="#architectural-choices">1. Architectural Choices</a></li>
+  <li><a href="#training-stability" id="toc-training-stability" class="nav-link" data-scroll-target="#training-stability">2. Training Stability</a></li>
   </ul></li>
   <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
   <ul class="collapse">
-  <li><a href="#algorithm-selection" id="toc-algorithm-selection" class="nav-link" data-scroll-target="#algorithm-selection">1. Algorithm Selection</a></li>
-  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">2. Implementation</a></li>
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">1. Model Selection</a></li>
+  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning">2. Hyperparameter Tuning</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
@@ -371,316 +374,283 @@ window.Quarto = {
 
 
 
-<section id="optimization-theory-in-machine-learning" class="level1">
-<h1>Optimization Theory in Machine Learning</h1>
-<section id="convex-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="convex-analysis">Convex Analysis</h2>
-<section id="convex-sets-and-functions" class="level3">
-<h3 class="anchored" data-anchor-id="convex-sets-and-functions">1. Convex Sets and Functions</h3>
-<p>Convex set definition:</p>
+<section id="generative-models-mathematical-foundations" class="level1">
+<h1>Generative Models: Mathematical Foundations</h1>
+<section id="variational-autoencoders-vaes" class="level2">
+<h2 class="anchored" data-anchor-id="variational-autoencoders-vaes">Variational Autoencoders (VAEs)</h2>
+<section id="evidence-lower-bound-elbo" class="level3">
+<h3 class="anchored" data-anchor-id="evidence-lower-bound-elbo">1. Evidence Lower Bound (ELBO)</h3>
+<p>The VAE objective maximizes the ELBO:</p>
 <p><span class="math display">\[
-\theta x + (1-\theta)y \in C, \forall x,y \in C, \theta \in [0,1]
+\mathcal{L}(\theta, \phi; x) = \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] - D_{KL}(q_\phi(z|x)||p(z))
 \]</span></p>
-<p>Convex function:</p>
-<p><span class="math display">\[
-f(\theta x + (1-\theta)y) \leq \theta f(x) + (1-\theta)f(y)
-\]</span></p>
+<p>Where: - <span class="math inline">\(q_\phi(z|x)\)</span> is the encoder (inference model) - <span class="math inline">\(p_\theta(x|z)\)</span> is the decoder (generative model) - <span class="math inline">\(p(z)\)</span> is the prior distribution - <span class="math inline">\(D_{KL}\)</span> is the Kullback-Leibler divergence</p>
 </section>
-<section id="properties" class="level3">
-<h3 class="anchored" data-anchor-id="properties">2. Properties</h3>
-<p>First-order characterization:</p>
+<section id="reparameterization-trick" class="level3">
+<h3 class="anchored" data-anchor-id="reparameterization-trick">2. Reparameterization Trick</h3>
+<p>Enables backpropagation through sampling:</p>
 <p><span class="math display">\[
-f(y) \geq f(x) + \nabla f(x)^T(y-x)
+z = \mu_\phi(x) + \sigma_\phi(x) \odot \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
 \]</span></p>
-<p>Second-order characterization:</p>
-<p><span class="math display">\[
-\nabla^2 f(x) \succeq 0
-\]</span></p>
-</section>
-<section id="strong-convexity" class="level3">
-<h3 class="anchored" data-anchor-id="strong-convexity">3. Strong Convexity</h3>
-<p>Definition:</p>
-<p><span class="math display">\[
-f(y) \geq f(x) + \nabla f(x)^T(y-x) + \frac{\mu}{2}\|y-x\|^2
-\]</span></p>
-<p>Quadratic growth:</p>
-<p><span class="math display">\[
-f(x) - f(x^*) \geq \frac{\mu}{2}\|x-x^*\|^2
-\]</span></p>
+<p>Where: - <span class="math inline">\(\mu_\phi(x)\)</span> is the mean encoder network - <span class="math inline">\(\sigma_\phi(x)\)</span> is the standard deviation encoder network - <span class="math inline">\(\odot\)</span> denotes element-wise multiplication</p>
 </section>
 </section>
-<section id="optimality-conditions" class="level2">
-<h2 class="anchored" data-anchor-id="optimality-conditions">Optimality Conditions</h2>
-<section id="first-order-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="first-order-conditions">1. First-Order Conditions</h3>
-<p>Unconstrained:</p>
+<section id="generative-adversarial-networks-gans" class="level2">
+<h2 class="anchored" data-anchor-id="generative-adversarial-networks-gans">Generative Adversarial Networks (GANs)</h2>
+<section id="minimax-objective" class="level3">
+<h3 class="anchored" data-anchor-id="minimax-objective">1. Minimax Objective</h3>
+<p>The original GAN formulation:</p>
 <p><span class="math display">\[
-\nabla f(x^*) = 0
+\min_G \max_D V(D,G) = \mathbb{E}_{x\sim p_{data}}[\log D(x)] + \mathbb{E}_{z\sim p_z}[\log(1-D(G(z)))]
 \]</span></p>
-<p>Constrained (KKT):</p>
+<p>Where: - <span class="math inline">\(G\)</span> is the generator - <span class="math inline">\(D\)</span> is the discriminator - <span class="math inline">\(p_{data}\)</span> is the real data distribution - <span class="math inline">\(p_z\)</span> is the latent distribution</p>
+</section>
+<section id="wasserstein-distance" class="level3">
+<h3 class="anchored" data-anchor-id="wasserstein-distance">2. Wasserstein Distance</h3>
+<p>WGAN objective using Kantorovich-Rubinstein duality:</p>
+<p><span class="math display">\[
+\min_G \max_{D \in \mathcal{F}_L} \mathbb{E}_{x\sim p_{data}}[D(x)] - \mathbb{E}_{z\sim p_z}[D(G(z))]
+\]</span></p>
+<p>Where: - <span class="math inline">\(\mathcal{F}_L\)</span> is the set of 1-Lipschitz functions</p>
+</section>
+<section id="gradient-penalty" class="level3">
+<h3 class="anchored" data-anchor-id="gradient-penalty">3. Gradient Penalty</h3>
+<p>WGAN-GP regularization term:</p>
+<p><span class="math display">\[
+\lambda \mathbb{E}_{\hat{x}\sim p_{\hat{x}}}[(\|\nabla_{\hat{x}}D(\hat{x})\|_2 - 1)^2]
+\]</span></p>
+<p>Where: - <span class="math inline">\(\hat{x}\)</span> is sampled along straight lines between real and generated samples - <span class="math inline">\(\lambda\)</span> is the penalty coefficient</p>
+</section>
+</section>
+<section id="diffusion-models" class="level2">
+<h2 class="anchored" data-anchor-id="diffusion-models">Diffusion Models</h2>
+<section id="forward-process" class="level3">
+<h3 class="anchored" data-anchor-id="forward-process">1. Forward Process</h3>
+<p>The forward diffusion process:</p>
+<p><span class="math display">\[
+q(x_t|x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t}x_{t-1}, \beta_tI)
+\]</span></p>
+<p>With closed form for arbitrary timestep:</p>
+<p><span class="math display">\[
+q(x_t|x_0) = \mathcal{N}(x_t; \sqrt{\bar{\alpha}_t}x_0, (1-\bar{\alpha}_t)I)
+\]</span></p>
+<p>Where: - <span class="math inline">\(\beta_t\)</span> is the noise schedule - <span class="math inline">\(\alpha_t = 1-\beta_t\)</span> - <span class="math inline">\(\bar{\alpha}_t = \prod_{s=1}^t \alpha_s\)</span></p>
+</section>
+<section id="reverse-process" class="level3">
+<h3 class="anchored" data-anchor-id="reverse-process">2. Reverse Process</h3>
+<p>The reverse diffusion process:</p>
+<p><span class="math display">\[
+p_\theta(x_{t-1}|x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t,t), \Sigma_\theta(x_t,t))
+\]</span></p>
+<p>Training objective:</p>
+<p><span class="math display">\[
+\mathcal{L} = \mathbb{E}_{x_0,\epsilon,t}\left[\|\epsilon - \epsilon_\theta(x_t,t)\|^2\right]
+\]</span></p>
+<p>Where: - <span class="math inline">\(\epsilon_\theta\)</span> predicts the noise component - <span class="math inline">\(x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon\)</span></p>
+</section>
+</section>
+<section id="advanced-architectures" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-architectures">Advanced Architectures</h2>
+<section id="normalizing-flows" class="level3">
+<h3 class="anchored" data-anchor-id="normalizing-flows">1. Normalizing Flows</h3>
+<p>Change of variables formula:</p>
+<p><span class="math display">\[
+\log p_X(x) = \log p_Z(f^{-1}(x)) + \log\left|\det\frac{\partial f^{-1}}{\partial x}\right|
+\]</span></p>
+<p>Where: - <span class="math inline">\(f\)</span> is an invertible transformation - <span class="math inline">\(p_Z\)</span> is a simple base distribution</p>
+</section>
+<section id="autoregressive-models" class="level3">
+<h3 class="anchored" data-anchor-id="autoregressive-models">2. Autoregressive Models</h3>
+<p>Factorized probability:</p>
+<p><span class="math display">\[
+p(x) = \prod_{i=1}^n p(x_i|x_{&lt;i})
+\]</span></p>
+<p>With masked convolutions:</p>
+<p><span class="math display">\[
+y_i = \sum_{j \leq i} m_{ij}(w_{ij} \cdot x_j)
+\]</span></p>
+</section>
+<section id="energy-based-models" class="level3">
+<h3 class="anchored" data-anchor-id="energy-based-models">3. Energy-Based Models</h3>
+<p>Probability density:</p>
+<p><span class="math display">\[
+p(x) = \frac{1}{Z}e^{-E(x)}
+\]</span></p>
+<p>Where: - <span class="math inline">\(E(x)\)</span> is the energy function - <span class="math inline">\(Z = \int e^{-E(x)}dx\)</span> is the partition function</p>
+</section>
+</section>
+<section id="training-dynamics" class="level2">
+<h2 class="anchored" data-anchor-id="training-dynamics">Training Dynamics</h2>
+<section id="mode-collapse-in-gans" class="level3">
+<h3 class="anchored" data-anchor-id="mode-collapse-in-gans">1. Mode Collapse in GANs</h3>
+<p>Jensen-Shannon divergence:</p>
+<p><span class="math display">\[
+JSD(P\|Q) = \frac{1}{2}D_{KL}(P\|\frac{P+Q}{2}) + \frac{1}{2}D_{KL}(Q\|\frac{P+Q}{2})
+\]</span></p>
+</section>
+<section id="vae-posterior-collapse" class="level3">
+<h3 class="anchored" data-anchor-id="vae-posterior-collapse">2. VAE Posterior Collapse</h3>
+<p>KL-divergence analysis:</p>
+<p><span class="math display">\[
+D_{KL}(q_\phi(z|x)\|p(z)) = \frac{1}{2}\sum_{j=1}^d(\sigma_j^2 + \mu_j^2 - \log\sigma_j^2 - 1)
+\]</span></p>
+</section>
+<section id="diffusion-model-training" class="level3">
+<h3 class="anchored" data-anchor-id="diffusion-model-training">3. Diffusion Model Training</h3>
+<p>Denoising score matching:</p>
+<p><span class="math display">\[
+\nabla_x \log p(x) = \mathbb{E}_{p(t|x)}[\nabla_x \log p(x|x_t)]
+\]</span></p>
+</section>
+</section>
+<section id="advanced-training-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-training-techniques">Advanced Training Techniques</h2>
+<section id="progressive-growing" class="level3">
+<h3 class="anchored" data-anchor-id="progressive-growing">1. Progressive Growing</h3>
+<p>Resolution-dependent loss:</p>
+<p><span class="math display">\[
+\mathcal{L}_\text{total} = \sum_{r} \alpha_r \mathcal{L}_r
+\]</span></p>
+<p>Where: - <span class="math inline">\(r\)</span> is the resolution level - <span class="math inline">\(\alpha_r\)</span> is the weighting factor</p>
+</section>
+<section id="style-mixing" class="level3">
+<h3 class="anchored" data-anchor-id="style-mixing">2. Style Mixing</h3>
+<p>Style transfer in latent space:</p>
+<p><span class="math display">\[
+w = \mathcal{M}(z) = f(z + \Delta z)
+\]</span></p>
+<p>Where: - <span class="math inline">\(\mathcal{M}\)</span> is the mapping network - <span class="math inline">\(f\)</span> is a non-linear transformation</p>
+</section>
+<section id="adaptive-instance-normalization-adain" class="level3">
+<h3 class="anchored" data-anchor-id="adaptive-instance-normalization-adain">3. Adaptive Instance Normalization (AdaIN)</h3>
+<p>Style transfer operation:</p>
+<p><span class="math display">\[
+\text{AdaIN}(x,y) = \sigma(y)\left(\frac{x-\mu(x)}{\sigma(x)}\right) + \mu(y)
+\]</span></p>
+</section>
+</section>
+<section id="evaluation-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-metrics">Evaluation Metrics</h2>
+<section id="inception-score" class="level3">
+<h3 class="anchored" data-anchor-id="inception-score">1. Inception Score</h3>
+<p>Measures quality and diversity:</p>
+<p><span class="math display">\[
+IS = \exp(\mathbb{E}_{x\sim p_g}[D_{KL}(p(y|x)\|p(y))])
+\]</span></p>
+</section>
+<section id="fréchet-inception-distance" class="level3">
+<h3 class="anchored" data-anchor-id="fréchet-inception-distance">2. Fréchet Inception Distance</h3>
+<p>Distribution similarity metric:</p>
+<p><span class="math display">\[
+FID = \|\mu_r - \mu_g\|^2 + Tr(\Sigma_r + \Sigma_g - 2(\Sigma_r\Sigma_g)^{1/2})
+\]</span></p>
+<p>Where: - <span class="math inline">\(\mu_r, \Sigma_r\)</span> are real data statistics - <span class="math inline">\(\mu_g, \Sigma_g\)</span> are generated data statistics</p>
+</section>
+<section id="precision-and-recall" class="level3">
+<h3 class="anchored" data-anchor-id="precision-and-recall">3. Precision and Recall</h3>
+<p>Two-way evaluation:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\nabla_x \mathcal{L}(x^*,\lambda^*) &amp;= 0 \\
-g_i(x^*) &amp;\leq 0 \\
-\lambda_i^* g_i(x^*) &amp;= 0 \\
-\lambda_i^* &amp;\geq 0
-\end{aligned}
-\]</span></p>
-</section>
-<section id="second-order-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-conditions">2. Second-Order Conditions</h3>
-<p>Unconstrained:</p>
-<p><span class="math display">\[
-\nabla^2 f(x^*) \succeq 0
-\]</span></p>
-<p>Constrained:</p>
-<p><span class="math display">\[
-y^T\nabla^2_{xx}\mathcal{L}(x^*,\lambda^*)y \geq 0
-\]</span></p>
-</section>
-<section id="saddle-point-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="saddle-point-conditions">3. Saddle Point Conditions</h3>
-<p>Minimax:</p>
-<p><span class="math display">\[
-\mathcal{L}(x^*,\lambda) \leq \mathcal{L}(x^*,\lambda^*) \leq \mathcal{L}(x,\lambda^*)
-\]</span></p>
-<p>Duality gap:</p>
-<p><span class="math display">\[
-f(x^*) - g(\lambda^*) = 0
-\]</span></p>
-</section>
-</section>
-<section id="gradient-methods" class="level2">
-<h2 class="anchored" data-anchor-id="gradient-methods">Gradient Methods</h2>
-<section id="gradient-descent" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-descent">1. Gradient Descent</h3>
-<p>Update rule:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta_k\nabla f(x_k)
-\]</span></p>
-<p>Convergence rate (convex):</p>
-<p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{\|x_0-x^*\|^2}{2\eta k}
-\]</span></p>
-</section>
-<section id="accelerated-methods" class="level3">
-<h3 class="anchored" data-anchor-id="accelerated-methods">2. Accelerated Methods</h3>
-<p>Nesterov’s acceleration:</p>
-<p><span class="math display">\[
-\begin{aligned}
-y_k &amp;= x_k + \beta_k(x_k - x_{k-1}) \\
-x_{k+1} &amp;= y_k - \eta_k\nabla f(y_k)
-\end{aligned}
-\]</span></p>
-<p>Convergence rate:</p>
-<p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{2L\|x_0-x^*\|^2}{(k+1)^2}
-\]</span></p>
-</section>
-<section id="stochastic-methods" class="level3">
-<h3 class="anchored" data-anchor-id="stochastic-methods">3. Stochastic Methods</h3>
-<p>SGD update:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta_k\nabla f_{i_k}(x_k)
-\]</span></p>
-<p>Convergence rate:</p>
-<p><span class="math display">\[
-\mathbb{E}[f(x_k) - f(x^*)] \leq \frac{L\|x_0-x^*\|^2}{2k} + \frac{L\sigma^2}{2}\sum_{t=1}^k \eta_t^2
-\]</span></p>
-</section>
-</section>
-<section id="non-convex-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="non-convex-optimization">Non-Convex Optimization</h2>
-<section id="local-minima" class="level3">
-<h3 class="anchored" data-anchor-id="local-minima">1. Local Minima</h3>
-<p>First-order condition:</p>
-<p><span class="math display">\[
-\|\nabla f(x^*)\| \leq \epsilon
-\]</span></p>
-<p>Second-order condition:</p>
-<p><span class="math display">\[
-\lambda_{\min}(\nabla^2 f(x^*)) \geq -\sqrt{\epsilon}
-\]</span></p>
-</section>
-<section id="escape-from-saddle-points" class="level3">
-<h3 class="anchored" data-anchor-id="escape-from-saddle-points">2. Escape from Saddle Points</h3>
-<p>Perturbed gradient descent:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta\nabla f(x_k) + \xi_k
-\]</span></p>
-<p>Where: - <span class="math inline">\(\xi_k \sim \mathcal{N}(0,\sigma^2I)\)</span></p>
-</section>
-<section id="global-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="global-optimization">3. Global Optimization</h3>
-<p>Branch and bound:</p>
-<p><span class="math display">\[
-\text{LB}(R) \leq \min_{x \in R} f(x) \leq \text{UB}(R)
-\]</span></p>
-<p>Simulated annealing:</p>
-<p><span class="math display">\[
-P(\text{accept}) = \exp(-\frac{\Delta E}{T_k})
-\]</span></p>
-</section>
-</section>
-<section id="modern-optimization-methods" class="level2">
-<h2 class="anchored" data-anchor-id="modern-optimization-methods">Modern Optimization Methods</h2>
-<section id="adaptive-methods" class="level3">
-<h3 class="anchored" data-anchor-id="adaptive-methods">1. Adaptive Methods</h3>
-<p>AdaGrad:</p>
-<p><span class="math display">\[
-x_{t+1,i} = x_{t,i} - \frac{\eta}{\sqrt{\sum_{s=1}^t g_{s,i}^2}}g_{t,i}
-\]</span></p>
-<p>Adam:</p>
-<p><span class="math display">\[
-\begin{aligned}
-m_t &amp;= \beta_1 m_{t-1} + (1-\beta_1)g_t \\
-v_t &amp;= \beta_2 v_{t-1} + (1-\beta_2)g_t^2 \\
-\hat{m}_t &amp;= \frac{m_t}{1-\beta_1^t} \\
-\hat{v}_t &amp;= \frac{v_t}{1-\beta_2^t} \\
-x_{t+1} &amp;= x_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon}\hat{m}_t
-\end{aligned}
-\]</span></p>
-</section>
-<section id="natural-gradient" class="level3">
-<h3 class="anchored" data-anchor-id="natural-gradient">2. Natural Gradient</h3>
-<p>Fisher information:</p>
-<p><span class="math display">\[
-F(x) = \mathbb{E}_{p(y|x)}[\nabla \log p(y|x)\nabla \log p(y|x)^T]
-\]</span></p>
-<p>Update rule:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta F(x_k)^{-1}\nabla f(x_k)
-\]</span></p>
-</section>
-<section id="second-order-methods" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-methods">3. Second-Order Methods</h3>
-<p>Newton’s method:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - [\nabla^2 f(x_k)]^{-1}\nabla f(x_k)
-\]</span></p>
-<p>BFGS update:</p>
-<p><span class="math display">\[
-B_{k+1} = B_k + \frac{y_ky_k^T}{y_k^Ts_k} - \frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}
-\]</span></p>
-</section>
-</section>
-<section id="constrained-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="constrained-optimization">Constrained Optimization</h2>
-<section id="projected-gradient" class="level3">
-<h3 class="anchored" data-anchor-id="projected-gradient">1. Projected Gradient</h3>
-<p>Update rule:</p>
-<p><span class="math display">\[
-x_{k+1} = \Pi_C(x_k - \eta_k\nabla f(x_k))
-\]</span></p>
-<p>Convergence rate:</p>
-<p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{\|x_0-x^*\|^2}{2\eta k}
-\]</span></p>
-</section>
-<section id="proximal-methods" class="level3">
-<h3 class="anchored" data-anchor-id="proximal-methods">2. Proximal Methods</h3>
-<p>Proximal operator:</p>
-<p><span class="math display">\[
-\text{prox}_{\eta g}(x) = \arg\min_y \{g(y) + \frac{1}{2\eta}\|y-x\|^2\}
-\]</span></p>
-<p>ISTA update:</p>
-<p><span class="math display">\[
-x_{k+1} = \text{prox}_{\eta g}(x_k - \eta\nabla f(x_k))
-\]</span></p>
-</section>
-<section id="augmented-lagrangian" class="level3">
-<h3 class="anchored" data-anchor-id="augmented-lagrangian">3. Augmented Lagrangian</h3>
-<p>Function:</p>
-<p><span class="math display">\[
-\mathcal{L}_\rho(x,\lambda) = f(x) + \lambda^Tg(x) + \frac{\rho}{2}\|g(x)\|^2
-\]</span></p>
-<p>Update rules:</p>
-<p><span class="math display">\[
-\begin{aligned}
-x_{k+1} &amp;= \arg\min_x \mathcal{L}_\rho(x,\lambda_k) \\
-\lambda_{k+1} &amp;= \lambda_k + \rho g(x_{k+1})
+\text{Precision} &amp;= \mathbb{E}_{x\sim p_g}[\max_{y\sim p_r} s(x,y)] \\
+\text{Recall} &amp;= \mathbb{E}_{y\sim p_r}[\max_{x\sim p_g} s(x,y)]
 \end{aligned}
 \]</span></p>
 </section>
 </section>
-<section id="advanced-topics" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="distributed-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="distributed-optimization">1. Distributed Optimization</h3>
-<p>ADMM algorithm:</p>
-<p><span class="math display">\[
-\begin{aligned}
-x_{k+1} &amp;= \arg\min_x \mathcal{L}_\rho(x,z_k,y_k) \\
-z_{k+1} &amp;= \arg\min_z \mathcal{L}_\rho(x_{k+1},z,y_k) \\
-y_{k+1} &amp;= y_k + \rho(Ax_{k+1} + Bz_{k+1} - c)
-\end{aligned}
-\]</span></p>
+<section id="implementation-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
+<section id="architectural-choices" class="level3">
+<h3 class="anchored" data-anchor-id="architectural-choices">1. Architectural Choices</h3>
+<ol type="1">
+<li>Generator Design:
+<ul>
+<li>Transposed convolutions vs upsampling</li>
+<li>Skip connections</li>
+<li>Attention mechanisms</li>
+</ul></li>
+<li>Discriminator Design:
+<ul>
+<li>Spectral normalization</li>
+<li>Residual blocks</li>
+<li>Multi-scale discrimination</li>
+</ul></li>
+<li>Loss Functions:
+<ul>
+<li>Adversarial loss</li>
+<li>Reconstruction loss</li>
+<li>Perceptual loss</li>
+</ul></li>
+</ol>
 </section>
-<section id="online-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="online-optimization">2. Online Optimization</h3>
-<p>Regret bound:</p>
-<p><span class="math display">\[
-R_T \leq O(\sqrt{T})
-\]</span></p>
-<p>Follow-the-regularized-leader:</p>
-<p><span class="math display">\[
-x_{t+1} = \arg\min_x \{\eta\sum_{s=1}^t \ell_s(x) + R(x)\}
-\]</span></p>
-</section>
-<section id="zeroth-order-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="zeroth-order-optimization">3. Zeroth-Order Optimization</h3>
-<p>Gradient estimation:</p>
-<p><span class="math display">\[
-\hat{\nabla} f(x) = \frac{d}{r}f(x+r\xi)\xi
-\]</span></p>
-<p>Where: - <span class="math inline">\(\xi \sim \text{Unif}(\mathbb{S}^{d-1})\)</span></p>
+<section id="training-stability" class="level3">
+<h3 class="anchored" data-anchor-id="training-stability">2. Training Stability</h3>
+<ol type="1">
+<li>Gradient Penalties:
+<ul>
+<li>R1 regularization</li>
+<li>Path length regularization</li>
+<li>Consistency regularization</li>
+</ul></li>
+<li>Learning Rate:
+<ul>
+<li>Two time-scale update rule</li>
+<li>Adaptive learning rates</li>
+<li>Warmup scheduling</li>
+</ul></li>
+<li>Batch Size:
+<ul>
+<li>Gradient accumulation</li>
+<li>Mixed precision training</li>
+<li>Memory-efficient backprop</li>
+</ul></li>
+</ol>
 </section>
 </section>
 <section id="best-practices" class="level2">
 <h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="algorithm-selection" class="level3">
-<h3 class="anchored" data-anchor-id="algorithm-selection">1. Algorithm Selection</h3>
+<section id="model-selection" class="level3">
+<h3 class="anchored" data-anchor-id="model-selection">1. Model Selection</h3>
 <ol type="1">
-<li>Problem Structure:
+<li>VAEs for:
 <ul>
-<li>Convexity</li>
-<li>Smoothness</li>
-<li>Constraints</li>
+<li>Structured latent spaces</li>
+<li>Reconstruction tasks</li>
+<li>Interpretable representations</li>
 </ul></li>
-<li>Data Properties:
+<li>GANs for:
 <ul>
-<li>Size</li>
-<li>Dimensionality</li>
-<li>Sparsity</li>
+<li>High-quality generation</li>
+<li>Style transfer</li>
+<li>Domain translation</li>
 </ul></li>
-<li>Computational Resources:
+<li>Diffusion Models for:
 <ul>
-<li>Memory</li>
-<li>Processing power</li>
-<li>Time constraints</li>
+<li>High-fidelity generation</li>
+<li>Controlled generation</li>
+<li>Robust training</li>
 </ul></li>
 </ol>
 </section>
-<section id="implementation" class="level3">
-<h3 class="anchored" data-anchor-id="implementation">2. Implementation</h3>
+<section id="hyperparameter-tuning" class="level3">
+<h3 class="anchored" data-anchor-id="hyperparameter-tuning">2. Hyperparameter Tuning</h3>
 <ol type="1">
-<li>Initialization:
+<li>Learning Rates:
 <ul>
-<li>Parameter scaling</li>
-<li>Random seeding</li>
-<li>Warm start</li>
+<li>Generator: 1e-4 to 1e-3</li>
+<li>Discriminator: 2e-4 to 2e-3</li>
+<li>VAE: 1e-3 to 1e-2</li>
 </ul></li>
-<li>Monitoring:
+<li>Batch Sizes:
 <ul>
-<li>Convergence</li>
-<li>Stability</li>
-<li>Resource usage</li>
+<li>GANs: 32 to 128</li>
+<li>VAEs: 64 to 256</li>
+<li>Diffusion: 32 to 64</li>
 </ul></li>
-<li>Tuning:
+<li>Architecture:
 <ul>
-<li>Learning rates</li>
-<li>Momentum</li>
-<li>Regularization</li>
+<li>Layer depth</li>
+<li>Channel width</li>
+<li>Attention layers</li>
 </ul></li>
 </ol>
 </section>
@@ -690,21 +660,21 @@ x_{t+1} = \arg\min_x \{\eta\sum_{s=1}^t \ell_s(x) + R(x)\}
 <ol type="1">
 <li>Theory:
 <ul>
-<li>“Convex Optimization” by Boyd and Vandenberghe</li>
-<li>“Introductory Lectures on Convex Optimization” by Nesterov</li>
-<li>“Optimization Methods for Large-Scale Machine Learning” by Bottou et al.</li>
+<li>“Auto-Encoding Variational Bayes” by Kingma and Welling</li>
+<li>“Generative Adversarial Networks” by Goodfellow et al.</li>
+<li>“Denoising Diffusion Probabilistic Models” by Ho et al.</li>
 </ul></li>
-<li>Methods:
+<li>Architecture:
 <ul>
-<li>“Numerical Optimization” by Nocedal and Wright</li>
-<li>“First-Order Methods in Optimization” by Beck</li>
-<li>“Proximal Algorithms” by Parikh and Boyd</li>
+<li>“Progressive Growing of GANs” by Karras et al.</li>
+<li>“StyleGAN” by Karras et al.</li>
+<li>“Normalizing Flows” by Rezende and Mohamed</li>
 </ul></li>
-<li>Applications:
+<li>Training:
 <ul>
-<li>“Deep Learning” by Goodfellow et al.</li>
-<li>“Optimization for Machine Learning” by Sra et al.</li>
-<li>“Large Scale Optimization in Machine Learning” by Shalev-Shwartz and Zhang</li>
+<li>“Improved Training of Wasserstein GANs” by Gulrajani et al.</li>
+<li>“Large Scale GAN Training for High Fidelity Natural Image Synthesis” by Brock et al.</li>
+<li>“Improved VQGAN for Image Generation” by Esser et al.</li>
 </ul></li>
 </ol>
 

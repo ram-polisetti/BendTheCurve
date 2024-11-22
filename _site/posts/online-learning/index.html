@@ -8,9 +8,9 @@
 
 <meta name="author" content="Ram Polisetti">
 <meta name="dcterms.date" content="2024-03-19">
-<meta name="description" content="A rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.">
+<meta name="description" content="A rigorous exploration of online learning theory and regret minimization, covering fundamental algorithms, bounds, and applications.">
 
-<title>Optimization Theory in Machine Learning – BendThe-Curve</title>
+<title>Online Learning and Regret Minimization – BendThe-Curve</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -188,7 +188,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Optimization Theory in Machine Learning</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Online Learning and Regret Minimization</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -198,17 +198,17 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Optimization Theory in Machine Learning</h1>
+      <h1 class="title">Online Learning and Regret Minimization</h1>
                   <div>
         <div class="description">
-          A rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.
+          A rigorous exploration of online learning theory and regret minimization, covering fundamental algorithms, bounds, and applications.
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">machine-learning</div>
-                <div class="quarto-category">optimization</div>
-                <div class="quarto-category">mathematics</div>
                 <div class="quarto-category">theory</div>
+                <div class="quarto-category">mathematics</div>
+                <div class="quarto-category">online-learning</div>
               </div>
                   </div>
   </div>
@@ -310,53 +310,58 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#optimization-theory-in-machine-learning" id="toc-optimization-theory-in-machine-learning" class="nav-link active" data-scroll-target="#optimization-theory-in-machine-learning">Optimization Theory in Machine Learning</a>
+  <li><a href="#online-learning-and-regret-minimization" id="toc-online-learning-and-regret-minimization" class="nav-link active" data-scroll-target="#online-learning-and-regret-minimization">Online Learning and Regret Minimization</a>
   <ul class="collapse">
-  <li><a href="#convex-analysis" id="toc-convex-analysis" class="nav-link" data-scroll-target="#convex-analysis">Convex Analysis</a>
+  <li><a href="#fundamental-concepts" id="toc-fundamental-concepts" class="nav-link" data-scroll-target="#fundamental-concepts">Fundamental Concepts</a>
   <ul class="collapse">
-  <li><a href="#convex-sets-and-functions" id="toc-convex-sets-and-functions" class="nav-link" data-scroll-target="#convex-sets-and-functions">1. Convex Sets and Functions</a></li>
-  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties">2. Properties</a></li>
-  <li><a href="#strong-convexity" id="toc-strong-convexity" class="nav-link" data-scroll-target="#strong-convexity">3. Strong Convexity</a></li>
+  <li><a href="#online-learning-protocol" id="toc-online-learning-protocol" class="nav-link" data-scroll-target="#online-learning-protocol">1. Online Learning Protocol</a></li>
+  <li><a href="#types-of-regret" id="toc-types-of-regret" class="nav-link" data-scroll-target="#types-of-regret">2. Types of Regret</a></li>
+  <li><a href="#performance-measures" id="toc-performance-measures" class="nav-link" data-scroll-target="#performance-measures">3. Performance Measures</a></li>
   </ul></li>
-  <li><a href="#optimality-conditions" id="toc-optimality-conditions" class="nav-link" data-scroll-target="#optimality-conditions">Optimality Conditions</a>
+  <li><a href="#online-convex-optimization" id="toc-online-convex-optimization" class="nav-link" data-scroll-target="#online-convex-optimization">Online Convex Optimization</a>
   <ul class="collapse">
-  <li><a href="#first-order-conditions" id="toc-first-order-conditions" class="nav-link" data-scroll-target="#first-order-conditions">1. First-Order Conditions</a></li>
-  <li><a href="#second-order-conditions" id="toc-second-order-conditions" class="nav-link" data-scroll-target="#second-order-conditions">2. Second-Order Conditions</a></li>
-  <li><a href="#saddle-point-conditions" id="toc-saddle-point-conditions" class="nav-link" data-scroll-target="#saddle-point-conditions">3. Saddle Point Conditions</a></li>
+  <li><a href="#online-gradient-descent" id="toc-online-gradient-descent" class="nav-link" data-scroll-target="#online-gradient-descent">1. Online Gradient Descent</a></li>
+  <li><a href="#follow-the-regularized-leader" id="toc-follow-the-regularized-leader" class="nav-link" data-scroll-target="#follow-the-regularized-leader">2. Follow The Regularized Leader</a></li>
+  <li><a href="#mirror-descent" id="toc-mirror-descent" class="nav-link" data-scroll-target="#mirror-descent">3. Mirror Descent</a></li>
   </ul></li>
-  <li><a href="#gradient-methods" id="toc-gradient-methods" class="nav-link" data-scroll-target="#gradient-methods">Gradient Methods</a>
+  <li><a href="#multi-armed-bandits" id="toc-multi-armed-bandits" class="nav-link" data-scroll-target="#multi-armed-bandits">Multi-Armed Bandits</a>
   <ul class="collapse">
-  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent">1. Gradient Descent</a></li>
-  <li><a href="#accelerated-methods" id="toc-accelerated-methods" class="nav-link" data-scroll-target="#accelerated-methods">2. Accelerated Methods</a></li>
-  <li><a href="#stochastic-methods" id="toc-stochastic-methods" class="nav-link" data-scroll-target="#stochastic-methods">3. Stochastic Methods</a></li>
+  <li><a href="#ucb-algorithm" id="toc-ucb-algorithm" class="nav-link" data-scroll-target="#ucb-algorithm">1. UCB Algorithm</a></li>
+  <li><a href="#thompson-sampling" id="toc-thompson-sampling" class="nav-link" data-scroll-target="#thompson-sampling">2. Thompson Sampling</a></li>
+  <li><a href="#exp3-algorithm" id="toc-exp3-algorithm" class="nav-link" data-scroll-target="#exp3-algorithm">3. Exp3 Algorithm</a></li>
   </ul></li>
-  <li><a href="#non-convex-optimization" id="toc-non-convex-optimization" class="nav-link" data-scroll-target="#non-convex-optimization">Non-Convex Optimization</a>
+  <li><a href="#expert-algorithms" id="toc-expert-algorithms" class="nav-link" data-scroll-target="#expert-algorithms">Expert Algorithms</a>
   <ul class="collapse">
-  <li><a href="#local-minima" id="toc-local-minima" class="nav-link" data-scroll-target="#local-minima">1. Local Minima</a></li>
-  <li><a href="#escape-from-saddle-points" id="toc-escape-from-saddle-points" class="nav-link" data-scroll-target="#escape-from-saddle-points">2. Escape from Saddle Points</a></li>
-  <li><a href="#global-optimization" id="toc-global-optimization" class="nav-link" data-scroll-target="#global-optimization">3. Global Optimization</a></li>
-  </ul></li>
-  <li><a href="#modern-optimization-methods" id="toc-modern-optimization-methods" class="nav-link" data-scroll-target="#modern-optimization-methods">Modern Optimization Methods</a>
-  <ul class="collapse">
-  <li><a href="#adaptive-methods" id="toc-adaptive-methods" class="nav-link" data-scroll-target="#adaptive-methods">1. Adaptive Methods</a></li>
-  <li><a href="#natural-gradient" id="toc-natural-gradient" class="nav-link" data-scroll-target="#natural-gradient">2. Natural Gradient</a></li>
-  <li><a href="#second-order-methods" id="toc-second-order-methods" class="nav-link" data-scroll-target="#second-order-methods">3. Second-Order Methods</a></li>
-  </ul></li>
-  <li><a href="#constrained-optimization" id="toc-constrained-optimization" class="nav-link" data-scroll-target="#constrained-optimization">Constrained Optimization</a>
-  <ul class="collapse">
-  <li><a href="#projected-gradient" id="toc-projected-gradient" class="nav-link" data-scroll-target="#projected-gradient">1. Projected Gradient</a></li>
-  <li><a href="#proximal-methods" id="toc-proximal-methods" class="nav-link" data-scroll-target="#proximal-methods">2. Proximal Methods</a></li>
-  <li><a href="#augmented-lagrangian" id="toc-augmented-lagrangian" class="nav-link" data-scroll-target="#augmented-lagrangian">3. Augmented Lagrangian</a></li>
+  <li><a href="#weighted-majority" id="toc-weighted-majority" class="nav-link" data-scroll-target="#weighted-majority">1. Weighted Majority</a></li>
+  <li><a href="#hedge-algorithm" id="toc-hedge-algorithm" class="nav-link" data-scroll-target="#hedge-algorithm">2. Hedge Algorithm</a></li>
+  <li><a href="#adahedge" id="toc-adahedge" class="nav-link" data-scroll-target="#adahedge">3. AdaHedge</a></li>
   </ul></li>
   <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
   <ul class="collapse">
-  <li><a href="#distributed-optimization" id="toc-distributed-optimization" class="nav-link" data-scroll-target="#distributed-optimization">1. Distributed Optimization</a></li>
-  <li><a href="#online-optimization" id="toc-online-optimization" class="nav-link" data-scroll-target="#online-optimization">2. Online Optimization</a></li>
-  <li><a href="#zeroth-order-optimization" id="toc-zeroth-order-optimization" class="nav-link" data-scroll-target="#zeroth-order-optimization">3. Zeroth-Order Optimization</a></li>
+  <li><a href="#adaptive-algorithms" id="toc-adaptive-algorithms" class="nav-link" data-scroll-target="#adaptive-algorithms">1. Adaptive Algorithms</a></li>
+  <li><a href="#second-order-methods" id="toc-second-order-methods" class="nav-link" data-scroll-target="#second-order-methods">2. Second-Order Methods</a></li>
+  <li><a href="#parameter-free-methods" id="toc-parameter-free-methods" class="nav-link" data-scroll-target="#parameter-free-methods">3. Parameter-Free Methods</a></li>
+  </ul></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a>
+  <ul class="collapse">
+  <li><a href="#portfolio-selection" id="toc-portfolio-selection" class="nav-link" data-scroll-target="#portfolio-selection">1. Portfolio Selection</a></li>
+  <li><a href="#online-routing" id="toc-online-routing" class="nav-link" data-scroll-target="#online-routing">2. Online Routing</a></li>
+  <li><a href="#online-classification" id="toc-online-classification" class="nav-link" data-scroll-target="#online-classification">3. Online Classification</a></li>
+  </ul></li>
+  <li><a href="#theoretical-results" id="toc-theoretical-results" class="nav-link" data-scroll-target="#theoretical-results">Theoretical Results</a>
+  <ul class="collapse">
+  <li><a href="#lower-bounds" id="toc-lower-bounds" class="nav-link" data-scroll-target="#lower-bounds">1. Lower Bounds</a></li>
+  <li><a href="#information-theory" id="toc-information-theory" class="nav-link" data-scroll-target="#information-theory">2. Information Theory</a></li>
+  <li><a href="#game-theory" id="toc-game-theory" class="nav-link" data-scroll-target="#game-theory">3. Game Theory</a></li>
+  </ul></li>
+  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-selection" id="toc-algorithm-selection" class="nav-link" data-scroll-target="#algorithm-selection">1. Algorithm Selection</a></li>
+  <li><a href="#parameter-tuning" id="toc-parameter-tuning" class="nav-link" data-scroll-target="#parameter-tuning">2. Parameter Tuning</a></li>
   </ul></li>
   <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
   <ul class="collapse">
-  <li><a href="#algorithm-selection" id="toc-algorithm-selection" class="nav-link" data-scroll-target="#algorithm-selection">1. Algorithm Selection</a></li>
+  <li><a href="#algorithm-design" id="toc-algorithm-design" class="nav-link" data-scroll-target="#algorithm-design">1. Algorithm Design</a></li>
   <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">2. Implementation</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -371,273 +376,243 @@ window.Quarto = {
 
 
 
-<section id="optimization-theory-in-machine-learning" class="level1">
-<h1>Optimization Theory in Machine Learning</h1>
-<section id="convex-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="convex-analysis">Convex Analysis</h2>
-<section id="convex-sets-and-functions" class="level3">
-<h3 class="anchored" data-anchor-id="convex-sets-and-functions">1. Convex Sets and Functions</h3>
-<p>Convex set definition:</p>
+<section id="online-learning-and-regret-minimization" class="level1">
+<h1>Online Learning and Regret Minimization</h1>
+<section id="fundamental-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="fundamental-concepts">Fundamental Concepts</h2>
+<section id="online-learning-protocol" class="level3">
+<h3 class="anchored" data-anchor-id="online-learning-protocol">1. Online Learning Protocol</h3>
+<p>Learning process: 1. Receive instance <span class="math inline">\(x_t\)</span> 2. Predict <span class="math inline">\(\hat{y}_t\)</span> 3. Observe true outcome <span class="math inline">\(y_t\)</span> 4. Suffer loss <span class="math inline">\(\ell({\hat{y}_t, y_t})\)</span> 5. Update model</p>
+<p>Regret definition:</p>
 <p><span class="math display">\[
-\theta x + (1-\theta)y \in C, \forall x,y \in C, \theta \in [0,1]
-\]</span></p>
-<p>Convex function:</p>
-<p><span class="math display">\[
-f(\theta x + (1-\theta)y) \leq \theta f(x) + (1-\theta)f(y)
+R_T = \sum_{t=1}^T \ell(h_t(x_t), y_t) - \min_{h \in \mathcal{H}}\sum_{t=1}^T \ell(h(x_t), y_t)
 \]</span></p>
 </section>
-<section id="properties" class="level3">
-<h3 class="anchored" data-anchor-id="properties">2. Properties</h3>
-<p>First-order characterization:</p>
+<section id="types-of-regret" class="level3">
+<h3 class="anchored" data-anchor-id="types-of-regret">2. Types of Regret</h3>
+<p>External regret:</p>
 <p><span class="math display">\[
-f(y) \geq f(x) + \nabla f(x)^T(y-x)
+R_T^{\text{ext}} = \mathbb{E}\left[\sum_{t=1}^T \ell_t(a_t)\right] - \min_{a \in \mathcal{A}}\mathbb{E}\left[\sum_{t=1}^T \ell_t(a)\right]
 \]</span></p>
-<p>Second-order characterization:</p>
+<p>Internal/swap regret:</p>
 <p><span class="math display">\[
-\nabla^2 f(x) \succeq 0
+R_T^{\text{int}} = \mathbb{E}\left[\sum_{t=1}^T \ell_t(a_t)\right] - \min_{\phi: \mathcal{A} \to \mathcal{A}}\mathbb{E}\left[\sum_{t=1}^T \ell_t(\phi(a_t))\right]
 \]</span></p>
 </section>
-<section id="strong-convexity" class="level3">
-<h3 class="anchored" data-anchor-id="strong-convexity">3. Strong Convexity</h3>
-<p>Definition:</p>
+<section id="performance-measures" class="level3">
+<h3 class="anchored" data-anchor-id="performance-measures">3. Performance Measures</h3>
+<p>Average regret:</p>
 <p><span class="math display">\[
-f(y) \geq f(x) + \nabla f(x)^T(y-x) + \frac{\mu}{2}\|y-x\|^2
+\bar{R}_T = \frac{R_T}{T}
 \]</span></p>
-<p>Quadratic growth:</p>
+<p>Competitive ratio:</p>
 <p><span class="math display">\[
-f(x) - f(x^*) \geq \frac{\mu}{2}\|x-x^*\|^2
+CR_T = \frac{\sum_{t=1}^T \ell_t(a_t)}{\min_{a \in \mathcal{A}}\sum_{t=1}^T \ell_t(a)}
 \]</span></p>
 </section>
 </section>
-<section id="optimality-conditions" class="level2">
-<h2 class="anchored" data-anchor-id="optimality-conditions">Optimality Conditions</h2>
-<section id="first-order-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="first-order-conditions">1. First-Order Conditions</h3>
-<p>Unconstrained:</p>
-<p><span class="math display">\[
-\nabla f(x^*) = 0
-\]</span></p>
-<p>Constrained (KKT):</p>
-<p><span class="math display">\[
-\begin{aligned}
-\nabla_x \mathcal{L}(x^*,\lambda^*) &amp;= 0 \\
-g_i(x^*) &amp;\leq 0 \\
-\lambda_i^* g_i(x^*) &amp;= 0 \\
-\lambda_i^* &amp;\geq 0
-\end{aligned}
-\]</span></p>
-</section>
-<section id="second-order-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-conditions">2. Second-Order Conditions</h3>
-<p>Unconstrained:</p>
-<p><span class="math display">\[
-\nabla^2 f(x^*) \succeq 0
-\]</span></p>
-<p>Constrained:</p>
-<p><span class="math display">\[
-y^T\nabla^2_{xx}\mathcal{L}(x^*,\lambda^*)y \geq 0
-\]</span></p>
-</section>
-<section id="saddle-point-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="saddle-point-conditions">3. Saddle Point Conditions</h3>
-<p>Minimax:</p>
-<p><span class="math display">\[
-\mathcal{L}(x^*,\lambda) \leq \mathcal{L}(x^*,\lambda^*) \leq \mathcal{L}(x,\lambda^*)
-\]</span></p>
-<p>Duality gap:</p>
-<p><span class="math display">\[
-f(x^*) - g(\lambda^*) = 0
-\]</span></p>
-</section>
-</section>
-<section id="gradient-methods" class="level2">
-<h2 class="anchored" data-anchor-id="gradient-methods">Gradient Methods</h2>
-<section id="gradient-descent" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-descent">1. Gradient Descent</h3>
+<section id="online-convex-optimization" class="level2">
+<h2 class="anchored" data-anchor-id="online-convex-optimization">Online Convex Optimization</h2>
+<section id="online-gradient-descent" class="level3">
+<h3 class="anchored" data-anchor-id="online-gradient-descent">1. Online Gradient Descent</h3>
 <p>Update rule:</p>
 <p><span class="math display">\[
-x_{k+1} = x_k - \eta_k\nabla f(x_k)
+w_{t+1} = \Pi_{\mathcal{W}}(w_t - \eta_t \nabla \ell_t(w_t))
 \]</span></p>
-<p>Convergence rate (convex):</p>
+<p>Regret bound:</p>
 <p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{\|x_0-x^*\|^2}{2\eta k}
+R_T \leq \frac{D^2}{2\eta} + \frac{\eta G^2T}{2}
+\]</span></p>
+<p>Where: - <span class="math inline">\(D\)</span> is diameter of feasible set - <span class="math inline">\(G\)</span> is gradient bound - <span class="math inline">\(\eta\)</span> is learning rate</p>
+</section>
+<section id="follow-the-regularized-leader" class="level3">
+<h3 class="anchored" data-anchor-id="follow-the-regularized-leader">2. Follow The Regularized Leader</h3>
+<p>FTRL update:</p>
+<p><span class="math display">\[
+w_{t+1} = \arg\min_{w \in \mathcal{W}}\{\eta\sum_{s=1}^t \ell_s(w) + R(w)\}
+\]</span></p>
+<p>Regret bound:</p>
+<p><span class="math display">\[
+R_T \leq \frac{R(w^*)}{\eta} + \frac{\eta G^2T}{2}
 \]</span></p>
 </section>
-<section id="accelerated-methods" class="level3">
-<h3 class="anchored" data-anchor-id="accelerated-methods">2. Accelerated Methods</h3>
-<p>Nesterov’s acceleration:</p>
-<p><span class="math display">\[
-\begin{aligned}
-y_k &amp;= x_k + \beta_k(x_k - x_{k-1}) \\
-x_{k+1} &amp;= y_k - \eta_k\nabla f(y_k)
-\end{aligned}
-\]</span></p>
-<p>Convergence rate:</p>
-<p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{2L\|x_0-x^*\|^2}{(k+1)^2}
-\]</span></p>
-</section>
-<section id="stochastic-methods" class="level3">
-<h3 class="anchored" data-anchor-id="stochastic-methods">3. Stochastic Methods</h3>
-<p>SGD update:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta_k\nabla f_{i_k}(x_k)
-\]</span></p>
-<p>Convergence rate:</p>
-<p><span class="math display">\[
-\mathbb{E}[f(x_k) - f(x^*)] \leq \frac{L\|x_0-x^*\|^2}{2k} + \frac{L\sigma^2}{2}\sum_{t=1}^k \eta_t^2
-\]</span></p>
-</section>
-</section>
-<section id="non-convex-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="non-convex-optimization">Non-Convex Optimization</h2>
-<section id="local-minima" class="level3">
-<h3 class="anchored" data-anchor-id="local-minima">1. Local Minima</h3>
-<p>First-order condition:</p>
-<p><span class="math display">\[
-\|\nabla f(x^*)\| \leq \epsilon
-\]</span></p>
-<p>Second-order condition:</p>
-<p><span class="math display">\[
-\lambda_{\min}(\nabla^2 f(x^*)) \geq -\sqrt{\epsilon}
-\]</span></p>
-</section>
-<section id="escape-from-saddle-points" class="level3">
-<h3 class="anchored" data-anchor-id="escape-from-saddle-points">2. Escape from Saddle Points</h3>
-<p>Perturbed gradient descent:</p>
-<p><span class="math display">\[
-x_{k+1} = x_k - \eta\nabla f(x_k) + \xi_k
-\]</span></p>
-<p>Where: - <span class="math inline">\(\xi_k \sim \mathcal{N}(0,\sigma^2I)\)</span></p>
-</section>
-<section id="global-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="global-optimization">3. Global Optimization</h3>
-<p>Branch and bound:</p>
-<p><span class="math display">\[
-\text{LB}(R) \leq \min_{x \in R} f(x) \leq \text{UB}(R)
-\]</span></p>
-<p>Simulated annealing:</p>
-<p><span class="math display">\[
-P(\text{accept}) = \exp(-\frac{\Delta E}{T_k})
-\]</span></p>
-</section>
-</section>
-<section id="modern-optimization-methods" class="level2">
-<h2 class="anchored" data-anchor-id="modern-optimization-methods">Modern Optimization Methods</h2>
-<section id="adaptive-methods" class="level3">
-<h3 class="anchored" data-anchor-id="adaptive-methods">1. Adaptive Methods</h3>
-<p>AdaGrad:</p>
-<p><span class="math display">\[
-x_{t+1,i} = x_{t,i} - \frac{\eta}{\sqrt{\sum_{s=1}^t g_{s,i}^2}}g_{t,i}
-\]</span></p>
-<p>Adam:</p>
-<p><span class="math display">\[
-\begin{aligned}
-m_t &amp;= \beta_1 m_{t-1} + (1-\beta_1)g_t \\
-v_t &amp;= \beta_2 v_{t-1} + (1-\beta_2)g_t^2 \\
-\hat{m}_t &amp;= \frac{m_t}{1-\beta_1^t} \\
-\hat{v}_t &amp;= \frac{v_t}{1-\beta_2^t} \\
-x_{t+1} &amp;= x_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon}\hat{m}_t
-\end{aligned}
-\]</span></p>
-</section>
-<section id="natural-gradient" class="level3">
-<h3 class="anchored" data-anchor-id="natural-gradient">2. Natural Gradient</h3>
-<p>Fisher information:</p>
-<p><span class="math display">\[
-F(x) = \mathbb{E}_{p(y|x)}[\nabla \log p(y|x)\nabla \log p(y|x)^T]
-\]</span></p>
+<section id="mirror-descent" class="level3">
+<h3 class="anchored" data-anchor-id="mirror-descent">3. Mirror Descent</h3>
 <p>Update rule:</p>
 <p><span class="math display">\[
-x_{k+1} = x_k - \eta F(x_k)^{-1}\nabla f(x_k)
+\nabla \psi(w_{t+1}) = \nabla \psi(w_t) - \eta_t \nabla \ell_t(w_t)
 \]</span></p>
-</section>
-<section id="second-order-methods" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-methods">3. Second-Order Methods</h3>
-<p>Newton’s method:</p>
+<p>Regret bound:</p>
 <p><span class="math display">\[
-x_{k+1} = x_k - [\nabla^2 f(x_k)]^{-1}\nabla f(x_k)
-\]</span></p>
-<p>BFGS update:</p>
-<p><span class="math display">\[
-B_{k+1} = B_k + \frac{y_ky_k^T}{y_k^Ts_k} - \frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}
+R_T \leq \frac{D_\psi(w^*\|w_1)}{\eta} + \frac{\eta G^2T}{2}
 \]</span></p>
 </section>
 </section>
-<section id="constrained-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="constrained-optimization">Constrained Optimization</h2>
-<section id="projected-gradient" class="level3">
-<h3 class="anchored" data-anchor-id="projected-gradient">1. Projected Gradient</h3>
-<p>Update rule:</p>
+<section id="multi-armed-bandits" class="level2">
+<h2 class="anchored" data-anchor-id="multi-armed-bandits">Multi-Armed Bandits</h2>
+<section id="ucb-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="ucb-algorithm">1. UCB Algorithm</h3>
+<p>UCB index:</p>
 <p><span class="math display">\[
-x_{k+1} = \Pi_C(x_k - \eta_k\nabla f(x_k))
+UCB_i(t) = \hat{\mu}_i(t) + \sqrt{\frac{2\ln t}{N_i(t)}}
 \]</span></p>
-<p>Convergence rate:</p>
+<p>Regret bound:</p>
 <p><span class="math display">\[
-f(x_k) - f(x^*) \leq \frac{\|x_0-x^*\|^2}{2\eta k}
-\]</span></p>
-</section>
-<section id="proximal-methods" class="level3">
-<h3 class="anchored" data-anchor-id="proximal-methods">2. Proximal Methods</h3>
-<p>Proximal operator:</p>
-<p><span class="math display">\[
-\text{prox}_{\eta g}(x) = \arg\min_y \{g(y) + \frac{1}{2\eta}\|y-x\|^2\}
-\]</span></p>
-<p>ISTA update:</p>
-<p><span class="math display">\[
-x_{k+1} = \text{prox}_{\eta g}(x_k - \eta\nabla f(x_k))
+R_T \leq \sum_{i:\Delta_i&gt;0}\left(\frac{8\ln T}{\Delta_i} + (1+\pi^2/3)\Delta_i\right)
 \]</span></p>
 </section>
-<section id="augmented-lagrangian" class="level3">
-<h3 class="anchored" data-anchor-id="augmented-lagrangian">3. Augmented Lagrangian</h3>
-<p>Function:</p>
+<section id="thompson-sampling" class="level3">
+<h3 class="anchored" data-anchor-id="thompson-sampling">2. Thompson Sampling</h3>
+<p>Posterior sampling:</p>
 <p><span class="math display">\[
-\mathcal{L}_\rho(x,\lambda) = f(x) + \lambda^Tg(x) + \frac{\rho}{2}\|g(x)\|^2
+\theta_i(t) \sim Beta(\alpha_i(t), \beta_i(t))
 \]</span></p>
-<p>Update rules:</p>
+<p>Regret bound:</p>
 <p><span class="math display">\[
-\begin{aligned}
-x_{k+1} &amp;= \arg\min_x \mathcal{L}_\rho(x,\lambda_k) \\
-\lambda_{k+1} &amp;= \lambda_k + \rho g(x_{k+1})
-\end{aligned}
+R_T \leq O(\sqrt{KT\ln T})
 \]</span></p>
+</section>
+<section id="exp3-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="exp3-algorithm">3. Exp3 Algorithm</h3>
+<p>Probability update:</p>
+<p><span class="math display">\[
+p_i(t) = \frac{(1-\gamma)\exp(\eta G_i(t))}{\sum_{j=1}^K \exp(\eta G_j(t))} + \frac{\gamma}{K}
+\]</span></p>
+<p>Regret bound:</p>
+<p><span class="math display">\[
+R_T \leq 2\sqrt{KT\ln K}
+\]</span></p>
+</section>
+</section>
+<section id="expert-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="expert-algorithms">Expert Algorithms</h2>
+<section id="weighted-majority" class="level3">
+<h3 class="anchored" data-anchor-id="weighted-majority">1. Weighted Majority</h3>
+<p>Weight update:</p>
+<p><span class="math display">\[
+w_i(t+1) = w_i(t)(1-\eta)^{\ell_i(t)}
+\]</span></p>
+<p>Regret bound:</p>
+<p><span class="math display">\[
+R_T \leq \sqrt{T\ln N}
+\]</span></p>
+</section>
+<section id="hedge-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="hedge-algorithm">2. Hedge Algorithm</h3>
+<p>Probability update:</p>
+<p><span class="math display">\[
+p_i(t+1) = \frac{\exp(-\eta L_i(t))}{\sum_{j=1}^N \exp(-\eta L_j(t))}
+\]</span></p>
+<p>Regret bound:</p>
+<p><span class="math display">\[
+R_T \leq \sqrt{2T\ln N}
+\]</span></p>
+</section>
+<section id="adahedge" class="level3">
+<h3 class="anchored" data-anchor-id="adahedge">3. AdaHedge</h3>
+<p>Adaptive learning rate:</p>
+<p><span class="math display">\[
+\eta_t = \frac{\ln N}{V_t}
+\]</span></p>
+<p>Where: - <span class="math inline">\(V_t\)</span> is cumulative variance - <span class="math inline">\(N\)</span> is number of experts</p>
 </section>
 </section>
 <section id="advanced-topics" class="level2">
 <h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="distributed-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="distributed-optimization">1. Distributed Optimization</h3>
-<p>ADMM algorithm:</p>
+<section id="adaptive-algorithms" class="level3">
+<h3 class="anchored" data-anchor-id="adaptive-algorithms">1. Adaptive Algorithms</h3>
+<p>AdaGrad update:</p>
 <p><span class="math display">\[
-\begin{aligned}
-x_{k+1} &amp;= \arg\min_x \mathcal{L}_\rho(x,z_k,y_k) \\
-z_{k+1} &amp;= \arg\min_z \mathcal{L}_\rho(x_{k+1},z,y_k) \\
-y_{k+1} &amp;= y_k + \rho(Ax_{k+1} + Bz_{k+1} - c)
-\end{aligned}
+w_{t+1,i} = w_{t,i} - \frac{\eta}{\sqrt{\sum_{s=1}^t g_{s,i}^2}}g_{t,i}
 \]</span></p>
-</section>
-<section id="online-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="online-optimization">2. Online Optimization</h3>
 <p>Regret bound:</p>
 <p><span class="math display">\[
-R_T \leq O(\sqrt{T})
+R_T \leq O(\sqrt{T}\|w^*\|_2\sqrt{\sum_{i=1}^d\sum_{t=1}^T g_{t,i}^2})
 \]</span></p>
-<p>Follow-the-regularized-leader:</p>
+</section>
+<section id="second-order-methods" class="level3">
+<h3 class="anchored" data-anchor-id="second-order-methods">2. Second-Order Methods</h3>
+<p>ONS update:</p>
 <p><span class="math display">\[
-x_{t+1} = \arg\min_x \{\eta\sum_{s=1}^t \ell_s(x) + R(x)\}
+w_{t+1} = w_t - \eta A_t^{-1}\nabla \ell_t(w_t)
 \]</span></p>
+<p>Where: - <span class="math inline">\(A_t = \sum_{s=1}^t \nabla \ell_s(w_s)\nabla \ell_s(w_s)^T\)</span></p>
 </section>
-<section id="zeroth-order-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="zeroth-order-optimization">3. Zeroth-Order Optimization</h3>
-<p>Gradient estimation:</p>
+<section id="parameter-free-methods" class="level3">
+<h3 class="anchored" data-anchor-id="parameter-free-methods">3. Parameter-Free Methods</h3>
+<p>MetaGrad update:</p>
 <p><span class="math display">\[
-\hat{\nabla} f(x) = \frac{d}{r}f(x+r\xi)\xi
+w_{t+1} = w_t - \eta_t H_t^{-1/2}\nabla \ell_t(w_t)
 \]</span></p>
-<p>Where: - <span class="math inline">\(\xi \sim \text{Unif}(\mathbb{S}^{d-1})\)</span></p>
+<p>Where: - <span class="math inline">\(H_t\)</span> is preconditioner matrix</p>
 </section>
 </section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<section id="applications" class="level2">
+<h2 class="anchored" data-anchor-id="applications">Applications</h2>
+<section id="portfolio-selection" class="level3">
+<h3 class="anchored" data-anchor-id="portfolio-selection">1. Portfolio Selection</h3>
+<p>Objective:</p>
+<p><span class="math display">\[
+\max_{w \in \Delta_n} \sum_{t=1}^T \log(w^T r_t)
+\]</span></p>
+<p>Universal portfolio:</p>
+<p><span class="math display">\[
+w_{t+1} = \int_{\Delta_n} w P_t(w)dw
+\]</span></p>
+</section>
+<section id="online-routing" class="level3">
+<h3 class="anchored" data-anchor-id="online-routing">2. Online Routing</h3>
+<p>Flow update:</p>
+<p><span class="math display">\[
+f_{t+1}(e) = f_t(e)\exp(-\eta \ell_t(e))
+\]</span></p>
+<p>Path selection:</p>
+<p><span class="math display">\[
+P(p) = \frac{\prod_{e \in p}f_t(e)}{\sum_{p' \in \mathcal{P}}\prod_{e \in p'}f_t(e)}
+\]</span></p>
+</section>
+<section id="online-classification" class="level3">
+<h3 class="anchored" data-anchor-id="online-classification">3. Online Classification</h3>
+<p>Perceptron update:</p>
+<p><span class="math display">\[
+w_{t+1} = w_t + y_tx_t\mathbb{1}[y_tw_t^Tx_t \leq 0]
+\]</span></p>
+<p>Mistake bound:</p>
+<p><span class="math display">\[
+M \leq \left(\frac{R}{\gamma}\right)^2
+\]</span></p>
+</section>
+</section>
+<section id="theoretical-results" class="level2">
+<h2 class="anchored" data-anchor-id="theoretical-results">Theoretical Results</h2>
+<section id="lower-bounds" class="level3">
+<h3 class="anchored" data-anchor-id="lower-bounds">1. Lower Bounds</h3>
+<p>Minimax regret:</p>
+<p><span class="math display">\[
+\min_{\text{ALG}}\max_{\text{ADV}} R_T = \Omega(\sqrt{T})
+\]</span></p>
+<p>Expert setting:</p>
+<p><span class="math display">\[
+R_T = \Omega(\sqrt{T\ln N})
+\]</span></p>
+</section>
+<section id="information-theory" class="level3">
+<h3 class="anchored" data-anchor-id="information-theory">2. Information Theory</h3>
+<p>Redundancy bound:</p>
+<p><span class="math display">\[
+R_T \leq \frac{KL(P\|Q) + \ln(1/\delta)}{\eta} + \frac{\eta T}{8}
+\]</span></p>
+</section>
+<section id="game-theory" class="level3">
+<h3 class="anchored" data-anchor-id="game-theory">3. Game Theory</h3>
+<p>Nash equilibrium:</p>
+<p><span class="math display">\[
+\max_P \min_Q \mathbb{E}_{p \sim P, q \sim Q}[M(p,q)] = \min_Q \max_P \mathbb{E}_{p \sim P, q \sim Q}[M(p,q)]
+\]</span></p>
+</section>
+</section>
+<section id="implementation-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
 <section id="algorithm-selection" class="level3">
 <h3 class="anchored" data-anchor-id="algorithm-selection">1. Algorithm Selection</h3>
 <ol type="1">
@@ -645,42 +620,91 @@ x_{t+1} = \arg\min_x \{\eta\sum_{s=1}^t \ell_s(x) + R(x)\}
 <ul>
 <li>Convexity</li>
 <li>Smoothness</li>
-<li>Constraints</li>
-</ul></li>
-<li>Data Properties:
-<ul>
-<li>Size</li>
-<li>Dimensionality</li>
 <li>Sparsity</li>
 </ul></li>
-<li>Computational Resources:
+<li>Computational Constraints:
 <ul>
-<li>Memory</li>
-<li>Processing power</li>
-<li>Time constraints</li>
+<li>Memory limits</li>
+<li>Update time</li>
+<li>Parallelization</li>
+</ul></li>
+<li>Performance Requirements:
+<ul>
+<li>Regret bounds</li>
+<li>Adaptation speed</li>
+<li>Robustness</li>
+</ul></li>
+</ol>
+</section>
+<section id="parameter-tuning" class="level3">
+<h3 class="anchored" data-anchor-id="parameter-tuning">2. Parameter Tuning</h3>
+<ol type="1">
+<li>Learning Rates:
+<ul>
+<li>Fixed vs adaptive</li>
+<li>Schedule design</li>
+<li>Initialization</li>
+</ul></li>
+<li>Exploration:
+<ul>
+<li>Exploration rate</li>
+<li>Decay schedule</li>
+<li>Adaptive schemes</li>
+</ul></li>
+<li>Regularization:
+<ul>
+<li>Strength</li>
+<li>Type selection</li>
+<li>Adaptation</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<section id="algorithm-design" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-design">1. Algorithm Design</h3>
+<ol type="1">
+<li>Robustness:
+<ul>
+<li>Adversarial scenarios</li>
+<li>Noise handling</li>
+<li>Distribution shifts</li>
+</ul></li>
+<li>Efficiency:
+<ul>
+<li>Memory usage</li>
+<li>Update complexity</li>
+<li>Parallelization</li>
+</ul></li>
+<li>Adaptivity:
+<ul>
+<li>Parameter tuning</li>
+<li>Distribution changes</li>
+<li>Model selection</li>
 </ul></li>
 </ol>
 </section>
 <section id="implementation" class="level3">
 <h3 class="anchored" data-anchor-id="implementation">2. Implementation</h3>
 <ol type="1">
-<li>Initialization:
+<li>Data Handling:
 <ul>
-<li>Parameter scaling</li>
-<li>Random seeding</li>
-<li>Warm start</li>
+<li>Streaming processing</li>
+<li>Feature extraction</li>
+<li>Preprocessing</li>
 </ul></li>
 <li>Monitoring:
 <ul>
-<li>Convergence</li>
-<li>Stability</li>
+<li>Regret tracking</li>
+<li>Performance metrics</li>
 <li>Resource usage</li>
 </ul></li>
-<li>Tuning:
+<li>Deployment:
 <ul>
-<li>Learning rates</li>
-<li>Momentum</li>
-<li>Regularization</li>
+<li>System integration</li>
+<li>Error handling</li>
+<li>Scaling strategy</li>
 </ul></li>
 </ol>
 </section>
@@ -690,21 +714,21 @@ x_{t+1} = \arg\min_x \{\eta\sum_{s=1}^t \ell_s(x) + R(x)\}
 <ol type="1">
 <li>Theory:
 <ul>
-<li>“Convex Optimization” by Boyd and Vandenberghe</li>
-<li>“Introductory Lectures on Convex Optimization” by Nesterov</li>
-<li>“Optimization Methods for Large-Scale Machine Learning” by Bottou et al.</li>
+<li>“Introduction to Online Convex Optimization” by Hazan</li>
+<li>“Bandit Algorithms” by Lattimore and Szepesvári</li>
+<li>“Prediction, Learning, and Games” by Cesa-Bianchi and Lugosi</li>
 </ul></li>
 <li>Methods:
 <ul>
-<li>“Numerical Optimization” by Nocedal and Wright</li>
-<li>“First-Order Methods in Optimization” by Beck</li>
-<li>“Proximal Algorithms” by Parikh and Boyd</li>
+<li>“Online Learning and Online Convex Optimization” by Shalev-Shwartz</li>
+<li>“A Modern Introduction to Online Learning” by Orabona</li>
+<li>“Regret Analysis of Stochastic and Nonstochastic Multi-armed Bandit Problems” by Bubeck and Cesa-Bianchi</li>
 </ul></li>
 <li>Applications:
 <ul>
-<li>“Deep Learning” by Goodfellow et al.</li>
-<li>“Optimization for Machine Learning” by Sra et al.</li>
-<li>“Large Scale Optimization in Machine Learning” by Shalev-Shwartz and Zhang</li>
+<li>“Online Portfolio Selection” by Li and Hoi</li>
+<li>“Online Learning in Routing Games” by Roughgarden</li>
+<li>“Online Methods in Machine Learning” by Bottou</li>
 </ul></li>
 </ol>
 
