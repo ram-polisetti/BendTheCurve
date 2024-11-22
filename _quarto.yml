@@ -73,6 +73,10 @@ format:
     fig-responsive: true
     citations-hover: true
     footnotes-hover: true
+    smooth-scroll: true
+    anchor-sections: true
+    link-external-newwindow: true
+    link-external-filter: '^(?:http:|https:)\/\/ram-polisetti\.github\.io\/BendTheCurve'
 
 execute:
   freeze: auto
