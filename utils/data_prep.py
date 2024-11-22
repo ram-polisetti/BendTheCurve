@@ -1,11 +1,43 @@
 """
 Helper functions for data preparation and analysis in BendTheCurve blog posts.
+
+This module provides a collection of utility functions for common data preprocessing tasks:
+1. Loading and cleaning data from various file formats
+2. Feature engineering and transformation
+3. Scaling and normalization
+4. Categorical encoding
+
+Example usage:
+    ```python
+    # Load and prepare data
+    df = load_and_clean_data(
+        'data.csv',
+        date_columns=['date'],
+        categorical_columns=['category'],
+        numerical_columns=['value']
+    )
+    
+    # Create time-based features
+    df_features = create_features(
+        df,
+        date_column='date',
+        cyclical_features=True,
+        lag_features=[1, 7, 30]
+    )
+    
+    # Scale numerical features
+    df_scaled = scale_features(
+        df_features,
+        columns=['value'],
+        scaler_type='standard'
+    )
+    ```
 """
 
 import pandas as pd
 import numpy as np
 from typing import List, Union, Optional, Dict
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, LabelEncoder
 from sklearn.impute import SimpleImputer
 
 def load_and_clean_data(filepath: str,
@@ -15,6 +47,11 @@ def load_and_clean_data(filepath: str,
     """
     Load and perform basic cleaning on a dataset.
     
+    This function handles:
+    - Loading data from various file formats (csv, excel)
+    - Converting columns to appropriate data types
+    - Basic data type validation
+    
     Args:
         filepath: Path to the data file (csv, excel, etc.)
         date_columns: List of column names to parse as dates
@@ -23,6 +60,14 @@ def load_and_clean_data(filepath: str,
     
     Returns:
         Cleaned pandas DataFrame
+    
+    Example:
+        >>> df = load_and_clean_data(
+        ...     'sales.csv',
+        ...     date_columns=['order_date'],
+        ...     categorical_columns=['product_category'],
+        ...     numerical_columns=['price', 'quantity']
+        ... )
     """
     # Determine file type and read accordingly
     if filepath.endswith('.csv'):
@@ -30,21 +75,27 @@ def load_and_clean_data(filepath: str,
     elif filepath.endswith(('.xls', '.xlsx')):
         df = pd.read_excel(filepath)
     else:
-        raise ValueError("Unsupported file format")
+        raise ValueError(f"Unsupported file format: {filepath.split('.')[-1]}")
     
     # Convert date columns
     if date_columns:
         for col in date_columns:
-            df[col] = pd.to_datetime(df[col])
+            if col not in df.columns:
+                raise ValueError(f"Date column '{col}' not found in data")
+            df[col] = pd.to_datetime(df[col], errors='coerce')
     
     # Convert categorical columns
     if categorical_columns:
         for col in categorical_columns:
+            if col not in df.columns:
+                raise ValueError(f"Categorical column '{col}' not found in data")
             df[col] = df[col].astype('category')
     
     # Convert numerical columns
     if numerical_columns:
         for col in numerical_columns:
+            if col not in df.columns:
+                raise ValueError(f"Numerical column '{col}' not found in data")
             df[col] = pd.to_numeric(df[col], errors='coerce')
     
     return df
@@ -55,6 +106,10 @@ def handle_missing_values(data: pd.DataFrame,
     """
     Handle missing values in a DataFrame.
     
+    This function handles:
+    - Dropping columns with high missing value rates
+    - Imputing missing values using various strategies
+    
     Args:
         data: Input DataFrame
         strategy: Dictionary mapping column names to imputation strategy
@@ -63,6 +118,12 @@ def handle_missing_values(data: pd.DataFrame,
     
     Returns:
         DataFrame with handled missing values
+    
+    Example:
+        >>> df = handle_missing_values(
+        ...     df,
+        ...     strategy={'age': 'mean', 'country': 'most_frequent'}
+        ... )
     """
     df = data.copy()
     
@@ -85,6 +146,11 @@ def create_features(data: pd.DataFrame,
     """
     Create common features from existing data.
     
+    This function handles:
+    - Extracting basic date features (year, month, day, day of week)
+    - Creating cyclical features for dates (month, day of week)
+    - Creating lag features
+    
     Args:
         data: Input DataFrame
         date_column: Name of the date column to extract features from
@@ -93,6 +159,14 @@ def create_features(data: pd.DataFrame,
     
     Returns:
         DataFrame with additional features
+    
+    Example:
+        >>> df_features = create_features(
+        ...     df,
+        ...     date_column='date',
+        ...     cyclical_features=True,
+        ...     lag_features=[1, 7, 30]
+        ... )
     """
     df = data.copy()
     
@@ -124,6 +198,9 @@ def scale_features(data: pd.DataFrame,
     """
     Scale numerical features in the dataset.
     
+    This function handles:
+    - Scaling numerical features using StandardScaler or MinMaxScaler
+    
     Args:
         data: Input DataFrame
         columns: List of columns to scale (if None, scales all numeric columns)
@@ -131,6 +208,13 @@ def scale_features(data: pd.DataFrame,
     
     Returns:
         DataFrame with scaled features
+    
+    Example:
+        >>> df_scaled = scale_features(
+        ...     df,
+        ...     columns=['price', 'quantity'],
+        ...     scaler_type='standard'
+        ... )
     """
     df = data.copy()
     
@@ -154,6 +238,10 @@ def encode_categorical(data: pd.DataFrame,
     """
     Encode categorical variables.
     
+    This function handles:
+    - One-hot encoding
+    - Label encoding
+    
     Args:
         data: Input DataFrame
         columns: List of categorical columns to encode
@@ -161,6 +249,13 @@ def encode_categorical(data: pd.DataFrame,
     
     Returns:
         DataFrame with encoded categorical variables
+    
+    Example:
+        >>> df_encoded = encode_categorical(
+        ...     df,
+        ...     columns=['category'],
+        ...     method='onehot'
+        ... )
     """
     df = data.copy()
     
