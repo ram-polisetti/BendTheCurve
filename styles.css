@@ -1,33 +1,30 @@
 /* css styles */
 
-/* Prevent flash during theme switch and page loads */
-html {
-    visibility: visible;
-    opacity: 1;
+/* Prevent flash during theme switch */
+:root {
+    transition: none !important;
 }
 
-/* Smoother transitions for theme switching */
-body {
-    transition: none;
+:root.light {
+    color-scheme: light !important;
+    background-color: white !important;
+    color: black !important;
 }
 
-/* Only transition specific properties that need animation */
-.navbar,
-.sidebar,
-.content,
-.footer {
-    transition: background-color 0.2s ease;
+:root.dark {
+    color-scheme: dark !important;
+    background-color: #222 !important;
+    color: white !important;
 }
 
-/* Ensure text doesn't flash during transitions */
-p, h1, h2, h3, h4, h5, h6, li, a {
-    transition: color 0.2s ease;
+/* Add smooth transition for theme switching */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Ensure code blocks have proper contrast in both themes */
 pre {
     border-radius: 4px;
-    transition: background-color 0.2s ease;
 }
 
 /* Improve link visibility in both themes */

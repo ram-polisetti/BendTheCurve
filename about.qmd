@@ -13,30 +13,8 @@ about:
     - icon: github
       text: Github
       href: https://github.com/ram-polisetti
-
+listing: false
+page-layout: full
 ---
 
-## About Me
-
 Hi! I'm Ram Polisetti, a passionate learner exploring the world of Machine Learning and Data Science. Through BendThe-Curve, I document my learning journey, share insights, and build a community of fellow ML enthusiasts.
-
-## Why "BendThe-Curve"?
-
-The name "BendThe-Curve" represents the exponential growth in learning and understanding that comes with consistent practice and exploration in the field of Machine Learning. It's about:
-
-- 📈 Accelerating the learning process
-- 🎯 Finding optimal solutions
-- 🔄 Continuous improvement
-- 🌱 Growing together as a community
-
-## Blog Focus
-
-This blog covers:
-
-- Machine Learning Algorithms & Applications
-- Data Analysis & Visualization
-- Python Programming
-- Real-world ML Projects
-- Learning Resources & Tips
-
-Feel free to reach out through any of the social links above. Let's learn and grow together!

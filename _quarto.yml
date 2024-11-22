@@ -73,10 +73,37 @@ format:
     fig-responsive: true
     citations-hover: true
     footnotes-hover: true
-    smooth-scroll: true
-    anchor-sections: true
-    link-external-newwindow: true
-    link-external-filter: '^(?:http:|https:)\/\/ram-polisetti\.github\.io\/BendTheCurve'
+    include-in-header:
+      text: |
+        <script>
+          (function() {
+            // Immediately apply the correct theme
+            const getStoredTheme = () => localStorage.getItem('quarto-color-scheme');
+            const getPreferredTheme = () => {
+              const storedTheme = getStoredTheme();
+              if (storedTheme) {
+                return storedTheme;
+              }
+              return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            };
+            
+            const theme = getPreferredTheme();
+            
+            // Apply theme immediately
+            document.documentElement.classList.add(theme);
+            document.documentElement.setAttribute('data-theme', theme);
+            document.documentElement.style.colorScheme = theme;
+            
+            // Set background color immediately to prevent flash
+            if (theme === 'dark') {
+              document.documentElement.style.backgroundColor = '#222';
+              document.documentElement.style.color = '#fff';
+            } else {
+              document.documentElement.style.backgroundColor = '#fff';
+              document.documentElement.style.color = '#000';
+            }
+          })();
+        </script>
 
 execute:
   freeze: auto

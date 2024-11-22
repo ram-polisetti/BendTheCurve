@@ -71,7 +71,35 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<style>html{ scroll-behavior: smooth; }</style>
+<script>
+  (function() {
+    // Immediately apply the correct theme
+    const getStoredTheme = () => localStorage.getItem('quarto-color-scheme');
+    const getPreferredTheme = () => {
+      const storedTheme = getStoredTheme();
+      if (storedTheme) {
+        return storedTheme;
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    
+    const theme = getPreferredTheme();
+    
+    // Apply theme immediately
+    document.documentElement.classList.add(theme);
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+    
+    // Set background color immediately to prevent flash
+    if (theme === 'dark') {
+      document.documentElement.style.backgroundColor = '#222';
+      document.documentElement.style.color = '#fff';
+    } else {
+      document.documentElement.style.backgroundColor = '#fff';
+      document.documentElement.style.color = '#000';
+    }
+  })();
+</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -801,7 +829,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("^(?:http:|https:)\/\/ram-polisetti\.github\.io\/BendTheCurve");
+      var filterRegex = new RegExp("https:\/\/ram-polisetti\.github\.io\/BendTheCurve\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -815,11 +843,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          if (link.getAttribute("rel") === null) {
-            link.setAttribute("rel", "noopener");
-          }
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -1139,5 +1162,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
