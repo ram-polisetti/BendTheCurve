@@ -1,0 +1,381 @@
+---
+title: "Optimization Theory in Machine Learning"
+author: "Ram Polisetti"
+date: "2024-03-19"
+categories: [machine-learning, optimization, mathematics, theory]
+image: "optimization_theory.jpg"
+description: "A rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms."
+jupyter: python3
+---
+
+# Optimization Theory in Machine Learning
+
+## Convex Analysis
+
+### 1. Convex Sets and Functions
+
+Convex set definition:
+
+$$
+\theta x + (1-\theta)y \in C, \forall x,y \in C, \theta \in [0,1]
+$$
+
+Convex function:
+
+$$
+f(\theta x + (1-\theta)y) \leq \theta f(x) + (1-\theta)f(y)
+$$
+
+### 2. Properties
+
+First-order characterization:
+
+$$
+f(y) \geq f(x) + \nabla f(x)^T(y-x)
+$$
+
+Second-order characterization:
+
+$$
+\nabla^2 f(x) \succeq 0
+$$
+
+### 3. Strong Convexity
+
+Definition:
+
+$$
+f(y) \geq f(x) + \nabla f(x)^T(y-x) + \frac{\mu}{2}\|y-x\|^2
+$$
+
+Quadratic growth:
+
+$$
+f(x) - f(x^*) \geq \frac{\mu}{2}\|x-x^*\|^2
+$$
+
+## Optimality Conditions
+
+### 1. First-Order Conditions
+
+Unconstrained:
+
+$$
+\nabla f(x^*) = 0
+$$
+
+Constrained (KKT):
+
+$$
+\begin{aligned}
+\nabla_x \mathcal{L}(x^*,\lambda^*) &= 0 \\
+g_i(x^*) &\leq 0 \\
+\lambda_i^* g_i(x^*) &= 0 \\
+\lambda_i^* &\geq 0
+\end{aligned}
+$$
+
+### 2. Second-Order Conditions
+
+Unconstrained:
+
+$$
+\nabla^2 f(x^*) \succeq 0
+$$
+
+Constrained:
+
+$$
+y^T\nabla^2_{xx}\mathcal{L}(x^*,\lambda^*)y \geq 0
+$$
+
+### 3. Saddle Point Conditions
+
+Minimax:
+
+$$
+\mathcal{L}(x^*,\lambda) \leq \mathcal{L}(x^*,\lambda^*) \leq \mathcal{L}(x,\lambda^*)
+$$
+
+Duality gap:
+
+$$
+f(x^*) - g(\lambda^*) = 0
+$$
+
+## Gradient Methods
+
+### 1. Gradient Descent
+
+Update rule:
+
+$$
+x_{k+1} = x_k - \eta_k\nabla f(x_k)
+$$
+
+Convergence rate (convex):
+
+$$
+f(x_k) - f(x^*) \leq \frac{\|x_0-x^*\|^2}{2\eta k}
+$$
+
+### 2. Accelerated Methods
+
+Nesterov's acceleration:
+
+$$
+\begin{aligned}
+y_k &= x_k + \beta_k(x_k - x_{k-1}) \\
+x_{k+1} &= y_k - \eta_k\nabla f(y_k)
+\end{aligned}
+$$
+
+Convergence rate:
+
+$$
+f(x_k) - f(x^*) \leq \frac{2L\|x_0-x^*\|^2}{(k+1)^2}
+$$
+
+### 3. Stochastic Methods
+
+SGD update:
+
+$$
+x_{k+1} = x_k - \eta_k\nabla f_{i_k}(x_k)
+$$
+
+Convergence rate:
+
+$$
+\mathbb{E}[f(x_k) - f(x^*)] \leq \frac{L\|x_0-x^*\|^2}{2k} + \frac{L\sigma^2}{2}\sum_{t=1}^k \eta_t^2
+$$
+
+## Non-Convex Optimization
+
+### 1. Local Minima
+
+First-order condition:
+
+$$
+\|\nabla f(x^*)\| \leq \epsilon
+$$
+
+Second-order condition:
+
+$$
+\lambda_{\min}(\nabla^2 f(x^*)) \geq -\sqrt{\epsilon}
+$$
+
+### 2. Escape from Saddle Points
+
+Perturbed gradient descent:
+
+$$
+x_{k+1} = x_k - \eta\nabla f(x_k) + \xi_k
+$$
+
+Where:
+- $\xi_k \sim \mathcal{N}(0,\sigma^2I)$
+
+### 3. Global Optimization
+
+Branch and bound:
+
+$$
+\text{LB}(R) \leq \min_{x \in R} f(x) \leq \text{UB}(R)
+$$
+
+Simulated annealing:
+
+$$
+P(\text{accept}) = \exp(-\frac{\Delta E}{T_k})
+$$
+
+## Modern Optimization Methods
+
+### 1. Adaptive Methods
+
+AdaGrad:
+
+$$
+x_{t+1,i} = x_{t,i} - \frac{\eta}{\sqrt{\sum_{s=1}^t g_{s,i}^2}}g_{t,i}
+$$
+
+Adam:
+
+$$
+\begin{aligned}
+m_t &= \beta_1 m_{t-1} + (1-\beta_1)g_t \\
+v_t &= \beta_2 v_{t-1} + (1-\beta_2)g_t^2 \\
+\hat{m}_t &= \frac{m_t}{1-\beta_1^t} \\
+\hat{v}_t &= \frac{v_t}{1-\beta_2^t} \\
+x_{t+1} &= x_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon}\hat{m}_t
+\end{aligned}
+$$
+
+### 2. Natural Gradient
+
+Fisher information:
+
+$$
+F(x) = \mathbb{E}_{p(y|x)}[\nabla \log p(y|x)\nabla \log p(y|x)^T]
+$$
+
+Update rule:
+
+$$
+x_{k+1} = x_k - \eta F(x_k)^{-1}\nabla f(x_k)
+$$
+
+### 3. Second-Order Methods
+
+Newton's method:
+
+$$
+x_{k+1} = x_k - [\nabla^2 f(x_k)]^{-1}\nabla f(x_k)
+$$
+
+BFGS update:
+
+$$
+B_{k+1} = B_k + \frac{y_ky_k^T}{y_k^Ts_k} - \frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}
+$$
+
+## Constrained Optimization
+
+### 1. Projected Gradient
+
+Update rule:
+
+$$
+x_{k+1} = \Pi_C(x_k - \eta_k\nabla f(x_k))
+$$
+
+Convergence rate:
+
+$$
+f(x_k) - f(x^*) \leq \frac{\|x_0-x^*\|^2}{2\eta k}
+$$
+
+### 2. Proximal Methods
+
+Proximal operator:
+
+$$
+\text{prox}_{\eta g}(x) = \arg\min_y \{g(y) + \frac{1}{2\eta}\|y-x\|^2\}
+$$
+
+ISTA update:
+
+$$
+x_{k+1} = \text{prox}_{\eta g}(x_k - \eta\nabla f(x_k))
+$$
+
+### 3. Augmented Lagrangian
+
+Function:
+
+$$
+\mathcal{L}_\rho(x,\lambda) = f(x) + \lambda^Tg(x) + \frac{\rho}{2}\|g(x)\|^2
+$$
+
+Update rules:
+
+$$
+\begin{aligned}
+x_{k+1} &= \arg\min_x \mathcal{L}_\rho(x,\lambda_k) \\
+\lambda_{k+1} &= \lambda_k + \rho g(x_{k+1})
+\end{aligned}
+$$
+
+## Advanced Topics
+
+### 1. Distributed Optimization
+
+ADMM algorithm:
+
+$$
+\begin{aligned}
+x_{k+1} &= \arg\min_x \mathcal{L}_\rho(x,z_k,y_k) \\
+z_{k+1} &= \arg\min_z \mathcal{L}_\rho(x_{k+1},z,y_k) \\
+y_{k+1} &= y_k + \rho(Ax_{k+1} + Bz_{k+1} - c)
+\end{aligned}
+$$
+
+### 2. Online Optimization
+
+Regret bound:
+
+$$
+R_T \leq O(\sqrt{T})
+$$
+
+Follow-the-regularized-leader:
+
+$$
+x_{t+1} = \arg\min_x \{\eta\sum_{s=1}^t \ell_s(x) + R(x)\}
+$$
+
+### 3. Zeroth-Order Optimization
+
+Gradient estimation:
+
+$$
+\hat{\nabla} f(x) = \frac{d}{r}f(x+r\xi)\xi
+$$
+
+Where:
+- $\xi \sim \text{Unif}(\mathbb{S}^{d-1})$
+
+## Best Practices
+
+### 1. Algorithm Selection
+
+1. Problem Structure:
+   - Convexity
+   - Smoothness
+   - Constraints
+
+2. Data Properties:
+   - Size
+   - Dimensionality
+   - Sparsity
+
+3. Computational Resources:
+   - Memory
+   - Processing power
+   - Time constraints
+
+### 2. Implementation
+
+1. Initialization:
+   - Parameter scaling
+   - Random seeding
+   - Warm start
+
+2. Monitoring:
+   - Convergence
+   - Stability
+   - Resource usage
+
+3. Tuning:
+   - Learning rates
+   - Momentum
+   - Regularization
+
+## References
+
+1. Theory:
+   - "Convex Optimization" by Boyd and Vandenberghe
+   - "Introductory Lectures on Convex Optimization" by Nesterov
+   - "Optimization Methods for Large-Scale Machine Learning" by Bottou et al.
+
+2. Methods:
+   - "Numerical Optimization" by Nocedal and Wright
+   - "First-Order Methods in Optimization" by Beck
+   - "Proximal Algorithms" by Parikh and Boyd
+
+3. Applications:
+   - "Deep Learning" by Goodfellow et al.
+   - "Optimization for Machine Learning" by Sra et al.
+   - "Large Scale Optimization in Machine Learning" by Shalev-Shwartz and Zhang

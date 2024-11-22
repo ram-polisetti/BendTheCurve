@@ -1,0 +1,544 @@
+---
+title: "Natural Language Processing with Machine Learning"
+author: "Ram Polisetti"
+date: "2024-03-19"
+categories: [machine-learning, nlp, deep-learning, transformers]
+image: "nlp_ml.jpg"
+description: "A comprehensive guide to Natural Language Processing with machine learning, covering fundamental concepts, modern architectures, and practical implementations."
+jupyter: python3
+---
+
+# Natural Language Processing with Machine Learning
+
+Natural Language Processing (NLP) has seen remarkable advances through machine learning, particularly with the advent of transformer models. This post explores key concepts and implementations in NLP.
+
+## Setup and Prerequisites
+
+```{python}
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.utils.data import Dataset, DataLoader
+import matplotlib.pyplot as plt
+import seaborn as sns
+from collections import Counter
+import re
+from typing import List, Dict, Tuple
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+nltk.download('punkt')
+nltk.download('stopwords')
+
+# Set random seeds for reproducibility
+np.random.seed(42)
+torch.manual_seed(42)
+
+# Set device
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f"Using device: {device}")
+
+# Plotting settings
+plt.style.use('seaborn')
+sns.set_theme(style="whitegrid")
+```
+
+## 1. Text Processing Fundamentals
+
+### Text Preprocessing Pipeline
+
+```{python}
+class TextPreprocessor:
+    def __init__(self, min_freq: int = 2, max_vocab_size: int = 10000):
+        self.min_freq = min_freq
+        self.max_vocab_size = max_vocab_size
+        self.vocab = None
+        self.word2idx = None
+        self.idx2word = None
+        self.stop_words = set(stopwords.words('english'))
+    
+    def clean_text(self, text: str) -> str:
+        """Clean and normalize text."""
+        # Convert to lowercase
+        text = text.lower()
+        
+        # Remove special characters and digits
+        text = re.sub(r'[^a-zA-Z\s]', '', text)
+        
+        # Remove extra whitespace
+        text = ' '.join(text.split())
+        
+        return text
+    
+    def tokenize(self, text: str) -> List[str]:
+        """Tokenize text into words."""
+        return word_tokenize(text)
+    
+    def remove_stopwords(self, tokens: List[str]) -> List[str]:
+        """Remove stop words from tokens."""
+        return [token for token in tokens if token not in self.stop_words]
+    
+    def build_vocab(self, texts: List[str]) -> None:
+        """Build vocabulary from texts."""
+        # Count word frequencies
+        word_freq = Counter()
+        for text in texts:
+            text = self.clean_text(text)
+            tokens = self.tokenize(text)
+            tokens = self.remove_stopwords(tokens)
+            word_freq.update(tokens)
+        
+        # Filter by frequency and vocab size
+        vocab = [word for word, freq in word_freq.most_common()
+                if freq >= self.min_freq]
+        vocab = vocab[:self.max_vocab_size-2]  # Leave room for <PAD> and <UNK>
+        
+        # Create vocabulary mappings
+        self.vocab = ['<PAD>', '<UNK>'] + vocab
+        self.word2idx = {word: idx for idx, word in enumerate(self.vocab)}
+        self.idx2word = {idx: word for word, idx in self.word2idx.items()}
+    
+    def encode(self, text: str) -> List[int]:
+        """Convert text to sequence of indices."""
+        text = self.clean_text(text)
+        tokens = self.tokenize(text)
+        tokens = self.remove_stopwords(tokens)
+        return [self.word2idx.get(token, self.word2idx['<UNK>'])
+                for token in tokens]
+    
+    def decode(self, indices: List[int]) -> str:
+        """Convert sequence of indices back to text."""
+        return ' '.join([self.idx2word[idx] for idx in indices
+                        if idx != self.word2idx['<PAD>']])
+
+# Example usage
+sample_texts = [
+    "Natural language processing is fascinating!",
+    "Machine learning transforms text understanding.",
+    "Deep neural networks process language effectively."
+]
+
+preprocessor = TextPreprocessor()
+preprocessor.build_vocab(sample_texts)
+
+# Demonstrate preprocessing
+print("Vocabulary size:", len(preprocessor.vocab))
+print("\nSample encoding:")
+for text in sample_texts:
+    encoded = preprocessor.encode(text)
+    decoded = preprocessor.decode(encoded)
+    print(f"\nOriginal: {text}")
+    print(f"Encoded: {encoded}")
+    print(f"Decoded: {decoded}")
+```
+
+## 2. Word Embeddings
+
+### Word2Vec Implementation
+
+```{python}
+class SkipGramModel(nn.Module):
+    def __init__(self, vocab_size: int, embedding_dim: int):
+        super(SkipGramModel, self).__init__()
+        self.embeddings = nn.Embedding(vocab_size, embedding_dim)
+        self.output = nn.Linear(embedding_dim, vocab_size)
+    
+    def forward(self, x):
+        embeds = self.embeddings(x)
+        return self.output(embeds)
+
+class Word2VecDataset(Dataset):
+    def __init__(self, texts: List[str], preprocessor: TextPreprocessor,
+                 window_size: int = 2):
+        self.preprocessor = preprocessor
+        self.window_size = window_size
+        self.data = self._prepare_data(texts)
+    
+    def _prepare_data(self, texts: List[str]) -> List[Tuple[int, int]]:
+        pairs = []
+        for text in texts:
+            indices = self.preprocessor.encode(text)
+            
+            # Generate context pairs
+            for i in range(len(indices)):
+                for j in range(max(0, i - self.window_size),
+                             min(len(indices), i + self.window_size + 1)):
+                    if i != j:
+                        pairs.append((indices[i], indices[j]))
+        
+        return pairs
+    
+    def __len__(self):
+        return len(self.data)
+    
+    def __getitem__(self, idx):
+        return torch.tensor(self.data[idx][0]), torch.tensor(self.data[idx][1])
+
+# Train Word2Vec model
+def train_word2vec(texts: List[str], preprocessor: TextPreprocessor,
+                   embedding_dim: int = 50, epochs: int = 5):
+    # Create dataset and dataloader
+    dataset = Word2VecDataset(texts, preprocessor)
+    dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+    
+    # Initialize model
+    model = SkipGramModel(len(preprocessor.vocab), embedding_dim).to(device)
+    optimizer = torch.optim.Adam(model.parameters())
+    criterion = nn.CrossEntropyLoss()
+    
+    # Training loop
+    losses = []
+    for epoch in range(epochs):
+        epoch_loss = 0
+        for target, context in dataloader:
+            target = target.to(device)
+            context = context.to(device)
+            
+            # Forward pass
+            output = model(target)
+            loss = criterion(output, context)
+            
+            # Backward pass
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            
+            epoch_loss += loss.item()
+        
+        avg_loss = epoch_loss / len(dataloader)
+        losses.append(avg_loss)
+        print(f"Epoch {epoch+1}, Loss: {avg_loss:.4f}")
+    
+    return model, losses
+
+# Train model
+model, losses = train_word2vec(sample_texts, preprocessor)
+
+# Plot training loss
+plt.figure(figsize=(10, 4))
+plt.plot(losses)
+plt.title('Word2Vec Training Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.show()
+
+# Visualize embeddings
+def plot_embeddings(model: SkipGramModel, preprocessor: TextPreprocessor,
+                   num_words: int = 20):
+    """Plot word embeddings using PCA."""
+    from sklearn.decomposition import PCA
+    
+    # Get embeddings
+    embeddings = model.embeddings.weight.detach().cpu().numpy()
+    words = list(preprocessor.word2idx.keys())[:num_words]
+    
+    # Reduce dimensionality
+    pca = PCA(n_components=2)
+    embeddings_2d = pca.fit_transform(embeddings[:num_words])
+    
+    # Plot
+    plt.figure(figsize=(12, 8))
+    plt.scatter(embeddings_2d[:, 0], embeddings_2d[:, 1])
+    
+    for i, word in enumerate(words):
+        plt.annotate(word, (embeddings_2d[i, 0], embeddings_2d[i, 1]))
+    
+    plt.title('Word Embeddings Visualization (PCA)')
+    plt.show()
+
+plot_embeddings(model, preprocessor)
+```
+
+## 3. Sequence Models
+
+### LSTM for Text Classification
+
+```{python}
+class TextLSTM(nn.Module):
+    def __init__(self, vocab_size: int, embedding_dim: int, hidden_dim: int,
+                 num_layers: int, num_classes: int, dropout: float = 0.5):
+        super(TextLSTM, self).__init__()
+        self.embedding = nn.Embedding(vocab_size, embedding_dim)
+        self.lstm = nn.LSTM(embedding_dim, hidden_dim, num_layers,
+                           batch_first=True, dropout=dropout if num_layers > 1 else 0)
+        self.dropout = nn.Dropout(dropout)
+        self.fc = nn.Linear(hidden_dim, num_classes)
+    
+    def forward(self, x, lengths):
+        # Embed the input
+        embedded = self.embedding(x)
+        
+        # Pack padded sequence
+        packed = nn.utils.rnn.pack_padded_sequence(
+            embedded, lengths.cpu(), batch_first=True, enforce_sorted=False
+        )
+        
+        # LSTM forward pass
+        output, (hidden, cell) = self.lstm(packed)
+        
+        # Use last hidden state
+        out = self.dropout(hidden[-1])
+        return self.fc(out)
+
+class TextClassificationDataset(Dataset):
+    def __init__(self, texts: List[str], labels: List[int],
+                 preprocessor: TextPreprocessor):
+        self.preprocessor = preprocessor
+        self.texts = texts
+        self.labels = labels
+        self.encoded_texts = [preprocessor.encode(text) for text in texts]
+    
+    def __len__(self):
+        return len(self.texts)
+    
+    def __getitem__(self, idx):
+        return (torch.tensor(self.encoded_texts[idx]),
+                torch.tensor(self.labels[idx]))
+
+def collate_fn(batch):
+    """Custom collate function for padding sequences."""
+    texts, labels = zip(*batch)
+    lengths = torch.tensor([len(text) for text in texts])
+    
+    # Pad sequences
+    padded_texts = nn.utils.rnn.pad_sequence(
+        texts, batch_first=True, padding_value=0
+    )
+    
+    return padded_texts, torch.tensor(labels), lengths
+
+# Example usage
+# Create synthetic dataset
+texts = [
+    "This movie is great!",
+    "Terrible waste of time.",
+    "I loved this film.",
+    "Do not recommend.",
+    "Amazing performance!"
+]
+labels = [1, 0, 1, 0, 1]  # 1 for positive, 0 for negative
+
+# Prepare data
+preprocessor.build_vocab(texts)
+dataset = TextClassificationDataset(texts, labels, preprocessor)
+dataloader = DataLoader(dataset, batch_size=2, shuffle=True,
+                       collate_fn=collate_fn)
+
+# Initialize model
+model = TextLSTM(
+    vocab_size=len(preprocessor.vocab),
+    embedding_dim=50,
+    hidden_dim=64,
+    num_layers=2,
+    num_classes=2
+).to(device)
+
+# Training loop
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters())
+
+num_epochs = 10
+for epoch in range(num_epochs):
+    model.train()
+    total_loss = 0
+    
+    for texts, labels, lengths in dataloader:
+        texts = texts.to(device)
+        labels = labels.to(device)
+        
+        # Forward pass
+        outputs = model(texts, lengths)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+        
+        total_loss += loss.item()
+    
+    print(f"Epoch {epoch+1}, Loss: {total_loss/len(dataloader):.4f}")
+```
+
+## 4. Transformer Architecture
+
+### Simple Transformer Implementation
+
+```{python}
+class MultiHeadAttention(nn.Module):
+    def __init__(self, d_model: int, num_heads: int):
+        super(MultiHeadAttention, self).__init__()
+        assert d_model % num_heads == 0
+        
+        self.d_model = d_model
+        self.num_heads = num_heads
+        self.d_k = d_model // num_heads
+        
+        self.W_q = nn.Linear(d_model, d_model)
+        self.W_k = nn.Linear(d_model, d_model)
+        self.W_v = nn.Linear(d_model, d_model)
+        self.W_o = nn.Linear(d_model, d_model)
+    
+    def scaled_dot_product_attention(self, Q, K, V, mask=None):
+        scores = torch.matmul(Q, K.transpose(-2, -1)) / np.sqrt(self.d_k)
+        
+        if mask is not None:
+            scores = scores.masked_fill(mask == 0, -1e9)
+        
+        attention = F.softmax(scores, dim=-1)
+        return torch.matmul(attention, V)
+    
+    def forward(self, Q, K, V, mask=None):
+        batch_size = Q.size(0)
+        
+        # Linear projections and split into heads
+        Q = self.W_q(Q).view(batch_size, -1, self.num_heads, self.d_k)
+        K = self.W_k(K).view(batch_size, -1, self.num_heads, self.d_k)
+        V = self.W_v(V).view(batch_size, -1, self.num_heads, self.d_k)
+        
+        # Transpose for attention computation
+        Q = Q.transpose(1, 2)
+        K = K.transpose(1, 2)
+        V = V.transpose(1, 2)
+        
+        # Apply attention
+        scores = self.scaled_dot_product_attention(Q, K, V, mask)
+        
+        # Concatenate heads and apply final linear layer
+        scores = scores.transpose(1, 2).contiguous().view(batch_size, -1, self.d_model)
+        return self.W_o(scores)
+
+class TransformerBlock(nn.Module):
+    def __init__(self, d_model: int, num_heads: int, d_ff: int, dropout: float = 0.1):
+        super(TransformerBlock, self).__init__()
+        self.attention = MultiHeadAttention(d_model, num_heads)
+        self.norm1 = nn.LayerNorm(d_model)
+        self.norm2 = nn.LayerNorm(d_model)
+        
+        self.feed_forward = nn.Sequential(
+            nn.Linear(d_model, d_ff),
+            nn.ReLU(),
+            nn.Linear(d_ff, d_model)
+        )
+        
+        self.dropout = nn.Dropout(dropout)
+    
+    def forward(self, x, mask=None):
+        # Self-attention
+        attention = self.attention(x, x, x, mask)
+        x = self.norm1(x + self.dropout(attention))
+        
+        # Feed forward
+        ff = self.feed_forward(x)
+        return self.norm2(x + self.dropout(ff))
+
+# Example usage
+seq_length = 10
+batch_size = 4
+d_model = 64
+num_heads = 8
+d_ff = 256
+
+# Create random input
+x = torch.randn(batch_size, seq_length, d_model).to(device)
+
+# Initialize transformer block
+transformer = TransformerBlock(d_model, num_heads, d_ff).to(device)
+
+# Forward pass
+output = transformer(x)
+print("Transformer output shape:", output.shape)
+
+# Visualize attention patterns
+def visualize_attention(model, input_seq):
+    """Visualize attention patterns in the transformer."""
+    with torch.no_grad():
+        # Get attention scores
+        Q = model.attention.W_q(input_seq)
+        K = model.attention.W_k(input_seq)
+        
+        scores = torch.matmul(Q, K.transpose(-2, -1)) / np.sqrt(model.attention.d_k)
+        attention = F.softmax(scores, dim=-1)
+        
+        # Plot attention matrix
+        plt.figure(figsize=(10, 8))
+        sns.heatmap(attention[0].cpu().numpy(), cmap='viridis')
+        plt.title('Attention Pattern')
+        plt.xlabel('Key Position')
+        plt.ylabel('Query Position')
+        plt.show()
+
+visualize_attention(transformer, x)
+```
+
+## Best Practices in NLP
+
+1. **Text Preprocessing**
+   - Proper tokenization
+   - Handle special characters
+   - Consider domain-specific preprocessing
+   - Implement proper cleaning
+
+2. **Model Architecture**
+   - Choose appropriate embeddings
+   - Consider sequence length
+   - Handle out-of-vocabulary words
+   - Implement proper regularization
+
+3. **Training Strategy**
+   - Proper batch size selection
+   - Learning rate scheduling
+   - Handle class imbalance
+   - Implement early stopping
+
+4. **Deployment Considerations**
+   - Model optimization
+   - Inference speed
+   - Memory constraints
+   - Batch processing
+
+## Common Challenges and Solutions
+
+1. **Data Quality**
+   - Noisy text
+   - Multiple languages
+   - Domain-specific terms
+   - Informal language
+
+2. **Model Performance**
+   - Long sequences
+   - Memory constraints
+   - Training time
+   - Model complexity
+
+3. **Deployment Issues**
+   - Model size
+   - Inference latency
+   - Scalability
+   - Resource constraints
+
+## Conclusion
+
+NLP with ML requires:
+
+1. Strong preprocessing pipeline
+2. Appropriate model selection
+3. Effective training strategies
+4. Consideration of deployment constraints
+
+In the next post, we'll explore reinforcement learning concepts and applications.
+
+## Additional Resources
+
+1. Books:
+   - "Natural Language Processing with Transformers" by Lewis Tunstall et al.
+   - "Speech and Language Processing" by Jurafsky and Martin
+   - "Natural Language Processing with PyTorch" by Rao and McMahan
+
+2. Online Resources:
+   - Hugging Face Documentation
+   - Stanford CS224N Course
+   - Fast.ai NLP Course
+
+Remember: NLP is a rapidly evolving field with new architectures and techniques emerging regularly. Stay updated with the latest research while maintaining a strong understanding of the fundamentals.

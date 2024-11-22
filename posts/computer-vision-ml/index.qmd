@@ -1,0 +1,460 @@
+---
+title: "Machine Learning in Computer Vision: From Pixels to Understanding"
+author: "Ram Polisetti"
+date: "2024-03-19"
+categories: [machine-learning, computer-vision, deep-learning, pytorch]
+image: "computer_vision.jpg"
+description: "A comprehensive guide to computer vision with machine learning, covering fundamental concepts, modern architectures, and practical implementations."
+jupyter: python3
+---
+
+# Machine Learning in Computer Vision
+
+Computer vision is one of the most successful applications of machine learning, enabling computers to understand and process visual information. This post explores key concepts and implementations in computer vision.
+
+## Setup and Prerequisites
+
+```{python}
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torchvision
+import torchvision.transforms as transforms
+from torch.utils.data import DataLoader
+import matplotlib.pyplot as plt
+import seaborn as sns
+from PIL import Image
+from torchvision.models import resnet18, ResNet18_Weights
+
+# Set random seeds for reproducibility
+np.random.seed(42)
+torch.manual_seed(42)
+
+# Set device
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f"Using device: {device}")
+
+# Plotting settings
+plt.style.use('seaborn')
+sns.set_theme(style="whitegrid")
+```
+
+## 1. Image Processing Fundamentals
+
+### Basic Image Operations
+
+```{python}
+def load_and_process_image(image_path):
+    """Load and process an image for visualization."""
+    # Load image
+    transform = transforms.Compose([
+        transforms.Resize((224, 224)),
+        transforms.ToTensor()
+    ])
+    
+    image = Image.open(image_path)
+    tensor = transform(image)
+    return tensor
+
+def show_image_transformations(tensor):
+    """Display various image transformations."""
+    plt.figure(figsize=(15, 5))
+    
+    # Original
+    plt.subplot(131)
+    plt.imshow(tensor.permute(1, 2, 0))
+    plt.title('Original')
+    plt.axis('off')
+    
+    # Grayscale
+    plt.subplot(132)
+    gray = tensor.mean(dim=0)
+    plt.imshow(gray, cmap='gray')
+    plt.title('Grayscale')
+    plt.axis('off')
+    
+    # Edge Detection (Sobel)
+    plt.subplot(133)
+    sobel_x = torch.tensor([[-1, 0, 1],
+                           [-2, 0, 2],
+                           [-1, 0, 1]]).float()
+    sobel_y = sobel_x.t()
+    
+    gray_expanded = gray.unsqueeze(0).unsqueeze(0)
+    edges_x = F.conv2d(gray_expanded, sobel_x.view(1, 1, 3, 3), padding=1)
+    edges_y = F.conv2d(gray_expanded, sobel_y.view(1, 1, 3, 3), padding=1)
+    edges = torch.sqrt(edges_x.pow(2) + edges_y.pow(2))[0, 0]
+    
+    plt.imshow(edges, cmap='gray')
+    plt.title('Edge Detection')
+    plt.axis('off')
+    
+    plt.tight_layout()
+    plt.show()
+
+# Example usage with CIFAR-10
+trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
+                                      download=True, transform=transforms.ToTensor())
+sample_image = trainset[0][0]
+show_image_transformations(sample_image)
+```
+
+## 2. Convolutional Neural Networks
+
+### Basic CNN Architecture
+
+```{python}
+class SimpleCNN(nn.Module):
+    def __init__(self, num_classes=10):
+        super(SimpleCNN, self).__init__()
+        self.conv1 = nn.Conv2d(3, 32, kernel_size=3, padding=1)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
+        self.conv3 = nn.Conv2d(64, 128, kernel_size=3, padding=1)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.fc1 = nn.Linear(128 * 4 * 4, 512)
+        self.fc2 = nn.Linear(512, num_classes)
+        self.dropout = nn.Dropout(0.5)
+    
+    def forward(self, x):
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = self.pool(F.relu(self.conv3(x)))
+        x = x.view(-1, 128 * 4 * 4)
+        x = self.dropout(F.relu(self.fc1(x)))
+        x = self.fc2(x)
+        return x
+
+# Visualize feature maps
+def visualize_feature_maps(model, image):
+    """Visualize feature maps from different layers."""
+    model.eval()
+    with torch.no_grad():
+        # Get feature maps from first conv layer
+        conv1_output = F.relu(model.conv1(image.unsqueeze(0)))
+        
+        # Plot first 16 feature maps
+        plt.figure(figsize=(15, 8))
+        for i in range(min(16, conv1_output.shape[1])):
+            plt.subplot(4, 4, i+1)
+            plt.imshow(conv1_output[0, i].cpu(), cmap='viridis')
+            plt.axis('off')
+        plt.suptitle('First Conv Layer Feature Maps')
+        plt.tight_layout()
+        plt.show()
+
+# Create model and visualize
+model = SimpleCNN().to(device)
+sample_image = sample_image.to(device)
+visualize_feature_maps(model, sample_image)
+```
+
+### Transfer Learning with ResNet
+
+```{python}
+def create_transfer_learning_model(num_classes=10):
+    """Create a transfer learning model using ResNet-18."""
+    # Load pre-trained ResNet
+    model = resnet18(weights=ResNet18_Weights.DEFAULT)
+    
+    # Freeze all layers
+    for param in model.parameters():
+        param.requires_grad = False
+    
+    # Replace final layer
+    num_features = model.fc.in_features
+    model.fc = nn.Linear(num_features, num_classes)
+    
+    return model
+
+# Create transfer learning model
+transfer_model = create_transfer_learning_model().to(device)
+
+# Visualize model architecture
+def print_model_structure(model):
+    """Print model structure with parameter counts."""
+    total_params = 0
+    trainable_params = 0
+    
+    for name, param in model.named_parameters():
+        param_count = param.numel()
+        total_params += param_count
+        if param.requires_grad:
+            trainable_params += param_count
+        print(f"{name}: {param.shape}, Parameters: {param_count:,}")
+    
+    print(f"\nTotal Parameters: {total_params:,}")
+    print(f"Trainable Parameters: {trainable_params:,}")
+
+print_model_structure(transfer_model)
+```
+
+## 3. Object Detection
+
+### Simple Object Detection Pipeline
+
+```{python}
+class ObjectDetector:
+    def __init__(self):
+        self.model = torchvision.models.detection.fasterrcnn_resnet50_fpn(
+            weights=torchvision.models.detection.FasterRCNN_ResNet50_FPN_Weights.DEFAULT
+        )
+        self.model.eval()
+        
+        # COCO class labels
+        self.COCO_CLASSES = [
+            'background', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
+            'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant',
+            'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse',
+            'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack',
+            'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis',
+            'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove',
+            'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass',
+            'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich',
+            'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake',
+            'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet',
+            'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone',
+            'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book',
+            'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush'
+        ]
+    
+    def detect(self, image, confidence_threshold=0.5):
+        """Detect objects in an image."""
+        self.model.eval()
+        with torch.no_grad():
+            predictions = self.model([image.to(device)])
+        
+        # Get predictions above threshold
+        boxes = predictions[0]['boxes']
+        scores = predictions[0]['scores']
+        labels = predictions[0]['labels']
+        
+        mask = scores > confidence_threshold
+        boxes = boxes[mask]
+        scores = scores[mask]
+        labels = labels[mask]
+        
+        return boxes, scores, labels
+    
+    def draw_detections(self, image, boxes, scores, labels):
+        """Draw detection boxes on image."""
+        image_np = image.permute(1, 2, 0).cpu().numpy().copy()
+        
+        for box, score, label in zip(boxes, scores, labels):
+            box = box.cpu().numpy()
+            label = label.cpu().item()
+            score = score.cpu().item()
+            
+            # Draw box
+            plt.gca().add_patch(plt.Rectangle(
+                (box[0], box[1]),
+                box[2] - box[0],
+                box[3] - box[1],
+                fill=False,
+                color='red',
+                linewidth=2
+            ))
+            
+            # Add label
+            plt.text(
+                box[0], box[1] - 5,
+                f'{self.COCO_CLASSES[label]}: {score:.2f}',
+                color='red',
+                fontsize=8,
+                bbox=dict(facecolor='white', alpha=0.8)
+            )
+        
+        plt.imshow(image_np)
+        plt.axis('off')
+        plt.show()
+
+# Example usage
+detector = ObjectDetector()
+transform = transforms.Compose([
+    transforms.Resize((800, 800)),
+    transforms.ToTensor()
+])
+
+# Use sample image
+sample_image = transform(trainset[0][0])
+boxes, scores, labels = detector.detect(sample_image)
+plt.figure(figsize=(12, 12))
+detector.draw_detections(sample_image, boxes, scores, labels)
+```
+
+## 4. Image Segmentation
+
+### Semantic Segmentation
+
+```{python}
+class SimpleUNet(nn.Module):
+    def __init__(self, n_channels=3, n_classes=2):
+        super(SimpleUNet, self).__init__()
+        
+        # Encoder
+        self.enc1 = self.conv_block(n_channels, 64)
+        self.enc2 = self.conv_block(64, 128)
+        self.enc3 = self.conv_block(128, 256)
+        
+        # Decoder
+        self.up1 = nn.ConvTranspose2d(256, 128, kernel_size=2, stride=2)
+        self.dec1 = self.conv_block(256, 128)
+        self.up2 = nn.ConvTranspose2d(128, 64, kernel_size=2, stride=2)
+        self.dec2 = self.conv_block(128, 64)
+        
+        # Final layer
+        self.final = nn.Conv2d(64, n_classes, kernel_size=1)
+    
+    def conv_block(self, in_channels, out_channels):
+        return nn.Sequential(
+            nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1),
+            nn.BatchNorm2d(out_channels),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(out_channels, out_channels, kernel_size=3, padding=1),
+            nn.BatchNorm2d(out_channels),
+            nn.ReLU(inplace=True)
+        )
+    
+    def forward(self, x):
+        # Encoder
+        enc1 = self.enc1(x)
+        enc1_pool = F.max_pool2d(enc1, 2)
+        enc2 = self.enc2(enc1_pool)
+        enc2_pool = F.max_pool2d(enc2, 2)
+        enc3 = self.enc3(enc2_pool)
+        
+        # Decoder
+        dec1 = self.up1(enc3)
+        dec1 = torch.cat([dec1, enc2], dim=1)
+        dec1 = self.dec1(dec1)
+        dec2 = self.up2(dec1)
+        dec2 = torch.cat([dec2, enc1], dim=1)
+        dec2 = self.dec2(dec2)
+        
+        return self.final(dec2)
+
+# Create synthetic segmentation data
+def create_synthetic_segmentation_data(size=128):
+    """Create synthetic image and mask for segmentation."""
+    # Create random shapes
+    image = np.zeros((size, size, 3))
+    mask = np.zeros((size, size))
+    
+    # Add random circles
+    for _ in range(3):
+        center = np.random.randint(0, size, 2)
+        radius = np.random.randint(10, 30)
+        color = np.random.rand(3)
+        
+        y, x = np.ogrid[:size, :size]
+        dist = np.sqrt((x - center[0])**2 + (y - center[1])**2)
+        circle = dist <= radius
+        
+        image[circle] = color
+        mask[circle] = 1
+    
+    return (torch.FloatTensor(image.transpose(2, 0, 1)),
+            torch.LongTensor(mask))
+
+# Create model and synthetic data
+segmentation_model = SimpleUNet().to(device)
+image, mask = create_synthetic_segmentation_data()
+image = image.to(device)
+
+# Get prediction
+segmentation_model.eval()
+with torch.no_grad():
+    pred = segmentation_model(image.unsqueeze(0))
+    pred = torch.argmax(pred, dim=1)[0]
+
+# Visualize results
+plt.figure(figsize=(15, 5))
+plt.subplot(131)
+plt.imshow(image.cpu().permute(1, 2, 0))
+plt.title('Input Image')
+plt.axis('off')
+
+plt.subplot(132)
+plt.imshow(mask.cpu(), cmap='gray')
+plt.title('True Mask')
+plt.axis('off')
+
+plt.subplot(133)
+plt.imshow(pred.cpu(), cmap='gray')
+plt.title('Predicted Mask')
+plt.axis('off')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Best Practices in Computer Vision
+
+1. **Data Preprocessing**
+   - Proper normalization
+   - Data augmentation
+   - Balanced datasets
+   - Resolution considerations
+
+2. **Model Architecture**
+   - Start with proven architectures
+   - Use transfer learning
+   - Consider computational constraints
+   - Implement proper regularization
+
+3. **Training Strategy**
+   - Learning rate scheduling
+   - Proper batch size selection
+   - Validation strategy
+   - Early stopping
+
+4. **Deployment Considerations**
+   - Model optimization
+   - Inference speed
+   - Memory constraints
+   - Hardware acceleration
+
+## Common Challenges and Solutions
+
+1. **Data Quality**
+   - Lighting variations
+   - Occlusions
+   - Scale differences
+   - Background clutter
+
+2. **Model Performance**
+   - Overfitting
+   - Class imbalance
+   - Domain adaptation
+   - Real-time constraints
+
+3. **Deployment Issues**
+   - Model size
+   - Inference speed
+   - Hardware limitations
+   - Edge deployment
+
+## Conclusion
+
+Computer vision with ML requires:
+
+1. Strong understanding of fundamentals
+2. Proper model selection and training
+3. Effective preprocessing and augmentation
+4. Consideration of deployment constraints
+
+In the next post, we'll explore natural language processing applications.
+
+## Additional Resources
+
+1. Books:
+   - "Deep Learning for Computer Vision" by Adrian Rosebrock
+   - "Computer Vision: Algorithms and Applications" by Richard Szeliski
+   - "Deep Learning" by Goodfellow, Bengio, and Courville
+
+2. Online Resources:
+   - PyTorch Vision Tutorials
+   - Stanford CS231n Course
+   - Fast.ai Computer Vision Course
+
+Remember: Computer vision is a rapidly evolving field. Stay updated with the latest research and techniques while maintaining a strong grasp of the fundamentals.

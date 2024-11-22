@@ -1,0 +1,347 @@
+---
+title: "Probabilistic Graphical Models: Mathematical Foundations"
+author: "Ram Polisetti"
+date: "2024-03-19"
+categories: [machine-learning, probabilistic-models, mathematics, bayesian]
+image: "pgm.jpg"
+description: "A rigorous exploration of probabilistic graphical models, covering mathematical foundations, inference algorithms, and learning methods."
+jupyter: python3
+---
+
+# Probabilistic Graphical Models
+
+## Bayesian Networks
+
+### 1. Factorization
+
+Joint probability factorization:
+
+$$
+P(X_1, ..., X_n) = \prod_{i=1}^n P(X_i | \text{Pa}(X_i))
+$$
+
+Where:
+- $X_i$ are random variables
+- $\text{Pa}(X_i)$ are parents of $X_i$ in the graph
+
+### 2. Conditional Independence
+
+D-separation criterion:
+- Two nodes are d-separated if all paths between them are blocked
+- A path is blocked if:
+  * Contains a collider not in evidence
+  * Contains a non-collider in evidence
+
+Formal definition:
+
+$$
+X \perp\!\!\!\perp Y | Z \iff P(X|Y,Z) = P(X|Z)
+$$
+
+## Markov Random Fields
+
+### 1. Gibbs Distribution
+
+Joint distribution representation:
+
+$$
+P(X = x) = \frac{1}{Z}\exp\left(-\sum_{c \in \mathcal{C}} \psi_c(x_c)\right)
+$$
+
+Where:
+- $\mathcal{C}$ is the set of cliques
+- $\psi_c$ are potential functions
+- $Z$ is the partition function:
+
+$$
+Z = \sum_x \exp\left(-\sum_{c \in \mathcal{C}} \psi_c(x_c)\right)
+$$
+
+### 2. Hammersley-Clifford Theorem
+
+Equivalence between positive distributions and Gibbs distributions:
+
+$$
+P(X = x) > 0 \iff P(X = x) = \frac{1}{Z}\prod_{c \in \mathcal{C}} \phi_c(x_c)
+$$
+
+Where:
+- $\phi_c$ are non-negative factors
+
+## Inference Algorithms
+
+### 1. Variable Elimination
+
+Complexity for tree-structured graphs:
+
+$$
+O(n \cdot d^{w})
+$$
+
+Where:
+- $n$ is number of variables
+- $d$ is domain size
+- $w$ is tree width
+
+Algorithm steps:
+1. Choose elimination ordering
+2. For each variable:
+   - Multiply relevant factors
+   - Sum out variable
+
+### 2. Belief Propagation
+
+Message passing equations:
+
+$$
+\begin{aligned}
+\mu_{i \to j}(x_j) &= \sum_{x_i} \phi_i(x_i)\phi_{ij}(x_i,x_j)\prod_{k \in N(i)\backslash j} \mu_{k \to i}(x_i) \\
+b_i(x_i) &\propto \phi_i(x_i)\prod_{j \in N(i)} \mu_{j \to i}(x_i)
+\end{aligned}
+$$
+
+Where:
+- $\mu_{i \to j}$ is message from i to j
+- $b_i$ is belief at node i
+- $N(i)$ is neighbors of i
+
+### 3. Junction Tree Algorithm
+
+Clique tree construction:
+1. Moralize graph
+2. Triangulate
+3. Find maximal cliques
+4. Build junction tree
+
+Running intersection property:
+
+$$
+S_{ij} = C_i \cap C_j \subseteq C_k
+$$
+
+For any cliques $C_i$, $C_j$, and clique $C_k$ on path between them.
+
+## Learning Methods
+
+### 1. Maximum Likelihood Estimation
+
+Objective function:
+
+$$
+\hat{\theta}_{MLE} = \arg\max_\theta \sum_{i=1}^N \log P(x^{(i)}|\theta)
+$$
+
+For complete data in Bayesian networks:
+
+$$
+\hat{\theta}_{ijk} = \frac{N_{ijk}}{\sum_k N_{ijk}}
+$$
+
+Where:
+- $N_{ijk}$ is count of $X_i=k$ with parent configuration j
+
+### 2. Bayesian Parameter Learning
+
+Posterior distribution:
+
+$$
+P(\theta|D) \propto P(D|\theta)P(\theta)
+$$
+
+With Dirichlet prior:
+
+$$
+\theta_{ijk} \sim \text{Dir}(\alpha_{ijk})
+$$
+
+Posterior parameters:
+
+$$
+\alpha_{ijk}^{\text{post}} = \alpha_{ijk} + N_{ijk}
+$$
+
+### 3. Structure Learning
+
+Score-based learning objective:
+
+$$
+G^* = \arg\max_G \text{score}(G:D)
+$$
+
+Common scores:
+1. BIC score:
+
+$$
+\text{BIC}(G:D) = \ell(D|\hat{\theta}, G) - \frac{\log N}{2}|G|
+$$
+
+2. Bayesian score:
+
+$$
+P(G|D) \propto P(D|G)P(G)
+$$
+
+## Advanced Topics
+
+### 1. Variational Inference
+
+Evidence lower bound (ELBO):
+
+$$
+\mathcal{L}(q) = \mathbb{E}_q[\log p(x,z)] - \mathbb{E}_q[\log q(z)]
+$$
+
+Mean field approximation:
+
+$$
+q(z) = \prod_i q_i(z_i)
+$$
+
+Update equations:
+
+$$
+\log q_j^*(z_j) = \mathbb{E}_{q_{-j}}[\log p(x,z)] + \text{const}
+$$
+
+### 2. MCMC Methods
+
+Metropolis-Hastings acceptance ratio:
+
+$$
+\alpha = \min\left(1, \frac{p(x')q(x|x')}{p(x)q(x'|x)}\right)
+$$
+
+Gibbs sampling update:
+
+$$
+x_i^{(t+1)} \sim p(x_i|x_{-i}^{(t)})
+$$
+
+### 3. Conditional Random Fields
+
+Linear-chain CRF probability:
+
+$$
+P(y|x) = \frac{1}{Z(x)}\exp\left(\sum_{t=1}^T\sum_k \lambda_k f_k(y_t,y_{t-1},x_t)\right)
+$$
+
+Where:
+- $f_k$ are feature functions
+- $\lambda_k$ are weights
+- $Z(x)$ is normalization factor
+
+## Implementation Considerations
+
+### 1. Numerical Stability
+
+Log-space computations:
+
+$$
+\log\sum_i \exp(x_i) = \max_i x_i + \log\sum_i \exp(x_i - \max_i x_i)
+$$
+
+### 2. Sparse Representations
+
+Efficient factor operations:
+- Sparse matrices for CPTs
+- Vectorized operations
+- Caching intermediate results
+
+### 3. Parallelization
+
+Parallel message passing:
+- Tree-structured graphs
+- Junction tree clusters
+- Mini-batch learning
+
+## Best Practices
+
+### 1. Model Selection
+
+1. Network Structure:
+   - Expert knowledge
+   - Causal relationships
+   - Data-driven learning
+
+2. Inference Method:
+   - Exact vs approximate
+   - Graph structure
+   - Domain size
+
+3. Learning Approach:
+   - Data completeness
+   - Prior knowledge
+   - Computational resources
+
+### 2. Performance Optimization
+
+1. Variable Ordering:
+   - Min-fill heuristic
+   - Min-degree ordering
+   - Weighted variants
+
+2. Message Scheduling:
+   - Residual belief propagation
+   - Priority-based updates
+   - Asynchronous methods
+
+3. Memory Management:
+   - Factor caching
+   - Message memoization
+   - Sparse representations
+
+## Applications
+
+### 1. Medical Diagnosis
+
+Network structure:
+- Diseases as root nodes
+- Symptoms as leaf nodes
+- Test results as intermediate nodes
+
+Inference tasks:
+- Diagnostic reasoning
+- Predictive reasoning
+- Intercausal reasoning
+
+### 2. Computer Vision
+
+MRF applications:
+- Image segmentation
+- Stereo matching
+- Image restoration
+
+Energy function:
+
+$$
+E(x) = \sum_i \phi_i(x_i) + \sum_{i,j} \phi_{ij}(x_i,x_j)
+$$
+
+### 3. Natural Language Processing
+
+Linear-chain CRFs:
+- Part-of-speech tagging
+- Named entity recognition
+- Sequence labeling
+
+Feature templates:
+- Word features
+- Context windows
+- Transition features
+
+## References
+
+1. Theory:
+   - "Probabilistic Graphical Models" by Koller and Friedman
+   - "Pattern Recognition and Machine Learning" by Bishop
+   - "Information Theory, Inference, and Learning Algorithms" by MacKay
+
+2. Algorithms:
+   - "Understanding Belief Propagation and its Generalizations" by Yedidia et al.
+   - "An Introduction to MCMC for Machine Learning" by Andrieu et al.
+   - "Structured Prediction for Natural Language Processing" by Smith
+
+3. Applications:
+   - "Medical Applications of Artificial Intelligence" by Dua and Acharya
+   - "Computer Vision: A Modern Approach" by Forsyth and Ponce
+   - "Speech and Language Processing" by Jurafsky and Martin

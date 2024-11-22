@@ -1,0 +1,394 @@
+---
+title: "Online Learning and Regret Minimization"
+author: "Ram Polisetti"
+date: "2024-03-19"
+categories: [machine-learning, theory, mathematics, online-learning]
+image: "online_learning.jpg"
+description: "A rigorous exploration of online learning theory and regret minimization, covering fundamental algorithms, bounds, and applications."
+jupyter: python3
+---
+
+# Online Learning and Regret Minimization
+
+## Fundamental Concepts
+
+### 1. Online Learning Protocol
+
+Learning process:
+1. Receive instance $x_t$
+2. Predict $\hat{y}_t$
+3. Observe true outcome $y_t$
+4. Suffer loss $\ell({\hat{y}_t, y_t})$
+5. Update model
+
+Regret definition:
+
+$$
+R_T = \sum_{t=1}^T \ell(h_t(x_t), y_t) - \min_{h \in \mathcal{H}}\sum_{t=1}^T \ell(h(x_t), y_t)
+$$
+
+### 2. Types of Regret
+
+External regret:
+
+$$
+R_T^{\text{ext}} = \mathbb{E}\left[\sum_{t=1}^T \ell_t(a_t)\right] - \min_{a \in \mathcal{A}}\mathbb{E}\left[\sum_{t=1}^T \ell_t(a)\right]
+$$
+
+Internal/swap regret:
+
+$$
+R_T^{\text{int}} = \mathbb{E}\left[\sum_{t=1}^T \ell_t(a_t)\right] - \min_{\phi: \mathcal{A} \to \mathcal{A}}\mathbb{E}\left[\sum_{t=1}^T \ell_t(\phi(a_t))\right]
+$$
+
+### 3. Performance Measures
+
+Average regret:
+
+$$
+\bar{R}_T = \frac{R_T}{T}
+$$
+
+Competitive ratio:
+
+$$
+CR_T = \frac{\sum_{t=1}^T \ell_t(a_t)}{\min_{a \in \mathcal{A}}\sum_{t=1}^T \ell_t(a)}
+$$
+
+## Online Convex Optimization
+
+### 1. Online Gradient Descent
+
+Update rule:
+
+$$
+w_{t+1} = \Pi_{\mathcal{W}}(w_t - \eta_t \nabla \ell_t(w_t))
+$$
+
+Regret bound:
+
+$$
+R_T \leq \frac{D^2}{2\eta} + \frac{\eta G^2T}{2}
+$$
+
+Where:
+- $D$ is diameter of feasible set
+- $G$ is gradient bound
+- $\eta$ is learning rate
+
+### 2. Follow The Regularized Leader
+
+FTRL update:
+
+$$
+w_{t+1} = \arg\min_{w \in \mathcal{W}}\{\eta\sum_{s=1}^t \ell_s(w) + R(w)\}
+$$
+
+Regret bound:
+
+$$
+R_T \leq \frac{R(w^*)}{\eta} + \frac{\eta G^2T}{2}
+$$
+
+### 3. Mirror Descent
+
+Update rule:
+
+$$
+\nabla \psi(w_{t+1}) = \nabla \psi(w_t) - \eta_t \nabla \ell_t(w_t)
+$$
+
+Regret bound:
+
+$$
+R_T \leq \frac{D_\psi(w^*\|w_1)}{\eta} + \frac{\eta G^2T}{2}
+$$
+
+## Multi-Armed Bandits
+
+### 1. UCB Algorithm
+
+UCB index:
+
+$$
+UCB_i(t) = \hat{\mu}_i(t) + \sqrt{\frac{2\ln t}{N_i(t)}}
+$$
+
+Regret bound:
+
+$$
+R_T \leq \sum_{i:\Delta_i>0}\left(\frac{8\ln T}{\Delta_i} + (1+\pi^2/3)\Delta_i\right)
+$$
+
+### 2. Thompson Sampling
+
+Posterior sampling:
+
+$$
+\theta_i(t) \sim Beta(\alpha_i(t), \beta_i(t))
+$$
+
+Regret bound:
+
+$$
+R_T \leq O(\sqrt{KT\ln T})
+$$
+
+### 3. Exp3 Algorithm
+
+Probability update:
+
+$$
+p_i(t) = \frac{(1-\gamma)\exp(\eta G_i(t))}{\sum_{j=1}^K \exp(\eta G_j(t))} + \frac{\gamma}{K}
+$$
+
+Regret bound:
+
+$$
+R_T \leq 2\sqrt{KT\ln K}
+$$
+
+## Expert Algorithms
+
+### 1. Weighted Majority
+
+Weight update:
+
+$$
+w_i(t+1) = w_i(t)(1-\eta)^{\ell_i(t)}
+$$
+
+Regret bound:
+
+$$
+R_T \leq \sqrt{T\ln N}
+$$
+
+### 2. Hedge Algorithm
+
+Probability update:
+
+$$
+p_i(t+1) = \frac{\exp(-\eta L_i(t))}{\sum_{j=1}^N \exp(-\eta L_j(t))}
+$$
+
+Regret bound:
+
+$$
+R_T \leq \sqrt{2T\ln N}
+$$
+
+### 3. AdaHedge
+
+Adaptive learning rate:
+
+$$
+\eta_t = \frac{\ln N}{V_t}
+$$
+
+Where:
+- $V_t$ is cumulative variance
+- $N$ is number of experts
+
+## Advanced Topics
+
+### 1. Adaptive Algorithms
+
+AdaGrad update:
+
+$$
+w_{t+1,i} = w_{t,i} - \frac{\eta}{\sqrt{\sum_{s=1}^t g_{s,i}^2}}g_{t,i}
+$$
+
+Regret bound:
+
+$$
+R_T \leq O(\sqrt{T}\|w^*\|_2\sqrt{\sum_{i=1}^d\sum_{t=1}^T g_{t,i}^2})
+$$
+
+### 2. Second-Order Methods
+
+ONS update:
+
+$$
+w_{t+1} = w_t - \eta A_t^{-1}\nabla \ell_t(w_t)
+$$
+
+Where:
+- $A_t = \sum_{s=1}^t \nabla \ell_s(w_s)\nabla \ell_s(w_s)^T$
+
+### 3. Parameter-Free Methods
+
+MetaGrad update:
+
+$$
+w_{t+1} = w_t - \eta_t H_t^{-1/2}\nabla \ell_t(w_t)
+$$
+
+Where:
+- $H_t$ is preconditioner matrix
+
+## Applications
+
+### 1. Portfolio Selection
+
+Objective:
+
+$$
+\max_{w \in \Delta_n} \sum_{t=1}^T \log(w^T r_t)
+$$
+
+Universal portfolio:
+
+$$
+w_{t+1} = \int_{\Delta_n} w P_t(w)dw
+$$
+
+### 2. Online Routing
+
+Flow update:
+
+$$
+f_{t+1}(e) = f_t(e)\exp(-\eta \ell_t(e))
+$$
+
+Path selection:
+
+$$
+P(p) = \frac{\prod_{e \in p}f_t(e)}{\sum_{p' \in \mathcal{P}}\prod_{e \in p'}f_t(e)}
+$$
+
+### 3. Online Classification
+
+Perceptron update:
+
+$$
+w_{t+1} = w_t + y_tx_t\mathbb{1}[y_tw_t^Tx_t \leq 0]
+$$
+
+Mistake bound:
+
+$$
+M \leq \left(\frac{R}{\gamma}\right)^2
+$$
+
+## Theoretical Results
+
+### 1. Lower Bounds
+
+Minimax regret:
+
+$$
+\min_{\text{ALG}}\max_{\text{ADV}} R_T = \Omega(\sqrt{T})
+$$
+
+Expert setting:
+
+$$
+R_T = \Omega(\sqrt{T\ln N})
+$$
+
+### 2. Information Theory
+
+Redundancy bound:
+
+$$
+R_T \leq \frac{KL(P\|Q) + \ln(1/\delta)}{\eta} + \frac{\eta T}{8}
+$$
+
+### 3. Game Theory
+
+Nash equilibrium:
+
+$$
+\max_P \min_Q \mathbb{E}_{p \sim P, q \sim Q}[M(p,q)] = \min_Q \max_P \mathbb{E}_{p \sim P, q \sim Q}[M(p,q)]
+$$
+
+## Implementation Considerations
+
+### 1. Algorithm Selection
+
+1. Problem Structure:
+   - Convexity
+   - Smoothness
+   - Sparsity
+
+2. Computational Constraints:
+   - Memory limits
+   - Update time
+   - Parallelization
+
+3. Performance Requirements:
+   - Regret bounds
+   - Adaptation speed
+   - Robustness
+
+### 2. Parameter Tuning
+
+1. Learning Rates:
+   - Fixed vs adaptive
+   - Schedule design
+   - Initialization
+
+2. Exploration:
+   - Exploration rate
+   - Decay schedule
+   - Adaptive schemes
+
+3. Regularization:
+   - Strength
+   - Type selection
+   - Adaptation
+
+## Best Practices
+
+### 1. Algorithm Design
+
+1. Robustness:
+   - Adversarial scenarios
+   - Noise handling
+   - Distribution shifts
+
+2. Efficiency:
+   - Memory usage
+   - Update complexity
+   - Parallelization
+
+3. Adaptivity:
+   - Parameter tuning
+   - Distribution changes
+   - Model selection
+
+### 2. Implementation
+
+1. Data Handling:
+   - Streaming processing
+   - Feature extraction
+   - Preprocessing
+
+2. Monitoring:
+   - Regret tracking
+   - Performance metrics
+   - Resource usage
+
+3. Deployment:
+   - System integration
+   - Error handling
+   - Scaling strategy
+
+## References
+
+1. Theory:
+   - "Introduction to Online Convex Optimization" by Hazan
+   - "Bandit Algorithms" by Lattimore and Szepesvári
+   - "Prediction, Learning, and Games" by Cesa-Bianchi and Lugosi
+
+2. Methods:
+   - "Online Learning and Online Convex Optimization" by Shalev-Shwartz
+   - "A Modern Introduction to Online Learning" by Orabona
+   - "Regret Analysis of Stochastic and Nonstochastic Multi-armed Bandit Problems" by Bubeck and Cesa-Bianchi
+
+3. Applications:
+   - "Online Portfolio Selection" by Li and Hoi
+   - "Online Learning in Routing Games" by Roughgarden
+   - "Online Methods in Machine Learning" by Bottou

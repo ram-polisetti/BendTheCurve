@@ -1,0 +1,340 @@
+---
+title: "Generative Models: Mathematical Foundations and Architectures"
+author: "Ram Polisetti"
+date: "2024-03-19"
+categories: [machine-learning, generative-models, deep-learning, mathematics]
+image: "generative_models.jpg"
+description: "A rigorous mathematical exploration of generative models, including GANs, VAEs, and diffusion models."
+jupyter: python3
+---
+
+# Generative Models: Mathematical Foundations
+
+## Variational Autoencoders (VAEs)
+
+### 1. Evidence Lower Bound (ELBO)
+
+The VAE objective maximizes the ELBO:
+
+$$
+\mathcal{L}(\theta, \phi; x) = \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] - D_{KL}(q_\phi(z|x)||p(z))
+$$
+
+Where:
+- $q_\phi(z|x)$ is the encoder (inference model)
+- $p_\theta(x|z)$ is the decoder (generative model)
+- $p(z)$ is the prior distribution
+- $D_{KL}$ is the Kullback-Leibler divergence
+
+### 2. Reparameterization Trick
+
+Enables backpropagation through sampling:
+
+$$
+z = \mu_\phi(x) + \sigma_\phi(x) \odot \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
+$$
+
+Where:
+- $\mu_\phi(x)$ is the mean encoder network
+- $\sigma_\phi(x)$ is the standard deviation encoder network
+- $\odot$ denotes element-wise multiplication
+
+## Generative Adversarial Networks (GANs)
+
+### 1. Minimax Objective
+
+The original GAN formulation:
+
+$$
+\min_G \max_D V(D,G) = \mathbb{E}_{x\sim p_{data}}[\log D(x)] + \mathbb{E}_{z\sim p_z}[\log(1-D(G(z)))]
+$$
+
+Where:
+- $G$ is the generator
+- $D$ is the discriminator
+- $p_{data}$ is the real data distribution
+- $p_z$ is the latent distribution
+
+### 2. Wasserstein Distance
+
+WGAN objective using Kantorovich-Rubinstein duality:
+
+$$
+\min_G \max_{D \in \mathcal{F}_L} \mathbb{E}_{x\sim p_{data}}[D(x)] - \mathbb{E}_{z\sim p_z}[D(G(z))]
+$$
+
+Where:
+- $\mathcal{F}_L$ is the set of 1-Lipschitz functions
+
+### 3. Gradient Penalty
+
+WGAN-GP regularization term:
+
+$$
+\lambda \mathbb{E}_{\hat{x}\sim p_{\hat{x}}}[(\|\nabla_{\hat{x}}D(\hat{x})\|_2 - 1)^2]
+$$
+
+Where:
+- $\hat{x}$ is sampled along straight lines between real and generated samples
+- $\lambda$ is the penalty coefficient
+
+## Diffusion Models
+
+### 1. Forward Process
+
+The forward diffusion process:
+
+$$
+q(x_t|x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t}x_{t-1}, \beta_tI)
+$$
+
+With closed form for arbitrary timestep:
+
+$$
+q(x_t|x_0) = \mathcal{N}(x_t; \sqrt{\bar{\alpha}_t}x_0, (1-\bar{\alpha}_t)I)
+$$
+
+Where:
+- $\beta_t$ is the noise schedule
+- $\alpha_t = 1-\beta_t$
+- $\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$
+
+### 2. Reverse Process
+
+The reverse diffusion process:
+
+$$
+p_\theta(x_{t-1}|x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t,t), \Sigma_\theta(x_t,t))
+$$
+
+Training objective:
+
+$$
+\mathcal{L} = \mathbb{E}_{x_0,\epsilon,t}\left[\|\epsilon - \epsilon_\theta(x_t,t)\|^2\right]
+$$
+
+Where:
+- $\epsilon_\theta$ predicts the noise component
+- $x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon$
+
+## Advanced Architectures
+
+### 1. Normalizing Flows
+
+Change of variables formula:
+
+$$
+\log p_X(x) = \log p_Z(f^{-1}(x)) + \log\left|\det\frac{\partial f^{-1}}{\partial x}\right|
+$$
+
+Where:
+- $f$ is an invertible transformation
+- $p_Z$ is a simple base distribution
+
+### 2. Autoregressive Models
+
+Factorized probability:
+
+$$
+p(x) = \prod_{i=1}^n p(x_i|x_{<i})
+$$
+
+With masked convolutions:
+
+$$
+y_i = \sum_{j \leq i} m_{ij}(w_{ij} \cdot x_j)
+$$
+
+### 3. Energy-Based Models
+
+Probability density:
+
+$$
+p(x) = \frac{1}{Z}e^{-E(x)}
+$$
+
+Where:
+- $E(x)$ is the energy function
+- $Z = \int e^{-E(x)}dx$ is the partition function
+
+## Training Dynamics
+
+### 1. Mode Collapse in GANs
+
+Jensen-Shannon divergence:
+
+$$
+JSD(P\|Q) = \frac{1}{2}D_{KL}(P\|\frac{P+Q}{2}) + \frac{1}{2}D_{KL}(Q\|\frac{P+Q}{2})
+$$
+
+### 2. VAE Posterior Collapse
+
+KL-divergence analysis:
+
+$$
+D_{KL}(q_\phi(z|x)\|p(z)) = \frac{1}{2}\sum_{j=1}^d(\sigma_j^2 + \mu_j^2 - \log\sigma_j^2 - 1)
+$$
+
+### 3. Diffusion Model Training
+
+Denoising score matching:
+
+$$
+\nabla_x \log p(x) = \mathbb{E}_{p(t|x)}[\nabla_x \log p(x|x_t)]
+$$
+
+## Advanced Training Techniques
+
+### 1. Progressive Growing
+
+Resolution-dependent loss:
+
+$$
+\mathcal{L}_\text{total} = \sum_{r} \alpha_r \mathcal{L}_r
+$$
+
+Where:
+- $r$ is the resolution level
+- $\alpha_r$ is the weighting factor
+
+### 2. Style Mixing
+
+Style transfer in latent space:
+
+$$
+w = \mathcal{M}(z) = f(z + \Delta z)
+$$
+
+Where:
+- $\mathcal{M}$ is the mapping network
+- $f$ is a non-linear transformation
+
+### 3. Adaptive Instance Normalization (AdaIN)
+
+Style transfer operation:
+
+$$
+\text{AdaIN}(x,y) = \sigma(y)\left(\frac{x-\mu(x)}{\sigma(x)}\right) + \mu(y)
+$$
+
+## Evaluation Metrics
+
+### 1. Inception Score
+
+Measures quality and diversity:
+
+$$
+IS = \exp(\mathbb{E}_{x\sim p_g}[D_{KL}(p(y|x)\|p(y))])
+$$
+
+### 2. Fréchet Inception Distance
+
+Distribution similarity metric:
+
+$$
+FID = \|\mu_r - \mu_g\|^2 + Tr(\Sigma_r + \Sigma_g - 2(\Sigma_r\Sigma_g)^{1/2})
+$$
+
+Where:
+- $\mu_r, \Sigma_r$ are real data statistics
+- $\mu_g, \Sigma_g$ are generated data statistics
+
+### 3. Precision and Recall
+
+Two-way evaluation:
+
+$$
+\begin{aligned}
+\text{Precision} &= \mathbb{E}_{x\sim p_g}[\max_{y\sim p_r} s(x,y)] \\
+\text{Recall} &= \mathbb{E}_{y\sim p_r}[\max_{x\sim p_g} s(x,y)]
+\end{aligned}
+$$
+
+## Implementation Considerations
+
+### 1. Architectural Choices
+
+1. Generator Design:
+   - Transposed convolutions vs upsampling
+   - Skip connections
+   - Attention mechanisms
+
+2. Discriminator Design:
+   - Spectral normalization
+   - Residual blocks
+   - Multi-scale discrimination
+
+3. Loss Functions:
+   - Adversarial loss
+   - Reconstruction loss
+   - Perceptual loss
+
+### 2. Training Stability
+
+1. Gradient Penalties:
+   - R1 regularization
+   - Path length regularization
+   - Consistency regularization
+
+2. Learning Rate:
+   - Two time-scale update rule
+   - Adaptive learning rates
+   - Warmup scheduling
+
+3. Batch Size:
+   - Gradient accumulation
+   - Mixed precision training
+   - Memory-efficient backprop
+
+## Best Practices
+
+### 1. Model Selection
+
+1. VAEs for:
+   - Structured latent spaces
+   - Reconstruction tasks
+   - Interpretable representations
+
+2. GANs for:
+   - High-quality generation
+   - Style transfer
+   - Domain translation
+
+3. Diffusion Models for:
+   - High-fidelity generation
+   - Controlled generation
+   - Robust training
+
+### 2. Hyperparameter Tuning
+
+1. Learning Rates:
+   - Generator: 1e-4 to 1e-3
+   - Discriminator: 2e-4 to 2e-3
+   - VAE: 1e-3 to 1e-2
+
+2. Batch Sizes:
+   - GANs: 32 to 128
+   - VAEs: 64 to 256
+   - Diffusion: 32 to 64
+
+3. Architecture:
+   - Layer depth
+   - Channel width
+   - Attention layers
+
+## References
+
+1. Theory:
+   - "Auto-Encoding Variational Bayes" by Kingma and Welling
+   - "Generative Adversarial Networks" by Goodfellow et al.
+   - "Denoising Diffusion Probabilistic Models" by Ho et al.
+
+2. Architecture:
+   - "Progressive Growing of GANs" by Karras et al.
+   - "StyleGAN" by Karras et al.
+   - "Normalizing Flows" by Rezende and Mohamed
+
+3. Training:
+   - "Improved Training of Wasserstein GANs" by Gulrajani et al.
+   - "Large Scale GAN Training for High Fidelity Natural Image Synthesis" by Brock et al.
+   - "Improved VQGAN for Image Generation" by Esser et al.

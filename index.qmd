@@ -5,10 +5,9 @@ listing:
   contents: posts
   sort: "date desc"
   type: grid
-  categories: true
   sort-ui: true
   filter-ui: true
-  fields: [date, title, reading-time, description, categories, image]
+  fields: [date, title, reading-time, description, image]
   max-items: 3
   feed: true
 page-layout: full

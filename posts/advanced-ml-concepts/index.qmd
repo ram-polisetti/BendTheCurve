@@ -1,0 +1,466 @@
+---
+title: "Advanced ML Concepts: Beyond the Basics"
+author: "Ram Polisetti"
+date: "2024-03-19"
+categories: [machine-learning, advanced-concepts, bayesian-methods, causal-inference]
+image: "advanced_ml.jpg"
+description: "Exploring advanced machine learning concepts including probabilistic ML, Bayesian methods, uncertainty estimation, and causal inference."
+jupyter: python3
+---
+
+# Advanced Machine Learning Concepts
+
+While basic machine learning concepts form the foundation, advanced concepts are crucial for handling real-world complexity and uncertainty. This post explores sophisticated approaches that are often overlooked but essential for advanced practitioners.
+
+## Setup and Prerequisites
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import torch
+import torch.nn as nn
+import pyro
+import pyro.distributions as dist
+from sklearn.datasets import make_regression
+from sklearn.model_selection import train_test_split
+
+# Set random seeds for reproducibility
+np.random.seed(42)
+torch.manual_seed(42)
+pyro.set_rng_seed(42)
+
+# Plotting settings
+plt.style.use('seaborn')
+sns.set_theme(style="whitegrid")
+```
+
+## 1. Probabilistic Machine Learning
+
+### Bayesian Linear Regression
+
+```{python}
+# Generate synthetic data
+X, y = make_regression(n_samples=100, n_features=1, noise=10, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define Bayesian linear regression model
+def model(X, y=None):
+    # Priors
+    weight = pyro.sample('weight', dist.Normal(0., 10.))
+    bias = pyro.sample('bias', dist.Normal(0., 10.))
+    sigma = pyro.sample('sigma', dist.HalfNormal(10.))
+    
+    # Linear regression
+    mean = weight * X + bias
+    
+    # Likelihood
+    with pyro.plate('data', X.shape[0]):
+        return pyro.sample('obs', dist.Normal(mean, sigma), obs=y)
+
+# Perform inference
+from pyro.infer import SVI, Trace_ELBO
+from pyro.optim import Adam
+
+# Define guide (variational distribution)
+def guide(X, y=None):
+    # Register parameters
+    weight_loc = pyro.param('weight_loc', torch.tensor(0.))
+    weight_scale = pyro.param('weight_scale', torch.tensor(1.),
+                             constraint=dist.constraints.positive)
+    bias_loc = pyro.param('bias_loc', torch.tensor(0.))
+    bias_scale = pyro.param('bias_scale', torch.tensor(1.),
+                           constraint=dist.constraints.positive)
+    sigma_loc = pyro.param('sigma_loc', torch.tensor(1.),
+                          constraint=dist.constraints.positive)
+    
+    # Sample from variational distributions
+    pyro.sample('weight', dist.Normal(weight_loc, weight_scale))
+    pyro.sample('bias', dist.Normal(bias_loc, bias_scale))
+    pyro.sample('sigma', dist.HalfNormal(sigma_loc))
+
+# Setup inference
+optimizer = Adam({"lr": 0.03})
+svi = SVI(model, guide, optimizer, loss=Trace_ELBO())
+
+# Training loop
+pyro.clear_param_store()
+num_iterations = 1000
+losses = []
+
+X_tensor = torch.tensor(X_train.astype(np.float32))
+y_tensor = torch.tensor(y_train.astype(np.float32))
+
+for j in range(num_iterations):
+    loss = svi.step(X_tensor, y_tensor)
+    losses.append(loss)
+
+# Plot loss
+plt.figure(figsize=(10, 4))
+plt.plot(losses)
+plt.title('ELBO Loss')
+plt.xlabel('Iteration')
+plt.ylabel('Loss')
+plt.show()
+
+# Visualize posterior predictions
+def get_posterior_predictions(X):
+    X_tensor = torch.tensor(X.astype(np.float32))
+    predictions = []
+    
+    for _ in range(100):
+        weight = pyro.param('weight_loc').item()
+        bias = pyro.param('bias_loc').item()
+        pred = weight * X + bias
+        predictions.append(pred)
+    
+    return np.array(predictions)
+
+X_plot = np.linspace(X.min(), X.max(), 100).reshape(-1, 1)
+predictions = get_posterior_predictions(X_plot)
+
+plt.figure(figsize=(10, 6))
+plt.scatter(X_train, y_train, alpha=0.5, label='Training data')
+plt.plot(X_plot, predictions.mean(axis=0), 'r-', label='Mean prediction')
+plt.fill_between(X_plot.flatten(),
+                predictions.mean(axis=0) - 2*predictions.std(axis=0),
+                predictions.mean(axis=0) + 2*predictions.std(axis=0),
+                alpha=0.3, label='95% Credible interval')
+plt.legend()
+plt.title('Bayesian Linear Regression')
+plt.show()
+```
+
+## 2. Uncertainty Estimation
+
+### Dropout as Bayesian Approximation
+
+```{python}
+class BayesianNN(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size, dropout_rate=0.1):
+        super(BayesianNN, self).__init__()
+        self.linear1 = nn.Linear(input_size, hidden_size)
+        self.linear2 = nn.Linear(hidden_size, hidden_size)
+        self.linear3 = nn.Linear(hidden_size, output_size)
+        self.dropout = nn.Dropout(dropout_rate)
+        self.relu = nn.ReLU()
+        
+    def forward(self, x):
+        x = self.dropout(self.relu(self.linear1(x)))
+        x = self.dropout(self.relu(self.linear2(x)))
+        return self.linear3(x)
+
+# Generate synthetic data
+X = torch.linspace(-4, 4, 100).reshape(-1, 1)
+y = X.pow(3) + torch.randn_like(X)
+
+# Train model
+model = BayesianNN(1, 64, 1)
+criterion = nn.MSELoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+
+for epoch in range(1000):
+    optimizer.zero_grad()
+    output = model(X)
+    loss = criterion(output, y)
+    loss.backward()
+    optimizer.step()
+
+# Monte Carlo Dropout predictions
+def mc_dropout_predict(model, x, num_samples=100):
+    model.train()  # Enable dropout
+    predictions = []
+    for _ in range(num_samples):
+        predictions.append(model(x).detach())
+    return torch.stack(predictions)
+
+# Get predictions
+X_test = torch.linspace(-6, 6, 100).reshape(-1, 1)
+predictions = mc_dropout_predict(model, X_test)
+
+mean_pred = predictions.mean(dim=0)
+std_pred = predictions.std(dim=0)
+
+# Plot results
+plt.figure(figsize=(10, 6))
+plt.scatter(X, y, alpha=0.5, label='Training data')
+plt.plot(X_test, mean_pred, 'r-', label='Mean prediction')
+plt.fill_between(X_test.flatten(),
+                mean_pred.flatten() - 2*std_pred.flatten(),
+                mean_pred.flatten() + 2*std_pred.flatten(),
+                alpha=0.3, label='95% Confidence interval')
+plt.legend()
+plt.title('Bayesian Neural Network with MC Dropout')
+plt.show()
+```
+
+## 3. Causal Inference
+
+### Demonstrating Simpson's Paradox
+
+```{python}
+# Generate synthetic data demonstrating Simpson's Paradox
+np.random.seed(42)
+n_samples = 1000
+
+# Generate confounding variable
+confounder = np.random.binomial(1, 0.5, n_samples)
+
+# Generate treatment with confounding
+treatment_prob = 0.3 + 0.4 * confounder
+treatment = np.random.binomial(1, treatment_prob)
+
+# Generate outcome with confounding
+outcome_base = 0.2 + 0.3 * confounder
+outcome_effect = 0.1 - 0.4 * confounder  # Treatment effect varies by confounder
+outcome_prob = outcome_base + outcome_effect * treatment
+outcome = np.random.binomial(1, outcome_prob)
+
+# Create DataFrame
+df = pd.DataFrame({
+    'Treatment': treatment,
+    'Outcome': outcome,
+    'Confounder': confounder
+})
+
+# Overall correlation
+overall_corr = np.corrcoef(treatment, outcome)[0, 1]
+
+# Stratified correlations
+corr_0 = np.corrcoef(treatment[confounder == 0], 
+                     outcome[confounder == 0])[0, 1]
+corr_1 = np.corrcoef(treatment[confounder == 1], 
+                     outcome[confounder == 1])[0, 1]
+
+# Plotting
+fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+
+# Overall relationship
+sns.regplot(data=df, x='Treatment', y='Outcome', ax=axes[0])
+axes[0].set_title(f'Overall Correlation: {overall_corr:.3f}')
+
+# Stratified by confounder
+for conf_val, ax in zip([0, 1], axes[1:]):
+    mask = df['Confounder'] == conf_val
+    sns.regplot(data=df[mask], x='Treatment', y='Outcome', ax=ax)
+    corr = np.corrcoef(df[mask]['Treatment'], 
+                      df[mask]['Outcome'])[0, 1]
+    ax.set_title(f'Confounder = {conf_val}\nCorrelation: {corr:.3f}')
+
+plt.tight_layout()
+plt.show()
+```
+
+## 4. Meta-Learning
+
+### Simple Meta-Learning Example
+
+```{python}
+class MetaModel(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(MetaModel, self).__init__()
+        self.feature_extractor = nn.Sequential(
+            nn.Linear(input_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, hidden_size),
+            nn.ReLU()
+        )
+        self.adaptation_network = nn.Linear(hidden_size, output_size)
+        
+    def forward(self, x, task_embedding=None):
+        features = self.feature_extractor(x)
+        if task_embedding is not None:
+            features = features * task_embedding
+        return self.adaptation_network(features)
+
+# Generate multiple tasks
+def generate_task():
+    # Each task is a different quadratic function
+    a = np.random.uniform(-1, 1)
+    b = np.random.uniform(-1, 1)
+    c = np.random.uniform(-1, 1)
+    
+    X = torch.linspace(-2, 2, 50).reshape(-1, 1)
+    y = a * X.pow(2) + b * X + c + torch.randn_like(X) * 0.1
+    return X, y
+
+# Generate tasks
+n_tasks = 5
+tasks = [generate_task() for _ in range(n_tasks)]
+
+# Train meta-model
+meta_model = MetaModel(1, 64, 1)
+meta_optimizer = torch.optim.Adam(meta_model.parameters(), lr=0.01)
+
+# Meta-training loop
+n_epochs = 1000
+for epoch in range(n_epochs):
+    meta_loss = 0
+    for X, y in tasks:
+        # Generate random task embedding
+        task_embedding = torch.randn(64)
+        
+        # Forward pass
+        pred = meta_model(X, task_embedding)
+        loss = nn.MSELoss()(pred, y)
+        
+        # Backward pass
+        meta_optimizer.zero_grad()
+        loss.backward()
+        meta_optimizer.step()
+        
+        meta_loss += loss.item()
+
+# Visualize results
+plt.figure(figsize=(15, 5))
+for i, (X, y) in enumerate(tasks):
+    plt.subplot(1, n_tasks, i+1)
+    
+    # Original data
+    plt.scatter(X.numpy(), y.numpy(), alpha=0.5, label='True')
+    
+    # Model prediction
+    task_embedding = torch.randn(64)
+    with torch.no_grad():
+        pred = meta_model(X, task_embedding)
+    plt.plot(X.numpy(), pred.numpy(), 'r-', label='Predicted')
+    
+    plt.title(f'Task {i+1}')
+    if i == 0:
+        plt.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+## 5. Advanced Optimization Techniques
+
+### Natural Gradient Descent
+
+```{python}
+class NaturalGradientOptimizer:
+    def __init__(self, parameters, lr=0.01, damping=1e-4):
+        self.parameters = list(parameters)
+        self.lr = lr
+        self.damping = damping
+        
+    def compute_fisher_matrix(self, loss):
+        # Compute gradients
+        grads = torch.autograd.grad(loss, self.parameters, create_graph=True)
+        
+        # Compute Fisher Information Matrix
+        fisher = []
+        for g in grads:
+            fisher.append(g.view(-1) @ g.view(-1))
+        
+        return sum(fisher)
+    
+    def step(self, loss):
+        # Compute gradients
+        grads = torch.autograd.grad(loss, self.parameters)
+        
+        # Compute Fisher Information Matrix
+        fisher = self.compute_fisher_matrix(loss)
+        
+        # Update parameters using natural gradient
+        with torch.no_grad():
+            for param, grad in zip(self.parameters, grads):
+                natural_grad = grad / (fisher + self.damping)
+                param.sub_(self.lr * natural_grad)
+
+# Example usage
+X = torch.linspace(-2, 2, 100).reshape(-1, 1)
+y = X.pow(2) + torch.randn_like(X) * 0.1
+
+model = nn.Sequential(
+    nn.Linear(1, 32),
+    nn.ReLU(),
+    nn.Linear(32, 1)
+)
+
+optimizer = NaturalGradientOptimizer(model.parameters())
+criterion = nn.MSELoss()
+
+# Training loop
+losses = []
+for epoch in range(100):
+    output = model(X)
+    loss = criterion(output, y)
+    losses.append(loss.item())
+    
+    optimizer.step(loss)
+
+# Plot training curve
+plt.figure(figsize=(10, 4))
+plt.plot(losses)
+plt.title('Training Loss with Natural Gradient Descent')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.yscale('log')
+plt.show()
+```
+
+## Best Practices for Advanced ML
+
+1. **Uncertainty Handling**
+   - Always consider model uncertainty
+   - Use probabilistic approaches when possible
+   - Implement proper validation strategies
+
+2. **Causal Considerations**
+   - Identify potential confounders
+   - Use causal diagrams
+   - Consider intervention effects
+
+3. **Meta-Learning Applications**
+   - Start with simple meta-learning approaches
+   - Consider task similarity
+   - Implement proper validation
+
+4. **Optimization Choices**
+   - Consider problem structure
+   - Use appropriate optimization techniques
+   - Monitor convergence carefully
+
+## Common Pitfalls in Advanced ML
+
+1. **Uncertainty Estimation**
+   - Overconfident predictions
+   - Ignoring epistemic uncertainty
+   - Poor calibration
+
+2. **Causal Analysis**
+   - Confounding bias
+   - Selection bias
+   - Temporal dependencies
+
+3. **Meta-Learning**
+   - Task overfitting
+   - Poor generalization
+   - Insufficient task diversity
+
+## Conclusion
+
+Advanced ML concepts provide powerful tools for:
+
+1. Better uncertainty estimation
+2. Causal understanding
+3. Improved generalization
+4. Robust optimization
+
+In the next post, we'll explore specific applications of these concepts in real-world scenarios.
+
+## Additional Resources
+
+1. Books:
+   - "Probabilistic Machine Learning" by Kevin Murphy
+   - "Causal Inference in Statistics" by Pearl et al.
+   - "Meta-Learning" by Chelsea Finn
+
+2. Papers:
+   - "Weight Uncertainty in Neural Networks" by Blundell et al.
+   - "Model-Agnostic Meta-Learning" by Finn et al.
+   - "Natural Gradient Works Efficiently in Learning" by Amari
+
+Remember: These advanced concepts are essential for handling real-world complexity and uncertainty in machine learning applications.

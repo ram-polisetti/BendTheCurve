@@ -1,0 +1,321 @@
+---
+title: "Causal Inference and Structural Learning"
+author: "Ram Polisetti"
+date: "2024-03-19"
+categories: [machine-learning, causality, statistics, mathematics]
+image: "causal_inference.jpg"
+description: "A rigorous exploration of causal inference and structural learning, covering identification, estimation, and structural causal models."
+jupyter: python3
+---
+
+# Causal Inference and Structural Learning
+
+## Structural Causal Models
+
+### 1. Basic Framework
+
+Definition of SCM:
+
+$$
+\begin{aligned}
+X_i &= f_i(\text{PA}_i, U_i) \\
+U_i &\sim P(U_i)
+\end{aligned}
+$$
+
+Where:
+- $X_i$ are endogenous variables
+- $\text{PA}_i$ are parents of $X_i$
+- $U_i$ are exogenous variables
+- $f_i$ are structural equations
+
+### 2. Intervention Calculus
+
+Do-operator formalization:
+
+$$
+P(Y|\text{do}(X=x)) = \sum_z P(Y|X=x,Z=z)P(Z=z)
+$$
+
+Backdoor adjustment:
+
+$$
+P(Y|\text{do}(X=x)) = \sum_z P(Y|X=x,Z=z)P(Z=z)
+$$
+
+Where Z satisfies the backdoor criterion.
+
+## Identification Methods
+
+### 1. Backdoor Criterion
+
+A set Z satisfies the backdoor criterion relative to (X,Y) if:
+1. No node in Z is a descendant of X
+2. Z blocks all backdoor paths from X to Y
+
+Formal criterion:
+
+$$
+P(Y|\text{do}(X)) = \sum_z P(Y|X,Z)P(Z)
+$$
+
+### 2. Front-door Criterion
+
+Three conditions:
+1. M blocks all directed paths from X to Y
+2. No unblocked backdoor path from X to M
+3. All backdoor paths from M to Y are blocked by X
+
+Formula:
+
+$$
+P(Y|\text{do}(X)) = \sum_m P(m|X)\sum_{x'}P(Y|m,x')P(x')
+$$
+
+### 3. Do-Calculus Rules
+
+Rule 1 (Insertion/deletion of observations):
+
+$$
+P(y|\text{do}(x),z,w) = P(y|\text{do}(x),w)
+$$
+
+if (Y ⊥⊥ Z|X,W)$_{G_{\overline{X}}}$
+
+Rule 2 (Action/observation exchange):
+
+$$
+P(y|\text{do}(x),\text{do}(z),w) = P(y|\text{do}(x),z,w)
+$$
+
+if (Y ⊥⊥ Z|X,W)$_{G_{\overline{X}\underline{Z}}}$
+
+Rule 3 (Insertion/deletion of actions):
+
+$$
+P(y|\text{do}(x),\text{do}(z),w) = P(y|\text{do}(x),w)
+$$
+
+if (Y ⊥⊥ Z|X,W)$_{G_{\overline{X}\overline{Z(W)}}}$
+
+## Estimation Methods
+
+### 1. Propensity Score Matching
+
+Propensity score:
+
+$$
+e(X) = P(T=1|X)
+$$
+
+Average Treatment Effect (ATE):
+
+$$
+\text{ATE} = \mathbb{E}[Y(1) - Y(0)] = \mathbb{E}\left[\frac{TY}{e(X)} - \frac{(1-T)Y}{1-e(X)}\right]
+$$
+
+### 2. Instrumental Variables
+
+Two-stage least squares (2SLS):
+
+First stage:
+$$
+X = \gamma_0 + \gamma_1Z + \eta
+$$
+
+Second stage:
+$$
+Y = \beta_0 + \beta_1\hat{X} + \epsilon
+$$
+
+### 3. Regression Discontinuity
+
+Sharp RD estimator:
+
+$$
+\tau_{SRD} = \lim_{x \downarrow c} \mathbb{E}[Y|X=x] - \lim_{x \uparrow c} \mathbb{E}[Y|X=x]
+$$
+
+Fuzzy RD estimator:
+
+$$
+\tau_{FRD} = \frac{\lim_{x \downarrow c} \mathbb{E}[Y|X=x] - \lim_{x \uparrow c} \mathbb{E}[Y|X=x]}{\lim_{x \downarrow c} \mathbb{E}[D|X=x] - \lim_{x \uparrow c} \mathbb{E}[D|X=x]}
+$$
+
+## Structural Learning
+
+### 1. Constraint-Based Methods
+
+PC Algorithm steps:
+1. Start with complete undirected graph
+2. Remove edges based on conditional independence
+3. Orient v-structures
+4. Orient remaining edges
+
+Independence test statistic:
+
+$$
+\chi^2 = n\sum_{i,j} \frac{(O_{ij} - E_{ij})^2}{E_{ij}}
+$$
+
+### 2. Score-Based Methods
+
+BIC score:
+
+$$
+\text{BIC}(G) = \ell(D|G) - \frac{\log n}{2}|G|
+$$
+
+Where:
+- $\ell(D|G)$ is log-likelihood
+- $|G|$ is model complexity
+- $n$ is sample size
+
+### 3. Hybrid Methods
+
+MMHC algorithm:
+1. Learn skeleton using constraint-based method
+2. Orient edges using score-based method
+
+Score function:
+
+$$
+\text{Score}(G) = \text{BIC}(G) + \lambda \text{Sparsity}(G)
+$$
+
+## Advanced Topics
+
+### 1. Counterfactual Analysis
+
+Fundamental problem of causal inference:
+
+$$
+\text{ACE} = \mathbb{E}[Y(1) - Y(0)]
+$$
+
+But we only observe:
+
+$$
+Y = TY(1) + (1-T)Y(0)
+$$
+
+### 2. Mediation Analysis
+
+Direct and indirect effects:
+
+$$
+\begin{aligned}
+\text{NDE} &= \mathbb{E}[Y(t,M(t'))] - \mathbb{E}[Y(t',M(t'))] \\
+\text{NIE} &= \mathbb{E}[Y(t,M(t))] - \mathbb{E}[Y(t,M(t'))]
+\end{aligned}
+$$
+
+### 3. Time-Varying Treatments
+
+G-computation formula:
+
+$$
+\mathbb{E}[Y_{\bar{a}}] = \sum_{\bar{l}} \prod_{t=0}^K P(l_t|l_{t-1},a_{t-1})P(y|\bar{l},\bar{a})
+$$
+
+## Implementation Considerations
+
+### 1. Sensitivity Analysis
+
+Rosenbaum bounds:
+
+$$
+\frac{1}{\Gamma} \leq \frac{P(Z=1|X)P(Z=0|X')}{P(Z=0|X)P(Z=1|X')} \leq \Gamma
+$$
+
+### 2. Missing Data
+
+Multiple imputation:
+
+$$
+\hat{\theta} = \frac{1}{M}\sum_{m=1}^M \hat{\theta}_m
+$$
+
+### 3. Heterogeneous Effects
+
+Conditional average treatment effect:
+
+$$
+\text{CATE}(x) = \mathbb{E}[Y(1) - Y(0)|X=x]
+$$
+
+## Best Practices
+
+### 1. Study Design
+
+1. Randomization:
+   - Complete randomization
+   - Stratified randomization
+   - Cluster randomization
+
+2. Sample Size:
+   - Power analysis
+   - Effect size estimation
+   - Variance components
+
+3. Measurement:
+   - Reliability
+   - Validity
+   - Missing data handling
+
+### 2. Analysis Strategy
+
+1. Identification:
+   - Check assumptions
+   - Sensitivity analysis
+   - Multiple methods
+
+2. Estimation:
+   - Robust methods
+   - Bootstrap
+   - Cross-validation
+
+3. Interpretation:
+   - Effect sizes
+   - Confidence intervals
+   - Multiple testing
+
+## Applications
+
+### 1. Economics
+
+Program evaluation:
+- Treatment effects
+- Policy analysis
+- Market interventions
+
+### 2. Healthcare
+
+Clinical trials:
+- Drug efficacy
+- Treatment comparison
+- Side effects
+
+### 3. Social Sciences
+
+Policy research:
+- Educational interventions
+- Social programs
+- Behavioral studies
+
+## References
+
+1. Theory:
+   - "Causality" by Pearl
+   - "Causal Inference in Statistics" by Pearl et al.
+   - "Elements of Causal Inference" by Peters et al.
+
+2. Methods:
+   - "Mostly Harmless Econometrics" by Angrist and Pischke
+   - "Counterfactuals and Causal Inference" by Morgan and Winship
+   - "Causal Inference for Statistics" by Hernán and Robins
+
+3. Applications:
+   - "Causal Machine Learning" by Athey and Imbens
+   - "The Book of Why" by Pearl and Mackenzie
+   - "Observation and Experiment" by Rosenbaum
