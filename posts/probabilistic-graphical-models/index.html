@@ -7,9 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ram Polisetti">
-<meta name="dcterms.date" content="2024-11-20">
+<meta name="dcterms.date" content="2024-03-19">
+<meta name="description" content="A rigorous exploration of probabilistic graphical models, covering mathematical foundations, inference algorithms, and learning methods.">
 
-<title>Welcome to BendTheCurve – BendThe-Curve</title>
+<title>Probabilistic Graphical Models: Mathematical Foundations – BendThe-Curve</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -187,7 +188,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Welcome to BendTheCurve</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Probabilistic Graphical Models: Mathematical Foundations</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -197,10 +198,17 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Welcome to BendTheCurve</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">welcome</div>
-                <div class="quarto-category">introduction</div>
+      <h1 class="title">Probabilistic Graphical Models: Mathematical Foundations</h1>
+                  <div>
+        <div class="description">
+          A rigorous exploration of probabilistic graphical models, covering mathematical foundations, inference algorithms, and learning methods.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">machine-learning</div>
+                <div class="quarto-category">probabilistic-models</div>
+                <div class="quarto-category">mathematics</div>
+                <div class="quarto-category">bayesian</div>
               </div>
                   </div>
   </div>
@@ -218,7 +226,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 20, 2024</p>
+        <p class="date">March 19, 2024</p>
       </div>
     </div>
     
@@ -302,10 +310,54 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome-to-bendthecurve" id="toc-welcome-to-bendthecurve" class="nav-link active" data-scroll-target="#welcome-to-bendthecurve">Welcome to BendTheCurve</a>
+  <li><a href="#probabilistic-graphical-models" id="toc-probabilistic-graphical-models" class="nav-link active" data-scroll-target="#probabilistic-graphical-models">Probabilistic Graphical Models</a>
   <ul class="collapse">
-  <li><a href="#what-to-expect" id="toc-what-to-expect" class="nav-link" data-scroll-target="#what-to-expect">What to Expect</a></li>
-  <li><a href="#join-the-journey" id="toc-join-the-journey" class="nav-link" data-scroll-target="#join-the-journey">Join the Journey</a></li>
+  <li><a href="#bayesian-networks" id="toc-bayesian-networks" class="nav-link" data-scroll-target="#bayesian-networks">Bayesian Networks</a>
+  <ul class="collapse">
+  <li><a href="#factorization" id="toc-factorization" class="nav-link" data-scroll-target="#factorization">1. Factorization</a></li>
+  <li><a href="#conditional-independence" id="toc-conditional-independence" class="nav-link" data-scroll-target="#conditional-independence">2. Conditional Independence</a></li>
+  </ul></li>
+  <li><a href="#markov-random-fields" id="toc-markov-random-fields" class="nav-link" data-scroll-target="#markov-random-fields">Markov Random Fields</a>
+  <ul class="collapse">
+  <li><a href="#gibbs-distribution" id="toc-gibbs-distribution" class="nav-link" data-scroll-target="#gibbs-distribution">1. Gibbs Distribution</a></li>
+  <li><a href="#hammersley-clifford-theorem" id="toc-hammersley-clifford-theorem" class="nav-link" data-scroll-target="#hammersley-clifford-theorem">2. Hammersley-Clifford Theorem</a></li>
+  </ul></li>
+  <li><a href="#inference-algorithms" id="toc-inference-algorithms" class="nav-link" data-scroll-target="#inference-algorithms">Inference Algorithms</a>
+  <ul class="collapse">
+  <li><a href="#variable-elimination" id="toc-variable-elimination" class="nav-link" data-scroll-target="#variable-elimination">1. Variable Elimination</a></li>
+  <li><a href="#belief-propagation" id="toc-belief-propagation" class="nav-link" data-scroll-target="#belief-propagation">2. Belief Propagation</a></li>
+  <li><a href="#junction-tree-algorithm" id="toc-junction-tree-algorithm" class="nav-link" data-scroll-target="#junction-tree-algorithm">3. Junction Tree Algorithm</a></li>
+  </ul></li>
+  <li><a href="#learning-methods" id="toc-learning-methods" class="nav-link" data-scroll-target="#learning-methods">Learning Methods</a>
+  <ul class="collapse">
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation">1. Maximum Likelihood Estimation</a></li>
+  <li><a href="#bayesian-parameter-learning" id="toc-bayesian-parameter-learning" class="nav-link" data-scroll-target="#bayesian-parameter-learning">2. Bayesian Parameter Learning</a></li>
+  <li><a href="#structure-learning" id="toc-structure-learning" class="nav-link" data-scroll-target="#structure-learning">3. Structure Learning</a></li>
+  </ul></li>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
+  <ul class="collapse">
+  <li><a href="#variational-inference" id="toc-variational-inference" class="nav-link" data-scroll-target="#variational-inference">1. Variational Inference</a></li>
+  <li><a href="#mcmc-methods" id="toc-mcmc-methods" class="nav-link" data-scroll-target="#mcmc-methods">2. MCMC Methods</a></li>
+  <li><a href="#conditional-random-fields" id="toc-conditional-random-fields" class="nav-link" data-scroll-target="#conditional-random-fields">3. Conditional Random Fields</a></li>
+  </ul></li>
+  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
+  <ul class="collapse">
+  <li><a href="#numerical-stability" id="toc-numerical-stability" class="nav-link" data-scroll-target="#numerical-stability">1. Numerical Stability</a></li>
+  <li><a href="#sparse-representations" id="toc-sparse-representations" class="nav-link" data-scroll-target="#sparse-representations">2. Sparse Representations</a></li>
+  <li><a href="#parallelization" id="toc-parallelization" class="nav-link" data-scroll-target="#parallelization">3. Parallelization</a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
+  <ul class="collapse">
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">1. Model Selection</a></li>
+  <li><a href="#performance-optimization" id="toc-performance-optimization" class="nav-link" data-scroll-target="#performance-optimization">2. Performance Optimization</a></li>
+  </ul></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a>
+  <ul class="collapse">
+  <li><a href="#medical-diagnosis" id="toc-medical-diagnosis" class="nav-link" data-scroll-target="#medical-diagnosis">1. Medical Diagnosis</a></li>
+  <li><a href="#computer-vision" id="toc-computer-vision" class="nav-link" data-scroll-target="#computer-vision">2. Computer Vision</a></li>
+  <li><a href="#natural-language-processing" id="toc-natural-language-processing" class="nav-link" data-scroll-target="#natural-language-processing">3. Natural Language Processing</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -317,22 +369,275 @@ window.Quarto = {
 
 
 
-<section id="welcome-to-bendthecurve" class="level1">
-<h1>Welcome to BendTheCurve</h1>
-<p>I’m excited to introduce BendTheCurve, a platform dedicated to exploring and sharing insights about data science, machine learning, and their real-world applications. Here, we’ll dive deep into:</p>
-<section id="what-to-expect" class="level2">
-<h2 class="anchored" data-anchor-id="what-to-expect">What to Expect</h2>
-<ul>
-<li><strong>Data Science Insights</strong>: Regular posts about data analysis, visualization, and interpretation</li>
-<li><strong>Machine Learning Deep Dives</strong>: Exploring both basic and advanced ML concepts</li>
-<li><strong>Practical Tutorials</strong>: Hands-on guides and code examples</li>
-<li><strong>Industry Applications</strong>: Real-world case studies and applications</li>
-</ul>
+<section id="probabilistic-graphical-models" class="level1">
+<h1>Probabilistic Graphical Models</h1>
+<section id="bayesian-networks" class="level2">
+<h2 class="anchored" data-anchor-id="bayesian-networks">Bayesian Networks</h2>
+<section id="factorization" class="level3">
+<h3 class="anchored" data-anchor-id="factorization">1. Factorization</h3>
+<p>Joint probability factorization:</p>
+<p><span class="math display">\[
+P(X_1, ..., X_n) = \prod_{i=1}^n P(X_i | \text{Pa}(X_i))
+\]</span></p>
+<p>Where: - <span class="math inline">\(X_i\)</span> are random variables - <span class="math inline">\(\text{Pa}(X_i)\)</span> are parents of <span class="math inline">\(X_i\)</span> in the graph</p>
 </section>
-<section id="join-the-journey" class="level2">
-<h2 class="anchored" data-anchor-id="join-the-journey">Join the Journey</h2>
-<p>Whether you’re a beginner in data science or an experienced practitioner, BendTheCurve aims to provide valuable content that helps you grow in your data science journey.</p>
-<p>Stay tuned for upcoming posts!</p>
+<section id="conditional-independence" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-independence">2. Conditional Independence</h3>
+<p>D-separation criterion: - Two nodes are d-separated if all paths between them are blocked - A path is blocked if: * Contains a collider not in evidence * Contains a non-collider in evidence</p>
+<p>Formal definition:</p>
+<p><span class="math display">\[
+X \perp\!\!\!\perp Y | Z \iff P(X|Y,Z) = P(X|Z)
+\]</span></p>
+</section>
+</section>
+<section id="markov-random-fields" class="level2">
+<h2 class="anchored" data-anchor-id="markov-random-fields">Markov Random Fields</h2>
+<section id="gibbs-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="gibbs-distribution">1. Gibbs Distribution</h3>
+<p>Joint distribution representation:</p>
+<p><span class="math display">\[
+P(X = x) = \frac{1}{Z}\exp\left(-\sum_{c \in \mathcal{C}} \psi_c(x_c)\right)
+\]</span></p>
+<p>Where: - <span class="math inline">\(\mathcal{C}\)</span> is the set of cliques - <span class="math inline">\(\psi_c\)</span> are potential functions - <span class="math inline">\(Z\)</span> is the partition function:</p>
+<p><span class="math display">\[
+Z = \sum_x \exp\left(-\sum_{c \in \mathcal{C}} \psi_c(x_c)\right)
+\]</span></p>
+</section>
+<section id="hammersley-clifford-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="hammersley-clifford-theorem">2. Hammersley-Clifford Theorem</h3>
+<p>Equivalence between positive distributions and Gibbs distributions:</p>
+<p><span class="math display">\[
+P(X = x) &gt; 0 \iff P(X = x) = \frac{1}{Z}\prod_{c \in \mathcal{C}} \phi_c(x_c)
+\]</span></p>
+<p>Where: - <span class="math inline">\(\phi_c\)</span> are non-negative factors</p>
+</section>
+</section>
+<section id="inference-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="inference-algorithms">Inference Algorithms</h2>
+<section id="variable-elimination" class="level3">
+<h3 class="anchored" data-anchor-id="variable-elimination">1. Variable Elimination</h3>
+<p>Complexity for tree-structured graphs:</p>
+<p><span class="math display">\[
+O(n \cdot d^{w})
+\]</span></p>
+<p>Where: - <span class="math inline">\(n\)</span> is number of variables - <span class="math inline">\(d\)</span> is domain size - <span class="math inline">\(w\)</span> is tree width</p>
+<p>Algorithm steps: 1. Choose elimination ordering 2. For each variable: - Multiply relevant factors - Sum out variable</p>
+</section>
+<section id="belief-propagation" class="level3">
+<h3 class="anchored" data-anchor-id="belief-propagation">2. Belief Propagation</h3>
+<p>Message passing equations:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mu_{i \to j}(x_j) &amp;= \sum_{x_i} \phi_i(x_i)\phi_{ij}(x_i,x_j)\prod_{k \in N(i)\backslash j} \mu_{k \to i}(x_i) \\
+b_i(x_i) &amp;\propto \phi_i(x_i)\prod_{j \in N(i)} \mu_{j \to i}(x_i)
+\end{aligned}
+\]</span></p>
+<p>Where: - <span class="math inline">\(\mu_{i \to j}\)</span> is message from i to j - <span class="math inline">\(b_i\)</span> is belief at node i - <span class="math inline">\(N(i)\)</span> is neighbors of i</p>
+</section>
+<section id="junction-tree-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="junction-tree-algorithm">3. Junction Tree Algorithm</h3>
+<p>Clique tree construction: 1. Moralize graph 2. Triangulate 3. Find maximal cliques 4. Build junction tree</p>
+<p>Running intersection property:</p>
+<p><span class="math display">\[
+S_{ij} = C_i \cap C_j \subseteq C_k
+\]</span></p>
+<p>For any cliques <span class="math inline">\(C_i\)</span>, <span class="math inline">\(C_j\)</span>, and clique <span class="math inline">\(C_k\)</span> on path between them.</p>
+</section>
+</section>
+<section id="learning-methods" class="level2">
+<h2 class="anchored" data-anchor-id="learning-methods">Learning Methods</h2>
+<section id="maximum-likelihood-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-likelihood-estimation">1. Maximum Likelihood Estimation</h3>
+<p>Objective function:</p>
+<p><span class="math display">\[
+\hat{\theta}_{MLE} = \arg\max_\theta \sum_{i=1}^N \log P(x^{(i)}|\theta)
+\]</span></p>
+<p>For complete data in Bayesian networks:</p>
+<p><span class="math display">\[
+\hat{\theta}_{ijk} = \frac{N_{ijk}}{\sum_k N_{ijk}}
+\]</span></p>
+<p>Where: - <span class="math inline">\(N_{ijk}\)</span> is count of <span class="math inline">\(X_i=k\)</span> with parent configuration j</p>
+</section>
+<section id="bayesian-parameter-learning" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-parameter-learning">2. Bayesian Parameter Learning</h3>
+<p>Posterior distribution:</p>
+<p><span class="math display">\[
+P(\theta|D) \propto P(D|\theta)P(\theta)
+\]</span></p>
+<p>With Dirichlet prior:</p>
+<p><span class="math display">\[
+\theta_{ijk} \sim \text{Dir}(\alpha_{ijk})
+\]</span></p>
+<p>Posterior parameters:</p>
+<p><span class="math display">\[
+\alpha_{ijk}^{\text{post}} = \alpha_{ijk} + N_{ijk}
+\]</span></p>
+</section>
+<section id="structure-learning" class="level3">
+<h3 class="anchored" data-anchor-id="structure-learning">3. Structure Learning</h3>
+<p>Score-based learning objective:</p>
+<p><span class="math display">\[
+G^* = \arg\max_G \text{score}(G:D)
+\]</span></p>
+<p>Common scores: 1. BIC score:</p>
+<p><span class="math display">\[
+\text{BIC}(G:D) = \ell(D|\hat{\theta}, G) - \frac{\log N}{2}|G|
+\]</span></p>
+<ol start="2" type="1">
+<li>Bayesian score:</li>
+</ol>
+<p><span class="math display">\[
+P(G|D) \propto P(D|G)P(G)
+\]</span></p>
+</section>
+</section>
+<section id="advanced-topics" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
+<section id="variational-inference" class="level3">
+<h3 class="anchored" data-anchor-id="variational-inference">1. Variational Inference</h3>
+<p>Evidence lower bound (ELBO):</p>
+<p><span class="math display">\[
+\mathcal{L}(q) = \mathbb{E}_q[\log p(x,z)] - \mathbb{E}_q[\log q(z)]
+\]</span></p>
+<p>Mean field approximation:</p>
+<p><span class="math display">\[
+q(z) = \prod_i q_i(z_i)
+\]</span></p>
+<p>Update equations:</p>
+<p><span class="math display">\[
+\log q_j^*(z_j) = \mathbb{E}_{q_{-j}}[\log p(x,z)] + \text{const}
+\]</span></p>
+</section>
+<section id="mcmc-methods" class="level3">
+<h3 class="anchored" data-anchor-id="mcmc-methods">2. MCMC Methods</h3>
+<p>Metropolis-Hastings acceptance ratio:</p>
+<p><span class="math display">\[
+\alpha = \min\left(1, \frac{p(x')q(x|x')}{p(x)q(x'|x)}\right)
+\]</span></p>
+<p>Gibbs sampling update:</p>
+<p><span class="math display">\[
+x_i^{(t+1)} \sim p(x_i|x_{-i}^{(t)})
+\]</span></p>
+</section>
+<section id="conditional-random-fields" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-random-fields">3. Conditional Random Fields</h3>
+<p>Linear-chain CRF probability:</p>
+<p><span class="math display">\[
+P(y|x) = \frac{1}{Z(x)}\exp\left(\sum_{t=1}^T\sum_k \lambda_k f_k(y_t,y_{t-1},x_t)\right)
+\]</span></p>
+<p>Where: - <span class="math inline">\(f_k\)</span> are feature functions - <span class="math inline">\(\lambda_k\)</span> are weights - <span class="math inline">\(Z(x)\)</span> is normalization factor</p>
+</section>
+</section>
+<section id="implementation-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
+<section id="numerical-stability" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-stability">1. Numerical Stability</h3>
+<p>Log-space computations:</p>
+<p><span class="math display">\[
+\log\sum_i \exp(x_i) = \max_i x_i + \log\sum_i \exp(x_i - \max_i x_i)
+\]</span></p>
+</section>
+<section id="sparse-representations" class="level3">
+<h3 class="anchored" data-anchor-id="sparse-representations">2. Sparse Representations</h3>
+<p>Efficient factor operations: - Sparse matrices for CPTs - Vectorized operations - Caching intermediate results</p>
+</section>
+<section id="parallelization" class="level3">
+<h3 class="anchored" data-anchor-id="parallelization">3. Parallelization</h3>
+<p>Parallel message passing: - Tree-structured graphs - Junction tree clusters - Mini-batch learning</p>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<section id="model-selection" class="level3">
+<h3 class="anchored" data-anchor-id="model-selection">1. Model Selection</h3>
+<ol type="1">
+<li>Network Structure:
+<ul>
+<li>Expert knowledge</li>
+<li>Causal relationships</li>
+<li>Data-driven learning</li>
+</ul></li>
+<li>Inference Method:
+<ul>
+<li>Exact vs approximate</li>
+<li>Graph structure</li>
+<li>Domain size</li>
+</ul></li>
+<li>Learning Approach:
+<ul>
+<li>Data completeness</li>
+<li>Prior knowledge</li>
+<li>Computational resources</li>
+</ul></li>
+</ol>
+</section>
+<section id="performance-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="performance-optimization">2. Performance Optimization</h3>
+<ol type="1">
+<li>Variable Ordering:
+<ul>
+<li>Min-fill heuristic</li>
+<li>Min-degree ordering</li>
+<li>Weighted variants</li>
+</ul></li>
+<li>Message Scheduling:
+<ul>
+<li>Residual belief propagation</li>
+<li>Priority-based updates</li>
+<li>Asynchronous methods</li>
+</ul></li>
+<li>Memory Management:
+<ul>
+<li>Factor caching</li>
+<li>Message memoization</li>
+<li>Sparse representations</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="applications" class="level2">
+<h2 class="anchored" data-anchor-id="applications">Applications</h2>
+<section id="medical-diagnosis" class="level3">
+<h3 class="anchored" data-anchor-id="medical-diagnosis">1. Medical Diagnosis</h3>
+<p>Network structure: - Diseases as root nodes - Symptoms as leaf nodes - Test results as intermediate nodes</p>
+<p>Inference tasks: - Diagnostic reasoning - Predictive reasoning - Intercausal reasoning</p>
+</section>
+<section id="computer-vision" class="level3">
+<h3 class="anchored" data-anchor-id="computer-vision">2. Computer Vision</h3>
+<p>MRF applications: - Image segmentation - Stereo matching - Image restoration</p>
+<p>Energy function:</p>
+<p><span class="math display">\[
+E(x) = \sum_i \phi_i(x_i) + \sum_{i,j} \phi_{ij}(x_i,x_j)
+\]</span></p>
+</section>
+<section id="natural-language-processing" class="level3">
+<h3 class="anchored" data-anchor-id="natural-language-processing">3. Natural Language Processing</h3>
+<p>Linear-chain CRFs: - Part-of-speech tagging - Named entity recognition - Sequence labeling</p>
+<p>Feature templates: - Word features - Context windows - Transition features</p>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Theory:
+<ul>
+<li>“Probabilistic Graphical Models” by Koller and Friedman</li>
+<li>“Pattern Recognition and Machine Learning” by Bishop</li>
+<li>“Information Theory, Inference, and Learning Algorithms” by MacKay</li>
+</ul></li>
+<li>Algorithms:
+<ul>
+<li>“Understanding Belief Propagation and its Generalizations” by Yedidia et al.</li>
+<li>“An Introduction to MCMC for Machine Learning” by Andrieu et al.</li>
+<li>“Structured Prediction for Natural Language Processing” by Smith</li>
+</ul></li>
+<li>Applications:
+<ul>
+<li>“Medical Applications of Artificial Intelligence” by Dua and Acharya</li>
+<li>“Computer Vision: A Modern Approach” by Forsyth and Ponce</li>
+<li>“Speech and Language Processing” by Jurafsky and Martin</li>
+</ul></li>
+</ol>
 
 
 

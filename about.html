@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -67,15 +69,67 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script async="" src="https://hypothes.is/embed.js"></script>
 <script>
+
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    document.body.classList.add('hypothesis-enabled');
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
   });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
 </script>
 
-
-</head>
+<link rel="alternate" type="application/rss+xml" title="BendThe-Curve" href="about.xml" data-external="1"></head>
 
 <body class="nav-sidebar docked nav-fixed">
 
@@ -189,6 +243,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+ <span class="menu-text">Note: Advanced posts with heavy computations are currently under maintenance</span>
+  </li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -203,7 +271,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#blog-focus" id="toc-blog-focus" class="nav-link" data-scroll-target="#blog-focus">Blog Focus</a></li>
   </ul>
 </nav>
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(19)</span></div><div class="category" data-category="algorithms">algorithms <span class="quarto-category-count">(2)</span></div><div class="category" data-category="applications">applications <span class="quarto-category-count">(1)</span></div><div class="category" data-category="architectures">architectures <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bayesian">bayesian <span class="quarto-category-count">(1)</span></div><div class="category" data-category="beginner">beginner <span class="quarto-category-count">(3)</span></div><div class="category" data-category="causality">causality <span class="quarto-category-count">(1)</span></div><div class="category" data-category="complexity">complexity <span class="quarto-category-count">(1)</span></div><div class="category" data-category="deep-learning">deep-learning <span class="quarto-category-count">(3)</span></div><div class="category" data-category="fundamentals">fundamentals <span class="quarto-category-count">(2)</span></div><div class="category" data-category="generative-models">generative-models <span class="quarto-category-count">(1)</span></div><div class="category" data-category="hands-on">hands-on <span class="quarto-category-count">(1)</span></div><div class="category" data-category="information-theory">information-theory <span class="quarto-category-count">(1)</span></div><div class="category" data-category="introduction">introduction <span class="quarto-category-count">(1)</span></div><div class="category" data-category="machine-learning">machine-learning <span class="quarto-category-count">(16)</span></div><div class="category" data-category="mathematics">mathematics <span class="quarto-category-count">(12)</span></div><div class="category" data-category="neural-networks">neural-networks <span class="quarto-category-count">(2)</span></div><div class="category" data-category="online-learning">online-learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="optimization">optimization <span class="quarto-category-count">(2)</span></div><div class="category" data-category="probabilistic-models">probabilistic-models <span class="quarto-category-count">(1)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="real-world">real-world <span class="quarto-category-count">(1)</span></div><div class="category" data-category="reinforcement-learning">reinforcement-learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="stability">stability <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistics">statistics <span class="quarto-category-count">(4)</span></div><div class="category" data-category="theory">theory <span class="quarto-category-count">(10)</span></div><div class="category" data-category="welcome">welcome <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <div class="quarto-about-jolla">
   <img src="profile.jpg" class="about-image
@@ -244,7 +312,799 @@ ul.task-list li input[type="checkbox"] {
 
 
 </section>
-</main> 
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1732125156823" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="98">
+<div class="thumbnail">
+<p><a href="./posts/bend-the-curve-intro/index.html" class="no-external"></a></p><a href="./posts/bend-the-curve-intro/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/bend-the-curve-intro/image.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/bend-the-curve-intro/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('welcome'); return false;">
+welcome
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('introduction'); return false;">
+introduction
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/bend-the-curve-intro/index.html" class="no-external">I’m excited to introduce BendTheCurve, a platform dedicated to exploring and sharing insights about data science, machine learning, and their real-world applications. Here…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+Nov 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732266330748" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="758">
+<div class="thumbnail">
+<p><a href="./posts/advanced-neural-architectures/index.html" class="no-external"></a></p><a href="./posts/advanced-neural-architectures/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/advanced-neural-architectures/neural_architectures.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/advanced-neural-architectures/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('deep-learning'); return false;">
+deep-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('neural-networks'); return false;">
+neural-networks
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('architectures'); return false;">
+architectures
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="machine-learning,theory,mathematics,stability" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732267118241" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="633">
+<div class="thumbnail">
+<p><a href="./posts/algorithmic-stability/index.html" class="no-external"></a></p><a href="./posts/algorithmic-stability/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/algorithmic-stability/stability.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/algorithmic-stability/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/algorithmic-stability/index.html" class="no-external">Algorithmic Stability and Learning Theory</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/algorithmic-stability/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('stability'); return false;">
+stability
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/algorithmic-stability/index.html" class="no-external">A rigorous exploration of algorithmic stability and its role in learning theory, covering different notions of stability and their implications for generalization.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/algorithmic-stability/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="machine-learning,causality,statistics,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732266538002" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="589">
+<div class="thumbnail">
+<p><a href="./posts/causal-inference/index.html" class="no-external"></a></p><a href="./posts/causal-inference/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/causal-inference/causal_inference.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/causal-inference/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/causal-inference/index.html" class="no-external">Causal Inference and Structural Learning</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/causal-inference/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('causality'); return false;">
+causality
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
+statistics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/causal-inference/index.html" class="no-external">A rigorous exploration of causal inference and structural learning, covering identification, estimation, and structural causal models.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/causal-inference/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="machine-learning,theory,complexity,algorithms" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732267340057" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="619">
+<div class="thumbnail">
+<p><a href="./posts/computational-learning-theory/index.html" class="no-external"></a></p><a href="./posts/computational-learning-theory/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/computational-learning-theory/computational_theory.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/computational-learning-theory/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/computational-learning-theory/index.html" class="no-external">Computational Learning Theory</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/computational-learning-theory/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('complexity'); return false;">
+complexity
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
+algorithms
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/computational-learning-theory/index.html" class="no-external">A rigorous exploration of computational learning theory, covering complexity analysis, learnability, and algorithmic efficiency in machine learning.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/computational-learning-theory/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="deep-learning,neural-networks,beginner" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732267686094" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="794">
+<div class="thumbnail">
+<p><a href="./posts/deep-learning-beginners/index.html" class="no-external"></a></p><a href="./posts/deep-learning-beginners/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/deep-learning-beginners/deep_learning.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/deep-learning-beginners/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/deep-learning-beginners/index.html" class="no-external">Deep Learning: The Technology Behind AI’s Recent Breakthroughs</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/deep-learning-beginners/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('deep-learning'); return false;">
+deep-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('neural-networks'); return false;">
+neural-networks
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('beginner'); return false;">
+beginner
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/deep-learning-beginners/index.html" class="no-external">Discover how deep learning is revolutionizing artificial intelligence and why it’s become the driving force behind recent AI breakthroughs.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/deep-learning-beginners/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="machine-learning,generative-models,deep-learning,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732266407922" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="774">
+<div class="thumbnail">
+<p><a href="./posts/generative-models/index.html" class="no-external"></a></p><a href="./posts/generative-models/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/generative-models/generative_models.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/generative-models/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/generative-models/index.html" class="no-external">Generative Models: Mathematical Foundations and Architectures</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/generative-models/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('generative-models'); return false;">
+generative-models
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('deep-learning'); return false;">
+deep-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/generative-models/index.html" class="no-external">A rigorous mathematical exploration of generative models, including GANs, VAEs, and diffusion models.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/generative-models/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-categories="machine-learning,information-theory,mathematics,theory" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732266593827" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="565">
+<div class="thumbnail">
+<p><a href="./posts/information-theory-ml/index.html" class="no-external"></a></p><a href="./posts/information-theory-ml/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/information-theory-ml/information_theory.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/information-theory-ml/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/information-theory-ml/index.html" class="no-external">Information Theory in Machine Learning</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/information-theory-ml/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('information-theory'); return false;">
+information-theory
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/information-theory-ml/index.html" class="no-external">A rigorous exploration of information theory principles and their applications in machine learning algorithms.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/information-theory-ml/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-categories="machine-learning,fundamentals,python,hands-on" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732267780935" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1056">
+<div class="thumbnail">
+<p><a href="./posts/ml-fundamentals-beginners/index.html" class="no-external"></a></p><a href="./posts/ml-fundamentals-beginners/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/ml-fundamentals-beginners/ml_fundamentals.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/ml-fundamentals-beginners/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/ml-fundamentals-beginners/index.html" class="no-external">Machine Learning: From Theory to Practice</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/ml-fundamentals-beginners/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('fundamentals'); return false;">
+fundamentals
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
+python
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('hands-on'); return false;">
+hands-on
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/ml-fundamentals-beginners/index.html" class="no-external">A practical journey through machine learning fundamentals, combining intuitive explanations with hands-on Python examples.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/ml-fundamentals-beginners/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="9" data-categories="machine-learning,fundamentals,theory" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732265388063" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="752">
+<div class="thumbnail">
+<p><a href="./posts/ml-fundamentals/index.html" class="no-external"></a></p><a href="./posts/ml-fundamentals/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/ml-fundamentals/ml_basics.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/ml-fundamentals/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/ml-fundamentals/index.html" class="no-external">ML Fundamentals: Understanding the Basics</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/ml-fundamentals/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('fundamentals'); return false;">
+fundamentals
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/ml-fundamentals/index.html" class="no-external">A comprehensive introduction to machine learning fundamentals, core concepts, and essential terminology that every aspiring ML practitioner should know.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/ml-fundamentals/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="10" data-categories="machine-learning,applications,real-world,beginner" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732266201532" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="841">
+<div class="thumbnail">
+<p><a href="./posts/ml-in-everyday-life/index.html" class="no-external"></a></p><a href="./posts/ml-in-everyday-life/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/ml-in-everyday-life/ml_everyday.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/ml-in-everyday-life/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/ml-in-everyday-life/index.html" class="no-external">Machine Learning in Everyday Life: A Practical Guide</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/ml-in-everyday-life/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('applications'); return false;">
+applications
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('real-world'); return false;">
+real-world
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('beginner'); return false;">
+beginner
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/ml-in-everyday-life/index.html" class="no-external">Discover how machine learning is already part of your daily life and how it makes things easier, explained in simple terms with real-world examples.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/ml-in-everyday-life/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="11" data-categories="machine-learning,theory,mathematics,statistics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732266905091" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="560">
+<div class="thumbnail">
+<p><a href="./posts/ml-theory-foundations/index.html" class="no-external"></a></p><a href="./posts/ml-theory-foundations/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/ml-theory-foundations/ml_theory.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/ml-theory-foundations/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/ml-theory-foundations/index.html" class="no-external">Machine Learning Theory: Mathematical Foundations</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/ml-theory-foundations/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
+statistics
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/ml-theory-foundations/index.html" class="no-external">A rigorous exploration of machine learning theory, covering statistical learning theory, optimization theory, and fundamental bounds.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/ml-theory-foundations/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="12" data-categories="machine-learning,theory,mathematics,online-learning" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732267182502" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="662">
+<div class="thumbnail">
+<p><a href="./posts/online-learning/index.html" class="no-external"></a></p><a href="./posts/online-learning/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/online-learning/online_learning.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/online-learning/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/online-learning/index.html" class="no-external">Online Learning and Regret Minimization</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/online-learning/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('online-learning'); return false;">
+online-learning
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/online-learning/index.html" class="no-external">A rigorous exploration of online learning theory and regret minimization, covering fundamental algorithms, bounds, and applications.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/online-learning/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="13" data-categories="machine-learning,optimization,mathematics,algorithms" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732266277991" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="775">
+<div class="thumbnail">
+<p><a href="./posts/optimization-algorithms/index.html" class="no-external"></a></p><a href="./posts/optimization-algorithms/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/optimization-algorithms/optimization.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/optimization-algorithms/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/optimization-algorithms/index.html" class="no-external">Optimization Algorithms in Machine Learning: A Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/optimization-algorithms/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('optimization'); return false;">
+optimization
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
+algorithms
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/optimization-algorithms/index.html" class="no-external">A comprehensive technical exploration of optimization algorithms in machine learning, covering mathematical foundations and implementation details.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/optimization-algorithms/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="14" data-categories="machine-learning,optimization,mathematics,theory" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732267287603" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="560">
+<div class="thumbnail">
+<p><a href="./posts/optimization-theory/index.html" class="no-external"></a></p><a href="./posts/optimization-theory/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/optimization-theory/optimization_theory.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/optimization-theory/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/optimization-theory/index.html" class="no-external">Optimization Theory in Machine Learning</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/optimization-theory/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('optimization'); return false;">
+optimization
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/optimization-theory/index.html" class="no-external">A rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/optimization-theory/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="15" data-categories="machine-learning,theory,mathematics,statistics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732266967964" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="588">
+<div class="thumbnail">
+<p><a href="./posts/pac-learning-theory/index.html" class="no-external"></a></p><a href="./posts/pac-learning-theory/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/pac-learning-theory/pac_learning.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/pac-learning-theory/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/pac-learning-theory/index.html" class="no-external">PAC Learning Theory and VC Dimension</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/pac-learning-theory/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
+statistics
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/pac-learning-theory/index.html" class="no-external">A rigorous exploration of PAC learning theory and VC dimension, covering fundamental bounds, sample complexity, and learnability.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/pac-learning-theory/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="16" data-categories="machine-learning,probabilistic-models,mathematics,bayesian" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732266473594" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="699">
+<div class="thumbnail">
+<p><a href="./posts/probabilistic-graphical-models/index.html" class="no-external"></a></p><a href="./posts/probabilistic-graphical-models/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/probabilistic-graphical-models/pgm.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/probabilistic-graphical-models/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/probabilistic-graphical-models/index.html" class="no-external">Probabilistic Graphical Models: Mathematical Foundations</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/probabilistic-graphical-models/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('probabilistic-models'); return false;">
+probabilistic-models
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bayesian'); return false;">
+bayesian
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/probabilistic-graphical-models/index.html" class="no-external">A rigorous exploration of probabilistic graphical models, covering mathematical foundations, inference algorithms, and learning methods.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/probabilistic-graphical-models/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="17" data-categories="machine-learning,reinforcement-learning,theory,beginner" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732266167603" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="913">
+<div class="thumbnail">
+<p><a href="./posts/reinforcement-learning-basics/index.html" class="no-external"></a></p><a href="./posts/reinforcement-learning-basics/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/reinforcement-learning-basics/rl_basics.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/reinforcement-learning-basics/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/reinforcement-learning-basics/index.html" class="no-external">Understanding Reinforcement Learning: A Beginner’s Guide</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/reinforcement-learning-basics/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('reinforcement-learning'); return false;">
+reinforcement-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('beginner'); return false;">
+beginner
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/reinforcement-learning-basics/index.html" class="no-external">A beginner-friendly introduction to reinforcement learning concepts, explained through simple analogies and real-world examples.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/reinforcement-learning-basics/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="18" data-categories="machine-learning,theory,mathematics,statistics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732267231756" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="645">
+<div class="thumbnail">
+<p><a href="./posts/statistical-learning-theory/index.html" class="no-external"></a></p><a href="./posts/statistical-learning-theory/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/statistical-learning-theory/statistical_learning.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/statistical-learning-theory/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/statistical-learning-theory/index.html" class="no-external">Statistical Learning Theory and Concentration Inequalities</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/statistical-learning-theory/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
+statistics
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/statistical-learning-theory/index.html" class="no-external">A rigorous exploration of statistical learning theory and concentration inequalities, covering fundamental bounds and their applications in machine learning.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/statistical-learning-theory/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> 
   <hr class="about-sep">
    <div class="about-links">
   <a href="https://twitter.com" class="about-link" rel="" target="">
@@ -819,6 +1679,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="ram-polisetti/BendTheCurve" data-repo-id="your-repo-id" data-category="Comments" data-category-id="your-category-id" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="light">
 </div> <!-- /content -->
 
 

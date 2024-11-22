@@ -7,9 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ram Polisetti">
-<meta name="dcterms.date" content="2024-11-20">
+<meta name="dcterms.date" content="2024-03-19">
+<meta name="description" content="A rigorous exploration of algorithmic stability and its role in learning theory, covering different notions of stability and their implications for generalization.">
 
-<title>Welcome to BendTheCurve – BendThe-Curve</title>
+<title>Algorithmic Stability and Learning Theory – BendThe-Curve</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -187,7 +188,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Welcome to BendTheCurve</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Algorithmic Stability and Learning Theory</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -197,10 +198,17 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Welcome to BendTheCurve</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">welcome</div>
-                <div class="quarto-category">introduction</div>
+      <h1 class="title">Algorithmic Stability and Learning Theory</h1>
+                  <div>
+        <div class="description">
+          A rigorous exploration of algorithmic stability and its role in learning theory, covering different notions of stability and their implications for generalization.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">machine-learning</div>
+                <div class="quarto-category">theory</div>
+                <div class="quarto-category">mathematics</div>
+                <div class="quarto-category">stability</div>
               </div>
                   </div>
   </div>
@@ -218,7 +226,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 20, 2024</p>
+        <p class="date">March 19, 2024</p>
       </div>
     </div>
     
@@ -302,10 +310,55 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome-to-bendthecurve" id="toc-welcome-to-bendthecurve" class="nav-link active" data-scroll-target="#welcome-to-bendthecurve">Welcome to BendTheCurve</a>
+  <li><a href="#algorithmic-stability-and-learning-theory" id="toc-algorithmic-stability-and-learning-theory" class="nav-link active" data-scroll-target="#algorithmic-stability-and-learning-theory">Algorithmic Stability and Learning Theory</a>
   <ul class="collapse">
-  <li><a href="#what-to-expect" id="toc-what-to-expect" class="nav-link" data-scroll-target="#what-to-expect">What to Expect</a></li>
-  <li><a href="#join-the-journey" id="toc-join-the-journey" class="nav-link" data-scroll-target="#join-the-journey">Join the Journey</a></li>
+  <li><a href="#fundamental-concepts" id="toc-fundamental-concepts" class="nav-link" data-scroll-target="#fundamental-concepts">Fundamental Concepts</a>
+  <ul class="collapse">
+  <li><a href="#stability-definitions" id="toc-stability-definitions" class="nav-link" data-scroll-target="#stability-definitions">1. Stability Definitions</a></li>
+  <li><a href="#loss-stability" id="toc-loss-stability" class="nav-link" data-scroll-target="#loss-stability">2. Loss Stability</a></li>
+  <li><a href="#generalization-bounds" id="toc-generalization-bounds" class="nav-link" data-scroll-target="#generalization-bounds">3. Generalization Bounds</a></li>
+  </ul></li>
+  <li><a href="#types-of-stability" id="toc-types-of-stability" class="nav-link" data-scroll-target="#types-of-stability">Types of Stability</a>
+  <ul class="collapse">
+  <li><a href="#strong-stability" id="toc-strong-stability" class="nav-link" data-scroll-target="#strong-stability">1. Strong Stability</a></li>
+  <li><a href="#cross-validation-stability" id="toc-cross-validation-stability" class="nav-link" data-scroll-target="#cross-validation-stability">2. Cross-Validation Stability</a></li>
+  <li><a href="#algorithmic-robustness" id="toc-algorithmic-robustness" class="nav-link" data-scroll-target="#algorithmic-robustness">3. Algorithmic Robustness</a></li>
+  </ul></li>
+  <li><a href="#stability-analysis" id="toc-stability-analysis" class="nav-link" data-scroll-target="#stability-analysis">Stability Analysis</a>
+  <ul class="collapse">
+  <li><a href="#regularization-and-stability" id="toc-regularization-and-stability" class="nav-link" data-scroll-target="#regularization-and-stability">1. Regularization and Stability</a></li>
+  <li><a href="#gradient-methods" id="toc-gradient-methods" class="nav-link" data-scroll-target="#gradient-methods">2. Gradient Methods</a></li>
+  <li><a href="#ensemble-methods" id="toc-ensemble-methods" class="nav-link" data-scroll-target="#ensemble-methods">3. Ensemble Methods</a></li>
+  </ul></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a>
+  <ul class="collapse">
+  <li><a href="#regularized-learning" id="toc-regularized-learning" class="nav-link" data-scroll-target="#regularized-learning">1. Regularized Learning</a></li>
+  <li><a href="#online-learning" id="toc-online-learning" class="nav-link" data-scroll-target="#online-learning">2. Online Learning</a></li>
+  <li><a href="#deep-learning" id="toc-deep-learning" class="nav-link" data-scroll-target="#deep-learning">3. Deep Learning</a></li>
+  </ul></li>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
+  <ul class="collapse">
+  <li><a href="#local-stability" id="toc-local-stability" class="nav-link" data-scroll-target="#local-stability">1. Local Stability</a></li>
+  <li><a href="#distribution-stability" id="toc-distribution-stability" class="nav-link" data-scroll-target="#distribution-stability">2. Distribution Stability</a></li>
+  <li><a href="#algorithmic-privacy" id="toc-algorithmic-privacy" class="nav-link" data-scroll-target="#algorithmic-privacy">3. Algorithmic Privacy</a></li>
+  </ul></li>
+  <li><a href="#theoretical-results" id="toc-theoretical-results" class="nav-link" data-scroll-target="#theoretical-results">Theoretical Results</a>
+  <ul class="collapse">
+  <li><a href="#stability-hierarchy" id="toc-stability-hierarchy" class="nav-link" data-scroll-target="#stability-hierarchy">1. Stability Hierarchy</a></li>
+  <li><a href="#lower-bounds" id="toc-lower-bounds" class="nav-link" data-scroll-target="#lower-bounds">2. Lower Bounds</a></li>
+  <li><a href="#composition-theorems" id="toc-composition-theorems" class="nav-link" data-scroll-target="#composition-theorems">3. Composition Theorems</a></li>
+  </ul></li>
+  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-design" id="toc-algorithm-design" class="nav-link" data-scroll-target="#algorithm-design">1. Algorithm Design</a></li>
+  <li><a href="#stability-measures" id="toc-stability-measures" class="nav-link" data-scroll-target="#stability-measures">2. Stability Measures</a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
+  <ul class="collapse">
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">1. Model Selection</a></li>
+  <li><a href="#training-strategy" id="toc-training-strategy" class="nav-link" data-scroll-target="#training-strategy">2. Training Strategy</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -317,22 +370,331 @@ window.Quarto = {
 
 
 
-<section id="welcome-to-bendthecurve" class="level1">
-<h1>Welcome to BendTheCurve</h1>
-<p>I’m excited to introduce BendTheCurve, a platform dedicated to exploring and sharing insights about data science, machine learning, and their real-world applications. Here, we’ll dive deep into:</p>
-<section id="what-to-expect" class="level2">
-<h2 class="anchored" data-anchor-id="what-to-expect">What to Expect</h2>
-<ul>
-<li><strong>Data Science Insights</strong>: Regular posts about data analysis, visualization, and interpretation</li>
-<li><strong>Machine Learning Deep Dives</strong>: Exploring both basic and advanced ML concepts</li>
-<li><strong>Practical Tutorials</strong>: Hands-on guides and code examples</li>
-<li><strong>Industry Applications</strong>: Real-world case studies and applications</li>
-</ul>
+<section id="algorithmic-stability-and-learning-theory" class="level1">
+<h1>Algorithmic Stability and Learning Theory</h1>
+<section id="fundamental-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="fundamental-concepts">Fundamental Concepts</h2>
+<section id="stability-definitions" class="level3">
+<h3 class="anchored" data-anchor-id="stability-definitions">1. Stability Definitions</h3>
+<p>Hypothesis stability:</p>
+<p><span class="math display">\[
+|\ell(A_S,z) - \ell(A_{S^i},z)| \leq \beta_m
+\]</span></p>
+<p>Where: - <span class="math inline">\(A_S\)</span> is algorithm output on dataset <span class="math inline">\(S\)</span> - <span class="math inline">\(S^i\)</span> is dataset with i-th example replaced - <span class="math inline">\(\beta_m\)</span> is stability coefficient</p>
+<p>Uniform stability:</p>
+<p><span class="math display">\[
+\sup_{S,z,i}|\ell(A_S,z) - \ell(A_{S^i},z)| \leq \beta
+\]</span></p>
 </section>
-<section id="join-the-journey" class="level2">
-<h2 class="anchored" data-anchor-id="join-the-journey">Join the Journey</h2>
-<p>Whether you’re a beginner in data science or an experienced practitioner, BendTheCurve aims to provide valuable content that helps you grow in your data science journey.</p>
-<p>Stay tuned for upcoming posts!</p>
+<section id="loss-stability" class="level3">
+<h3 class="anchored" data-anchor-id="loss-stability">2. Loss Stability</h3>
+<p>Point-wise loss stability:</p>
+<p><span class="math display">\[
+|\ell(h_S,z) - \ell(h_{S^i},z)| \leq \beta
+\]</span></p>
+<p>Average loss stability:</p>
+<p><span class="math display">\[
+|\mathbb{E}_{z \sim \mathcal{D}}[\ell(h_S,z) - \ell(h_{S^i},z)]| \leq \beta
+\]</span></p>
+</section>
+<section id="generalization-bounds" class="level3">
+<h3 class="anchored" data-anchor-id="generalization-bounds">3. Generalization Bounds</h3>
+<p>McDiarmid’s inequality based bound:</p>
+<p><span class="math display">\[
+P(|R(A_S) - \hat{R}_S(A_S)| &gt; \epsilon) \leq 2\exp(-\frac{2m\epsilon^2}{(4\beta)^2})
+\]</span></p>
+<p>Expected generalization error:</p>
+<p><span class="math display">\[
+|\mathbb{E}[R(A_S) - \hat{R}_S(A_S)]| \leq \beta
+\]</span></p>
+</section>
+</section>
+<section id="types-of-stability" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-stability">Types of Stability</h2>
+<section id="strong-stability" class="level3">
+<h3 class="anchored" data-anchor-id="strong-stability">1. Strong Stability</h3>
+<p>Definition:</p>
+<p><span class="math display">\[
+\sup_{S,S': |S \triangle S'| = 2}\|A_S - A_{S'}\| \leq \beta_m
+\]</span></p>
+<p>Generalization bound:</p>
+<p><span class="math display">\[
+P(|R(A_S) - \hat{R}_S(A_S)| &gt; \epsilon) \leq 2\exp(-\frac{m\epsilon^2}{2\beta_m^2})
+\]</span></p>
+</section>
+<section id="cross-validation-stability" class="level3">
+<h3 class="anchored" data-anchor-id="cross-validation-stability">2. Cross-Validation Stability</h3>
+<p>Leave-one-out stability:</p>
+<p><span class="math display">\[
+|\mathbb{E}_{S,z}[\ell(A_S,z) - \ell(A_{S^{-i}},z)]| \leq \beta_m
+\]</span></p>
+<p>k-fold stability:</p>
+<p><span class="math display">\[
+|\mathbb{E}_{S,z}[\ell(A_S,z) - \ell(A_{S_k},z)]| \leq \beta_m
+\]</span></p>
+</section>
+<section id="algorithmic-robustness" class="level3">
+<h3 class="anchored" data-anchor-id="algorithmic-robustness">3. Algorithmic Robustness</h3>
+<p><span class="math inline">\((K,\epsilon(\cdot))\)</span>-robustness:</p>
+<p><span class="math display">\[
+P_{S,z}(|\ell(A_S,z) - \ell(A_S,z')| &gt; \epsilon(m)) \leq K/m
+\]</span></p>
+<p>Where: - <span class="math inline">\(z,z'\)</span> are in same partition - <span class="math inline">\(K\)</span> is number of partitions - <span class="math inline">\(\epsilon(m)\)</span> is robustness parameter</p>
+</section>
+</section>
+<section id="stability-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="stability-analysis">Stability Analysis</h2>
+<section id="regularization-and-stability" class="level3">
+<h3 class="anchored" data-anchor-id="regularization-and-stability">1. Regularization and Stability</h3>
+<p>Tikhonov regularization:</p>
+<p><span class="math display">\[
+A_S = \arg\min_{h \in \mathcal{H}} \frac{1}{m}\sum_{i=1}^m \ell(h,z_i) + \lambda\|h\|^2
+\]</span></p>
+<p>Stability bound:</p>
+<p><span class="math display">\[
+\beta \leq \frac{L^2}{2m\lambda}
+\]</span></p>
+<p>Where: - <span class="math inline">\(L\)</span> is Lipschitz constant - <span class="math inline">\(\lambda\)</span> is regularization parameter</p>
+</section>
+<section id="gradient-methods" class="level3">
+<h3 class="anchored" data-anchor-id="gradient-methods">2. Gradient Methods</h3>
+<p>Gradient descent stability:</p>
+<p><span class="math display">\[
+\|w_t - w_t'\| \leq (1+\eta L)^t\|w_0 - w_0'\|
+\]</span></p>
+<p>SGD stability:</p>
+<p><span class="math display">\[
+\mathbb{E}[\|w_t - w_t'\|^2] \leq \frac{\eta^2L^2}{2m}
+\]</span></p>
+</section>
+<section id="ensemble-methods" class="level3">
+<h3 class="anchored" data-anchor-id="ensemble-methods">3. Ensemble Methods</h3>
+<p>Bagging stability:</p>
+<p><span class="math display">\[
+\beta_{\text{bag}} \leq \frac{\beta}{\sqrt{B}}
+\]</span></p>
+<p>Where: - <span class="math inline">\(B\)</span> is number of bootstrap samples - <span class="math inline">\(\beta\)</span> is base learner stability</p>
+</section>
+</section>
+<section id="applications" class="level2">
+<h2 class="anchored" data-anchor-id="applications">Applications</h2>
+<section id="regularized-learning" class="level3">
+<h3 class="anchored" data-anchor-id="regularized-learning">1. Regularized Learning</h3>
+<p>Ridge regression stability:</p>
+<p><span class="math display">\[
+\beta_{\text{ridge}} \leq \frac{4M^2}{m\lambda}
+\]</span></p>
+<p>Where: - <span class="math inline">\(M\)</span> is bound on features - <span class="math inline">\(\lambda\)</span> is regularization</p>
+</section>
+<section id="online-learning" class="level3">
+<h3 class="anchored" data-anchor-id="online-learning">2. Online Learning</h3>
+<p>Online stability:</p>
+<p><span class="math display">\[
+\mathbb{E}[\|w_t - w_t'\|] \leq \frac{2G}{\lambda\sqrt{t}}
+\]</span></p>
+<p>Where: - <span class="math inline">\(G\)</span> is gradient bound - <span class="math inline">\(t\)</span> is iteration number</p>
+</section>
+<section id="deep-learning" class="level3">
+<h3 class="anchored" data-anchor-id="deep-learning">3. Deep Learning</h3>
+<p>Dropout stability:</p>
+<p><span class="math display">\[
+\beta_{\text{dropout}} \leq \frac{p(1-p)L^2}{m}
+\]</span></p>
+<p>Where: - <span class="math inline">\(p\)</span> is dropout probability - <span class="math inline">\(L\)</span> is network Lipschitz constant</p>
+</section>
+</section>
+<section id="advanced-topics" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
+<section id="local-stability" class="level3">
+<h3 class="anchored" data-anchor-id="local-stability">1. Local Stability</h3>
+<p>Definition:</p>
+<p><span class="math display">\[
+|\ell(A_S,z) - \ell(A_{S^i},z)| \leq \beta(z)
+\]</span></p>
+<p>Adaptive bound:</p>
+<p><span class="math display">\[
+P(|R(A_S) - \hat{R}_S(A_S)| &gt; \epsilon) \leq 2\exp(-\frac{2m\epsilon^2}{\mathbb{E}[\beta(Z)^2]})
+\]</span></p>
+</section>
+<section id="distribution-stability" class="level3">
+<h3 class="anchored" data-anchor-id="distribution-stability">2. Distribution Stability</h3>
+<p>Definition:</p>
+<p><span class="math display">\[
+\|\mathcal{D}_{A_S} - \mathcal{D}_{A_{S^i}}\|_1 \leq \beta
+\]</span></p>
+<p>Generalization:</p>
+<p><span class="math display">\[
+|\mathbb{E}[R(A_S)] - \mathbb{E}[\hat{R}_S(A_S)]| \leq \beta
+\]</span></p>
+</section>
+<section id="algorithmic-privacy" class="level3">
+<h3 class="anchored" data-anchor-id="algorithmic-privacy">3. Algorithmic Privacy</h3>
+<p>Differential privacy:</p>
+<p><span class="math display">\[
+P(A_S \in E) \leq e^\epsilon P(A_{S'} \in E)
+\]</span></p>
+<p>Privacy-stability relationship:</p>
+<p><span class="math display">\[
+\beta \leq \epsilon L
+\]</span></p>
+</section>
+</section>
+<section id="theoretical-results" class="level2">
+<h2 class="anchored" data-anchor-id="theoretical-results">Theoretical Results</h2>
+<section id="stability-hierarchy" class="level3">
+<h3 class="anchored" data-anchor-id="stability-hierarchy">1. Stability Hierarchy</h3>
+<p>Relationships:</p>
+<p><span class="math display">\[
+\text{Uniform} \implies \text{Hypothesis} \implies \text{Point-wise} \implies \text{Average}
+\]</span></p>
+<p>Equivalence conditions:</p>
+<p><span class="math display">\[
+\beta_{\text{uniform}} = \beta_{\text{hypothesis}} \iff \text{convex loss}
+\]</span></p>
+</section>
+<section id="lower-bounds" class="level3">
+<h3 class="anchored" data-anchor-id="lower-bounds">2. Lower Bounds</h3>
+<p>Minimal stability:</p>
+<p><span class="math display">\[
+\beta_m \geq \Omega(\frac{1}{\sqrt{m}})
+\]</span></p>
+<p>Optimal rates:</p>
+<p><span class="math display">\[
+\beta_m = \Theta(\frac{1}{m})
+\]</span></p>
+</section>
+<section id="composition-theorems" class="level3">
+<h3 class="anchored" data-anchor-id="composition-theorems">3. Composition Theorems</h3>
+<p>Serial composition:</p>
+<p><span class="math display">\[
+\beta_{A \circ B} \leq \beta_A + \beta_B
+\]</span></p>
+<p>Parallel composition:</p>
+<p><span class="math display">\[
+\beta_{\text{parallel}} \leq \max_i \beta_i
+\]</span></p>
+</section>
+</section>
+<section id="implementation-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
+<section id="algorithm-design" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-design">1. Algorithm Design</h3>
+<ol type="1">
+<li>Regularization:
+<ul>
+<li>Choose appropriate <span class="math inline">\(\lambda\)</span></li>
+<li>Balance stability-accuracy</li>
+<li>Adaptive regularization</li>
+</ul></li>
+<li>Optimization:
+<ul>
+<li>Step size selection</li>
+<li>Batch size impact</li>
+<li>Momentum effects</li>
+</ul></li>
+<li>Architecture:
+<ul>
+<li>Layer stability</li>
+<li>Skip connections</li>
+<li>Normalization impact</li>
+</ul></li>
+</ol>
+</section>
+<section id="stability-measures" class="level3">
+<h3 class="anchored" data-anchor-id="stability-measures">2. Stability Measures</h3>
+<ol type="1">
+<li>Empirical Stability:
+<ul>
+<li>Leave-one-out estimates</li>
+<li>Bootstrap estimates</li>
+<li>Cross-validation</li>
+</ul></li>
+<li>Theoretical Bounds:
+<ul>
+<li>Lipschitz constants</li>
+<li>Condition numbers</li>
+<li>Spectral norms</li>
+</ul></li>
+<li>Monitoring:
+<ul>
+<li>Stability metrics</li>
+<li>Generalization gaps</li>
+<li>Validation curves</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<section id="model-selection" class="level3">
+<h3 class="anchored" data-anchor-id="model-selection">1. Model Selection</h3>
+<ol type="1">
+<li>Stability Analysis:
+<ul>
+<li>Cross-validation stability</li>
+<li>Parameter sensitivity</li>
+<li>Model robustness</li>
+</ul></li>
+<li>Regularization:
+<ul>
+<li>Multiple techniques</li>
+<li>Adaptive schemes</li>
+<li>Stability-based selection</li>
+</ul></li>
+<li>Validation:
+<ul>
+<li>Stability metrics</li>
+<li>Generalization bounds</li>
+<li>Robustness checks</li>
+</ul></li>
+</ol>
+</section>
+<section id="training-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="training-strategy">2. Training Strategy</h3>
+<ol type="1">
+<li>Optimization:
+<ul>
+<li>Stable algorithms</li>
+<li>Adaptive methods</li>
+<li>Early stopping</li>
+</ul></li>
+<li>Data Processing:
+<ul>
+<li>Robust preprocessing</li>
+<li>Feature stability</li>
+<li>Outlier handling</li>
+</ul></li>
+<li>Evaluation:
+<ul>
+<li>Stability measures</li>
+<li>Confidence bounds</li>
+<li>Sensitivity analysis</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Theory:
+<ul>
+<li>“Stability and Generalization” by Bousquet and Elisseeff</li>
+<li>“Learning, Testing, and the Stability Approach” by Shalev-Shwartz et al.</li>
+<li>“Stability and Learning Theory” by Mukherjee et al.</li>
+</ul></li>
+<li>Methods:
+<ul>
+<li>“Algorithmic Stability and Uniform Convergence” by Kearns and Ron</li>
+<li>“Stability and Instance-Based Learning” by Devroye and Wagner</li>
+<li>“Stable Learning Algorithms” by Kutin and Niyogi</li>
+</ul></li>
+<li>Applications:
+<ul>
+<li>“Stability in Machine Learning” by Hardt et al.</li>
+<li>“Deep Learning and Stability” by Hardt and Ma</li>
+<li>“Stability-Based Generalization Analysis” by Poggio et al.</li>
+</ul></li>
+</ol>
 
 
 
