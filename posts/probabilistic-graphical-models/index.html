@@ -33,17 +33,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,34 +72,34 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <script>
-  (function() {
-    // Immediately apply the correct theme
-    const getStoredTheme = () => localStorage.getItem('quarto-color-scheme');
-    const getPreferredTheme = () => {
-      const storedTheme = getStoredTheme();
-      if (storedTheme) {
-        return storedTheme;
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-    
-    const theme = getPreferredTheme();
-    
-    // Apply theme immediately
-    document.documentElement.classList.add(theme);
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.style.colorScheme = theme;
-    
-    // Set background color immediately to prevent flash
-    if (theme === 'dark') {
-      document.documentElement.style.backgroundColor = '#222';
-      document.documentElement.style.color = '#fff';
-    } else {
-      document.documentElement.style.backgroundColor = '#fff';
-      document.documentElement.style.color = '#000';
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
     }
-  })();
-</script>
+
+    const options = {
+      valueNames: ['listing-title','listing-description','listing-date','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -132,7 +132,7 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
-</head>
+<link rel="alternate" type="application/rss+xml" title="BendThe-Curve" href="index.xml" data-external="1"></head>
 
 <body class="nav-sidebar docked nav-fixed">
 
@@ -178,7 +178,6 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -304,62 +303,8 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#probabilistic-graphical-models" id="toc-probabilistic-graphical-models" class="nav-link active" data-scroll-target="#probabilistic-graphical-models">Probabilistic Graphical Models</a>
-  <ul class="collapse">
-  <li><a href="#bayesian-networks" id="toc-bayesian-networks" class="nav-link" data-scroll-target="#bayesian-networks">Bayesian Networks</a>
-  <ul class="collapse">
-  <li><a href="#factorization" id="toc-factorization" class="nav-link" data-scroll-target="#factorization">1. Factorization</a></li>
-  <li><a href="#conditional-independence" id="toc-conditional-independence" class="nav-link" data-scroll-target="#conditional-independence">2. Conditional Independence</a></li>
-  </ul></li>
-  <li><a href="#markov-random-fields" id="toc-markov-random-fields" class="nav-link" data-scroll-target="#markov-random-fields">Markov Random Fields</a>
-  <ul class="collapse">
-  <li><a href="#gibbs-distribution" id="toc-gibbs-distribution" class="nav-link" data-scroll-target="#gibbs-distribution">1. Gibbs Distribution</a></li>
-  <li><a href="#hammersley-clifford-theorem" id="toc-hammersley-clifford-theorem" class="nav-link" data-scroll-target="#hammersley-clifford-theorem">2. Hammersley-Clifford Theorem</a></li>
-  </ul></li>
-  <li><a href="#inference-algorithms" id="toc-inference-algorithms" class="nav-link" data-scroll-target="#inference-algorithms">Inference Algorithms</a>
-  <ul class="collapse">
-  <li><a href="#variable-elimination" id="toc-variable-elimination" class="nav-link" data-scroll-target="#variable-elimination">1. Variable Elimination</a></li>
-  <li><a href="#belief-propagation" id="toc-belief-propagation" class="nav-link" data-scroll-target="#belief-propagation">2. Belief Propagation</a></li>
-  <li><a href="#junction-tree-algorithm" id="toc-junction-tree-algorithm" class="nav-link" data-scroll-target="#junction-tree-algorithm">3. Junction Tree Algorithm</a></li>
-  </ul></li>
-  <li><a href="#learning-methods" id="toc-learning-methods" class="nav-link" data-scroll-target="#learning-methods">Learning Methods</a>
-  <ul class="collapse">
-  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation">1. Maximum Likelihood Estimation</a></li>
-  <li><a href="#bayesian-parameter-learning" id="toc-bayesian-parameter-learning" class="nav-link" data-scroll-target="#bayesian-parameter-learning">2. Bayesian Parameter Learning</a></li>
-  <li><a href="#structure-learning" id="toc-structure-learning" class="nav-link" data-scroll-target="#structure-learning">3. Structure Learning</a></li>
-  </ul></li>
-  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
-  <ul class="collapse">
-  <li><a href="#variational-inference" id="toc-variational-inference" class="nav-link" data-scroll-target="#variational-inference">1. Variational Inference</a></li>
-  <li><a href="#mcmc-methods" id="toc-mcmc-methods" class="nav-link" data-scroll-target="#mcmc-methods">2. MCMC Methods</a></li>
-  <li><a href="#conditional-random-fields" id="toc-conditional-random-fields" class="nav-link" data-scroll-target="#conditional-random-fields">3. Conditional Random Fields</a></li>
-  </ul></li>
-  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
-  <ul class="collapse">
-  <li><a href="#numerical-stability" id="toc-numerical-stability" class="nav-link" data-scroll-target="#numerical-stability">1. Numerical Stability</a></li>
-  <li><a href="#sparse-representations" id="toc-sparse-representations" class="nav-link" data-scroll-target="#sparse-representations">2. Sparse Representations</a></li>
-  <li><a href="#parallelization" id="toc-parallelization" class="nav-link" data-scroll-target="#parallelization">3. Parallelization</a></li>
-  </ul></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
-  <ul class="collapse">
-  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">1. Model Selection</a></li>
-  <li><a href="#performance-optimization" id="toc-performance-optimization" class="nav-link" data-scroll-target="#performance-optimization">2. Performance Optimization</a></li>
-  </ul></li>
-  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a>
-  <ul class="collapse">
-  <li><a href="#medical-diagnosis" id="toc-medical-diagnosis" class="nav-link" data-scroll-target="#medical-diagnosis">1. Medical Diagnosis</a></li>
-  <li><a href="#computer-vision" id="toc-computer-vision" class="nav-link" data-scroll-target="#computer-vision">2. Computer Vision</a></li>
-  <li><a href="#natural-language-processing" id="toc-natural-language-processing" class="nav-link" data-scroll-target="#natural-language-processing">3. Natural Language Processing</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -368,281 +313,66 @@ window.Quarto = {
 
 
 
-<section id="probabilistic-graphical-models" class="level1">
-<h1>Probabilistic Graphical Models</h1>
-<section id="bayesian-networks" class="level2">
-<h2 class="anchored" data-anchor-id="bayesian-networks">Bayesian Networks</h2>
-<section id="factorization" class="level3">
-<h3 class="anchored" data-anchor-id="factorization">1. Factorization</h3>
-<p>Joint probability factorization:</p>
-<p><span class="math display">\[
-P(X_1, ..., X_n) = \prod_{i=1}^n P(X_i | \text{Pa}(X_i))
-\]</span></p>
-<p>Where: - <span class="math inline">\(X_i\)</span> are random variables - <span class="math inline">\(\text{Pa}(X_i)\)</span> are parents of <span class="math inline">\(X_i\)</span> in the graph</p>
-</section>
-<section id="conditional-independence" class="level3">
-<h3 class="anchored" data-anchor-id="conditional-independence">2. Conditional Independence</h3>
-<p>D-separation criterion: - Two nodes are d-separated if all paths between them are blocked - A path is blocked if: * Contains a collider not in evidence * Contains a non-collider in evidence</p>
-<p>Formal definition:</p>
-<p><span class="math display">\[
-X \perp\!\!\!\perp Y | Z \iff P(X|Y,Z) = P(X|Z)
-\]</span></p>
-</section>
-</section>
-<section id="markov-random-fields" class="level2">
-<h2 class="anchored" data-anchor-id="markov-random-fields">Markov Random Fields</h2>
-<section id="gibbs-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="gibbs-distribution">1. Gibbs Distribution</h3>
-<p>Joint distribution representation:</p>
-<p><span class="math display">\[
-P(X = x) = \frac{1}{Z}\exp\left(-\sum_{c \in \mathcal{C}} \psi_c(x_c)\right)
-\]</span></p>
-<p>Where: - <span class="math inline">\(\mathcal{C}\)</span> is the set of cliques - <span class="math inline">\(\psi_c\)</span> are potential functions - <span class="math inline">\(Z\)</span> is the partition function:</p>
-<p><span class="math display">\[
-Z = \sum_x \exp\left(-\sum_{c \in \mathcal{C}} \psi_c(x_c)\right)
-\]</span></p>
-</section>
-<section id="hammersley-clifford-theorem" class="level3">
-<h3 class="anchored" data-anchor-id="hammersley-clifford-theorem">2. Hammersley-Clifford Theorem</h3>
-<p>Equivalence between positive distributions and Gibbs distributions:</p>
-<p><span class="math display">\[
-P(X = x) &gt; 0 \iff P(X = x) = \frac{1}{Z}\prod_{c \in \mathcal{C}} \phi_c(x_c)
-\]</span></p>
-<p>Where: - <span class="math inline">\(\phi_c\)</span> are non-negative factors</p>
-</section>
-</section>
-<section id="inference-algorithms" class="level2">
-<h2 class="anchored" data-anchor-id="inference-algorithms">Inference Algorithms</h2>
-<section id="variable-elimination" class="level3">
-<h3 class="anchored" data-anchor-id="variable-elimination">1. Variable Elimination</h3>
-<p>Complexity for tree-structured graphs:</p>
-<p><span class="math display">\[
-O(n \cdot d^{w})
-\]</span></p>
-<p>Where: - <span class="math inline">\(n\)</span> is number of variables - <span class="math inline">\(d\)</span> is domain size - <span class="math inline">\(w\)</span> is tree width</p>
-<p>Algorithm steps: 1. Choose elimination ordering 2. For each variable: - Multiply relevant factors - Sum out variable</p>
-</section>
-<section id="belief-propagation" class="level3">
-<h3 class="anchored" data-anchor-id="belief-propagation">2. Belief Propagation</h3>
-<p>Message passing equations:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\mu_{i \to j}(x_j) &amp;= \sum_{x_i} \phi_i(x_i)\phi_{ij}(x_i,x_j)\prod_{k \in N(i)\backslash j} \mu_{k \to i}(x_i) \\
-b_i(x_i) &amp;\propto \phi_i(x_i)\prod_{j \in N(i)} \mu_{j \to i}(x_i)
-\end{aligned}
-\]</span></p>
-<p>Where: - <span class="math inline">\(\mu_{i \to j}\)</span> is message from i to j - <span class="math inline">\(b_i\)</span> is belief at node i - <span class="math inline">\(N(i)\)</span> is neighbors of i</p>
-</section>
-<section id="junction-tree-algorithm" class="level3">
-<h3 class="anchored" data-anchor-id="junction-tree-algorithm">3. Junction Tree Algorithm</h3>
-<p>Clique tree construction: 1. Moralize graph 2. Triangulate 3. Find maximal cliques 4. Build junction tree</p>
-<p>Running intersection property:</p>
-<p><span class="math display">\[
-S_{ij} = C_i \cap C_j \subseteq C_k
-\]</span></p>
-<p>For any cliques <span class="math inline">\(C_i\)</span>, <span class="math inline">\(C_j\)</span>, and clique <span class="math inline">\(C_k\)</span> on path between them.</p>
-</section>
-</section>
-<section id="learning-methods" class="level2">
-<h2 class="anchored" data-anchor-id="learning-methods">Learning Methods</h2>
-<section id="maximum-likelihood-estimation" class="level3">
-<h3 class="anchored" data-anchor-id="maximum-likelihood-estimation">1. Maximum Likelihood Estimation</h3>
-<p>Objective function:</p>
-<p><span class="math display">\[
-\hat{\theta}_{MLE} = \arg\max_\theta \sum_{i=1}^N \log P(x^{(i)}|\theta)
-\]</span></p>
-<p>For complete data in Bayesian networks:</p>
-<p><span class="math display">\[
-\hat{\theta}_{ijk} = \frac{N_{ijk}}{\sum_k N_{ijk}}
-\]</span></p>
-<p>Where: - <span class="math inline">\(N_{ijk}\)</span> is count of <span class="math inline">\(X_i=k\)</span> with parent configuration j</p>
-</section>
-<section id="bayesian-parameter-learning" class="level3">
-<h3 class="anchored" data-anchor-id="bayesian-parameter-learning">2. Bayesian Parameter Learning</h3>
-<p>Posterior distribution:</p>
-<p><span class="math display">\[
-P(\theta|D) \propto P(D|\theta)P(\theta)
-\]</span></p>
-<p>With Dirichlet prior:</p>
-<p><span class="math display">\[
-\theta_{ijk} \sim \text{Dir}(\alpha_{ijk})
-\]</span></p>
-<p>Posterior parameters:</p>
-<p><span class="math display">\[
-\alpha_{ijk}^{\text{post}} = \alpha_{ijk} + N_{ijk}
-\]</span></p>
-</section>
-<section id="structure-learning" class="level3">
-<h3 class="anchored" data-anchor-id="structure-learning">3. Structure Learning</h3>
-<p>Score-based learning objective:</p>
-<p><span class="math display">\[
-G^* = \arg\max_G \text{score}(G:D)
-\]</span></p>
-<p>Common scores: 1. BIC score:</p>
-<p><span class="math display">\[
-\text{BIC}(G:D) = \ell(D|\hat{\theta}, G) - \frac{\log N}{2}|G|
-\]</span></p>
-<ol start="2" type="1">
-<li>Bayesian score:</li>
-</ol>
-<p><span class="math display">\[
-P(G|D) \propto P(D|G)P(G)
-\]</span></p>
-</section>
-</section>
-<section id="advanced-topics" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="variational-inference" class="level3">
-<h3 class="anchored" data-anchor-id="variational-inference">1. Variational Inference</h3>
-<p>Evidence lower bound (ELBO):</p>
-<p><span class="math display">\[
-\mathcal{L}(q) = \mathbb{E}_q[\log p(x,z)] - \mathbb{E}_q[\log q(z)]
-\]</span></p>
-<p>Mean field approximation:</p>
-<p><span class="math display">\[
-q(z) = \prod_i q_i(z_i)
-\]</span></p>
-<p>Update equations:</p>
-<p><span class="math display">\[
-\log q_j^*(z_j) = \mathbb{E}_{q_{-j}}[\log p(x,z)] + \text{const}
-\]</span></p>
-</section>
-<section id="mcmc-methods" class="level3">
-<h3 class="anchored" data-anchor-id="mcmc-methods">2. MCMC Methods</h3>
-<p>Metropolis-Hastings acceptance ratio:</p>
-<p><span class="math display">\[
-\alpha = \min\left(1, \frac{p(x')q(x|x')}{p(x)q(x'|x)}\right)
-\]</span></p>
-<p>Gibbs sampling update:</p>
-<p><span class="math display">\[
-x_i^{(t+1)} \sim p(x_i|x_{-i}^{(t)})
-\]</span></p>
-</section>
-<section id="conditional-random-fields" class="level3">
-<h3 class="anchored" data-anchor-id="conditional-random-fields">3. Conditional Random Fields</h3>
-<p>Linear-chain CRF probability:</p>
-<p><span class="math display">\[
-P(y|x) = \frac{1}{Z(x)}\exp\left(\sum_{t=1}^T\sum_k \lambda_k f_k(y_t,y_{t-1},x_t)\right)
-\]</span></p>
-<p>Where: - <span class="math inline">\(f_k\)</span> are feature functions - <span class="math inline">\(\lambda_k\)</span> are weights - <span class="math inline">\(Z(x)\)</span> is normalization factor</p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="numerical-stability" class="level3">
-<h3 class="anchored" data-anchor-id="numerical-stability">1. Numerical Stability</h3>
-<p>Log-space computations:</p>
-<p><span class="math display">\[
-\log\sum_i \exp(x_i) = \max_i x_i + \log\sum_i \exp(x_i - \max_i x_i)
-\]</span></p>
-</section>
-<section id="sparse-representations" class="level3">
-<h3 class="anchored" data-anchor-id="sparse-representations">2. Sparse Representations</h3>
-<p>Efficient factor operations: - Sparse matrices for CPTs - Vectorized operations - Caching intermediate results</p>
-</section>
-<section id="parallelization" class="level3">
-<h3 class="anchored" data-anchor-id="parallelization">3. Parallelization</h3>
-<p>Parallel message passing: - Tree-structured graphs - Junction tree clusters - Mini-batch learning</p>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="model-selection" class="level3">
-<h3 class="anchored" data-anchor-id="model-selection">1. Model Selection</h3>
-<ol type="1">
-<li>Network Structure:
-<ul>
-<li>Expert knowledge</li>
-<li>Causal relationships</li>
-<li>Data-driven learning</li>
-</ul></li>
-<li>Inference Method:
-<ul>
-<li>Exact vs approximate</li>
-<li>Graph structure</li>
-<li>Domain size</li>
-</ul></li>
-<li>Learning Approach:
-<ul>
-<li>Data completeness</li>
-<li>Prior knowledge</li>
-<li>Computational resources</li>
-</ul></li>
-</ol>
-</section>
-<section id="performance-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="performance-optimization">2. Performance Optimization</h3>
-<ol type="1">
-<li>Variable Ordering:
-<ul>
-<li>Min-fill heuristic</li>
-<li>Min-degree ordering</li>
-<li>Weighted variants</li>
-</ul></li>
-<li>Message Scheduling:
-<ul>
-<li>Residual belief propagation</li>
-<li>Priority-based updates</li>
-<li>Asynchronous methods</li>
-</ul></li>
-<li>Memory Management:
-<ul>
-<li>Factor caching</li>
-<li>Message memoization</li>
-<li>Sparse representations</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="applications" class="level2">
-<h2 class="anchored" data-anchor-id="applications">Applications</h2>
-<section id="medical-diagnosis" class="level3">
-<h3 class="anchored" data-anchor-id="medical-diagnosis">1. Medical Diagnosis</h3>
-<p>Network structure: - Diseases as root nodes - Symptoms as leaf nodes - Test results as intermediate nodes</p>
-<p>Inference tasks: - Diagnostic reasoning - Predictive reasoning - Intercausal reasoning</p>
-</section>
-<section id="computer-vision" class="level3">
-<h3 class="anchored" data-anchor-id="computer-vision">2. Computer Vision</h3>
-<p>MRF applications: - Image segmentation - Stereo matching - Image restoration</p>
-<p>Energy function:</p>
-<p><span class="math display">\[
-E(x) = \sum_i \phi_i(x_i) + \sum_{i,j} \phi_{ij}(x_i,x_j)
-\]</span></p>
-</section>
-<section id="natural-language-processing" class="level3">
-<h3 class="anchored" data-anchor-id="natural-language-processing">3. Natural Language Processing</h3>
-<p>Linear-chain CRFs: - Part-of-speech tagging - Named entity recognition - Sequence labeling</p>
-<p>Feature templates: - Word features - Context windows - Transition features</p>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Theory:
-<ul>
-<li>“Probabilistic Graphical Models” by Koller and Friedman</li>
-<li>“Pattern Recognition and Machine Learning” by Bishop</li>
-<li>“Information Theory, Inference, and Learning Algorithms” by MacKay</li>
-</ul></li>
-<li>Algorithms:
-<ul>
-<li>“Understanding Belief Propagation and its Generalizations” by Yedidia et al.</li>
-<li>“An Introduction to MCMC for Machine Learning” by Andrieu et al.</li>
-<li>“Structured Prediction for Natural Language Processing” by Smith</li>
-</ul></li>
-<li>Applications:
-<ul>
-<li>“Medical Applications of Artificial Intelligence” by Dua and Acharya</li>
-<li>“Computer Vision: A Modern Approach” by Forsyth and Ponce</li>
-<li>“Speech and Language Processing” by Jurafsky and Martin</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733023433492" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="456">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -663,150 +393,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

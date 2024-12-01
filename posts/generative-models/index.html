@@ -33,17 +33,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,34 +72,34 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <script>
-  (function() {
-    // Immediately apply the correct theme
-    const getStoredTheme = () => localStorage.getItem('quarto-color-scheme');
-    const getPreferredTheme = () => {
-      const storedTheme = getStoredTheme();
-      if (storedTheme) {
-        return storedTheme;
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-    
-    const theme = getPreferredTheme();
-    
-    // Apply theme immediately
-    document.documentElement.classList.add(theme);
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.style.colorScheme = theme;
-    
-    // Set background color immediately to prevent flash
-    if (theme === 'dark') {
-      document.documentElement.style.backgroundColor = '#222';
-      document.documentElement.style.color = '#fff';
-    } else {
-      document.documentElement.style.backgroundColor = '#fff';
-      document.documentElement.style.color = '#000';
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
     }
-  })();
-</script>
+
+    const options = {
+      valueNames: ['listing-title','listing-description','listing-date','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -132,7 +132,7 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
-</head>
+<link rel="alternate" type="application/rss+xml" title="BendThe-Curve" href="index.xml" data-external="1"></head>
 
 <body class="nav-sidebar docked nav-fixed">
 
@@ -178,7 +178,6 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -304,67 +303,8 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#generative-models-mathematical-foundations" id="toc-generative-models-mathematical-foundations" class="nav-link active" data-scroll-target="#generative-models-mathematical-foundations">Generative Models: Mathematical Foundations</a>
-  <ul class="collapse">
-  <li><a href="#variational-autoencoders-vaes" id="toc-variational-autoencoders-vaes" class="nav-link" data-scroll-target="#variational-autoencoders-vaes">Variational Autoencoders (VAEs)</a>
-  <ul class="collapse">
-  <li><a href="#evidence-lower-bound-elbo" id="toc-evidence-lower-bound-elbo" class="nav-link" data-scroll-target="#evidence-lower-bound-elbo">1. Evidence Lower Bound (ELBO)</a></li>
-  <li><a href="#reparameterization-trick" id="toc-reparameterization-trick" class="nav-link" data-scroll-target="#reparameterization-trick">2. Reparameterization Trick</a></li>
-  </ul></li>
-  <li><a href="#generative-adversarial-networks-gans" id="toc-generative-adversarial-networks-gans" class="nav-link" data-scroll-target="#generative-adversarial-networks-gans">Generative Adversarial Networks (GANs)</a>
-  <ul class="collapse">
-  <li><a href="#minimax-objective" id="toc-minimax-objective" class="nav-link" data-scroll-target="#minimax-objective">1. Minimax Objective</a></li>
-  <li><a href="#wasserstein-distance" id="toc-wasserstein-distance" class="nav-link" data-scroll-target="#wasserstein-distance">2. Wasserstein Distance</a></li>
-  <li><a href="#gradient-penalty" id="toc-gradient-penalty" class="nav-link" data-scroll-target="#gradient-penalty">3. Gradient Penalty</a></li>
-  </ul></li>
-  <li><a href="#diffusion-models" id="toc-diffusion-models" class="nav-link" data-scroll-target="#diffusion-models">Diffusion Models</a>
-  <ul class="collapse">
-  <li><a href="#forward-process" id="toc-forward-process" class="nav-link" data-scroll-target="#forward-process">1. Forward Process</a></li>
-  <li><a href="#reverse-process" id="toc-reverse-process" class="nav-link" data-scroll-target="#reverse-process">2. Reverse Process</a></li>
-  </ul></li>
-  <li><a href="#advanced-architectures" id="toc-advanced-architectures" class="nav-link" data-scroll-target="#advanced-architectures">Advanced Architectures</a>
-  <ul class="collapse">
-  <li><a href="#normalizing-flows" id="toc-normalizing-flows" class="nav-link" data-scroll-target="#normalizing-flows">1. Normalizing Flows</a></li>
-  <li><a href="#autoregressive-models" id="toc-autoregressive-models" class="nav-link" data-scroll-target="#autoregressive-models">2. Autoregressive Models</a></li>
-  <li><a href="#energy-based-models" id="toc-energy-based-models" class="nav-link" data-scroll-target="#energy-based-models">3. Energy-Based Models</a></li>
-  </ul></li>
-  <li><a href="#training-dynamics" id="toc-training-dynamics" class="nav-link" data-scroll-target="#training-dynamics">Training Dynamics</a>
-  <ul class="collapse">
-  <li><a href="#mode-collapse-in-gans" id="toc-mode-collapse-in-gans" class="nav-link" data-scroll-target="#mode-collapse-in-gans">1. Mode Collapse in GANs</a></li>
-  <li><a href="#vae-posterior-collapse" id="toc-vae-posterior-collapse" class="nav-link" data-scroll-target="#vae-posterior-collapse">2. VAE Posterior Collapse</a></li>
-  <li><a href="#diffusion-model-training" id="toc-diffusion-model-training" class="nav-link" data-scroll-target="#diffusion-model-training">3. Diffusion Model Training</a></li>
-  </ul></li>
-  <li><a href="#advanced-training-techniques" id="toc-advanced-training-techniques" class="nav-link" data-scroll-target="#advanced-training-techniques">Advanced Training Techniques</a>
-  <ul class="collapse">
-  <li><a href="#progressive-growing" id="toc-progressive-growing" class="nav-link" data-scroll-target="#progressive-growing">1. Progressive Growing</a></li>
-  <li><a href="#style-mixing" id="toc-style-mixing" class="nav-link" data-scroll-target="#style-mixing">2. Style Mixing</a></li>
-  <li><a href="#adaptive-instance-normalization-adain" id="toc-adaptive-instance-normalization-adain" class="nav-link" data-scroll-target="#adaptive-instance-normalization-adain">3. Adaptive Instance Normalization (AdaIN)</a></li>
-  </ul></li>
-  <li><a href="#evaluation-metrics" id="toc-evaluation-metrics" class="nav-link" data-scroll-target="#evaluation-metrics">Evaluation Metrics</a>
-  <ul class="collapse">
-  <li><a href="#inception-score" id="toc-inception-score" class="nav-link" data-scroll-target="#inception-score">1. Inception Score</a></li>
-  <li><a href="#fréchet-inception-distance" id="toc-fréchet-inception-distance" class="nav-link" data-scroll-target="#fréchet-inception-distance">2. Fréchet Inception Distance</a></li>
-  <li><a href="#precision-and-recall" id="toc-precision-and-recall" class="nav-link" data-scroll-target="#precision-and-recall">3. Precision and Recall</a></li>
-  </ul></li>
-  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
-  <ul class="collapse">
-  <li><a href="#architectural-choices" id="toc-architectural-choices" class="nav-link" data-scroll-target="#architectural-choices">1. Architectural Choices</a></li>
-  <li><a href="#training-stability" id="toc-training-stability" class="nav-link" data-scroll-target="#training-stability">2. Training Stability</a></li>
-  </ul></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
-  <ul class="collapse">
-  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">1. Model Selection</a></li>
-  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning">2. Hyperparameter Tuning</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -373,315 +313,66 @@ window.Quarto = {
 
 
 
-<section id="generative-models-mathematical-foundations" class="level1">
-<h1>Generative Models: Mathematical Foundations</h1>
-<section id="variational-autoencoders-vaes" class="level2">
-<h2 class="anchored" data-anchor-id="variational-autoencoders-vaes">Variational Autoencoders (VAEs)</h2>
-<section id="evidence-lower-bound-elbo" class="level3">
-<h3 class="anchored" data-anchor-id="evidence-lower-bound-elbo">1. Evidence Lower Bound (ELBO)</h3>
-<p>The VAE objective maximizes the ELBO:</p>
-<p><span class="math display">\[
-\mathcal{L}(\theta, \phi; x) = \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] - D_{KL}(q_\phi(z|x)||p(z))
-\]</span></p>
-<p>Where: - <span class="math inline">\(q_\phi(z|x)\)</span> is the encoder (inference model) - <span class="math inline">\(p_\theta(x|z)\)</span> is the decoder (generative model) - <span class="math inline">\(p(z)\)</span> is the prior distribution - <span class="math inline">\(D_{KL}\)</span> is the Kullback-Leibler divergence</p>
-</section>
-<section id="reparameterization-trick" class="level3">
-<h3 class="anchored" data-anchor-id="reparameterization-trick">2. Reparameterization Trick</h3>
-<p>Enables backpropagation through sampling:</p>
-<p><span class="math display">\[
-z = \mu_\phi(x) + \sigma_\phi(x) \odot \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
-\]</span></p>
-<p>Where: - <span class="math inline">\(\mu_\phi(x)\)</span> is the mean encoder network - <span class="math inline">\(\sigma_\phi(x)\)</span> is the standard deviation encoder network - <span class="math inline">\(\odot\)</span> denotes element-wise multiplication</p>
-</section>
-</section>
-<section id="generative-adversarial-networks-gans" class="level2">
-<h2 class="anchored" data-anchor-id="generative-adversarial-networks-gans">Generative Adversarial Networks (GANs)</h2>
-<section id="minimax-objective" class="level3">
-<h3 class="anchored" data-anchor-id="minimax-objective">1. Minimax Objective</h3>
-<p>The original GAN formulation:</p>
-<p><span class="math display">\[
-\min_G \max_D V(D,G) = \mathbb{E}_{x\sim p_{data}}[\log D(x)] + \mathbb{E}_{z\sim p_z}[\log(1-D(G(z)))]
-\]</span></p>
-<p>Where: - <span class="math inline">\(G\)</span> is the generator - <span class="math inline">\(D\)</span> is the discriminator - <span class="math inline">\(p_{data}\)</span> is the real data distribution - <span class="math inline">\(p_z\)</span> is the latent distribution</p>
-</section>
-<section id="wasserstein-distance" class="level3">
-<h3 class="anchored" data-anchor-id="wasserstein-distance">2. Wasserstein Distance</h3>
-<p>WGAN objective using Kantorovich-Rubinstein duality:</p>
-<p><span class="math display">\[
-\min_G \max_{D \in \mathcal{F}_L} \mathbb{E}_{x\sim p_{data}}[D(x)] - \mathbb{E}_{z\sim p_z}[D(G(z))]
-\]</span></p>
-<p>Where: - <span class="math inline">\(\mathcal{F}_L\)</span> is the set of 1-Lipschitz functions</p>
-</section>
-<section id="gradient-penalty" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-penalty">3. Gradient Penalty</h3>
-<p>WGAN-GP regularization term:</p>
-<p><span class="math display">\[
-\lambda \mathbb{E}_{\hat{x}\sim p_{\hat{x}}}[(\|\nabla_{\hat{x}}D(\hat{x})\|_2 - 1)^2]
-\]</span></p>
-<p>Where: - <span class="math inline">\(\hat{x}\)</span> is sampled along straight lines between real and generated samples - <span class="math inline">\(\lambda\)</span> is the penalty coefficient</p>
-</section>
-</section>
-<section id="diffusion-models" class="level2">
-<h2 class="anchored" data-anchor-id="diffusion-models">Diffusion Models</h2>
-<section id="forward-process" class="level3">
-<h3 class="anchored" data-anchor-id="forward-process">1. Forward Process</h3>
-<p>The forward diffusion process:</p>
-<p><span class="math display">\[
-q(x_t|x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t}x_{t-1}, \beta_tI)
-\]</span></p>
-<p>With closed form for arbitrary timestep:</p>
-<p><span class="math display">\[
-q(x_t|x_0) = \mathcal{N}(x_t; \sqrt{\bar{\alpha}_t}x_0, (1-\bar{\alpha}_t)I)
-\]</span></p>
-<p>Where: - <span class="math inline">\(\beta_t\)</span> is the noise schedule - <span class="math inline">\(\alpha_t = 1-\beta_t\)</span> - <span class="math inline">\(\bar{\alpha}_t = \prod_{s=1}^t \alpha_s\)</span></p>
-</section>
-<section id="reverse-process" class="level3">
-<h3 class="anchored" data-anchor-id="reverse-process">2. Reverse Process</h3>
-<p>The reverse diffusion process:</p>
-<p><span class="math display">\[
-p_\theta(x_{t-1}|x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t,t), \Sigma_\theta(x_t,t))
-\]</span></p>
-<p>Training objective:</p>
-<p><span class="math display">\[
-\mathcal{L} = \mathbb{E}_{x_0,\epsilon,t}\left[\|\epsilon - \epsilon_\theta(x_t,t)\|^2\right]
-\]</span></p>
-<p>Where: - <span class="math inline">\(\epsilon_\theta\)</span> predicts the noise component - <span class="math inline">\(x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon\)</span></p>
-</section>
-</section>
-<section id="advanced-architectures" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-architectures">Advanced Architectures</h2>
-<section id="normalizing-flows" class="level3">
-<h3 class="anchored" data-anchor-id="normalizing-flows">1. Normalizing Flows</h3>
-<p>Change of variables formula:</p>
-<p><span class="math display">\[
-\log p_X(x) = \log p_Z(f^{-1}(x)) + \log\left|\det\frac{\partial f^{-1}}{\partial x}\right|
-\]</span></p>
-<p>Where: - <span class="math inline">\(f\)</span> is an invertible transformation - <span class="math inline">\(p_Z\)</span> is a simple base distribution</p>
-</section>
-<section id="autoregressive-models" class="level3">
-<h3 class="anchored" data-anchor-id="autoregressive-models">2. Autoregressive Models</h3>
-<p>Factorized probability:</p>
-<p><span class="math display">\[
-p(x) = \prod_{i=1}^n p(x_i|x_{&lt;i})
-\]</span></p>
-<p>With masked convolutions:</p>
-<p><span class="math display">\[
-y_i = \sum_{j \leq i} m_{ij}(w_{ij} \cdot x_j)
-\]</span></p>
-</section>
-<section id="energy-based-models" class="level3">
-<h3 class="anchored" data-anchor-id="energy-based-models">3. Energy-Based Models</h3>
-<p>Probability density:</p>
-<p><span class="math display">\[
-p(x) = \frac{1}{Z}e^{-E(x)}
-\]</span></p>
-<p>Where: - <span class="math inline">\(E(x)\)</span> is the energy function - <span class="math inline">\(Z = \int e^{-E(x)}dx\)</span> is the partition function</p>
-</section>
-</section>
-<section id="training-dynamics" class="level2">
-<h2 class="anchored" data-anchor-id="training-dynamics">Training Dynamics</h2>
-<section id="mode-collapse-in-gans" class="level3">
-<h3 class="anchored" data-anchor-id="mode-collapse-in-gans">1. Mode Collapse in GANs</h3>
-<p>Jensen-Shannon divergence:</p>
-<p><span class="math display">\[
-JSD(P\|Q) = \frac{1}{2}D_{KL}(P\|\frac{P+Q}{2}) + \frac{1}{2}D_{KL}(Q\|\frac{P+Q}{2})
-\]</span></p>
-</section>
-<section id="vae-posterior-collapse" class="level3">
-<h3 class="anchored" data-anchor-id="vae-posterior-collapse">2. VAE Posterior Collapse</h3>
-<p>KL-divergence analysis:</p>
-<p><span class="math display">\[
-D_{KL}(q_\phi(z|x)\|p(z)) = \frac{1}{2}\sum_{j=1}^d(\sigma_j^2 + \mu_j^2 - \log\sigma_j^2 - 1)
-\]</span></p>
-</section>
-<section id="diffusion-model-training" class="level3">
-<h3 class="anchored" data-anchor-id="diffusion-model-training">3. Diffusion Model Training</h3>
-<p>Denoising score matching:</p>
-<p><span class="math display">\[
-\nabla_x \log p(x) = \mathbb{E}_{p(t|x)}[\nabla_x \log p(x|x_t)]
-\]</span></p>
-</section>
-</section>
-<section id="advanced-training-techniques" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-training-techniques">Advanced Training Techniques</h2>
-<section id="progressive-growing" class="level3">
-<h3 class="anchored" data-anchor-id="progressive-growing">1. Progressive Growing</h3>
-<p>Resolution-dependent loss:</p>
-<p><span class="math display">\[
-\mathcal{L}_\text{total} = \sum_{r} \alpha_r \mathcal{L}_r
-\]</span></p>
-<p>Where: - <span class="math inline">\(r\)</span> is the resolution level - <span class="math inline">\(\alpha_r\)</span> is the weighting factor</p>
-</section>
-<section id="style-mixing" class="level3">
-<h3 class="anchored" data-anchor-id="style-mixing">2. Style Mixing</h3>
-<p>Style transfer in latent space:</p>
-<p><span class="math display">\[
-w = \mathcal{M}(z) = f(z + \Delta z)
-\]</span></p>
-<p>Where: - <span class="math inline">\(\mathcal{M}\)</span> is the mapping network - <span class="math inline">\(f\)</span> is a non-linear transformation</p>
-</section>
-<section id="adaptive-instance-normalization-adain" class="level3">
-<h3 class="anchored" data-anchor-id="adaptive-instance-normalization-adain">3. Adaptive Instance Normalization (AdaIN)</h3>
-<p>Style transfer operation:</p>
-<p><span class="math display">\[
-\text{AdaIN}(x,y) = \sigma(y)\left(\frac{x-\mu(x)}{\sigma(x)}\right) + \mu(y)
-\]</span></p>
-</section>
-</section>
-<section id="evaluation-metrics" class="level2">
-<h2 class="anchored" data-anchor-id="evaluation-metrics">Evaluation Metrics</h2>
-<section id="inception-score" class="level3">
-<h3 class="anchored" data-anchor-id="inception-score">1. Inception Score</h3>
-<p>Measures quality and diversity:</p>
-<p><span class="math display">\[
-IS = \exp(\mathbb{E}_{x\sim p_g}[D_{KL}(p(y|x)\|p(y))])
-\]</span></p>
-</section>
-<section id="fréchet-inception-distance" class="level3">
-<h3 class="anchored" data-anchor-id="fréchet-inception-distance">2. Fréchet Inception Distance</h3>
-<p>Distribution similarity metric:</p>
-<p><span class="math display">\[
-FID = \|\mu_r - \mu_g\|^2 + Tr(\Sigma_r + \Sigma_g - 2(\Sigma_r\Sigma_g)^{1/2})
-\]</span></p>
-<p>Where: - <span class="math inline">\(\mu_r, \Sigma_r\)</span> are real data statistics - <span class="math inline">\(\mu_g, \Sigma_g\)</span> are generated data statistics</p>
-</section>
-<section id="precision-and-recall" class="level3">
-<h3 class="anchored" data-anchor-id="precision-and-recall">3. Precision and Recall</h3>
-<p>Two-way evaluation:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\text{Precision} &amp;= \mathbb{E}_{x\sim p_g}[\max_{y\sim p_r} s(x,y)] \\
-\text{Recall} &amp;= \mathbb{E}_{y\sim p_r}[\max_{x\sim p_g} s(x,y)]
-\end{aligned}
-\]</span></p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="architectural-choices" class="level3">
-<h3 class="anchored" data-anchor-id="architectural-choices">1. Architectural Choices</h3>
-<ol type="1">
-<li>Generator Design:
-<ul>
-<li>Transposed convolutions vs upsampling</li>
-<li>Skip connections</li>
-<li>Attention mechanisms</li>
-</ul></li>
-<li>Discriminator Design:
-<ul>
-<li>Spectral normalization</li>
-<li>Residual blocks</li>
-<li>Multi-scale discrimination</li>
-</ul></li>
-<li>Loss Functions:
-<ul>
-<li>Adversarial loss</li>
-<li>Reconstruction loss</li>
-<li>Perceptual loss</li>
-</ul></li>
-</ol>
-</section>
-<section id="training-stability" class="level3">
-<h3 class="anchored" data-anchor-id="training-stability">2. Training Stability</h3>
-<ol type="1">
-<li>Gradient Penalties:
-<ul>
-<li>R1 regularization</li>
-<li>Path length regularization</li>
-<li>Consistency regularization</li>
-</ul></li>
-<li>Learning Rate:
-<ul>
-<li>Two time-scale update rule</li>
-<li>Adaptive learning rates</li>
-<li>Warmup scheduling</li>
-</ul></li>
-<li>Batch Size:
-<ul>
-<li>Gradient accumulation</li>
-<li>Mixed precision training</li>
-<li>Memory-efficient backprop</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="model-selection" class="level3">
-<h3 class="anchored" data-anchor-id="model-selection">1. Model Selection</h3>
-<ol type="1">
-<li>VAEs for:
-<ul>
-<li>Structured latent spaces</li>
-<li>Reconstruction tasks</li>
-<li>Interpretable representations</li>
-</ul></li>
-<li>GANs for:
-<ul>
-<li>High-quality generation</li>
-<li>Style transfer</li>
-<li>Domain translation</li>
-</ul></li>
-<li>Diffusion Models for:
-<ul>
-<li>High-fidelity generation</li>
-<li>Controlled generation</li>
-<li>Robust training</li>
-</ul></li>
-</ol>
-</section>
-<section id="hyperparameter-tuning" class="level3">
-<h3 class="anchored" data-anchor-id="hyperparameter-tuning">2. Hyperparameter Tuning</h3>
-<ol type="1">
-<li>Learning Rates:
-<ul>
-<li>Generator: 1e-4 to 1e-3</li>
-<li>Discriminator: 2e-4 to 2e-3</li>
-<li>VAE: 1e-3 to 1e-2</li>
-</ul></li>
-<li>Batch Sizes:
-<ul>
-<li>GANs: 32 to 128</li>
-<li>VAEs: 64 to 256</li>
-<li>Diffusion: 32 to 64</li>
-</ul></li>
-<li>Architecture:
-<ul>
-<li>Layer depth</li>
-<li>Channel width</li>
-<li>Attention layers</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Theory:
-<ul>
-<li>“Auto-Encoding Variational Bayes” by Kingma and Welling</li>
-<li>“Generative Adversarial Networks” by Goodfellow et al.</li>
-<li>“Denoising Diffusion Probabilistic Models” by Ho et al.</li>
-</ul></li>
-<li>Architecture:
-<ul>
-<li>“Progressive Growing of GANs” by Karras et al.</li>
-<li>“StyleGAN” by Karras et al.</li>
-<li>“Normalizing Flows” by Rezende and Mohamed</li>
-</ul></li>
-<li>Training:
-<ul>
-<li>“Improved Training of Wasserstein GANs” by Gulrajani et al.</li>
-<li>“Large Scale GAN Training for High Fidelity Natural Image Synthesis” by Brock et al.</li>
-<li>“Improved VQGAN for Image Generation” by Esser et al.</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733023433492" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="456">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -702,150 +393,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

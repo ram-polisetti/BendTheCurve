@@ -33,17 +33,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,34 +72,34 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <script>
-  (function() {
-    // Immediately apply the correct theme
-    const getStoredTheme = () => localStorage.getItem('quarto-color-scheme');
-    const getPreferredTheme = () => {
-      const storedTheme = getStoredTheme();
-      if (storedTheme) {
-        return storedTheme;
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-    
-    const theme = getPreferredTheme();
-    
-    // Apply theme immediately
-    document.documentElement.classList.add(theme);
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.style.colorScheme = theme;
-    
-    // Set background color immediately to prevent flash
-    if (theme === 'dark') {
-      document.documentElement.style.backgroundColor = '#222';
-      document.documentElement.style.color = '#fff';
-    } else {
-      document.documentElement.style.backgroundColor = '#fff';
-      document.documentElement.style.color = '#000';
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
     }
-  })();
-</script>
+
+    const options = {
+      valueNames: ['listing-title','listing-description','listing-date','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -132,7 +132,7 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
-</head>
+<link rel="alternate" type="application/rss+xml" title="BendThe-Curve" href="index.xml" data-external="1"></head>
 
 <body class="nav-sidebar docked nav-fixed">
 
@@ -178,7 +178,6 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -304,69 +303,8 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#online-learning-and-regret-minimization" id="toc-online-learning-and-regret-minimization" class="nav-link active" data-scroll-target="#online-learning-and-regret-minimization">Online Learning and Regret Minimization</a>
-  <ul class="collapse">
-  <li><a href="#fundamental-concepts" id="toc-fundamental-concepts" class="nav-link" data-scroll-target="#fundamental-concepts">Fundamental Concepts</a>
-  <ul class="collapse">
-  <li><a href="#online-learning-protocol" id="toc-online-learning-protocol" class="nav-link" data-scroll-target="#online-learning-protocol">1. Online Learning Protocol</a></li>
-  <li><a href="#types-of-regret" id="toc-types-of-regret" class="nav-link" data-scroll-target="#types-of-regret">2. Types of Regret</a></li>
-  <li><a href="#performance-measures" id="toc-performance-measures" class="nav-link" data-scroll-target="#performance-measures">3. Performance Measures</a></li>
-  </ul></li>
-  <li><a href="#online-convex-optimization" id="toc-online-convex-optimization" class="nav-link" data-scroll-target="#online-convex-optimization">Online Convex Optimization</a>
-  <ul class="collapse">
-  <li><a href="#online-gradient-descent" id="toc-online-gradient-descent" class="nav-link" data-scroll-target="#online-gradient-descent">1. Online Gradient Descent</a></li>
-  <li><a href="#follow-the-regularized-leader" id="toc-follow-the-regularized-leader" class="nav-link" data-scroll-target="#follow-the-regularized-leader">2. Follow The Regularized Leader</a></li>
-  <li><a href="#mirror-descent" id="toc-mirror-descent" class="nav-link" data-scroll-target="#mirror-descent">3. Mirror Descent</a></li>
-  </ul></li>
-  <li><a href="#multi-armed-bandits" id="toc-multi-armed-bandits" class="nav-link" data-scroll-target="#multi-armed-bandits">Multi-Armed Bandits</a>
-  <ul class="collapse">
-  <li><a href="#ucb-algorithm" id="toc-ucb-algorithm" class="nav-link" data-scroll-target="#ucb-algorithm">1. UCB Algorithm</a></li>
-  <li><a href="#thompson-sampling" id="toc-thompson-sampling" class="nav-link" data-scroll-target="#thompson-sampling">2. Thompson Sampling</a></li>
-  <li><a href="#exp3-algorithm" id="toc-exp3-algorithm" class="nav-link" data-scroll-target="#exp3-algorithm">3. Exp3 Algorithm</a></li>
-  </ul></li>
-  <li><a href="#expert-algorithms" id="toc-expert-algorithms" class="nav-link" data-scroll-target="#expert-algorithms">Expert Algorithms</a>
-  <ul class="collapse">
-  <li><a href="#weighted-majority" id="toc-weighted-majority" class="nav-link" data-scroll-target="#weighted-majority">1. Weighted Majority</a></li>
-  <li><a href="#hedge-algorithm" id="toc-hedge-algorithm" class="nav-link" data-scroll-target="#hedge-algorithm">2. Hedge Algorithm</a></li>
-  <li><a href="#adahedge" id="toc-adahedge" class="nav-link" data-scroll-target="#adahedge">3. AdaHedge</a></li>
-  </ul></li>
-  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
-  <ul class="collapse">
-  <li><a href="#adaptive-algorithms" id="toc-adaptive-algorithms" class="nav-link" data-scroll-target="#adaptive-algorithms">1. Adaptive Algorithms</a></li>
-  <li><a href="#second-order-methods" id="toc-second-order-methods" class="nav-link" data-scroll-target="#second-order-methods">2. Second-Order Methods</a></li>
-  <li><a href="#parameter-free-methods" id="toc-parameter-free-methods" class="nav-link" data-scroll-target="#parameter-free-methods">3. Parameter-Free Methods</a></li>
-  </ul></li>
-  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a>
-  <ul class="collapse">
-  <li><a href="#portfolio-selection" id="toc-portfolio-selection" class="nav-link" data-scroll-target="#portfolio-selection">1. Portfolio Selection</a></li>
-  <li><a href="#online-routing" id="toc-online-routing" class="nav-link" data-scroll-target="#online-routing">2. Online Routing</a></li>
-  <li><a href="#online-classification" id="toc-online-classification" class="nav-link" data-scroll-target="#online-classification">3. Online Classification</a></li>
-  </ul></li>
-  <li><a href="#theoretical-results" id="toc-theoretical-results" class="nav-link" data-scroll-target="#theoretical-results">Theoretical Results</a>
-  <ul class="collapse">
-  <li><a href="#lower-bounds" id="toc-lower-bounds" class="nav-link" data-scroll-target="#lower-bounds">1. Lower Bounds</a></li>
-  <li><a href="#information-theory" id="toc-information-theory" class="nav-link" data-scroll-target="#information-theory">2. Information Theory</a></li>
-  <li><a href="#game-theory" id="toc-game-theory" class="nav-link" data-scroll-target="#game-theory">3. Game Theory</a></li>
-  </ul></li>
-  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
-  <ul class="collapse">
-  <li><a href="#algorithm-selection" id="toc-algorithm-selection" class="nav-link" data-scroll-target="#algorithm-selection">1. Algorithm Selection</a></li>
-  <li><a href="#parameter-tuning" id="toc-parameter-tuning" class="nav-link" data-scroll-target="#parameter-tuning">2. Parameter Tuning</a></li>
-  </ul></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
-  <ul class="collapse">
-  <li><a href="#algorithm-design" id="toc-algorithm-design" class="nav-link" data-scroll-target="#algorithm-design">1. Algorithm Design</a></li>
-  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">2. Implementation</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -375,367 +313,66 @@ window.Quarto = {
 
 
 
-<section id="online-learning-and-regret-minimization" class="level1">
-<h1>Online Learning and Regret Minimization</h1>
-<section id="fundamental-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="fundamental-concepts">Fundamental Concepts</h2>
-<section id="online-learning-protocol" class="level3">
-<h3 class="anchored" data-anchor-id="online-learning-protocol">1. Online Learning Protocol</h3>
-<p>Learning process: 1. Receive instance <span class="math inline">\(x_t\)</span> 2. Predict <span class="math inline">\(\hat{y}_t\)</span> 3. Observe true outcome <span class="math inline">\(y_t\)</span> 4. Suffer loss <span class="math inline">\(\ell({\hat{y}_t, y_t})\)</span> 5. Update model</p>
-<p>Regret definition:</p>
-<p><span class="math display">\[
-R_T = \sum_{t=1}^T \ell(h_t(x_t), y_t) - \min_{h \in \mathcal{H}}\sum_{t=1}^T \ell(h(x_t), y_t)
-\]</span></p>
-</section>
-<section id="types-of-regret" class="level3">
-<h3 class="anchored" data-anchor-id="types-of-regret">2. Types of Regret</h3>
-<p>External regret:</p>
-<p><span class="math display">\[
-R_T^{\text{ext}} = \mathbb{E}\left[\sum_{t=1}^T \ell_t(a_t)\right] - \min_{a \in \mathcal{A}}\mathbb{E}\left[\sum_{t=1}^T \ell_t(a)\right]
-\]</span></p>
-<p>Internal/swap regret:</p>
-<p><span class="math display">\[
-R_T^{\text{int}} = \mathbb{E}\left[\sum_{t=1}^T \ell_t(a_t)\right] - \min_{\phi: \mathcal{A} \to \mathcal{A}}\mathbb{E}\left[\sum_{t=1}^T \ell_t(\phi(a_t))\right]
-\]</span></p>
-</section>
-<section id="performance-measures" class="level3">
-<h3 class="anchored" data-anchor-id="performance-measures">3. Performance Measures</h3>
-<p>Average regret:</p>
-<p><span class="math display">\[
-\bar{R}_T = \frac{R_T}{T}
-\]</span></p>
-<p>Competitive ratio:</p>
-<p><span class="math display">\[
-CR_T = \frac{\sum_{t=1}^T \ell_t(a_t)}{\min_{a \in \mathcal{A}}\sum_{t=1}^T \ell_t(a)}
-\]</span></p>
-</section>
-</section>
-<section id="online-convex-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="online-convex-optimization">Online Convex Optimization</h2>
-<section id="online-gradient-descent" class="level3">
-<h3 class="anchored" data-anchor-id="online-gradient-descent">1. Online Gradient Descent</h3>
-<p>Update rule:</p>
-<p><span class="math display">\[
-w_{t+1} = \Pi_{\mathcal{W}}(w_t - \eta_t \nabla \ell_t(w_t))
-\]</span></p>
-<p>Regret bound:</p>
-<p><span class="math display">\[
-R_T \leq \frac{D^2}{2\eta} + \frac{\eta G^2T}{2}
-\]</span></p>
-<p>Where: - <span class="math inline">\(D\)</span> is diameter of feasible set - <span class="math inline">\(G\)</span> is gradient bound - <span class="math inline">\(\eta\)</span> is learning rate</p>
-</section>
-<section id="follow-the-regularized-leader" class="level3">
-<h3 class="anchored" data-anchor-id="follow-the-regularized-leader">2. Follow The Regularized Leader</h3>
-<p>FTRL update:</p>
-<p><span class="math display">\[
-w_{t+1} = \arg\min_{w \in \mathcal{W}}\{\eta\sum_{s=1}^t \ell_s(w) + R(w)\}
-\]</span></p>
-<p>Regret bound:</p>
-<p><span class="math display">\[
-R_T \leq \frac{R(w^*)}{\eta} + \frac{\eta G^2T}{2}
-\]</span></p>
-</section>
-<section id="mirror-descent" class="level3">
-<h3 class="anchored" data-anchor-id="mirror-descent">3. Mirror Descent</h3>
-<p>Update rule:</p>
-<p><span class="math display">\[
-\nabla \psi(w_{t+1}) = \nabla \psi(w_t) - \eta_t \nabla \ell_t(w_t)
-\]</span></p>
-<p>Regret bound:</p>
-<p><span class="math display">\[
-R_T \leq \frac{D_\psi(w^*\|w_1)}{\eta} + \frac{\eta G^2T}{2}
-\]</span></p>
-</section>
-</section>
-<section id="multi-armed-bandits" class="level2">
-<h2 class="anchored" data-anchor-id="multi-armed-bandits">Multi-Armed Bandits</h2>
-<section id="ucb-algorithm" class="level3">
-<h3 class="anchored" data-anchor-id="ucb-algorithm">1. UCB Algorithm</h3>
-<p>UCB index:</p>
-<p><span class="math display">\[
-UCB_i(t) = \hat{\mu}_i(t) + \sqrt{\frac{2\ln t}{N_i(t)}}
-\]</span></p>
-<p>Regret bound:</p>
-<p><span class="math display">\[
-R_T \leq \sum_{i:\Delta_i&gt;0}\left(\frac{8\ln T}{\Delta_i} + (1+\pi^2/3)\Delta_i\right)
-\]</span></p>
-</section>
-<section id="thompson-sampling" class="level3">
-<h3 class="anchored" data-anchor-id="thompson-sampling">2. Thompson Sampling</h3>
-<p>Posterior sampling:</p>
-<p><span class="math display">\[
-\theta_i(t) \sim Beta(\alpha_i(t), \beta_i(t))
-\]</span></p>
-<p>Regret bound:</p>
-<p><span class="math display">\[
-R_T \leq O(\sqrt{KT\ln T})
-\]</span></p>
-</section>
-<section id="exp3-algorithm" class="level3">
-<h3 class="anchored" data-anchor-id="exp3-algorithm">3. Exp3 Algorithm</h3>
-<p>Probability update:</p>
-<p><span class="math display">\[
-p_i(t) = \frac{(1-\gamma)\exp(\eta G_i(t))}{\sum_{j=1}^K \exp(\eta G_j(t))} + \frac{\gamma}{K}
-\]</span></p>
-<p>Regret bound:</p>
-<p><span class="math display">\[
-R_T \leq 2\sqrt{KT\ln K}
-\]</span></p>
-</section>
-</section>
-<section id="expert-algorithms" class="level2">
-<h2 class="anchored" data-anchor-id="expert-algorithms">Expert Algorithms</h2>
-<section id="weighted-majority" class="level3">
-<h3 class="anchored" data-anchor-id="weighted-majority">1. Weighted Majority</h3>
-<p>Weight update:</p>
-<p><span class="math display">\[
-w_i(t+1) = w_i(t)(1-\eta)^{\ell_i(t)}
-\]</span></p>
-<p>Regret bound:</p>
-<p><span class="math display">\[
-R_T \leq \sqrt{T\ln N}
-\]</span></p>
-</section>
-<section id="hedge-algorithm" class="level3">
-<h3 class="anchored" data-anchor-id="hedge-algorithm">2. Hedge Algorithm</h3>
-<p>Probability update:</p>
-<p><span class="math display">\[
-p_i(t+1) = \frac{\exp(-\eta L_i(t))}{\sum_{j=1}^N \exp(-\eta L_j(t))}
-\]</span></p>
-<p>Regret bound:</p>
-<p><span class="math display">\[
-R_T \leq \sqrt{2T\ln N}
-\]</span></p>
-</section>
-<section id="adahedge" class="level3">
-<h3 class="anchored" data-anchor-id="adahedge">3. AdaHedge</h3>
-<p>Adaptive learning rate:</p>
-<p><span class="math display">\[
-\eta_t = \frac{\ln N}{V_t}
-\]</span></p>
-<p>Where: - <span class="math inline">\(V_t\)</span> is cumulative variance - <span class="math inline">\(N\)</span> is number of experts</p>
-</section>
-</section>
-<section id="advanced-topics" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="adaptive-algorithms" class="level3">
-<h3 class="anchored" data-anchor-id="adaptive-algorithms">1. Adaptive Algorithms</h3>
-<p>AdaGrad update:</p>
-<p><span class="math display">\[
-w_{t+1,i} = w_{t,i} - \frac{\eta}{\sqrt{\sum_{s=1}^t g_{s,i}^2}}g_{t,i}
-\]</span></p>
-<p>Regret bound:</p>
-<p><span class="math display">\[
-R_T \leq O(\sqrt{T}\|w^*\|_2\sqrt{\sum_{i=1}^d\sum_{t=1}^T g_{t,i}^2})
-\]</span></p>
-</section>
-<section id="second-order-methods" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-methods">2. Second-Order Methods</h3>
-<p>ONS update:</p>
-<p><span class="math display">\[
-w_{t+1} = w_t - \eta A_t^{-1}\nabla \ell_t(w_t)
-\]</span></p>
-<p>Where: - <span class="math inline">\(A_t = \sum_{s=1}^t \nabla \ell_s(w_s)\nabla \ell_s(w_s)^T\)</span></p>
-</section>
-<section id="parameter-free-methods" class="level3">
-<h3 class="anchored" data-anchor-id="parameter-free-methods">3. Parameter-Free Methods</h3>
-<p>MetaGrad update:</p>
-<p><span class="math display">\[
-w_{t+1} = w_t - \eta_t H_t^{-1/2}\nabla \ell_t(w_t)
-\]</span></p>
-<p>Where: - <span class="math inline">\(H_t\)</span> is preconditioner matrix</p>
-</section>
-</section>
-<section id="applications" class="level2">
-<h2 class="anchored" data-anchor-id="applications">Applications</h2>
-<section id="portfolio-selection" class="level3">
-<h3 class="anchored" data-anchor-id="portfolio-selection">1. Portfolio Selection</h3>
-<p>Objective:</p>
-<p><span class="math display">\[
-\max_{w \in \Delta_n} \sum_{t=1}^T \log(w^T r_t)
-\]</span></p>
-<p>Universal portfolio:</p>
-<p><span class="math display">\[
-w_{t+1} = \int_{\Delta_n} w P_t(w)dw
-\]</span></p>
-</section>
-<section id="online-routing" class="level3">
-<h3 class="anchored" data-anchor-id="online-routing">2. Online Routing</h3>
-<p>Flow update:</p>
-<p><span class="math display">\[
-f_{t+1}(e) = f_t(e)\exp(-\eta \ell_t(e))
-\]</span></p>
-<p>Path selection:</p>
-<p><span class="math display">\[
-P(p) = \frac{\prod_{e \in p}f_t(e)}{\sum_{p' \in \mathcal{P}}\prod_{e \in p'}f_t(e)}
-\]</span></p>
-</section>
-<section id="online-classification" class="level3">
-<h3 class="anchored" data-anchor-id="online-classification">3. Online Classification</h3>
-<p>Perceptron update:</p>
-<p><span class="math display">\[
-w_{t+1} = w_t + y_tx_t\mathbb{1}[y_tw_t^Tx_t \leq 0]
-\]</span></p>
-<p>Mistake bound:</p>
-<p><span class="math display">\[
-M \leq \left(\frac{R}{\gamma}\right)^2
-\]</span></p>
-</section>
-</section>
-<section id="theoretical-results" class="level2">
-<h2 class="anchored" data-anchor-id="theoretical-results">Theoretical Results</h2>
-<section id="lower-bounds" class="level3">
-<h3 class="anchored" data-anchor-id="lower-bounds">1. Lower Bounds</h3>
-<p>Minimax regret:</p>
-<p><span class="math display">\[
-\min_{\text{ALG}}\max_{\text{ADV}} R_T = \Omega(\sqrt{T})
-\]</span></p>
-<p>Expert setting:</p>
-<p><span class="math display">\[
-R_T = \Omega(\sqrt{T\ln N})
-\]</span></p>
-</section>
-<section id="information-theory" class="level3">
-<h3 class="anchored" data-anchor-id="information-theory">2. Information Theory</h3>
-<p>Redundancy bound:</p>
-<p><span class="math display">\[
-R_T \leq \frac{KL(P\|Q) + \ln(1/\delta)}{\eta} + \frac{\eta T}{8}
-\]</span></p>
-</section>
-<section id="game-theory" class="level3">
-<h3 class="anchored" data-anchor-id="game-theory">3. Game Theory</h3>
-<p>Nash equilibrium:</p>
-<p><span class="math display">\[
-\max_P \min_Q \mathbb{E}_{p \sim P, q \sim Q}[M(p,q)] = \min_Q \max_P \mathbb{E}_{p \sim P, q \sim Q}[M(p,q)]
-\]</span></p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="algorithm-selection" class="level3">
-<h3 class="anchored" data-anchor-id="algorithm-selection">1. Algorithm Selection</h3>
-<ol type="1">
-<li>Problem Structure:
-<ul>
-<li>Convexity</li>
-<li>Smoothness</li>
-<li>Sparsity</li>
-</ul></li>
-<li>Computational Constraints:
-<ul>
-<li>Memory limits</li>
-<li>Update time</li>
-<li>Parallelization</li>
-</ul></li>
-<li>Performance Requirements:
-<ul>
-<li>Regret bounds</li>
-<li>Adaptation speed</li>
-<li>Robustness</li>
-</ul></li>
-</ol>
-</section>
-<section id="parameter-tuning" class="level3">
-<h3 class="anchored" data-anchor-id="parameter-tuning">2. Parameter Tuning</h3>
-<ol type="1">
-<li>Learning Rates:
-<ul>
-<li>Fixed vs adaptive</li>
-<li>Schedule design</li>
-<li>Initialization</li>
-</ul></li>
-<li>Exploration:
-<ul>
-<li>Exploration rate</li>
-<li>Decay schedule</li>
-<li>Adaptive schemes</li>
-</ul></li>
-<li>Regularization:
-<ul>
-<li>Strength</li>
-<li>Type selection</li>
-<li>Adaptation</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="algorithm-design" class="level3">
-<h3 class="anchored" data-anchor-id="algorithm-design">1. Algorithm Design</h3>
-<ol type="1">
-<li>Robustness:
-<ul>
-<li>Adversarial scenarios</li>
-<li>Noise handling</li>
-<li>Distribution shifts</li>
-</ul></li>
-<li>Efficiency:
-<ul>
-<li>Memory usage</li>
-<li>Update complexity</li>
-<li>Parallelization</li>
-</ul></li>
-<li>Adaptivity:
-<ul>
-<li>Parameter tuning</li>
-<li>Distribution changes</li>
-<li>Model selection</li>
-</ul></li>
-</ol>
-</section>
-<section id="implementation" class="level3">
-<h3 class="anchored" data-anchor-id="implementation">2. Implementation</h3>
-<ol type="1">
-<li>Data Handling:
-<ul>
-<li>Streaming processing</li>
-<li>Feature extraction</li>
-<li>Preprocessing</li>
-</ul></li>
-<li>Monitoring:
-<ul>
-<li>Regret tracking</li>
-<li>Performance metrics</li>
-<li>Resource usage</li>
-</ul></li>
-<li>Deployment:
-<ul>
-<li>System integration</li>
-<li>Error handling</li>
-<li>Scaling strategy</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Theory:
-<ul>
-<li>“Introduction to Online Convex Optimization” by Hazan</li>
-<li>“Bandit Algorithms” by Lattimore and Szepesvári</li>
-<li>“Prediction, Learning, and Games” by Cesa-Bianchi and Lugosi</li>
-</ul></li>
-<li>Methods:
-<ul>
-<li>“Online Learning and Online Convex Optimization” by Shalev-Shwartz</li>
-<li>“A Modern Introduction to Online Learning” by Orabona</li>
-<li>“Regret Analysis of Stochastic and Nonstochastic Multi-armed Bandit Problems” by Bubeck and Cesa-Bianchi</li>
-</ul></li>
-<li>Applications:
-<ul>
-<li>“Online Portfolio Selection” by Li and Hoi</li>
-<li>“Online Learning in Routing Games” by Roughgarden</li>
-<li>“Online Methods in Machine Learning” by Bottou</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733023433492" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="456">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -756,150 +393,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

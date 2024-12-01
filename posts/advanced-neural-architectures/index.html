@@ -33,17 +33,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,34 +72,34 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <script>
-  (function() {
-    // Immediately apply the correct theme
-    const getStoredTheme = () => localStorage.getItem('quarto-color-scheme');
-    const getPreferredTheme = () => {
-      const storedTheme = getStoredTheme();
-      if (storedTheme) {
-        return storedTheme;
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-    
-    const theme = getPreferredTheme();
-    
-    // Apply theme immediately
-    document.documentElement.classList.add(theme);
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.style.colorScheme = theme;
-    
-    // Set background color immediately to prevent flash
-    if (theme === 'dark') {
-      document.documentElement.style.backgroundColor = '#222';
-      document.documentElement.style.color = '#fff';
-    } else {
-      document.documentElement.style.backgroundColor = '#fff';
-      document.documentElement.style.color = '#000';
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
     }
-  })();
-</script>
+
+    const options = {
+      valueNames: ['listing-title','listing-description','listing-date','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -132,7 +132,7 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
-</head>
+<link rel="alternate" type="application/rss+xml" title="BendThe-Curve" href="index.xml" data-external="1"></head>
 
 <body class="nav-sidebar docked nav-fixed">
 
@@ -178,7 +178,6 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -304,75 +303,8 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#advanced-neural-network-architectures" id="toc-advanced-neural-network-architectures" class="nav-link active" data-scroll-target="#advanced-neural-network-architectures">Advanced Neural Network Architectures</a>
-  <ul class="collapse">
-  <li><a href="#self-attention-mechanisms" id="toc-self-attention-mechanisms" class="nav-link" data-scroll-target="#self-attention-mechanisms">Self-Attention Mechanisms</a>
-  <ul class="collapse">
-  <li><a href="#scaled-dot-product-attention" id="toc-scaled-dot-product-attention" class="nav-link" data-scroll-target="#scaled-dot-product-attention">1. Scaled Dot-Product Attention</a></li>
-  <li><a href="#multi-head-attention" id="toc-multi-head-attention" class="nav-link" data-scroll-target="#multi-head-attention">2. Multi-Head Attention</a></li>
-  </ul></li>
-  <li><a href="#transformer-architecture" id="toc-transformer-architecture" class="nav-link" data-scroll-target="#transformer-architecture">Transformer Architecture</a>
-  <ul class="collapse">
-  <li><a href="#encoder-block" id="toc-encoder-block" class="nav-link" data-scroll-target="#encoder-block">1. Encoder Block</a></li>
-  <li><a href="#positional-encoding" id="toc-positional-encoding" class="nav-link" data-scroll-target="#positional-encoding">2. Positional Encoding</a></li>
-  </ul></li>
-  <li><a href="#modern-architectural-patterns" id="toc-modern-architectural-patterns" class="nav-link" data-scroll-target="#modern-architectural-patterns">Modern Architectural Patterns</a>
-  <ul class="collapse">
-  <li><a href="#residual-networks" id="toc-residual-networks" class="nav-link" data-scroll-target="#residual-networks">1. Residual Networks</a></li>
-  <li><a href="#dense-networks" id="toc-dense-networks" class="nav-link" data-scroll-target="#dense-networks">2. Dense Networks</a></li>
-  <li><a href="#squeeze-and-excitation-networks" id="toc-squeeze-and-excitation-networks" class="nav-link" data-scroll-target="#squeeze-and-excitation-networks">3. Squeeze-and-Excitation Networks</a></li>
-  </ul></li>
-  <li><a href="#advanced-attention-variants" id="toc-advanced-attention-variants" class="nav-link" data-scroll-target="#advanced-attention-variants">Advanced Attention Variants</a>
-  <ul class="collapse">
-  <li><a href="#relative-position-attention" id="toc-relative-position-attention" class="nav-link" data-scroll-target="#relative-position-attention">1. Relative Position Attention</a></li>
-  <li><a href="#linear-attention" id="toc-linear-attention" class="nav-link" data-scroll-target="#linear-attention">2. Linear Attention</a></li>
-  <li><a href="#sparse-attention" id="toc-sparse-attention" class="nav-link" data-scroll-target="#sparse-attention">3. Sparse Attention</a></li>
-  </ul></li>
-  <li><a href="#advanced-normalization-techniques" id="toc-advanced-normalization-techniques" class="nav-link" data-scroll-target="#advanced-normalization-techniques">Advanced Normalization Techniques</a>
-  <ul class="collapse">
-  <li><a href="#layer-normalization" id="toc-layer-normalization" class="nav-link" data-scroll-target="#layer-normalization">1. Layer Normalization</a></li>
-  <li><a href="#group-normalization" id="toc-group-normalization" class="nav-link" data-scroll-target="#group-normalization">2. Group Normalization</a></li>
-  </ul></li>
-  <li><a href="#advanced-activation-functions" id="toc-advanced-activation-functions" class="nav-link" data-scroll-target="#advanced-activation-functions">Advanced Activation Functions</a>
-  <ul class="collapse">
-  <li><a href="#gelu-gaussian-error-linear-unit" id="toc-gelu-gaussian-error-linear-unit" class="nav-link" data-scroll-target="#gelu-gaussian-error-linear-unit">1. GELU (Gaussian Error Linear Unit)</a></li>
-  <li><a href="#swish" id="toc-swish" class="nav-link" data-scroll-target="#swish">2. Swish</a></li>
-  </ul></li>
-  <li><a href="#architectural-optimization" id="toc-architectural-optimization" class="nav-link" data-scroll-target="#architectural-optimization">Architectural Optimization</a>
-  <ul class="collapse">
-  <li><a href="#neural-architecture-search-nas" id="toc-neural-architecture-search-nas" class="nav-link" data-scroll-target="#neural-architecture-search-nas">1. Neural Architecture Search (NAS)</a></li>
-  <li><a href="#dynamic-routing" id="toc-dynamic-routing" class="nav-link" data-scroll-target="#dynamic-routing">2. Dynamic Routing</a></li>
-  </ul></li>
-  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
-  <ul class="collapse">
-  <li><a href="#memory-efficiency" id="toc-memory-efficiency" class="nav-link" data-scroll-target="#memory-efficiency">1. Memory Efficiency</a></li>
-  <li><a href="#computational-efficiency" id="toc-computational-efficiency" class="nav-link" data-scroll-target="#computational-efficiency">2. Computational Efficiency</a></li>
-  <li><a href="#training-stability" id="toc-training-stability" class="nav-link" data-scroll-target="#training-stability">3. Training Stability</a></li>
-  </ul></li>
-  <li><a href="#advanced-training-techniques" id="toc-advanced-training-techniques" class="nav-link" data-scroll-target="#advanced-training-techniques">Advanced Training Techniques</a>
-  <ul class="collapse">
-  <li><a href="#knowledge-distillation" id="toc-knowledge-distillation" class="nav-link" data-scroll-target="#knowledge-distillation">1. Knowledge Distillation</a></li>
-  <li><a href="#progressive-training" id="toc-progressive-training" class="nav-link" data-scroll-target="#progressive-training">2. Progressive Training</a></li>
-  </ul></li>
-  <li><a href="#performance-analysis" id="toc-performance-analysis" class="nav-link" data-scroll-target="#performance-analysis">Performance Analysis</a>
-  <ul class="collapse">
-  <li><a href="#theoretical-complexity" id="toc-theoretical-complexity" class="nav-link" data-scroll-target="#theoretical-complexity">1. Theoretical Complexity</a></li>
-  <li><a href="#information-flow" id="toc-information-flow" class="nav-link" data-scroll-target="#information-flow">2. Information Flow</a></li>
-  </ul></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
-  <ul class="collapse">
-  <li><a href="#architecture-design" id="toc-architecture-design" class="nav-link" data-scroll-target="#architecture-design">1. Architecture Design</a></li>
-  <li><a href="#training-strategy" id="toc-training-strategy" class="nav-link" data-scroll-target="#training-strategy">2. Training Strategy</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -381,324 +313,66 @@ window.Quarto = {
 
 
 
-<section id="advanced-neural-network-architectures" class="level1">
-<h1>Advanced Neural Network Architectures</h1>
-<section id="self-attention-mechanisms" class="level2">
-<h2 class="anchored" data-anchor-id="self-attention-mechanisms">Self-Attention Mechanisms</h2>
-<section id="scaled-dot-product-attention" class="level3">
-<h3 class="anchored" data-anchor-id="scaled-dot-product-attention">1. Scaled Dot-Product Attention</h3>
-<p>The fundamental building block of modern architectures:</p>
-<p><span class="math display">\[
-\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
-\]</span></p>
-<p>Where: - <span class="math inline">\(Q \in \mathbb{R}^{n \times d_k}\)</span> is the query matrix - <span class="math inline">\(K \in \mathbb{R}^{m \times d_k}\)</span> is the key matrix - <span class="math inline">\(V \in \mathbb{R}^{m \times d_v}\)</span> is the value matrix - <span class="math inline">\(d_k\)</span> is the dimension of keys - <span class="math inline">\(\sqrt{d_k}\)</span> is the scaling factor</p>
-</section>
-<section id="multi-head-attention" class="level3">
-<h3 class="anchored" data-anchor-id="multi-head-attention">2. Multi-Head Attention</h3>
-<p>Parallel attention computations:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\text{MultiHead}(Q, K, V) &amp;= \text{Concat}(\text{head}_1, ..., \text{head}_h)W^O \\
-\text{where head}_i &amp;= \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)
-\end{aligned}
-\]</span></p>
-<p>Where: - <span class="math inline">\(W_i^Q \in \mathbb{R}^{d_{model} \times d_k}\)</span> - <span class="math inline">\(W_i^K \in \mathbb{R}^{d_{model} \times d_k}\)</span> - <span class="math inline">\(W_i^V \in \mathbb{R}^{d_{model} \times d_v}\)</span> - <span class="math inline">\(W^O \in \mathbb{R}^{hd_v \times d_{model}}\)</span></p>
-</section>
-</section>
-<section id="transformer-architecture" class="level2">
-<h2 class="anchored" data-anchor-id="transformer-architecture">Transformer Architecture</h2>
-<section id="encoder-block" class="level3">
-<h3 class="anchored" data-anchor-id="encoder-block">1. Encoder Block</h3>
-<p>Complete encoder block computation:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\text{MultiHeadAttn} &amp;= \text{LayerNorm}(x + \text{MultiHead}(x, x, x)) \\
-\text{FFN}(x) &amp;= \text{max}(0, xW_1 + b_1)W_2 + b_2 \\
-\text{Output} &amp;= \text{LayerNorm}(\text{MultiHeadAttn} + \text{FFN}(\text{MultiHeadAttn}))
-\end{aligned}
-\]</span></p>
-</section>
-<section id="positional-encoding" class="level3">
-<h3 class="anchored" data-anchor-id="positional-encoding">2. Positional Encoding</h3>
-<p>Sinusoidal position encoding:</p>
-<p><span class="math display">\[
-\begin{aligned}
-PE_{(pos,2i)} &amp;= \sin(pos/10000^{2i/d_{model}}) \\
-PE_{(pos,2i+1)} &amp;= \cos(pos/10000^{2i/d_{model}})
-\end{aligned}
-\]</span></p>
-<p>Where: - <span class="math inline">\(pos\)</span> is the position - <span class="math inline">\(i\)</span> is the dimension</p>
-</section>
-</section>
-<section id="modern-architectural-patterns" class="level2">
-<h2 class="anchored" data-anchor-id="modern-architectural-patterns">Modern Architectural Patterns</h2>
-<section id="residual-networks" class="level3">
-<h3 class="anchored" data-anchor-id="residual-networks">1. Residual Networks</h3>
-<p>ResNet block formulation:</p>
-<p><span class="math display">\[
-y = F(x, \{W_i\}) + x
-\]</span></p>
-<p>With pre-activation variant:</p>
-<p><span class="math display">\[
-\begin{aligned}
-h &amp;= \text{ReLU}(\text{BN}(x)) \\
-y &amp;= W_2\text{ReLU}(\text{BN}(W_1h)) + x
-\end{aligned}
-\]</span></p>
-</section>
-<section id="dense-networks" class="level3">
-<h3 class="anchored" data-anchor-id="dense-networks">2. Dense Networks</h3>
-<p>DenseNet connectivity pattern:</p>
-<p><span class="math display">\[
-x_l = H_l([x_0, x_1, ..., x_{l-1}])
-\]</span></p>
-<p>Where: - <span class="math inline">\(x_l\)</span> is the output of layer <span class="math inline">\(l\)</span> - <span class="math inline">\(H_l\)</span> is a composite function - <span class="math inline">\([...]\)</span> represents concatenation</p>
-</section>
-<section id="squeeze-and-excitation-networks" class="level3">
-<h3 class="anchored" data-anchor-id="squeeze-and-excitation-networks">3. Squeeze-and-Excitation Networks</h3>
-<p>Channel attention mechanism:</p>
-<p><span class="math display">\[
-\begin{aligned}
-z &amp;= F_{sq}(u) = \frac{1}{H \times W}\sum_{i=1}^H\sum_{j=1}^W u_c(i,j) \\
-s &amp;= F_{ex}(z) = \sigma(W_2\text{ReLU}(W_1z))
-\end{aligned}
-\]</span></p>
-</section>
-</section>
-<section id="advanced-attention-variants" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-attention-variants">Advanced Attention Variants</h2>
-<section id="relative-position-attention" class="level3">
-<h3 class="anchored" data-anchor-id="relative-position-attention">1. Relative Position Attention</h3>
-<p>Position-aware attention scoring:</p>
-<p><span class="math display">\[
-\text{Attention}(Q, K, V, R) = \text{softmax}\left(\frac{QK^T + QR^T}{\sqrt{d_k}}\right)V
-\]</span></p>
-<p>Where: - <span class="math inline">\(R\)</span> is the relative position encoding matrix</p>
-</section>
-<section id="linear-attention" class="level3">
-<h3 class="anchored" data-anchor-id="linear-attention">2. Linear Attention</h3>
-<p>Efficient attention computation:</p>
-<p><span class="math display">\[
-\text{LinearAttention}(Q, K, V) = \phi(Q)(\phi(K)^TV)
-\]</span></p>
-<p>Where: - <span class="math inline">\(\phi\)</span> is a feature map (e.g., elu(x) + 1)</p>
-</section>
-<section id="sparse-attention" class="level3">
-<h3 class="anchored" data-anchor-id="sparse-attention">3. Sparse Attention</h3>
-<p>Structured sparsity pattern:</p>
-<p><span class="math display">\[
-\text{SparseAttention}(Q, K, V) = \text{softmax}\left(\frac{M \odot (QK^T)}{\sqrt{d_k}}\right)V
-\]</span></p>
-<p>Where: - <span class="math inline">\(M\)</span> is a binary mask matrix - <span class="math inline">\(\odot\)</span> is element-wise multiplication</p>
-</section>
-</section>
-<section id="advanced-normalization-techniques" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-normalization-techniques">Advanced Normalization Techniques</h2>
-<section id="layer-normalization" class="level3">
-<h3 class="anchored" data-anchor-id="layer-normalization">1. Layer Normalization</h3>
-<p>Computation across features:</p>
-<p><span class="math display">\[
-\text{LN}(x) = \gamma \odot \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta
-\]</span></p>
-<p>Where: - <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are computed across feature dimension</p>
-</section>
-<section id="group-normalization" class="level3">
-<h3 class="anchored" data-anchor-id="group-normalization">2. Group Normalization</h3>
-<p>Feature group normalization:</p>
-<p><span class="math display">\[
-\text{GN}(x) = \gamma \odot \frac{x - \mu_g}{\sqrt{\sigma_g^2 + \epsilon}} + \beta
-\]</span></p>
-<p>Where: - <span class="math inline">\(\mu_g\)</span> and <span class="math inline">\(\sigma_g\)</span> are computed within groups</p>
-</section>
-</section>
-<section id="advanced-activation-functions" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-activation-functions">Advanced Activation Functions</h2>
-<section id="gelu-gaussian-error-linear-unit" class="level3">
-<h3 class="anchored" data-anchor-id="gelu-gaussian-error-linear-unit">1. GELU (Gaussian Error Linear Unit)</h3>
-<p>Smooth approximation:</p>
-<p><span class="math display">\[
-\text{GELU}(x) = x\Phi(x) = x \cdot \frac{1}{2}\left[1 + \text{erf}\left(\frac{x}{\sqrt{2}}\right)\right]
-\]</span></p>
-</section>
-<section id="swish" class="level3">
-<h3 class="anchored" data-anchor-id="swish">2. Swish</h3>
-<p>Self-gated activation:</p>
-<p><span class="math display">\[
-\text{Swish}(x) = x \cdot \sigma(\beta x)
-\]</span></p>
-<p>Where: - <span class="math inline">\(\sigma\)</span> is the sigmoid function - <span class="math inline">\(\beta\)</span> is a learnable parameter</p>
-</section>
-</section>
-<section id="architectural-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="architectural-optimization">Architectural Optimization</h2>
-<section id="neural-architecture-search-nas" class="level3">
-<h3 class="anchored" data-anchor-id="neural-architecture-search-nas">1. Neural Architecture Search (NAS)</h3>
-<p>Optimization objective:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\min_{\alpha} &amp; \quad \mathcal{L}_{val}(w^*(\alpha), \alpha) \\
-\text{s.t.} &amp; \quad w^*(\alpha) = \argmin_w \mathcal{L}_{train}(w, \alpha)
-\end{aligned}
-\]</span></p>
-</section>
-<section id="dynamic-routing" class="level3">
-<h3 class="anchored" data-anchor-id="dynamic-routing">2. Dynamic Routing</h3>
-<p>Routing probability:</p>
-<p><span class="math display">\[
-p_{ij} = \frac{\exp(\hat{u}_j|u_i)}{\sum_k \exp(\hat{u}_k|u_i)}
-\]</span></p>
-<p>Where: - <span class="math inline">\(u_i\)</span> is the input capsule - <span class="math inline">\(\hat{u}_j\)</span> is the prediction vector</p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="memory-efficiency" class="level3">
-<h3 class="anchored" data-anchor-id="memory-efficiency">1. Memory Efficiency</h3>
-<p>Gradient checkpointing:</p>
-<p><span class="math display">\[
-\text{memory} = O(\sqrt{N}) \text{ instead of } O(N)
-\]</span></p>
-<p>Where: - <span class="math inline">\(N\)</span> is the number of layers</p>
-</section>
-<section id="computational-efficiency" class="level3">
-<h3 class="anchored" data-anchor-id="computational-efficiency">2. Computational Efficiency</h3>
-<p>Mixed precision training:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\text{FP16 Forward} &amp;: y = \text{cast}_{\text{FP16}}(Wx) \\
-\text{FP32 Master} &amp;: w_{\text{master}} = w_{\text{FP32}}
-\end{aligned}
-\]</span></p>
-</section>
-<section id="training-stability" class="level3">
-<h3 class="anchored" data-anchor-id="training-stability">3. Training Stability</h3>
-<p>Gradient clipping with norm:</p>
-<p><span class="math display">\[
-g = \min\left(1, \frac{\theta}{\|g\|}\right)g
-\]</span></p>
-<p>Where: - <span class="math inline">\(\theta\)</span> is the clipping threshold - <span class="math inline">\(g\)</span> is the gradient</p>
-</section>
-</section>
-<section id="advanced-training-techniques" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-training-techniques">Advanced Training Techniques</h2>
-<section id="knowledge-distillation" class="level3">
-<h3 class="anchored" data-anchor-id="knowledge-distillation">1. Knowledge Distillation</h3>
-<p>Distillation objective:</p>
-<p><span class="math display">\[
-\mathcal{L} = \alpha T^2 \text{KL}\left(\text{softmax}\left(\frac{z_t}{T}\right), \text{softmax}\left(\frac{z_s}{T}\right)\right) + (1-\alpha)\mathcal{L}_{\text{CE}}
-\]</span></p>
-<p>Where: - <span class="math inline">\(z_t\)</span> and <span class="math inline">\(z_s\)</span> are teacher and student logits - <span class="math inline">\(T\)</span> is temperature - <span class="math inline">\(\alpha\)</span> is balancing factor</p>
-</section>
-<section id="progressive-training" class="level3">
-<h3 class="anchored" data-anchor-id="progressive-training">2. Progressive Training</h3>
-<p>Curriculum learning schedule:</p>
-<p><span class="math display">\[
-\lambda(t) = \min\left(1, \frac{t}{\tau}\right)
-\]</span></p>
-<p>Where: - <span class="math inline">\(t\)</span> is current step - <span class="math inline">\(\tau\)</span> is ramp-up period</p>
-</section>
-</section>
-<section id="performance-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="performance-analysis">Performance Analysis</h2>
-<section id="theoretical-complexity" class="level3">
-<h3 class="anchored" data-anchor-id="theoretical-complexity">1. Theoretical Complexity</h3>
-<p>Attention complexity:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\text{Space} &amp;: O(n^2d) \\
-\text{Time} &amp;: O(n^2d)
-\end{aligned}
-\]</span></p>
-<p>Where: - <span class="math inline">\(n\)</span> is sequence length - <span class="math inline">\(d\)</span> is hidden dimension</p>
-</section>
-<section id="information-flow" class="level3">
-<h3 class="anchored" data-anchor-id="information-flow">2. Information Flow</h3>
-<p>Maximum path length:</p>
-<p><span class="math display">\[
-\text{PathLength} = \begin{cases}
-O(1) &amp; \text{for transformers} \\
-O(n) &amp; \text{for RNNs}
-\end{cases}
-\]</span></p>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="architecture-design" class="level3">
-<h3 class="anchored" data-anchor-id="architecture-design">1. Architecture Design</h3>
-<ol type="1">
-<li>Residual Connections:
-<ul>
-<li>Use in deep networks</li>
-<li>Maintain gradient flow</li>
-<li>Enable deeper architectures</li>
-</ul></li>
-<li>Normalization:
-<ul>
-<li>Pre-normalization for stability</li>
-<li>Layer normalization for transformers</li>
-<li>Batch normalization for CNNs</li>
-</ul></li>
-<li>Attention Mechanisms:
-<ul>
-<li>Multi-head attention for diverse features</li>
-<li>Relative position encoding for sequences</li>
-<li>Sparse attention for long sequences</li>
-</ul></li>
-</ol>
-</section>
-<section id="training-strategy" class="level3">
-<h3 class="anchored" data-anchor-id="training-strategy">2. Training Strategy</h3>
-<ol type="1">
-<li>Learning Rate:
-<ul>
-<li>Linear warmup</li>
-<li>Cosine decay</li>
-<li>Layer-wise learning rates</li>
-</ul></li>
-<li>Regularization:
-<ul>
-<li>Dropout in attention</li>
-<li>Weight decay</li>
-<li>Label smoothing</li>
-</ul></li>
-<li>Optimization:
-<ul>
-<li>Adam with weight decay</li>
-<li>Gradient clipping</li>
-<li>Mixed precision training</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Architecture:
-<ul>
-<li>“Attention Is All You Need” by Vaswani et al.</li>
-<li>“Deep Residual Learning” by He et al.</li>
-<li>“Densely Connected Networks” by Huang et al.</li>
-</ul></li>
-<li>Training:
-<ul>
-<li>“On Layer Normalization in the Transformer Architecture” by Xiong et al.</li>
-<li>“Understanding the Difficulty of Training Deep Feedforward Neural Networks” by Glorot and Bengio</li>
-<li>“Mixed Precision Training” by Micikevicius et al.</li>
-</ul></li>
-<li>Analysis:
-<ul>
-<li>“On the Relationship between Self-Attention and Convolutional Layers” by Cordonnier et al.</li>
-<li>“The Transformer Family” by Tay et al.</li>
-<li>“What Does BERT Look At?” by Clark et al.</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733023433492" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="456">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="machine-learning,theory,mathematics,stability" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023240221" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2619">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/algorithmic-stability/index.html" class="no-external">Algorithmic Stability and Learning Theory</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/algorithmic-stability/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/algorithmic-stability/index.html" class="no-external">A beginner-friendly guide to algorithmic stability in machine learning, with interactive visualizations and practical examples.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/algorithmic-stability/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -719,150 +393,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

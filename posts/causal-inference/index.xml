@@ -6,9 +6,14 @@
       version="2.0">
 <channel>
 <title>BendThe-Curve</title>
-<link>https://ram-polisetti.github.io/BendTheCurve/posts.html</link>
-<atom:link href="https://ram-polisetti.github.io/BendTheCurve/posts.xml" rel="self" type="application/rss+xml"/>
-<description></description>
+<link>https://ram-polisetti.github.io/BendTheCurve/posts/causal-inference/</link>
+<atom:link href="https://ram-polisetti.github.io/BendTheCurve/posts/causal-inference/index.xml" rel="self" type="application/rss+xml"/>
+<description>A rigorous exploration of causal inference and structural learning, covering identification, estimation, and structural causal models.</description>
+<image>
+<url>https://ram-polisetti.github.io/BendTheCurve/causal_inference.jpg</url>
+<title>BendThe-Curve</title>
+<link>https://ram-polisetti.github.io/BendTheCurve/posts/causal-inference/</link>
+</image>
 <generator>quarto-1.5.57</generator>
 <lastBuildDate>Wed, 20 Nov 2024 05:00:00 GMT</lastBuildDate>
 <item>
@@ -1855,84 +1860,6 @@ font-style: inherit;">"</span>)</span></code></pre></div>
   <guid>https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/</guid>
   <pubDate>Tue, 19 Mar 2024 04:00:00 GMT</pubDate>
   <media:content url="https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/stability.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>Causal Inference and Structural Learning</title>
-  <dc:creator>Ram Polisetti</dc:creator>
-  <link>https://ram-polisetti.github.io/BendTheCurve/posts/causal-inference/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
-<hr>
-<p>::: :::</p>
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733023433492" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="456">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
-</div>
-</div>
-<div class="metadata">
-<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
-<div class="listing-date">
-November 20, 2024
-</div>
-<div class="listing-author">
-Ram Polisetti
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
-<div class="listing-date">
-March 19, 2024
-</div>
-<div class="listing-author">
-Ram Polisetti
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div> ]]></description>
-  <category>machine-learning</category>
-  <category>causality</category>
-  <category>statistics</category>
-  <category>mathematics</category>
-  <guid>https://ram-polisetti.github.io/BendTheCurve/posts/causal-inference/</guid>
-  <pubDate>Tue, 19 Mar 2024 04:00:00 GMT</pubDate>
-  <media:content url="https://ram-polisetti.github.io/BendTheCurve/posts/causal-inference/causal_inference.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Computational Learning Theory</title>
