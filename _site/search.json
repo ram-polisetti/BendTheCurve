@@ -1405,5 +1405,82 @@
     "title": "Computational Learning Theory",
     "section": "",
     "text": "Theory:\n\n“Foundations of Machine Learning” by Mohri et al.\n“Understanding Machine Learning” by Shalev-Shwartz and Ben-David\n“Computational Learning Theory” by Kearns and Vazirani\n\nComplexity:\n\n“Computational Complexity” by Arora and Barak\n“Communication Complexity” by Kushilevitz and Nisan\n“The Nature of Computation” by Moore and Mertens\n\nApplications:\n\n“Algorithmic Learning Theory” by Anthony and Biggs\n“Learning with Kernels” by Schölkopf and Smola\n“Theoretical Computer Science” by Hopcroft and Ullman"
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html",
+    "href": "posts/machine_learning_concepts.html",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "",
+    "text": "Hey there! 👋 Ever wondered how Netflix knows exactly what show you might like next? Or how your phone can recognize your face? That’s machine learning in action! Today, let’s break down this fascinating technology in simple terms."
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#introduction",
+    "href": "posts/machine_learning_concepts.html#introduction",
+    "title": "Understanding Machine Learning",
+    "section": "",
+    "text": "Machine learning is a fascinating field that has revolutionized the way we interact with technology. It enables computers to learn from data and make decisions without being explicitly programmed. This post explores two foundational definitions that capture the essence of machine learning."
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#definitions",
+    "href": "posts/machine_learning_concepts.html#definitions",
+    "title": "Understanding Machine Learning",
+    "section": "Definitions",
+    "text": "Definitions\n\nArthur Samuel, 1959\n“Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed.” —Arthur Samuel, 1959\nArthur Samuel’s definition highlights the core idea of machine learning: enabling computers to learn autonomously from data. This concept laid the groundwork for the development of algorithms that can adapt and improve over time.\n\n\nTom Mitchell, 1997\n“A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.” —Tom Mitchell, 1997\nTom Mitchell’s definition provides a more structured approach to understanding machine learning. It emphasizes the importance of experience (E), task (T), and performance measure (P) in evaluating a machine learning model’s effectiveness.\nTo put it simply, if a computer program gets better at a task the more it does it, then it’s learning! For example, if a program is designed to recognize cats in photos, it will get better at this task the more cat photos it sees."
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#conclusion",
+    "href": "posts/machine_learning_concepts.html#conclusion",
+    "title": "Understanding Machine Learning",
+    "section": "Conclusion",
+    "text": "Conclusion\nThese definitions underscore the transformative potential of machine learning. By enabling computers to learn and improve from experience, machine learning opens up a world of possibilities for innovation and problem-solving across various domains.\nMachine learning is everywhere—from recommending movies and products to predicting weather and diagnosing diseases. As you continue to explore this field, you’ll discover how it can be applied to solve real-world problems and create new opportunities."
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#what-is-machine-learning",
+    "href": "posts/machine_learning_concepts.html#what-is-machine-learning",
+    "title": "Understanding Machine Learning",
+    "section": "What is Machine Learning?",
+    "text": "What is Machine Learning?\nMachine learning is like teaching a computer to learn from its own experiences, similar to how humans learn from theirs. Instead of giving the computer a set of rigid instructions, we provide it with data and let it figure out patterns and make decisions on its own.\nImagine teaching a child to recognize animals. Instead of telling them every detail about each animal, you show them pictures and let them learn to identify them over time. Machine learning works in a similar way, using data to help computers “see” patterns and make predictions."
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#whats-machine-learning-really",
+    "href": "posts/machine_learning_concepts.html#whats-machine-learning-really",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "What’s Machine Learning, Really?",
+    "text": "What’s Machine Learning, Really?\nYou know how we humans learn from experience? Like how you learned to ride a bike by practicing, falling down a few times, and getting better with each try? Well, machine learning is kind of like that, but for computers!\nInstead of writing strict rules like “if this happens, do that,” we’re basically teaching computers to learn from examples and get better over time. Cool, right?"
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#lets-break-it-down-with-a-simple-example",
+    "href": "posts/machine_learning_concepts.html#lets-break-it-down-with-a-simple-example",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "Let’s Break It Down with a Simple Example",
+    "text": "Let’s Break It Down with a Simple Example\nImagine you’re teaching your little sister to identify dogs and cats: - First, you show her lots of pictures of dogs and cats - She might make mistakes at first (calling a dog a cat) - But the more pictures she sees, the better she gets at telling them apart - Eventually, she can identify animals she’s never seen before!\nThis is exactly how machine learning works! We show computers lots of examples, and they learn to recognize patterns, just like your sister did."
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#the-smart-people-who-explained-it-first",
+    "href": "posts/machine_learning_concepts.html#the-smart-people-who-explained-it-first",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "The Smart People Who Explained It First",
+    "text": "The Smart People Who Explained It First\n\nArthur Samuel’s Take (1959)\nHe said: “Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed.”\nIn everyday words: Instead of telling a computer exactly what to do (like we usually do), we let it figure things out on its own by learning from data. Just like how you learned to walk without someone programming your brain with exact instructions for each muscle movement!\n\n\nTom Mitchell’s Version (1997)\nHe got a bit more specific and said: “A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.”\nOkay, that sounds complicated! But let’s break it down with a fun example:\nImagine teaching a computer to play Mario Kart: - Task (T): Playing Mario Kart - Experience (E): Playing lots of races - Performance (P): How often it wins races\nThe more races it plays (E), the better it gets at winning (P) the game (T). Simple as that!"
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#where-do-we-see-machine-learning-in-real-life",
+    "href": "posts/machine_learning_concepts.html#where-do-we-see-machine-learning-in-real-life",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "Where Do We See Machine Learning in Real Life?",
+    "text": "Where Do We See Machine Learning in Real Life?\nIt’s everywhere! Here are some cool examples: - 📱 Face ID on your phone - 🎵 Spotify suggesting songs you might like - 📺 Netflix recommending your next binge-worthy show - 🚗 Self-driving cars learning to navigate roads - 📧 Gmail filtering out spam"
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#why-should-you-care",
+    "href": "posts/machine_learning_concepts.html#why-should-you-care",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "Why Should You Care?",
+    "text": "Why Should You Care?\nMachine learning is changing the world in amazing ways: - Making our devices smarter and more helpful - Helping doctors diagnose diseases earlier - Creating awesome video game experiences - Even helping fight climate change!"
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#wrapping-up",
+    "href": "posts/machine_learning_concepts.html#wrapping-up",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "Wrapping Up",
+    "text": "Wrapping Up\nSo there you have it! Machine learning isn’t just some complicated tech jargon - it’s a way to make computers learn from experience, just like we do. And the best part? We’re just getting started with what it can do!\nRemember: Every time you use a filter on Snapchat, ask Siri a question, or get a product recommendation on Amazon, you’re interacting with machine learning. Pretty amazing, right?\nGot questions? Feel free to drop them in the comments below! Learning about machine learning is a journey, and we’re all in it together! 🚀"
   }
 ]
