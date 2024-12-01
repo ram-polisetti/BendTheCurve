@@ -18,7 +18,9 @@ Deep learning is inspired by how our brains work, but it's a simplified model. U
 
 Think of it like this:
 - Your brain has billions of neurons working together to help you recognize faces, understand speech, and make decisions
+
 - Each neuron is like a tiny processor, taking in information and deciding whether to pass it on
+
 - Deep learning creates artificial versions of these networks to solve complex problems
 
 Let's break it down with a simple example:
@@ -41,7 +43,9 @@ A deep learning system works similarly!
 ## Concept
 An artificial neuron is like a simple calculator that:
 - Takes inputs (like numbers from 0 to 1)
+
 - Weighs their importance
+
 - Makes a decision based on the total
 
 ## Python Example
@@ -70,7 +74,9 @@ print(f"Neuron output: {result}")
 ## Understanding Network Depth
 The "deep" in deep learning comes from having multiple layers. Each layer:
 - Learns different levels of features
+
 - Builds upon previous layers
+
 - Increases the network's ability to learn complex patterns
 :::
 
@@ -180,9 +186,12 @@ Good for sequences:
 ### 1. Computer Vision
 What it can do:
 - Recognize objects
+
 - Detect faces
-- Read text
-- Find patterns in images
+
+- Read text from images
+
+- Identify medical conditions
 
 Real Examples:
 - Face ID on phones

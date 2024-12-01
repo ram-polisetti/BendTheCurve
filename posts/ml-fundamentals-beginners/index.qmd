@@ -11,16 +11,22 @@ jupyter: python3
 ::: {.callout-note}
 ## What You'll Learn
 - Understand machine learning in simple, everyday terms
+
 - Write your first machine learning code (no experience needed!)
+
 - Learn how Netflix, Spotify, and other apps use ML
+
 - Build real working models step by step
+
 :::
 
 ## Introduction: What is Machine Learning, Really?
 
 Imagine teaching a child to recognize a cat:
 - You don't give them a mathematical formula for "cat-ness"
+
 - You don't list out exact measurements for ears, whiskers, and tail
+
 - Instead, you show them lots of cat pictures
 
 This is exactly how machine learning works! Instead of writing strict rules, we show computers lots of examples and let them learn patterns.
@@ -28,9 +34,13 @@ This is exactly how machine learning works! Instead of writing strict rules, we 
 ::: {.callout-tip}
 ## Quick Examples You Already Know
 - 📧 Gmail knowing which emails are spam
+
 - 🎵 Spotify suggesting songs you might like
+
 - 📱 Face ID unlocking your phone
+
 - 🛒 Amazon recommending products
+
 All of these use machine learning!
 :::
 
@@ -53,9 +63,13 @@ plt.style.use('seaborn')
 ::: {.callout-note}
 ## Understanding the Tools
 - `numpy`: Like a super calculator
+
 - `pandas`: Like Excel, but more powerful
+
 - `matplotlib`: For making charts and graphs
+
 - `sklearn`: Our machine learning toolkit
+
 :::
 
 ## Part 1: Your First Machine Learning Project
@@ -65,9 +79,13 @@ Let's start with something everyone understands: house prices!
 ::: {.callout-tip}
 ## Why Houses?
 - Everyone knows bigger houses usually cost more
+
 - It's easy to visualize
+
 - The relationship is fairly simple
+
 - It's a real-world problem
+
 :::
 
 ### Step 1: Creating Our Data
@@ -101,9 +119,12 @@ plt.show()
 ::: {.callout-important}
 ## Understanding the Code Above
 1. `np.linspace(1000, 5000, 100)`: Creates 100 evenly spaced numbers between 1000 and 5000
+
 2. `base_price + size_factor * house_sizes`: Basic price calculation
    - Example: A 2000 sq ft house would be: $200K + (0.3 * 2000) = $800K
+
 3. `noise`: Adds random variation, just like real house prices aren't perfectly predictable
+
 :::
 
 ### Step 2: Training Our First Model
@@ -162,9 +183,13 @@ for size in test_sizes:
 1. We split our data into two parts:
    - Training data (80%): Like studying for a test
    - Testing data (20%): Like taking the actual test
+
 2. The model learned the relationship between size and price
+
 3. The red line shows what the model learned
+
 4. Blue dots are training data, green dots are testing data
+
 :::
 
 ## Part 2: Types of Machine Learning (With Real Examples!)
@@ -178,12 +203,15 @@ This is like learning with a teacher who gives you questions AND answers.
 - 📧 Gmail's Spam Filter
   - Input: Email content
   - Output: Spam or Not Spam
+
 - 🏠 Our House Price Predictor
   - Input: House size
   - Output: Price
+
 - 📱 Face Recognition
   - Input: Photo
   - Output: Person's name
+
 :::
 
 Let's build another supervised learning example - a simple age classifier:
@@ -243,12 +271,16 @@ plt.show()
 ::: {.callout-important}
 ## Understanding the Age Classifier
 1. We created fake data about people's age and activity levels
+
 2. The model learns to group people into three categories:
    - Young (around 25 years)
    - Middle-aged (around 45 years)
    - Senior (around 65 years)
+
 3. The colored regions show how the model makes decisions
+
 4. Each dot represents one person
+
 :::
 
 ### 2. Unsupervised Learning: Finding Hidden Patterns
@@ -303,12 +335,15 @@ for i, center in enumerate(centers):
 1. 🎵 Spotify Groups Similar Songs
    - Creates playlists automatically
    - Suggests new music you might like
+
 2. 📺 Netflix Categories
    - Groups similar movies/shows
    - Creates those oddly specific categories you see
+
 3. 🛒 Amazon Customer Segments
    - Groups shoppers by behavior
    - Personalizes recommendations
+
 :::
 
 ## Part 3: Making Your Models Better
@@ -392,6 +427,7 @@ plt.show()
 4. Using Complex Models Too Soon
    - Start simple!
    - Add complexity only when needed
+
 :::
 
 ## Your Next Steps
@@ -417,6 +453,7 @@ plt.show()
 - Use real-world examples
 - Don't be afraid to make mistakes
 - Share your work with others
+
 :::
 
 ## Quick Reference: Python for ML
@@ -455,4 +492,5 @@ accuracy = accuracy_score(y_test, predictions)
 - Join ML communities on Reddit or Discord
 - Share your code on GitHub
 - Ask questions on Stack Overflow
+
 :::

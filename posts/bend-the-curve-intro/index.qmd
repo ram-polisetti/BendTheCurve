@@ -16,7 +16,9 @@ A learning platform where we break down complex data science and machine learnin
 
 Have you ever:
 - Wondered how Netflix knows exactly what show you'll like? 🎬
+
 - Been curious about how self-driving cars work? 🚗
+
 - Wanted to learn data science but felt overwhelmed? 📊
 
 You're in the right place! BendTheCurve is designed to make these fascinating topics accessible to everyone.
@@ -25,17 +27,23 @@ You're in the right place! BendTheCurve is designed to make these fascinating to
 
 ### 🌱 For Beginners
 - **Python Basics**: Start from zero
+
 - **Data Analysis**: Learn to tell stories with data
+
 - **Machine Learning 101**: Build your first AI models
 
 ### 🚀 For Intermediate Learners
 - **Deep Learning**: Understand neural networks
+
 - **Natural Language Processing**: Make computers understand text
+
 - **Computer Vision**: Teach machines to see
 
 ### 💡 For Advanced Practitioners
 - **Research Papers Explained**: Latest developments in simple terms
+
 - **Industry Best Practices**: Real-world applications
+
 - **Advanced Techniques**: Cutting-edge methods
 
 ## How to Use This Blog
@@ -43,7 +51,9 @@ You're in the right place! BendTheCurve is designed to make these fascinating to
 ### 1. Start with the Fundamentals
 Begin with our beginner-friendly series:
 - [Machine Learning Fundamentals](/posts/ml-fundamentals-beginners)
+
 - [Python for Data Science](/posts/python-data-science)
+
 - [Statistics Made Simple](/posts/statistics-basics)
 
 ### 2. Choose Your Path
@@ -93,8 +103,11 @@ Every concept comes with:
 ## Join Our Community
 
 - 💬 Comment on posts
+
 - 🤝 Share your projects
+
 - 📧 Subscribe to updates
+
 - 🐦 Follow on Twitter
 
 ::: {.callout-important}
