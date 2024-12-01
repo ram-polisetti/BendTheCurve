@@ -14,9 +14,13 @@ jupyter: python3
 ## Learning Objectives
 By the end of this article, you will:
 1. Understand PAC learning intuitively and mathematically
+
 2. Visualize VC dimension in practice
+
 3. Calculate sample complexity for real problems
+
 4. Implement PAC learning algorithms
+
 5. Apply VC theory to model selection
 :::
 
@@ -147,8 +151,11 @@ $$
 
 Where:
 - $\epsilon$ is the accuracy parameter (how close to perfect)
+
 - $\delta$ is the confidence parameter (how sure we are)
+
 - $m$ is the sample size
+
 - $h_S$ is the learned hypothesis
 
 ### 2. Sample Complexity

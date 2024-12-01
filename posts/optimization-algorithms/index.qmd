@@ -22,10 +22,15 @@ $$
 
 Where:
 - $J(\theta)$ is the objective function
+
 - $\theta$ represents model parameters
+
 - $L$ is the loss function
+
 - $f_\theta$ is the model prediction
+
 - $R(\theta)$ is the regularization term
+
 - $\lambda$ is the regularization strength
 
 ### 2. Gradient Descent Fundamentals
@@ -38,7 +43,9 @@ $$
 
 Where:
 - $\theta_t$ is the parameter at iteration t
+
 - $\eta$ is the learning rate
+
 - $\nabla_\theta J(\theta_t)$ is the gradient of the objective function
 
 ### 3. Convergence Analysis
@@ -51,7 +58,9 @@ $$
 
 Where:
 - $\theta^*$ is the optimal parameter
+
 - $\theta_0$ is the initial parameter
+
 - $t$ is the number of iterations
 
 ## First-Order Methods
@@ -72,6 +81,7 @@ $$
 
 Where:
 - $L$ is the Lipschitz constant
+
 - $\mu$ is the strong convexity parameter
 
 ### 2. Momentum
@@ -87,6 +97,7 @@ $$
 
 Where:
 - $v_t$ is the velocity at time t
+
 - $\gamma$ is the momentum coefficient
 
 ### 3. Nesterov Accelerated Gradient (NAG)
@@ -112,7 +123,9 @@ $$
 
 Where:
 - $G_t$ is the sum of squared gradients up to time t
+
 - $g_t$ is the current gradient
+
 - $\odot$ represents element-wise multiplication
 
 ### 2. RMSprop
@@ -196,6 +209,7 @@ $$
 
 Where:
 - $b$ is the current batch size
+
 - $b_{base}$ is the reference batch size
 
 ### 3. Gradient Clipping
@@ -285,6 +299,7 @@ W \sim \mathcal{N}(0, \sqrt{\frac{2}{n_{in} + n_{out}}})
 $$
 
 2. Gradient clipping
+
 3. Layer normalization:
 $$
 \hat{x} = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}}

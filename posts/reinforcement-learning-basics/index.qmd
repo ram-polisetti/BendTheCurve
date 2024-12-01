@@ -11,8 +11,11 @@ description: "A beginner-friendly introduction to reinforcement learning concept
 ## What You'll Learn
 By the end of this guide, you'll understand:
 - The basic concepts of reinforcement learning
+
 - How agents learn from experience
+
 - Real-world applications
+
 - How to implement a simple RL algorithm
 :::
 
@@ -34,7 +37,9 @@ Imagine teaching a dog new tricks:
 
 This is exactly how reinforcement learning works! It's about:
 - Learning what to do (actions)
+
 - How to map situations to actions (strategy)
+
 - Maximizing a numerical reward signal
 
 ## Your First RL Algorithm
@@ -87,8 +92,11 @@ for _ in range(10):
 ## Explanation
 This code demonstrates:
 1. Creating a Q-learning agent
+
 2. Balancing exploration vs exploitation
+
 3. Learning from experience
+
 4. Updating Q-values based on rewards
 
 ## Output Visualization

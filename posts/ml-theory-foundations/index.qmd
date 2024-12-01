@@ -12,8 +12,11 @@ jupyter: python3
 ## What You'll Learn
 This guide will help you understand:
 - The mathematical foundations of machine learning
+
 - Why ML algorithms work (or fail)
+
 - How to choose and evaluate models
+
 - Real-world applications of ML theory
 :::
 
@@ -22,8 +25,11 @@ This guide will help you understand:
 ::: {.callout-tip}
 ## Prerequisites
 - Basic calculus (derivatives, integrals)
+
 - Linear algebra fundamentals
+
 - Basic probability theory
+
 - Python programming
 :::
 
@@ -70,12 +76,15 @@ plt.show()
 ## Explanation
 This example illustrates:
 1. Underfitting (degree 1)
+
 2. Good fit (degree 3)
+
 3. Overfitting (degree 15)
 
 ## Theory Connection
 This demonstrates the bias-variance tradeoff:
 - Low degree = high bias
+
 - High degree = high variance
 :::
 

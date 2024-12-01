@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ram Polisetti">
-<meta name="dcterms.date" content="2024-11-20">
-<meta name="description" content="Your friendly guide to the exciting world of data science and machine learning">
+<meta name="dcterms.date" content="2024-03-19">
+<meta name="description" content="A comprehensive technical exploration of optimization algorithms in machine learning, covering mathematical foundations and implementation details.">
 
-<title>Welcome to BendTheCurve – BendThe-Curve</title>
+<title>Optimization Algorithms in Machine Learning: A Deep Dive – BendThe-Curve</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,6 +101,35 @@ ul.task-list li input[type="checkbox"] {
   })();
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -158,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Welcome to BendTheCurve</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Optimization Algorithms in Machine Learning: A Deep Dive</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -168,15 +197,17 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Welcome to BendTheCurve</h1>
+      <h1 class="title">Optimization Algorithms in Machine Learning: A Deep Dive</h1>
                   <div>
         <div class="description">
-          Your friendly guide to the exciting world of data science and machine learning
+          A comprehensive technical exploration of optimization algorithms in machine learning, covering mathematical foundations and implementation details.
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">welcome</div>
-                <div class="quarto-category">introduction</div>
+                <div class="quarto-category">machine-learning</div>
+                <div class="quarto-category">optimization</div>
+                <div class="quarto-category">mathematics</div>
+                <div class="quarto-category">algorithms</div>
               </div>
                   </div>
   </div>
@@ -194,7 +225,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 20, 2024</p>
+        <p class="date">March 19, 2024</p>
       </div>
     </div>
     
@@ -278,27 +309,56 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#why-bendthecurve" id="toc-why-bendthecurve" class="nav-link active" data-scroll-target="#why-bendthecurve">Why BendTheCurve?</a></li>
-  <li><a href="#what-well-cover" id="toc-what-well-cover" class="nav-link" data-scroll-target="#what-well-cover">What We’ll Cover</a>
+  <li><a href="#optimization-algorithms-in-machine-learning" id="toc-optimization-algorithms-in-machine-learning" class="nav-link active" data-scroll-target="#optimization-algorithms-in-machine-learning">Optimization Algorithms in Machine Learning</a>
   <ul class="collapse">
-  <li><a href="#for-beginners" id="toc-for-beginners" class="nav-link" data-scroll-target="#for-beginners">🌱 For Beginners</a></li>
-  <li><a href="#for-intermediate-learners" id="toc-for-intermediate-learners" class="nav-link" data-scroll-target="#for-intermediate-learners">🚀 For Intermediate Learners</a></li>
-  <li><a href="#for-advanced-practitioners" id="toc-for-advanced-practitioners" class="nav-link" data-scroll-target="#for-advanced-practitioners">💡 For Advanced Practitioners</a></li>
+  <li><a href="#mathematical-foundations" id="toc-mathematical-foundations" class="nav-link" data-scroll-target="#mathematical-foundations">Mathematical Foundations</a>
+  <ul class="collapse">
+  <li><a href="#objective-functions" id="toc-objective-functions" class="nav-link" data-scroll-target="#objective-functions">1. Objective Functions</a></li>
+  <li><a href="#gradient-descent-fundamentals" id="toc-gradient-descent-fundamentals" class="nav-link" data-scroll-target="#gradient-descent-fundamentals">2. Gradient Descent Fundamentals</a></li>
+  <li><a href="#convergence-analysis" id="toc-convergence-analysis" class="nav-link" data-scroll-target="#convergence-analysis">3. Convergence Analysis</a></li>
   </ul></li>
-  <li><a href="#how-to-use-this-blog" id="toc-how-to-use-this-blog" class="nav-link" data-scroll-target="#how-to-use-this-blog">How to Use This Blog</a>
+  <li><a href="#first-order-methods" id="toc-first-order-methods" class="nav-link" data-scroll-target="#first-order-methods">First-Order Methods</a>
   <ul class="collapse">
-  <li><a href="#start-with-the-fundamentals" id="toc-start-with-the-fundamentals" class="nav-link" data-scroll-target="#start-with-the-fundamentals">1. Start with the Fundamentals</a></li>
-  <li><a href="#choose-your-path" id="toc-choose-your-path" class="nav-link" data-scroll-target="#choose-your-path">2. Choose Your Path</a></li>
-  <li><a href="#practice-with-real-projects" id="toc-practice-with-real-projects" class="nav-link" data-scroll-target="#practice-with-real-projects">3. Practice with Real Projects</a></li>
+  <li><a href="#stochastic-gradient-descent-sgd" id="toc-stochastic-gradient-descent-sgd" class="nav-link" data-scroll-target="#stochastic-gradient-descent-sgd">1. Stochastic Gradient Descent (SGD)</a></li>
+  <li><a href="#momentum" id="toc-momentum" class="nav-link" data-scroll-target="#momentum">2. Momentum</a></li>
+  <li><a href="#nesterov-accelerated-gradient-nag" id="toc-nesterov-accelerated-gradient-nag" class="nav-link" data-scroll-target="#nesterov-accelerated-gradient-nag">3. Nesterov Accelerated Gradient (NAG)</a></li>
   </ul></li>
-  <li><a href="#what-makes-us-different" id="toc-what-makes-us-different" class="nav-link" data-scroll-target="#what-makes-us-different">What Makes Us Different</a></li>
-  <li><a href="#join-our-community" id="toc-join-our-community" class="nav-link" data-scroll-target="#join-our-community">Join Our Community</a></li>
-  <li><a href="#coming-up-next" id="toc-coming-up-next" class="nav-link" data-scroll-target="#coming-up-next">Coming Up Next</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a>
+  <li><a href="#adaptive-methods" id="toc-adaptive-methods" class="nav-link" data-scroll-target="#adaptive-methods">Adaptive Methods</a>
   <ul class="collapse">
-  <li><a href="#tools-well-use" id="toc-tools-well-use" class="nav-link" data-scroll-target="#tools-well-use">🛠️ Tools We’ll Use</a></li>
-  <li><a href="#recommended-reading" id="toc-recommended-reading" class="nav-link" data-scroll-target="#recommended-reading">📚 Recommended Reading</a></li>
-  <li><a href="#practice-materials" id="toc-practice-materials" class="nav-link" data-scroll-target="#practice-materials">💻 Practice Materials</a></li>
+  <li><a href="#adagrad" id="toc-adagrad" class="nav-link" data-scroll-target="#adagrad">1. AdaGrad</a></li>
+  <li><a href="#rmsprop" id="toc-rmsprop" class="nav-link" data-scroll-target="#rmsprop">2. RMSprop</a></li>
+  <li><a href="#adam" id="toc-adam" class="nav-link" data-scroll-target="#adam">3. Adam</a></li>
+  </ul></li>
+  <li><a href="#second-order-methods" id="toc-second-order-methods" class="nav-link" data-scroll-target="#second-order-methods">Second-Order Methods</a>
+  <ul class="collapse">
+  <li><a href="#newtons-method" id="toc-newtons-method" class="nav-link" data-scroll-target="#newtons-method">1. Newton’s Method</a></li>
+  <li><a href="#quasi-newton-methods-bfgs" id="toc-quasi-newton-methods-bfgs" class="nav-link" data-scroll-target="#quasi-newton-methods-bfgs">2. Quasi-Newton Methods (BFGS)</a></li>
+  </ul></li>
+  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
+  <ul class="collapse">
+  <li><a href="#learning-rate-scheduling" id="toc-learning-rate-scheduling" class="nav-link" data-scroll-target="#learning-rate-scheduling">1. Learning Rate Scheduling</a></li>
+  <li><a href="#batch-size-selection" id="toc-batch-size-selection" class="nav-link" data-scroll-target="#batch-size-selection">2. Batch Size Selection</a></li>
+  <li><a href="#gradient-clipping" id="toc-gradient-clipping" class="nav-link" data-scroll-target="#gradient-clipping">3. Gradient Clipping</a></li>
+  </ul></li>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
+  <ul class="collapse">
+  <li><a href="#natural-gradient-descent" id="toc-natural-gradient-descent" class="nav-link" data-scroll-target="#natural-gradient-descent">1. Natural Gradient Descent</a></li>
+  <li><a href="#distributed-optimization" id="toc-distributed-optimization" class="nav-link" data-scroll-target="#distributed-optimization">2. Distributed Optimization</a></li>
+  <li><a href="#stochastic-weight-averaging-swa" id="toc-stochastic-weight-averaging-swa" class="nav-link" data-scroll-target="#stochastic-weight-averaging-swa">3. Stochastic Weight Averaging (SWA)</a></li>
+  </ul></li>
+  <li><a href="#practical-guidelines" id="toc-practical-guidelines" class="nav-link" data-scroll-target="#practical-guidelines">Practical Guidelines</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-selection" id="toc-algorithm-selection" class="nav-link" data-scroll-target="#algorithm-selection">1. Algorithm Selection</a></li>
+  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning">2. Hyperparameter Tuning</a></li>
+  </ul></li>
+  <li><a href="#common-issues-and-solutions" id="toc-common-issues-and-solutions" class="nav-link" data-scroll-target="#common-issues-and-solutions">Common Issues and Solutions</a>
+  <ul class="collapse">
+  <li><a href="#vanishingexploding-gradients" id="toc-vanishingexploding-gradients" class="nav-link" data-scroll-target="#vanishingexploding-gradients">1. Vanishing/Exploding Gradients</a></li>
+  <li><a href="#saddle-points" id="toc-saddle-points" class="nav-link" data-scroll-target="#saddle-points">2. Saddle Points</a></li>
+  <li><a href="#poor-conditioning" id="toc-poor-conditioning" class="nav-link" data-scroll-target="#poor-conditioning">3. Poor Conditioning</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -310,183 +370,323 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is BendTheCurve?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>A learning platform where we break down complex data science and machine learning concepts into simple, understandable pieces. No PhD required! 🎓</p>
-</div>
-</div>
-<section id="why-bendthecurve" class="level2">
-<h2 class="anchored" data-anchor-id="why-bendthecurve">Why BendTheCurve?</h2>
-<p>Have you ever: - Wondered how Netflix knows exactly what show you’ll like? 🎬</p>
+<section id="optimization-algorithms-in-machine-learning" class="level1">
+<h1>Optimization Algorithms in Machine Learning</h1>
+<section id="mathematical-foundations" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-foundations">Mathematical Foundations</h2>
+<section id="objective-functions" class="level3">
+<h3 class="anchored" data-anchor-id="objective-functions">1. Objective Functions</h3>
+<p>The core of optimization in machine learning is minimizing (or maximizing) an objective function:</p>
+<p><span class="math display">\[
+\min_{\theta} J(\theta) = \frac{1}{N} \sum_{i=1}^N L(f_\theta(x_i), y_i) + \lambda R(\theta)
+\]</span></p>
+<p>Where: - <span class="math inline">\(J(\theta)\)</span> is the objective function</p>
 <ul>
-<li><p>Been curious about how self-driving cars work? 🚗</p></li>
-<li><p>Wanted to learn data science but felt overwhelmed? 📊</p></li>
-</ul>
-<p>You’re in the right place! BendTheCurve is designed to make these fascinating topics accessible to everyone.</p>
-</section>
-<section id="what-well-cover" class="level2">
-<h2 class="anchored" data-anchor-id="what-well-cover">What We’ll Cover</h2>
-<section id="for-beginners" class="level3">
-<h3 class="anchored" data-anchor-id="for-beginners">🌱 For Beginners</h3>
-<ul>
-<li><p><strong>Python Basics</strong>: Start from zero</p></li>
-<li><p><strong>Data Analysis</strong>: Learn to tell stories with data</p></li>
-<li><p><strong>Machine Learning 101</strong>: Build your first AI models</p></li>
+<li><p><span class="math inline">\(\theta\)</span> represents model parameters</p></li>
+<li><p><span class="math inline">\(L\)</span> is the loss function</p></li>
+<li><p><span class="math inline">\(f_\theta\)</span> is the model prediction</p></li>
+<li><p><span class="math inline">\(R(\theta)\)</span> is the regularization term</p></li>
+<li><p><span class="math inline">\(\lambda\)</span> is the regularization strength</p></li>
 </ul>
 </section>
-<section id="for-intermediate-learners" class="level3">
-<h3 class="anchored" data-anchor-id="for-intermediate-learners">🚀 For Intermediate Learners</h3>
+<section id="gradient-descent-fundamentals" class="level3">
+<h3 class="anchored" data-anchor-id="gradient-descent-fundamentals">2. Gradient Descent Fundamentals</h3>
+<p>The basic update rule for gradient descent:</p>
+<p><span class="math display">\[
+\theta_{t+1} = \theta_t - \eta \nabla_\theta J(\theta_t)
+\]</span></p>
+<p>Where: - <span class="math inline">\(\theta_t\)</span> is the parameter at iteration t</p>
 <ul>
-<li><p><strong>Deep Learning</strong>: Understand neural networks</p></li>
-<li><p><strong>Natural Language Processing</strong>: Make computers understand text</p></li>
-<li><p><strong>Computer Vision</strong>: Teach machines to see</p></li>
+<li><p><span class="math inline">\(\eta\)</span> is the learning rate</p></li>
+<li><p><span class="math inline">\(\nabla_\theta J(\theta_t)\)</span> is the gradient of the objective function</p></li>
 </ul>
 </section>
-<section id="for-advanced-practitioners" class="level3">
-<h3 class="anchored" data-anchor-id="for-advanced-practitioners">💡 For Advanced Practitioners</h3>
+<section id="convergence-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="convergence-analysis">3. Convergence Analysis</h3>
+<p>For convex functions, gradient descent converges at rate:</p>
+<p><span class="math display">\[
+J(\theta_t) - J(\theta^*) \leq \frac{\|\theta_0 - \theta^*\|^2}{2\eta t}
+\]</span></p>
+<p>Where: - <span class="math inline">\(\theta^*\)</span> is the optimal parameter</p>
 <ul>
-<li><p><strong>Research Papers Explained</strong>: Latest developments in simple terms</p></li>
-<li><p><strong>Industry Best Practices</strong>: Real-world applications</p></li>
-<li><p><strong>Advanced Techniques</strong>: Cutting-edge methods</p></li>
+<li><p><span class="math inline">\(\theta_0\)</span> is the initial parameter</p></li>
+<li><p><span class="math inline">\(t\)</span> is the number of iterations</p></li>
 </ul>
 </section>
 </section>
-<section id="how-to-use-this-blog" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-use-this-blog">How to Use This Blog</h2>
-<section id="start-with-the-fundamentals" class="level3">
-<h3 class="anchored" data-anchor-id="start-with-the-fundamentals">1. Start with the Fundamentals</h3>
-<p>Begin with our beginner-friendly series: - <a href="../../posts/ml-fundamentals-beginners">Machine Learning Fundamentals</a></p>
+<section id="first-order-methods" class="level2">
+<h2 class="anchored" data-anchor-id="first-order-methods">First-Order Methods</h2>
+<section id="stochastic-gradient-descent-sgd" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-gradient-descent-sgd">1. Stochastic Gradient Descent (SGD)</h3>
+<p>Update rule:</p>
+<p><span class="math display">\[
+\theta_{t+1} = \theta_t - \eta_t \nabla_\theta L(f_\theta(x_i), y_i)
+\]</span></p>
+<p>Convergence rate for strongly convex functions:</p>
+<p><span class="math display">\[
+\mathbb{E}[J(\theta_t) - J(\theta^*)] \leq \frac{L}{2\mu t}
+\]</span></p>
+<p>Where: - <span class="math inline">\(L\)</span> is the Lipschitz constant</p>
 <ul>
-<li><p><a href="../../posts/python-data-science">Python for Data Science</a></p></li>
-<li><p><a href="../../posts/statistics-basics">Statistics Made Simple</a></p></li>
+<li><span class="math inline">\(\mu\)</span> is the strong convexity parameter</li>
 </ul>
 </section>
-<section id="choose-your-path" class="level3">
-<h3 class="anchored" data-anchor-id="choose-your-path">2. Choose Your Path</h3>
-<p>We’ve organized content into clear learning paths:</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Learning Paths
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>🔰 <strong>Beginner Path</strong> 1. Python Basics 2. Data Analysis Fundamentals 3. Intro to Machine Learning</p>
-<p>📚 <strong>Data Science Path</strong> 1. Statistical Methods 2. Data Visualization 3. Advanced Analytics</p>
-<p>🤖 <strong>Machine Learning Path</strong> 1. ML Algorithms 2. Deep Learning 3. AI Applications</p>
-</div>
-</div>
+<section id="momentum" class="level3">
+<h3 class="anchored" data-anchor-id="momentum">2. Momentum</h3>
+<p>Incorporates velocity in updates:</p>
+<p><span class="math display">\[
+\begin{aligned}
+v_{t+1} &amp;= \gamma v_t + \eta \nabla_\theta J(\theta_t) \\
+\theta_{t+1} &amp;= \theta_t - v_{t+1}
+\end{aligned}
+\]</span></p>
+<p>Where: - <span class="math inline">\(v_t\)</span> is the velocity at time t</p>
+<ul>
+<li><span class="math inline">\(\gamma\)</span> is the momentum coefficient</li>
+</ul>
 </section>
-<section id="practice-with-real-projects" class="level3">
-<h3 class="anchored" data-anchor-id="practice-with-real-projects">3. Practice with Real Projects</h3>
-<p>Every concept comes with: - 💻 Hands-on code examples - 🎯 Practice exercises - 🏗️ Project ideas</p>
+<section id="nesterov-accelerated-gradient-nag" class="level3">
+<h3 class="anchored" data-anchor-id="nesterov-accelerated-gradient-nag">3. Nesterov Accelerated Gradient (NAG)</h3>
+<p>Looks ahead for gradient computation:</p>
+<p><span class="math display">\[
+\begin{aligned}
+v_{t+1} &amp;= \gamma v_t + \eta \nabla_\theta J(\theta_t + \gamma v_t) \\
+\theta_{t+1} &amp;= \theta_t - v_{t+1}
+\end{aligned}
+\]</span></p>
 </section>
 </section>
-<section id="what-makes-us-different" class="level2">
-<h2 class="anchored" data-anchor-id="what-makes-us-different">What Makes Us Different</h2>
+<section id="adaptive-methods" class="level2">
+<h2 class="anchored" data-anchor-id="adaptive-methods">Adaptive Methods</h2>
+<section id="adagrad" class="level3">
+<h3 class="anchored" data-anchor-id="adagrad">1. AdaGrad</h3>
+<p>Adapts learning rates per parameter:</p>
+<p><span class="math display">\[
+\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{G_t + \epsilon}} \odot g_t
+\]</span></p>
+<p>Where: - <span class="math inline">\(G_t\)</span> is the sum of squared gradients up to time t</p>
+<ul>
+<li><p><span class="math inline">\(g_t\)</span> is the current gradient</p></li>
+<li><p><span class="math inline">\(\odot\)</span> represents element-wise multiplication</p></li>
+</ul>
+</section>
+<section id="rmsprop" class="level3">
+<h3 class="anchored" data-anchor-id="rmsprop">2. RMSprop</h3>
+<p>Exponentially decaying average of squared gradients:</p>
+<p><span class="math display">\[
+\begin{aligned}
+G_t &amp;= \gamma G_{t-1} + (1-\gamma)g_t^2 \\
+\theta_{t+1} &amp;= \theta_t - \frac{\eta}{\sqrt{G_t + \epsilon}} \odot g_t
+\end{aligned}
+\]</span></p>
+</section>
+<section id="adam" class="level3">
+<h3 class="anchored" data-anchor-id="adam">3. Adam</h3>
+<p>Combines momentum and adaptive learning rates:</p>
+<p><span class="math display">\[
+\begin{aligned}
+m_t &amp;= \beta_1 m_{t-1} + (1-\beta_1)g_t \\
+v_t &amp;= \beta_2 v_{t-1} + (1-\beta_2)g_t^2 \\
+\hat{m}_t &amp;= \frac{m_t}{1-\beta_1^t} \\
+\hat{v}_t &amp;= \frac{v_t}{1-\beta_2^t} \\
+\theta_{t+1} &amp;= \theta_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon} \odot \hat{m}_t
+\end{aligned}
+\]</span></p>
+</section>
+</section>
+<section id="second-order-methods" class="level2">
+<h2 class="anchored" data-anchor-id="second-order-methods">Second-Order Methods</h2>
+<section id="newtons-method" class="level3">
+<h3 class="anchored" data-anchor-id="newtons-method">1. Newton’s Method</h3>
+<p>Update rule using Hessian:</p>
+<p><span class="math display">\[
+\theta_{t+1} = \theta_t - \eta H^{-1}\nabla_\theta J(\theta_t)
+\]</span></p>
+<p>Where: - <span class="math inline">\(H\)</span> is the Hessian matrix of second derivatives</p>
+</section>
+<section id="quasi-newton-methods-bfgs" class="level3">
+<h3 class="anchored" data-anchor-id="quasi-newton-methods-bfgs">2. Quasi-Newton Methods (BFGS)</h3>
+<p>Approximates Hessian inverse:</p>
+<p><span class="math display">\[
+\begin{aligned}
+s_k &amp;= \theta_{k+1} - \theta_k \\
+y_k &amp;= \nabla J(\theta_{k+1}) - \nabla J(\theta_k) \\
+B_{k+1} &amp;= B_k + \frac{y_ky_k^T}{y_k^Ts_k} - \frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}
+\end{aligned}
+\]</span></p>
+</section>
+</section>
+<section id="implementation-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
+<section id="learning-rate-scheduling" class="level3">
+<h3 class="anchored" data-anchor-id="learning-rate-scheduling">1. Learning Rate Scheduling</h3>
+<p>Common schedules include:</p>
 <ol type="1">
-<li><strong>Simple Explanations</strong>
+<li><p>Step decay: <span class="math display">\[
+\eta_t = \eta_0 \gamma^{\lfloor t/k \rfloor}
+\]</span></p></li>
+<li><p>Exponential decay: <span class="math display">\[
+\eta_t = \eta_0 e^{-kt}
+\]</span></p></li>
+<li><p>Cosine annealing: <span class="math display">\[
+\eta_t = \eta_{min} + \frac{1}{2}(\eta_{max} - \eta_{min})(1 + \cos(\frac{t\pi}{T}))
+\]</span></p></li>
+</ol>
+</section>
+<section id="batch-size-selection" class="level3">
+<h3 class="anchored" data-anchor-id="batch-size-selection">2. Batch Size Selection</h3>
+<p>The relationship between batch size and learning rate:</p>
+<p><span class="math display">\[
+\eta_{effective} = \eta \sqrt{\frac{b}{b_{base}}}
+\]</span></p>
+<p>Where: - <span class="math inline">\(b\)</span> is the current batch size</p>
 <ul>
-<li>No unnecessary jargon</li>
-<li>Real-world analogies</li>
-<li>Visual learning aids</li>
+<li><span class="math inline">\(b_{base}\)</span> is the reference batch size</li>
+</ul>
+</section>
+<section id="gradient-clipping" class="level3">
+<h3 class="anchored" data-anchor-id="gradient-clipping">3. Gradient Clipping</h3>
+<p>For handling exploding gradients:</p>
+<p><span class="math display">\[
+g_t = \begin{cases}
+g_t &amp; \text{if } \|g_t\| \leq c \\
+c\frac{g_t}{\|g_t\|} &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+</section>
+</section>
+<section id="advanced-topics" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
+<section id="natural-gradient-descent" class="level3">
+<h3 class="anchored" data-anchor-id="natural-gradient-descent">1. Natural Gradient Descent</h3>
+<p>Update rule using Fisher Information Matrix:</p>
+<p><span class="math display">\[
+\theta_{t+1} = \theta_t - \eta F^{-1}\nabla_\theta J(\theta_t)
+\]</span></p>
+<p>Where: - <span class="math inline">\(F\)</span> is the Fisher Information Matrix</p>
+</section>
+<section id="distributed-optimization" class="level3">
+<h3 class="anchored" data-anchor-id="distributed-optimization">2. Distributed Optimization</h3>
+<p>For parallel SGD with K workers:</p>
+<p><span class="math display">\[
+\theta_{t+1} = \theta_t - \frac{\eta}{K}\sum_{k=1}^K \nabla_\theta J_k(\theta_t)
+\]</span></p>
+</section>
+<section id="stochastic-weight-averaging-swa" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-weight-averaging-swa">3. Stochastic Weight Averaging (SWA)</h3>
+<p>Averaging weights along the trajectory:</p>
+<p><span class="math display">\[
+\theta_{SWA} = \frac{1}{n}\sum_{i=1}^n \theta_i
+\]</span></p>
+</section>
+</section>
+<section id="practical-guidelines" class="level2">
+<h2 class="anchored" data-anchor-id="practical-guidelines">Practical Guidelines</h2>
+<section id="algorithm-selection" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-selection">1. Algorithm Selection</h3>
+<ol type="1">
+<li>First try Adam with default parameters:
+<ul>
+<li>Learning rate: <span class="math inline">\(10^{-3}\)</span></li>
+<li><span class="math inline">\(\beta_1 = 0.9\)</span></li>
+<li><span class="math inline">\(\beta_2 = 0.999\)</span></li>
+<li><span class="math inline">\(\epsilon = 10^{-8}\)</span></li>
 </ul></li>
-<li><strong>Practical Focus</strong>
+<li>If training is unstable, try:
 <ul>
-<li>Industry-relevant skills</li>
-<li>Real-world examples</li>
-<li>Ready-to-use code</li>
+<li>Reducing learning rate</li>
+<li>Gradient clipping</li>
+<li>Layer normalization</li>
 </ul></li>
-<li><strong>Community Support</strong>
+<li>For fine-tuning, consider:
 <ul>
-<li>Active discussions</li>
-<li>Question &amp; Answer sessions</li>
-<li>Project sharing</li>
+<li>SGD with momentum</li>
+<li>Cosine annealing</li>
+<li>SWA</li>
 </ul></li>
 </ol>
 </section>
-<section id="join-our-community" class="level2">
-<h2 class="anchored" data-anchor-id="join-our-community">Join Our Community</h2>
-<ul>
-<li><p>💬 Comment on posts</p></li>
-<li><p>🤝 Share your projects</p></li>
-<li><p>📧 Subscribe to updates</p></li>
-<li><p>🐦 Follow on Twitter</p></li>
-</ul>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Getting Started
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<section id="hyperparameter-tuning" class="level3">
+<h3 class="anchored" data-anchor-id="hyperparameter-tuning">2. Hyperparameter Tuning</h3>
 <ol type="1">
-<li>Pick a learning path that matches your level</li>
-<li>Start with the fundamentals</li>
-<li>Practice with provided examples</li>
-<li>Join the discussion</li>
+<li>Learning rate search:
+<ul>
+<li>Start with logarithmic grid</li>
+<li>Use learning rate finder algorithm</li>
+</ul></li>
+<li>Batch size selection:
+<ul>
+<li>Start with power of 2</li>
+<li>Consider memory constraints</li>
+<li>Scale learning rate accordingly</li>
+</ul></li>
+<li>Momentum tuning:
+<ul>
+<li>Default: 0.9</li>
+<li>Increase for noisy gradients</li>
+<li>Decrease for stable training</li>
+</ul></li>
 </ol>
-</div>
-</div>
 </section>
-<section id="coming-up-next" class="level2">
-<h2 class="anchored" data-anchor-id="coming-up-next">Coming Up Next</h2>
-<p>Here’s what we’re working on: - 📊 Data Visualization Masterclass - 🤖 Building Your First Neural Network - 📱 Machine Learning for Mobile Apps</p>
 </section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<section id="tools-well-use" class="level3">
-<h3 class="anchored" data-anchor-id="tools-well-use">🛠️ Tools We’ll Use</h3>
+<section id="common-issues-and-solutions" class="level2">
+<h2 class="anchored" data-anchor-id="common-issues-and-solutions">Common Issues and Solutions</h2>
+<section id="vanishingexploding-gradients" class="level3">
+<h3 class="anchored" data-anchor-id="vanishingexploding-gradients">1. Vanishing/Exploding Gradients</h3>
+<p>Solutions: 1. Proper initialization: <span class="math display">\[
+W \sim \mathcal{N}(0, \sqrt{\frac{2}{n_{in} + n_{out}}})
+\]</span></p>
+<ol start="2" type="1">
+<li><p>Gradient clipping</p></li>
+<li><p>Layer normalization: <span class="math display">\[
+\hat{x} = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}}
+\]</span></p></li>
+</ol>
+</section>
+<section id="saddle-points" class="level3">
+<h3 class="anchored" data-anchor-id="saddle-points">2. Saddle Points</h3>
+<p>Solutions: 1. Add noise to gradients: <span class="math display">\[
+g_t = \nabla_\theta J(\theta_t) + \mathcal{N}(0, \sigma^2)
+\]</span></p>
+<ol start="2" type="1">
+<li>Use momentum-based methods</li>
+<li>Implement trust region methods</li>
+</ol>
+</section>
+<section id="poor-conditioning" class="level3">
+<h3 class="anchored" data-anchor-id="poor-conditioning">3. Poor Conditioning</h3>
+<p>Solutions: 1. Preconditioning: <span class="math display">\[
+\theta_{t+1} = \theta_t - \eta P^{-1}\nabla_\theta J(\theta_t)
+\]</span></p>
+<ol start="2" type="1">
+<li>Adaptive methods (Adam, RMSprop)</li>
+<li>Second-order methods when feasible</li>
+</ol>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Key takeaways: 1. Understanding optimization fundamentals is crucial 2. Different algorithms suit different problems 3. Practical considerations often outweigh theoretical guarantees 4. Monitoring and debugging optimization is essential</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Mathematical Foundations:
 <ul>
-<li>Python</li>
-<li>Jupyter Notebooks</li>
-<li>Popular ML Libraries</li>
-</ul>
-</section>
-<section id="recommended-reading" class="level3">
-<h3 class="anchored" data-anchor-id="recommended-reading">📚 Recommended Reading</h3>
+<li>“Convex Optimization” by Boyd and Vandenberghe</li>
+<li>“Optimization Methods for Large-Scale Machine Learning” by Bottou et al.</li>
+</ul></li>
+<li>Implementation Details:
 <ul>
-<li>Free online resources</li>
-<li>Book recommendations</li>
-<li>Research papers explained</li>
-</ul>
-</section>
-<section id="practice-materials" class="level3">
-<h3 class="anchored" data-anchor-id="practice-materials">💻 Practice Materials</h3>
+<li>“Deep Learning” by Goodfellow et al.</li>
+<li>“Adaptive Methods for Machine Learning” by Duchi et al.</li>
+</ul></li>
+<li>Advanced Topics:
 <ul>
-<li>Datasets</li>
-<li>Code templates</li>
-<li>Project starters</li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Remember
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Everyone starts somewhere! Don’t feel overwhelmed - we’ll break everything down into manageable pieces.</p>
-</div>
-</div>
-<p>Let’s start this exciting journey together! Choose your first article from the learning paths above, or check out our <a href="../../posts">latest posts</a>.</p>
-<p>Happy Learning! 🚀</p>
+<li>“Natural Gradient Works Efficiently in Learning” by Amari</li>
+<li>“On the Convergence of Adam and Beyond” by Reddi et al.</li>
+</ul></li>
+</ol>
 
 
 </section>
