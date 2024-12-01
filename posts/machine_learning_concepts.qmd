@@ -1,7 +1,7 @@
 ---
 title: "Machine Learning Explained: A Beginner's Guide"
 author: "Ram Polisetti"
-date: "2024-01-09"
+date: "2024-11-30"
 categories: ["Machine Learning", "Tutorial"]
 description: "Understanding machine learning in simple terms - from basic concepts to real-world applications"
 ---
@@ -17,9 +17,13 @@ Instead of writing strict rules like "if this happens, do that," we're basically
 ## Let's Break It Down with a Simple Example
 
 Imagine you're teaching your little sister to identify dogs and cats:
+
 - First, you show her lots of pictures of dogs and cats
+
 - She might make mistakes at first (calling a dog a cat)
+
 - But the more pictures she sees, the better she gets at telling them apart
+
 - Eventually, she can identify animals she's never seen before!
 
 This is exactly how machine learning works! We show computers lots of examples, and they learn to recognize patterns, just like your sister did.
@@ -37,8 +41,11 @@ He got a bit more specific and said: "A computer program is said to learn from e
 Okay, that sounds complicated! But let's break it down with a fun example:
 
 Imagine teaching a computer to play Mario Kart:
+
 - Task (T): Playing Mario Kart
+
 - Experience (E): Playing lots of races
+
 - Performance (P): How often it wins races
 
 The more races it plays (E), the better it gets at winning (P) the game (T). Simple as that!
@@ -46,18 +53,27 @@ The more races it plays (E), the better it gets at winning (P) the game (T). Sim
 ## Where Do We See Machine Learning in Real Life?
 
 It's everywhere! Here are some cool examples:
+
 - 📱 Face ID on your phone
+
 - 🎵 Spotify suggesting songs you might like
+
 - 📺 Netflix recommending your next binge-worthy show
+
 - 🚗 Self-driving cars learning to navigate roads
+
 - 📧 Gmail filtering out spam
 
 ## Why Should You Care?
 
 Machine learning is changing the world in amazing ways:
+
 - Making our devices smarter and more helpful
+
 - Helping doctors diagnose diseases earlier
+
 - Creating awesome video game experiences
+
 - Even helping fight climate change!
 
 ## Wrapping Up

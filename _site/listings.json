@@ -26,6 +26,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/machine_learning_concepts.html",
       "/posts/bend-the-curve-intro/index.html",
       "/posts/advanced-neural-architectures/index.html",
       "/posts/causal-inference/index.html",
@@ -44,8 +45,7 @@
       "/posts/statistical-learning-theory/index.html",
       "/posts/pac-learning-theory/index.html",
       "/posts/computational-learning-theory/index.html",
-      "/posts/algorithmic-stability/index.html",
-      "/posts/machine_learning_concepts.html"
+      "/posts/algorithmic-stability/index.html"
     ]
   }
 ]
