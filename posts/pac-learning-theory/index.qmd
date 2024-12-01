@@ -3,36 +3,10 @@ title: "PAC Learning Theory and VC Dimension"
 author: "Ram Polisetti"
 date: "2024-03-19"
 categories: [machine-learning, theory, mathematics, statistics]
+tags: [machine-learning-theory, computational-learning, statistical-learning, optimization]
 image: "pac_learning.jpg"
 description: "A beginner-friendly guide to PAC learning theory and VC dimension with interactive visualizations and practical examples."
 jupyter: python3
-related_posts: |
-  [
-    {
-      "path": "/posts/computational-learning-theory/",
-      "title": "Computational Learning Theory",
-      "description": "Deep dive into the theoretical foundations of machine learning algorithms",
-      "categories": ["theory", "machine-learning"]
-    },
-    {
-      "path": "/posts/statistical-learning-theory/",
-      "title": "Statistical Learning Theory",
-      "description": "Understanding the statistical principles behind machine learning",
-      "categories": ["theory", "statistics", "machine-learning"]
-    },
-    {
-      "path": "/posts/ml-theory-foundations/",
-      "title": "Machine Learning Theory Foundations",
-      "description": "Essential theoretical concepts for understanding machine learning",
-      "categories": ["theory", "machine-learning"]
-    },
-    {
-      "path": "/posts/optimization-algorithms/",
-      "title": "Optimization Algorithms in Machine Learning",
-      "description": "Understanding key optimization algorithms used in machine learning",
-      "categories": ["algorithms", "optimization", "machine-learning"]
-    }
-  ]
 ---
 
 # PAC Learning Theory and VC Dimension
@@ -402,3 +376,29 @@ for ax in [ax1, ax2]:
     ax.spines['right'].set_visible(False)
     
 plt.show()
+
+# Related Posts {.unnumbered}
+
+::: {.grid}
+
+::: {.g-col-6}
+### [Computational Learning Theory](/posts/computational-learning-theory/)
+Deep dive into the theoretical foundations of machine learning algorithms
+:::
+
+::: {.g-col-6}
+### [Statistical Learning Theory](/posts/statistical-learning-theory/)
+Understanding the statistical principles behind machine learning
+:::
+
+::: {.g-col-6}
+### [Machine Learning Theory Foundations](/posts/ml-theory-foundations/)
+Essential theoretical concepts for understanding machine learning
+:::
+
+::: {.g-col-6}
+### [Optimization Algorithms](/posts/optimization-algorithms/)
+Understanding key optimization algorithms used in machine learning
+:::
+
+:::

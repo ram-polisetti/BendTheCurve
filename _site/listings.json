@@ -1,5 +1,14 @@
 [
   {
+    "listing": "/posts/pac-learning-theory/index.html",
+    "items": [
+      "/posts/computational-learning-theory/index.html",
+      "/posts/statistical-learning-theory/index.html",
+      "/posts/ml-theory-foundations/index.html",
+      "/posts/optimization-algorithms/index.html"
+    ]
+  },
+  {
     "listing": "/posts.html",
     "items": [
       "/posts/bend-the-curve-intro/index.html",

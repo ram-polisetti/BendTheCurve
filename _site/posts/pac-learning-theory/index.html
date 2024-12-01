@@ -67,6 +67,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -104,105 +106,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <script>
-  window.addEventListener('load', function() {
-    // Function to handle related posts
-    function setupRelatedPosts() {
-      const relatedPostsData = document.querySelector('meta[name="related-posts"]')?.content;
-      if (relatedPostsData) {
-        try {
-          const posts = JSON.parse(relatedPostsData);
-          if (posts && posts.length > 0) {
-            const container = document.createElement('div');
-            container.className = 'related-posts';
-            container.innerHTML = `
-              <h2 class="related-posts-title">Related Posts</h2>
-              <div class="related-posts-grid">
-                ${posts.map(post => `
-                  <div class="related-post-card">
-                    <a href="${post.path}" class="related-post-link">
-                      <h3 class="related-post-title">${post.title}</h3>
-                      ${post.description ? `<p class="related-post-description">${post.description}</p>` : ''}
-                      <div class="related-post-meta">
-                        ${post.categories ? post.categories.map(cat => `
-                          <span class="related-post-category">${cat}</span>
-                        `).join('') : ''}
-                      </div>
-                    </a>
-                  </div>
-                `).join('')}
-              </div>
-            `;
-            document.querySelector('main').appendChild(container);
-          }
-        } catch (e) {
-          console.error('Error setting up related posts:', e);
-        }
-      }
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
     }
-    setupRelatedPosts();
+
+    const options = {
+      valueNames: ['listing-image','listing-title','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
   });
-</script>
-<style>
-  .related-posts {
-    margin-top: 4rem;
-    padding: 2rem;
-    background: var(--bs-body-bg);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  .related-posts-title {
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
-    color: var(--bs-body-color);
-    border-bottom: 2px solid var(--bs-primary);
-    padding-bottom: 0.5rem;
-  }
-  .related-posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-  .related-post-card {
-    background: var(--bs-body-bg);
-    border: 1px solid var(--bs-border-color);
-    border-radius: 6px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .related-post-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  .related-post-link {
-    display: block;
-    padding: 1.5rem;
-    text-decoration: none;
-    color: inherit;
-  }
-  .related-post-title {
-    font-size: 1.25rem;
-    margin: 0 0 0.75rem 0;
-    color: var(--bs-primary);
-  }
-  .related-post-description {
-    font-size: 0.95rem;
-    color: var(--bs-body-color);
-    margin-bottom: 1rem;
-    opacity: 0.9;
-  }
-  .related-post-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-  }
-  .related-post-category {
-    background: var(--bs-primary);
-    color: white;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-  }
-</style>
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -835,9 +766,140 @@ Practical Application
 <p>plt.show()</p>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="list grid quarto-listing-cols-2">
+<div class="g-col-1" data-index="0" data-categories="machine-learning,theory,complexity,algorithms" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732273299984" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1710">
+<a href="../../posts/computational-learning-theory/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../posts/computational-learning-theory/computational_theory.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Computational Learning Theory
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('complexity'); return false;">
+complexity
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
+algorithms
+</div>
+</div>
+<div class="card-text listing-description">
+A beginner-friendly guide to computational learning theory with interactive visualizations and practical examples.
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="machine-learning,theory,mathematics,statistics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732267231756" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="645">
+<a href="../../posts/statistical-learning-theory/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../posts/statistical-learning-theory/statistical_learning.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Statistical Learning Theory and Concentration Inequalities
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
+statistics
+</div>
+</div>
+<div class="card-text listing-description">
+A rigorous exploration of statistical learning theory and concentration inequalities, covering fundamental bounds and their applications in machine learning.
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="2" data-categories="machine-learning,theory,mathematics,statistics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733018642361" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1159">
+<a href="../../posts/ml-theory-foundations/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../posts/ml-theory-foundations/ml_theory.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Machine Learning Theory: Mathematical Foundations Made Simple
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
+theory
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
+statistics
+</div>
+</div>
+<div class="card-text listing-description">
+A beginner-friendly guide to machine learning theory, with intuitive explanations and practical examples.
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="3" data-categories="machine-learning,optimization,mathematics,algorithms" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733018675369" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="775">
+<a href="../../posts/optimization-algorithms/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../posts/optimization-algorithms/optimization.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Optimization Algorithms in Machine Learning: A Deep Dive
+</h5>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('optimization'); return false;">
+optimization
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
+algorithms
+</div>
+</div>
+<div class="card-text listing-description">
+A comprehensive technical exploration of optimization algorithms in machine learning, covering mathematical foundations and implementation details.
+</div>
+</div>
+</div>
+</a>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

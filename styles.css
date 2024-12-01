@@ -47,3 +47,54 @@ a:hover {
 .nav-footer {
     padding: 2rem 0;
 }
+
+/* Related Posts Styling */
+#related-posts {
+    margin-top: 3rem;
+    padding: 2rem 0;
+}
+
+#related-posts .quarto-listing-container {
+    margin-top: 1.5rem;
+}
+
+#related-posts .quarto-grid-item {
+    background: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 1rem;
+}
+
+#related-posts .quarto-grid-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#related-posts .listing-title {
+    color: var(--bs-primary);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+#related-posts .listing-description {
+    font-size: 0.95rem;
+    color: var(--bs-body-color);
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+#related-posts .listing-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+#related-posts .listing-category {
+    background: var(--bs-primary);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
