@@ -392,3 +392,23 @@ $$
    - "Online Portfolio Selection" by Li and Hoi
    - "Online Learning in Routing Games" by Roughgarden
    - "Online Methods in Machine Learning" by Bottou
+
+::: {.related-posts-section}
+## Continue Your Learning Journey
+
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
+:::
+:::

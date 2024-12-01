@@ -350,3 +350,23 @@ Remember:
    - Company update pages
 
 Remember: Machine learning is here to help make your life easier, but it's important to use it wisely and stay informed about how it affects your daily activities.
+
+::: {.related-posts-section}
+## Continue Your Learning Journey
+
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
+:::
+:::

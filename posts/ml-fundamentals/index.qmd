@@ -173,4 +173,26 @@ Stay tuned for more detailed explorations of each topic!
    - Towards Data Science
    - Machine Learning Mastery
 
+## Related Posts
+
+::: {.related-posts-section}
+## Continue Your Learning Journey
+
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
+:::
+:::
+
 Remember: Building a strong foundation in these fundamentals is crucial for success in machine learning. Take time to understand these concepts thoroughly before moving on to more advanced topics.

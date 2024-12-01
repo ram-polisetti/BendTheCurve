@@ -376,4 +376,26 @@ Start with these beginner-friendly projects:
 - PyTorch
 :::
 
+## Related Posts
+
+::: {.related-posts-section}
+## Continue Your Learning Journey
+
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
+:::
+:::
+
 Remember: Deep learning is powerful but requires patience to learn. Start with simple concepts, practice regularly, and gradually tackle more complex topics. Focus on understanding rather than memorizing, and always experiment with code to reinforce your learning.

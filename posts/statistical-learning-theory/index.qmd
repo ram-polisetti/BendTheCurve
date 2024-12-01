@@ -3,6 +3,7 @@ title: "Statistical Learning Theory and Concentration Inequalities"
 author: "Ram Polisetti"
 date: "2024-03-19"
 categories: [machine-learning, theory, mathematics, statistics]
+tags: [machine-learning-theory, statistical-learning, mathematics]
 image: "statistical_learning.jpg"
 description: "A rigorous exploration of statistical learning theory and concentration inequalities, covering fundamental bounds and their applications in machine learning."
 jupyter: python3
@@ -329,3 +330,23 @@ $$
    - "Statistical Learning Theory and Applications" by Bousquet et al.
    - "High-Dimensional Statistics" by Wainwright
    - "Machine Learning Theory" by Mohri et al.
+
+::: {.related-posts-section}
+## Continue Your Learning Journey
+
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
+:::
+:::

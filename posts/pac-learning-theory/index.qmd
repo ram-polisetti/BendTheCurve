@@ -377,28 +377,42 @@ for ax in [ax1, ax2]:
     
 plt.show()
 
-# Related Posts {.unnumbered}
+::: {.column-screen-inset}
+# You May Also Like {.unnumbered}
 
-::: {.grid}
-
-::: {.g-col-6}
-### [Computational Learning Theory](/posts/computational-learning-theory/)
-Deep dive into the theoretical foundations of machine learning algorithms
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
+:::
 :::
 
-::: {.g-col-6}
-### [Statistical Learning Theory](/posts/statistical-learning-theory/)
-Understanding the statistical principles behind machine learning
-:::
+::: {.related-posts-section}
+## Continue Your Learning Journey
 
-::: {.g-col-6}
-### [Machine Learning Theory Foundations](/posts/ml-theory-foundations/)
-Essential theoretical concepts for understanding machine learning
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
 :::
-
-::: {.g-col-6}
-### [Optimization Algorithms](/posts/optimization-algorithms/)
-Understanding key optimization algorithms used in machine learning
-:::
-
 :::

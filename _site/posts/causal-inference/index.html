@@ -33,6 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-description','listing-date','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -101,7 +132,7 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
-</head>
+<link rel="alternate" type="application/rss+xml" title="BendThe-Curve" href="index.xml" data-external="1"></head>
 
 <body class="nav-sidebar docked nav-fixed">
 
@@ -272,63 +303,8 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#causal-inference-and-structural-learning" id="toc-causal-inference-and-structural-learning" class="nav-link active" data-scroll-target="#causal-inference-and-structural-learning">Causal Inference and Structural Learning</a>
-  <ul class="collapse">
-  <li><a href="#structural-causal-models" id="toc-structural-causal-models" class="nav-link" data-scroll-target="#structural-causal-models">Structural Causal Models</a>
-  <ul class="collapse">
-  <li><a href="#basic-framework" id="toc-basic-framework" class="nav-link" data-scroll-target="#basic-framework">1. Basic Framework</a></li>
-  <li><a href="#intervention-calculus" id="toc-intervention-calculus" class="nav-link" data-scroll-target="#intervention-calculus">2. Intervention Calculus</a></li>
-  </ul></li>
-  <li><a href="#identification-methods" id="toc-identification-methods" class="nav-link" data-scroll-target="#identification-methods">Identification Methods</a>
-  <ul class="collapse">
-  <li><a href="#backdoor-criterion" id="toc-backdoor-criterion" class="nav-link" data-scroll-target="#backdoor-criterion">1. Backdoor Criterion</a></li>
-  <li><a href="#front-door-criterion" id="toc-front-door-criterion" class="nav-link" data-scroll-target="#front-door-criterion">2. Front-door Criterion</a></li>
-  <li><a href="#do-calculus-rules" id="toc-do-calculus-rules" class="nav-link" data-scroll-target="#do-calculus-rules">3. Do-Calculus Rules</a></li>
-  </ul></li>
-  <li><a href="#estimation-methods" id="toc-estimation-methods" class="nav-link" data-scroll-target="#estimation-methods">Estimation Methods</a>
-  <ul class="collapse">
-  <li><a href="#propensity-score-matching" id="toc-propensity-score-matching" class="nav-link" data-scroll-target="#propensity-score-matching">1. Propensity Score Matching</a></li>
-  <li><a href="#instrumental-variables" id="toc-instrumental-variables" class="nav-link" data-scroll-target="#instrumental-variables">2. Instrumental Variables</a></li>
-  <li><a href="#regression-discontinuity" id="toc-regression-discontinuity" class="nav-link" data-scroll-target="#regression-discontinuity">3. Regression Discontinuity</a></li>
-  </ul></li>
-  <li><a href="#structural-learning" id="toc-structural-learning" class="nav-link" data-scroll-target="#structural-learning">Structural Learning</a>
-  <ul class="collapse">
-  <li><a href="#constraint-based-methods" id="toc-constraint-based-methods" class="nav-link" data-scroll-target="#constraint-based-methods">1. Constraint-Based Methods</a></li>
-  <li><a href="#score-based-methods" id="toc-score-based-methods" class="nav-link" data-scroll-target="#score-based-methods">2. Score-Based Methods</a></li>
-  <li><a href="#hybrid-methods" id="toc-hybrid-methods" class="nav-link" data-scroll-target="#hybrid-methods">3. Hybrid Methods</a></li>
-  </ul></li>
-  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
-  <ul class="collapse">
-  <li><a href="#counterfactual-analysis" id="toc-counterfactual-analysis" class="nav-link" data-scroll-target="#counterfactual-analysis">1. Counterfactual Analysis</a></li>
-  <li><a href="#mediation-analysis" id="toc-mediation-analysis" class="nav-link" data-scroll-target="#mediation-analysis">2. Mediation Analysis</a></li>
-  <li><a href="#time-varying-treatments" id="toc-time-varying-treatments" class="nav-link" data-scroll-target="#time-varying-treatments">3. Time-Varying Treatments</a></li>
-  </ul></li>
-  <li><a href="#implementation-considerations" id="toc-implementation-considerations" class="nav-link" data-scroll-target="#implementation-considerations">Implementation Considerations</a>
-  <ul class="collapse">
-  <li><a href="#sensitivity-analysis" id="toc-sensitivity-analysis" class="nav-link" data-scroll-target="#sensitivity-analysis">1. Sensitivity Analysis</a></li>
-  <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data">2. Missing Data</a></li>
-  <li><a href="#heterogeneous-effects" id="toc-heterogeneous-effects" class="nav-link" data-scroll-target="#heterogeneous-effects">3. Heterogeneous Effects</a></li>
-  </ul></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
-  <ul class="collapse">
-  <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design">1. Study Design</a></li>
-  <li><a href="#analysis-strategy" id="toc-analysis-strategy" class="nav-link" data-scroll-target="#analysis-strategy">2. Analysis Strategy</a></li>
-  </ul></li>
-  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a>
-  <ul class="collapse">
-  <li><a href="#economics" id="toc-economics" class="nav-link" data-scroll-target="#economics">1. Economics</a></li>
-  <li><a href="#healthcare" id="toc-healthcare" class="nav-link" data-scroll-target="#healthcare">2. Healthcare</a></li>
-  <li><a href="#social-sciences" id="toc-social-sciences" class="nav-link" data-scroll-target="#social-sciences">3. Social Sciences</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -337,280 +313,66 @@ window.Quarto = {
 
 
 
-<section id="causal-inference-and-structural-learning" class="level1">
-<h1>Causal Inference and Structural Learning</h1>
-<section id="structural-causal-models" class="level2">
-<h2 class="anchored" data-anchor-id="structural-causal-models">Structural Causal Models</h2>
-<section id="basic-framework" class="level3">
-<h3 class="anchored" data-anchor-id="basic-framework">1. Basic Framework</h3>
-<p>Definition of SCM:</p>
-<p><span class="math display">\[
-\begin{aligned}
-X_i &amp;= f_i(\text{PA}_i, U_i) \\
-U_i &amp;\sim P(U_i)
-\end{aligned}
-\]</span></p>
-<p>Where: - <span class="math inline">\(X_i\)</span> are endogenous variables - <span class="math inline">\(\text{PA}_i\)</span> are parents of <span class="math inline">\(X_i\)</span> - <span class="math inline">\(U_i\)</span> are exogenous variables - <span class="math inline">\(f_i\)</span> are structural equations</p>
-</section>
-<section id="intervention-calculus" class="level3">
-<h3 class="anchored" data-anchor-id="intervention-calculus">2. Intervention Calculus</h3>
-<p>Do-operator formalization:</p>
-<p><span class="math display">\[
-P(Y|\text{do}(X=x)) = \sum_z P(Y|X=x,Z=z)P(Z=z)
-\]</span></p>
-<p>Backdoor adjustment:</p>
-<p><span class="math display">\[
-P(Y|\text{do}(X=x)) = \sum_z P(Y|X=x,Z=z)P(Z=z)
-\]</span></p>
-<p>Where Z satisfies the backdoor criterion.</p>
-</section>
-</section>
-<section id="identification-methods" class="level2">
-<h2 class="anchored" data-anchor-id="identification-methods">Identification Methods</h2>
-<section id="backdoor-criterion" class="level3">
-<h3 class="anchored" data-anchor-id="backdoor-criterion">1. Backdoor Criterion</h3>
-<p>A set Z satisfies the backdoor criterion relative to (X,Y) if: 1. No node in Z is a descendant of X 2. Z blocks all backdoor paths from X to Y</p>
-<p>Formal criterion:</p>
-<p><span class="math display">\[
-P(Y|\text{do}(X)) = \sum_z P(Y|X,Z)P(Z)
-\]</span></p>
-</section>
-<section id="front-door-criterion" class="level3">
-<h3 class="anchored" data-anchor-id="front-door-criterion">2. Front-door Criterion</h3>
-<p>Three conditions: 1. M blocks all directed paths from X to Y 2. No unblocked backdoor path from X to M 3. All backdoor paths from M to Y are blocked by X</p>
-<p>Formula:</p>
-<p><span class="math display">\[
-P(Y|\text{do}(X)) = \sum_m P(m|X)\sum_{x'}P(Y|m,x')P(x')
-\]</span></p>
-</section>
-<section id="do-calculus-rules" class="level3">
-<h3 class="anchored" data-anchor-id="do-calculus-rules">3. Do-Calculus Rules</h3>
-<p>Rule 1 (Insertion/deletion of observations):</p>
-<p><span class="math display">\[
-P(y|\text{do}(x),z,w) = P(y|\text{do}(x),w)
-\]</span></p>
-<p>if (Y ⊥⊥ Z|X,W)<span class="math inline">\(_{G_{\overline{X}}}\)</span></p>
-<p>Rule 2 (Action/observation exchange):</p>
-<p><span class="math display">\[
-P(y|\text{do}(x),\text{do}(z),w) = P(y|\text{do}(x),z,w)
-\]</span></p>
-<p>if (Y ⊥⊥ Z|X,W)<span class="math inline">\(_{G_{\overline{X}\underline{Z}}}\)</span></p>
-<p>Rule 3 (Insertion/deletion of actions):</p>
-<p><span class="math display">\[
-P(y|\text{do}(x),\text{do}(z),w) = P(y|\text{do}(x),w)
-\]</span></p>
-<p>if (Y ⊥⊥ Z|X,W)<span class="math inline">\(_{G_{\overline{X}\overline{Z(W)}}}\)</span></p>
-</section>
-</section>
-<section id="estimation-methods" class="level2">
-<h2 class="anchored" data-anchor-id="estimation-methods">Estimation Methods</h2>
-<section id="propensity-score-matching" class="level3">
-<h3 class="anchored" data-anchor-id="propensity-score-matching">1. Propensity Score Matching</h3>
-<p>Propensity score:</p>
-<p><span class="math display">\[
-e(X) = P(T=1|X)
-\]</span></p>
-<p>Average Treatment Effect (ATE):</p>
-<p><span class="math display">\[
-\text{ATE} = \mathbb{E}[Y(1) - Y(0)] = \mathbb{E}\left[\frac{TY}{e(X)} - \frac{(1-T)Y}{1-e(X)}\right]
-\]</span></p>
-</section>
-<section id="instrumental-variables" class="level3">
-<h3 class="anchored" data-anchor-id="instrumental-variables">2. Instrumental Variables</h3>
-<p>Two-stage least squares (2SLS):</p>
-<p>First stage: <span class="math display">\[
-X = \gamma_0 + \gamma_1Z + \eta
-\]</span></p>
-<p>Second stage: <span class="math display">\[
-Y = \beta_0 + \beta_1\hat{X} + \epsilon
-\]</span></p>
-</section>
-<section id="regression-discontinuity" class="level3">
-<h3 class="anchored" data-anchor-id="regression-discontinuity">3. Regression Discontinuity</h3>
-<p>Sharp RD estimator:</p>
-<p><span class="math display">\[
-\tau_{SRD} = \lim_{x \downarrow c} \mathbb{E}[Y|X=x] - \lim_{x \uparrow c} \mathbb{E}[Y|X=x]
-\]</span></p>
-<p>Fuzzy RD estimator:</p>
-<p><span class="math display">\[
-\tau_{FRD} = \frac{\lim_{x \downarrow c} \mathbb{E}[Y|X=x] - \lim_{x \uparrow c} \mathbb{E}[Y|X=x]}{\lim_{x \downarrow c} \mathbb{E}[D|X=x] - \lim_{x \uparrow c} \mathbb{E}[D|X=x]}
-\]</span></p>
-</section>
-</section>
-<section id="structural-learning" class="level2">
-<h2 class="anchored" data-anchor-id="structural-learning">Structural Learning</h2>
-<section id="constraint-based-methods" class="level3">
-<h3 class="anchored" data-anchor-id="constraint-based-methods">1. Constraint-Based Methods</h3>
-<p>PC Algorithm steps: 1. Start with complete undirected graph 2. Remove edges based on conditional independence 3. Orient v-structures 4. Orient remaining edges</p>
-<p>Independence test statistic:</p>
-<p><span class="math display">\[
-\chi^2 = n\sum_{i,j} \frac{(O_{ij} - E_{ij})^2}{E_{ij}}
-\]</span></p>
-</section>
-<section id="score-based-methods" class="level3">
-<h3 class="anchored" data-anchor-id="score-based-methods">2. Score-Based Methods</h3>
-<p>BIC score:</p>
-<p><span class="math display">\[
-\text{BIC}(G) = \ell(D|G) - \frac{\log n}{2}|G|
-\]</span></p>
-<p>Where: - <span class="math inline">\(\ell(D|G)\)</span> is log-likelihood - <span class="math inline">\(|G|\)</span> is model complexity - <span class="math inline">\(n\)</span> is sample size</p>
-</section>
-<section id="hybrid-methods" class="level3">
-<h3 class="anchored" data-anchor-id="hybrid-methods">3. Hybrid Methods</h3>
-<p>MMHC algorithm: 1. Learn skeleton using constraint-based method 2. Orient edges using score-based method</p>
-<p>Score function:</p>
-<p><span class="math display">\[
-\text{Score}(G) = \text{BIC}(G) + \lambda \text{Sparsity}(G)
-\]</span></p>
-</section>
-</section>
-<section id="advanced-topics" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="counterfactual-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="counterfactual-analysis">1. Counterfactual Analysis</h3>
-<p>Fundamental problem of causal inference:</p>
-<p><span class="math display">\[
-\text{ACE} = \mathbb{E}[Y(1) - Y(0)]
-\]</span></p>
-<p>But we only observe:</p>
-<p><span class="math display">\[
-Y = TY(1) + (1-T)Y(0)
-\]</span></p>
-</section>
-<section id="mediation-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="mediation-analysis">2. Mediation Analysis</h3>
-<p>Direct and indirect effects:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\text{NDE} &amp;= \mathbb{E}[Y(t,M(t'))] - \mathbb{E}[Y(t',M(t'))] \\
-\text{NIE} &amp;= \mathbb{E}[Y(t,M(t))] - \mathbb{E}[Y(t,M(t'))]
-\end{aligned}
-\]</span></p>
-</section>
-<section id="time-varying-treatments" class="level3">
-<h3 class="anchored" data-anchor-id="time-varying-treatments">3. Time-Varying Treatments</h3>
-<p>G-computation formula:</p>
-<p><span class="math display">\[
-\mathbb{E}[Y_{\bar{a}}] = \sum_{\bar{l}} \prod_{t=0}^K P(l_t|l_{t-1},a_{t-1})P(y|\bar{l},\bar{a})
-\]</span></p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="sensitivity-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="sensitivity-analysis">1. Sensitivity Analysis</h3>
-<p>Rosenbaum bounds:</p>
-<p><span class="math display">\[
-\frac{1}{\Gamma} \leq \frac{P(Z=1|X)P(Z=0|X')}{P(Z=0|X)P(Z=1|X')} \leq \Gamma
-\]</span></p>
-</section>
-<section id="missing-data" class="level3">
-<h3 class="anchored" data-anchor-id="missing-data">2. Missing Data</h3>
-<p>Multiple imputation:</p>
-<p><span class="math display">\[
-\hat{\theta} = \frac{1}{M}\sum_{m=1}^M \hat{\theta}_m
-\]</span></p>
-</section>
-<section id="heterogeneous-effects" class="level3">
-<h3 class="anchored" data-anchor-id="heterogeneous-effects">3. Heterogeneous Effects</h3>
-<p>Conditional average treatment effect:</p>
-<p><span class="math display">\[
-\text{CATE}(x) = \mathbb{E}[Y(1) - Y(0)|X=x]
-\]</span></p>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="study-design" class="level3">
-<h3 class="anchored" data-anchor-id="study-design">1. Study Design</h3>
-<ol type="1">
-<li>Randomization:
-<ul>
-<li>Complete randomization</li>
-<li>Stratified randomization</li>
-<li>Cluster randomization</li>
-</ul></li>
-<li>Sample Size:
-<ul>
-<li>Power analysis</li>
-<li>Effect size estimation</li>
-<li>Variance components</li>
-</ul></li>
-<li>Measurement:
-<ul>
-<li>Reliability</li>
-<li>Validity</li>
-<li>Missing data handling</li>
-</ul></li>
-</ol>
-</section>
-<section id="analysis-strategy" class="level3">
-<h3 class="anchored" data-anchor-id="analysis-strategy">2. Analysis Strategy</h3>
-<ol type="1">
-<li>Identification:
-<ul>
-<li>Check assumptions</li>
-<li>Sensitivity analysis</li>
-<li>Multiple methods</li>
-</ul></li>
-<li>Estimation:
-<ul>
-<li>Robust methods</li>
-<li>Bootstrap</li>
-<li>Cross-validation</li>
-</ul></li>
-<li>Interpretation:
-<ul>
-<li>Effect sizes</li>
-<li>Confidence intervals</li>
-<li>Multiple testing</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="applications" class="level2">
-<h2 class="anchored" data-anchor-id="applications">Applications</h2>
-<section id="economics" class="level3">
-<h3 class="anchored" data-anchor-id="economics">1. Economics</h3>
-<p>Program evaluation: - Treatment effects - Policy analysis - Market interventions</p>
-</section>
-<section id="healthcare" class="level3">
-<h3 class="anchored" data-anchor-id="healthcare">2. Healthcare</h3>
-<p>Clinical trials: - Drug efficacy - Treatment comparison - Side effects</p>
-</section>
-<section id="social-sciences" class="level3">
-<h3 class="anchored" data-anchor-id="social-sciences">3. Social Sciences</h3>
-<p>Policy research: - Educational interventions - Social programs - Behavioral studies</p>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Theory:
-<ul>
-<li>“Causality” by Pearl</li>
-<li>“Causal Inference in Statistics” by Pearl et al.</li>
-<li>“Elements of Causal Inference” by Peters et al.</li>
-</ul></li>
-<li>Methods:
-<ul>
-<li>“Mostly Harmless Econometrics” by Angrist and Pischke</li>
-<li>“Counterfactuals and Causal Inference” by Morgan and Winship</li>
-<li>“Causal Inference for Statistics” by Hernán and Robins</li>
-</ul></li>
-<li>Applications:
-<ul>
-<li>“Causal Machine Learning” by Athey and Imbens</li>
-<li>“The Book of Why” by Pearl and Mackenzie</li>
-<li>“Observation and Experiment” by Rosenbaum</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

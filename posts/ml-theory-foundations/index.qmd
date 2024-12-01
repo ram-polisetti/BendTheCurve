@@ -3,6 +3,7 @@ title: "Machine Learning Theory: Mathematical Foundations Made Simple"
 author: "Ram Polisetti"
 date: "2024-03-19"
 categories: [machine-learning, theory, mathematics, statistics]
+tags: [machine-learning-theory, foundations, mathematics]
 image: "ml_theory.jpg"
 description: "A beginner-friendly guide to machine learning theory, with intuitive explanations and practical examples."
 jupyter: python3
@@ -328,6 +329,28 @@ best_degree = select_best_model(X, y)
 - Google Colab notebooks
 - TensorFlow Playground
 - ML Visualization Tools
+:::
+
+## Related Posts
+
+::: {.related-posts-section}
+## Continue Your Learning Journey
+
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
+:::
 :::
 
 Remember: Theory provides the foundation for understanding why ML works, but always combine it with practical implementation for better learning!

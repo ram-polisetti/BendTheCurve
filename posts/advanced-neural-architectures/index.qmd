@@ -366,3 +366,23 @@ $$
    - "On the Relationship between Self-Attention and Convolutional Layers" by Cordonnier et al.
    - "The Transformer Family" by Tay et al.
    - "What Does BERT Look At?" by Clark et al.
+
+::: {.related-posts-section}
+## Continue Your Learning Journey
+
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
+:::
+:::

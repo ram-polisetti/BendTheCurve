@@ -345,3 +345,23 @@ Feature templates:
    - "Medical Applications of Artificial Intelligence" by Dua and Acharya
    - "Computer Vision: A Modern Approach" by Forsyth and Ponce
    - "Speech and Language Processing" by Jurafsky and Martin
+
+::: {.related-posts-section}
+## Continue Your Learning Journey
+
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
+:::
+:::

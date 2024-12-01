@@ -196,14 +196,76 @@ Remember
 <p>Everyone starts somewhere! Don’t feel overwhelmed - we’ll break everything down into manageable pieces.</p>
 </div>
 </div>
+</section>
+</section>
+<section id="related-posts" class="level2">
+<h2 class="anchored" data-anchor-id="related-posts">Related Posts</h2>
+</section>
+<section id="continue-your-learning-journey" class="level2 related-posts-section">
+<h2 class="anchored" data-anchor-id="continue-your-learning-journey">Continue Your Learning Journey</h2>
+<div id="related-posts">
+
+</div>
+</section>
 <p>Let’s start this exciting journey together! Choose your first article from the learning paths above, or check out our <a href="../../posts">latest posts</a>.</p>
 <p>Happy Learning! 🚀</p>
 
 
-</section>
-</section>
 
- ]]></description>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="machine-learning,theory,mathematics,stability" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023240221" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2619">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/algorithmic-stability/index.html" class="no-external">Algorithmic Stability and Learning Theory</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/algorithmic-stability/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/algorithmic-stability/index.html" class="no-external">A beginner-friendly guide to algorithmic stability in machine learning, with interactive visualizations and practical examples.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/algorithmic-stability/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>welcome</category>
   <category>introduction</category>
   <guid>https://ram-polisetti.github.io/BendTheCurve/posts/bend-the-curve-intro/</guid>
@@ -220,248 +282,66 @@ Remember
 
 
 
-<section id="advanced-neural-network-architectures" class="level1">
-<h1>Advanced Neural Network Architectures</h1>
-<section id="self-attention-mechanisms" class="level2">
-<h2 class="anchored" data-anchor-id="self-attention-mechanisms">Self-Attention Mechanisms</h2>
-<section id="scaled-dot-product-attention" class="level3">
-<h3 class="anchored" data-anchor-id="scaled-dot-product-attention">1. Scaled Dot-Product Attention</h3>
-<p>The fundamental building block of modern architectures:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BAttention%7D(Q,%20K,%20V)%20=%20%5Ctext%7Bsoftmax%7D%5Cleft(%5Cfrac%7BQK%5ET%7D%7B%5Csqrt%7Bd_k%7D%7D%5Cright)V%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?Q%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bn%20%5Ctimes%20d_k%7D"> is the query matrix - <img src="https://latex.codecogs.com/png.latex?K%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bm%20%5Ctimes%20d_k%7D"> is the key matrix - <img src="https://latex.codecogs.com/png.latex?V%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bm%20%5Ctimes%20d_v%7D"> is the value matrix - <img src="https://latex.codecogs.com/png.latex?d_k"> is the dimension of keys - <img src="https://latex.codecogs.com/png.latex?%5Csqrt%7Bd_k%7D"> is the scaling factor</p>
-</section>
-<section id="multi-head-attention" class="level3">
-<h3 class="anchored" data-anchor-id="multi-head-attention">2. Multi-Head Attention</h3>
-<p>Parallel attention computations:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Ctext%7BMultiHead%7D(Q,%20K,%20V)%20&amp;=%20%5Ctext%7BConcat%7D(%5Ctext%7Bhead%7D_1,%20...,%20%5Ctext%7Bhead%7D_h)W%5EO%20%5C%5C%0A%5Ctext%7Bwhere%20head%7D_i%20&amp;=%20%5Ctext%7BAttention%7D(QW_i%5EQ,%20KW_i%5EK,%20VW_i%5EV)%0A%5Cend%7Baligned%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?W_i%5EQ%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bd_%7Bmodel%7D%20%5Ctimes%20d_k%7D"> - <img src="https://latex.codecogs.com/png.latex?W_i%5EK%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bd_%7Bmodel%7D%20%5Ctimes%20d_k%7D"> - <img src="https://latex.codecogs.com/png.latex?W_i%5EV%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bd_%7Bmodel%7D%20%5Ctimes%20d_v%7D"> - <img src="https://latex.codecogs.com/png.latex?W%5EO%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bhd_v%20%5Ctimes%20d_%7Bmodel%7D%7D"></p>
-</section>
-</section>
-<section id="transformer-architecture" class="level2">
-<h2 class="anchored" data-anchor-id="transformer-architecture">Transformer Architecture</h2>
-<section id="encoder-block" class="level3">
-<h3 class="anchored" data-anchor-id="encoder-block">1. Encoder Block</h3>
-<p>Complete encoder block computation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Ctext%7BMultiHeadAttn%7D%20&amp;=%20%5Ctext%7BLayerNorm%7D(x%20+%20%5Ctext%7BMultiHead%7D(x,%20x,%20x))%20%5C%5C%0A%5Ctext%7BFFN%7D(x)%20&amp;=%20%5Ctext%7Bmax%7D(0,%20xW_1%20+%20b_1)W_2%20+%20b_2%20%5C%5C%0A%5Ctext%7BOutput%7D%20&amp;=%20%5Ctext%7BLayerNorm%7D(%5Ctext%7BMultiHeadAttn%7D%20+%20%5Ctext%7BFFN%7D(%5Ctext%7BMultiHeadAttn%7D))%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-<section id="positional-encoding" class="level3">
-<h3 class="anchored" data-anchor-id="positional-encoding">2. Positional Encoding</h3>
-<p>Sinusoidal position encoding:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0APE_%7B(pos,2i)%7D%20&amp;=%20%5Csin(pos/10000%5E%7B2i/d_%7Bmodel%7D%7D)%20%5C%5C%0APE_%7B(pos,2i+1)%7D%20&amp;=%20%5Ccos(pos/10000%5E%7B2i/d_%7Bmodel%7D%7D)%0A%5Cend%7Baligned%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?pos"> is the position - <img src="https://latex.codecogs.com/png.latex?i"> is the dimension</p>
-</section>
-</section>
-<section id="modern-architectural-patterns" class="level2">
-<h2 class="anchored" data-anchor-id="modern-architectural-patterns">Modern Architectural Patterns</h2>
-<section id="residual-networks" class="level3">
-<h3 class="anchored" data-anchor-id="residual-networks">1. Residual Networks</h3>
-<p>ResNet block formulation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ay%20=%20F(x,%20%5C%7BW_i%5C%7D)%20+%20x%0A"></p>
-<p>With pre-activation variant:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0Ah%20&amp;=%20%5Ctext%7BReLU%7D(%5Ctext%7BBN%7D(x))%20%5C%5C%0Ay%20&amp;=%20W_2%5Ctext%7BReLU%7D(%5Ctext%7BBN%7D(W_1h))%20+%20x%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-<section id="dense-networks" class="level3">
-<h3 class="anchored" data-anchor-id="dense-networks">2. Dense Networks</h3>
-<p>DenseNet connectivity pattern:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ax_l%20=%20H_l(%5Bx_0,%20x_1,%20...,%20x_%7Bl-1%7D%5D)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?x_l"> is the output of layer <img src="https://latex.codecogs.com/png.latex?l"> - <img src="https://latex.codecogs.com/png.latex?H_l"> is a composite function - <img src="https://latex.codecogs.com/png.latex?%5B...%5D"> represents concatenation</p>
-</section>
-<section id="squeeze-and-excitation-networks" class="level3">
-<h3 class="anchored" data-anchor-id="squeeze-and-excitation-networks">3. Squeeze-and-Excitation Networks</h3>
-<p>Channel attention mechanism:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0Az%20&amp;=%20F_%7Bsq%7D(u)%20=%20%5Cfrac%7B1%7D%7BH%20%5Ctimes%20W%7D%5Csum_%7Bi=1%7D%5EH%5Csum_%7Bj=1%7D%5EW%20u_c(i,j)%20%5C%5C%0As%20&amp;=%20F_%7Bex%7D(z)%20=%20%5Csigma(W_2%5Ctext%7BReLU%7D(W_1z))%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-</section>
-<section id="advanced-attention-variants" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-attention-variants">Advanced Attention Variants</h2>
-<section id="relative-position-attention" class="level3">
-<h3 class="anchored" data-anchor-id="relative-position-attention">1. Relative Position Attention</h3>
-<p>Position-aware attention scoring:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BAttention%7D(Q,%20K,%20V,%20R)%20=%20%5Ctext%7Bsoftmax%7D%5Cleft(%5Cfrac%7BQK%5ET%20+%20QR%5ET%7D%7B%5Csqrt%7Bd_k%7D%7D%5Cright)V%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?R"> is the relative position encoding matrix</p>
-</section>
-<section id="linear-attention" class="level3">
-<h3 class="anchored" data-anchor-id="linear-attention">2. Linear Attention</h3>
-<p>Efficient attention computation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BLinearAttention%7D(Q,%20K,%20V)%20=%20%5Cphi(Q)(%5Cphi(K)%5ETV)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cphi"> is a feature map (e.g., elu(x) + 1)</p>
-</section>
-<section id="sparse-attention" class="level3">
-<h3 class="anchored" data-anchor-id="sparse-attention">3. Sparse Attention</h3>
-<p>Structured sparsity pattern:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BSparseAttention%7D(Q,%20K,%20V)%20=%20%5Ctext%7Bsoftmax%7D%5Cleft(%5Cfrac%7BM%20%5Codot%20(QK%5ET)%7D%7B%5Csqrt%7Bd_k%7D%7D%5Cright)V%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?M"> is a binary mask matrix - <img src="https://latex.codecogs.com/png.latex?%5Codot"> is element-wise multiplication</p>
-</section>
-</section>
-<section id="advanced-normalization-techniques" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-normalization-techniques">Advanced Normalization Techniques</h2>
-<section id="layer-normalization" class="level3">
-<h3 class="anchored" data-anchor-id="layer-normalization">1. Layer Normalization</h3>
-<p>Computation across features:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BLN%7D(x)%20=%20%5Cgamma%20%5Codot%20%5Cfrac%7Bx%20-%20%5Cmu%7D%7B%5Csqrt%7B%5Csigma%5E2%20+%20%5Cepsilon%7D%7D%20+%20%5Cbeta%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cmu"> and <img src="https://latex.codecogs.com/png.latex?%5Csigma"> are computed across feature dimension</p>
-</section>
-<section id="group-normalization" class="level3">
-<h3 class="anchored" data-anchor-id="group-normalization">2. Group Normalization</h3>
-<p>Feature group normalization:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BGN%7D(x)%20=%20%5Cgamma%20%5Codot%20%5Cfrac%7Bx%20-%20%5Cmu_g%7D%7B%5Csqrt%7B%5Csigma_g%5E2%20+%20%5Cepsilon%7D%7D%20+%20%5Cbeta%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cmu_g"> and <img src="https://latex.codecogs.com/png.latex?%5Csigma_g"> are computed within groups</p>
-</section>
-</section>
-<section id="advanced-activation-functions" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-activation-functions">Advanced Activation Functions</h2>
-<section id="gelu-gaussian-error-linear-unit" class="level3">
-<h3 class="anchored" data-anchor-id="gelu-gaussian-error-linear-unit">1. GELU (Gaussian Error Linear Unit)</h3>
-<p>Smooth approximation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BGELU%7D(x)%20=%20x%5CPhi(x)%20=%20x%20%5Ccdot%20%5Cfrac%7B1%7D%7B2%7D%5Cleft%5B1%20+%20%5Ctext%7Berf%7D%5Cleft(%5Cfrac%7Bx%7D%7B%5Csqrt%7B2%7D%7D%5Cright)%5Cright%5D%0A"></p>
-</section>
-<section id="swish" class="level3">
-<h3 class="anchored" data-anchor-id="swish">2. Swish</h3>
-<p>Self-gated activation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BSwish%7D(x)%20=%20x%20%5Ccdot%20%5Csigma(%5Cbeta%20x)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Csigma"> is the sigmoid function - <img src="https://latex.codecogs.com/png.latex?%5Cbeta"> is a learnable parameter</p>
-</section>
-</section>
-<section id="architectural-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="architectural-optimization">Architectural Optimization</h2>
-<section id="neural-architecture-search-nas" class="level3">
-<h3 class="anchored" data-anchor-id="neural-architecture-search-nas">1. Neural Architecture Search (NAS)</h3>
-<p>Optimization objective:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Cmin_%7B%5Calpha%7D%20&amp;%20%5Cquad%20%5Cmathcal%7BL%7D_%7Bval%7D(w%5E*(%5Calpha),%20%5Calpha)%20%5C%5C%0A%5Ctext%7Bs.t.%7D%20&amp;%20%5Cquad%20w%5E*(%5Calpha)%20=%20%5Cargmin_w%20%5Cmathcal%7BL%7D_%7Btrain%7D(w,%20%5Calpha)%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-<section id="dynamic-routing" class="level3">
-<h3 class="anchored" data-anchor-id="dynamic-routing">2. Dynamic Routing</h3>
-<p>Routing probability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ap_%7Bij%7D%20=%20%5Cfrac%7B%5Cexp(%5Chat%7Bu%7D_j%7Cu_i)%7D%7B%5Csum_k%20%5Cexp(%5Chat%7Bu%7D_k%7Cu_i)%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?u_i"> is the input capsule - <img src="https://latex.codecogs.com/png.latex?%5Chat%7Bu%7D_j"> is the prediction vector</p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="memory-efficiency" class="level3">
-<h3 class="anchored" data-anchor-id="memory-efficiency">1. Memory Efficiency</h3>
-<p>Gradient checkpointing:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7Bmemory%7D%20=%20O(%5Csqrt%7BN%7D)%20%5Ctext%7B%20instead%20of%20%7D%20O(N)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?N"> is the number of layers</p>
-</section>
-<section id="computational-efficiency" class="level3">
-<h3 class="anchored" data-anchor-id="computational-efficiency">2. Computational Efficiency</h3>
-<p>Mixed precision training:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Ctext%7BFP16%20Forward%7D%20&amp;:%20y%20=%20%5Ctext%7Bcast%7D_%7B%5Ctext%7BFP16%7D%7D(Wx)%20%5C%5C%0A%5Ctext%7BFP32%20Master%7D%20&amp;:%20w_%7B%5Ctext%7Bmaster%7D%7D%20=%20w_%7B%5Ctext%7BFP32%7D%7D%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-<section id="training-stability" class="level3">
-<h3 class="anchored" data-anchor-id="training-stability">3. Training Stability</h3>
-<p>Gradient clipping with norm:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ag%20=%20%5Cmin%5Cleft(1,%20%5Cfrac%7B%5Ctheta%7D%7B%5C%7Cg%5C%7C%7D%5Cright)g%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> is the clipping threshold - <img src="https://latex.codecogs.com/png.latex?g"> is the gradient</p>
-</section>
-</section>
-<section id="advanced-training-techniques" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-training-techniques">Advanced Training Techniques</h2>
-<section id="knowledge-distillation" class="level3">
-<h3 class="anchored" data-anchor-id="knowledge-distillation">1. Knowledge Distillation</h3>
-<p>Distillation objective:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathcal%7BL%7D%20=%20%5Calpha%20T%5E2%20%5Ctext%7BKL%7D%5Cleft(%5Ctext%7Bsoftmax%7D%5Cleft(%5Cfrac%7Bz_t%7D%7BT%7D%5Cright),%20%5Ctext%7Bsoftmax%7D%5Cleft(%5Cfrac%7Bz_s%7D%7BT%7D%5Cright)%5Cright)%20+%20(1-%5Calpha)%5Cmathcal%7BL%7D_%7B%5Ctext%7BCE%7D%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?z_t"> and <img src="https://latex.codecogs.com/png.latex?z_s"> are teacher and student logits - <img src="https://latex.codecogs.com/png.latex?T"> is temperature - <img src="https://latex.codecogs.com/png.latex?%5Calpha"> is balancing factor</p>
-</section>
-<section id="progressive-training" class="level3">
-<h3 class="anchored" data-anchor-id="progressive-training">2. Progressive Training</h3>
-<p>Curriculum learning schedule:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Clambda(t)%20=%20%5Cmin%5Cleft(1,%20%5Cfrac%7Bt%7D%7B%5Ctau%7D%5Cright)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?t"> is current step - <img src="https://latex.codecogs.com/png.latex?%5Ctau"> is ramp-up period</p>
-</section>
-</section>
-<section id="performance-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="performance-analysis">Performance Analysis</h2>
-<section id="theoretical-complexity" class="level3">
-<h3 class="anchored" data-anchor-id="theoretical-complexity">1. Theoretical Complexity</h3>
-<p>Attention complexity:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Ctext%7BSpace%7D%20&amp;:%20O(n%5E2d)%20%5C%5C%0A%5Ctext%7BTime%7D%20&amp;:%20O(n%5E2d)%0A%5Cend%7Baligned%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?n"> is sequence length - <img src="https://latex.codecogs.com/png.latex?d"> is hidden dimension</p>
-</section>
-<section id="information-flow" class="level3">
-<h3 class="anchored" data-anchor-id="information-flow">2. Information Flow</h3>
-<p>Maximum path length:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BPathLength%7D%20=%20%5Cbegin%7Bcases%7D%0AO(1)%20&amp;%20%5Ctext%7Bfor%20transformers%7D%20%5C%5C%0AO(n)%20&amp;%20%5Ctext%7Bfor%20RNNs%7D%0A%5Cend%7Bcases%7D%0A"></p>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="architecture-design" class="level3">
-<h3 class="anchored" data-anchor-id="architecture-design">1. Architecture Design</h3>
-<ol type="1">
-<li>Residual Connections:
-<ul>
-<li>Use in deep networks</li>
-<li>Maintain gradient flow</li>
-<li>Enable deeper architectures</li>
-</ul></li>
-<li>Normalization:
-<ul>
-<li>Pre-normalization for stability</li>
-<li>Layer normalization for transformers</li>
-<li>Batch normalization for CNNs</li>
-</ul></li>
-<li>Attention Mechanisms:
-<ul>
-<li>Multi-head attention for diverse features</li>
-<li>Relative position encoding for sequences</li>
-<li>Sparse attention for long sequences</li>
-</ul></li>
-</ol>
-</section>
-<section id="training-strategy" class="level3">
-<h3 class="anchored" data-anchor-id="training-strategy">2. Training Strategy</h3>
-<ol type="1">
-<li>Learning Rate:
-<ul>
-<li>Linear warmup</li>
-<li>Cosine decay</li>
-<li>Layer-wise learning rates</li>
-</ul></li>
-<li>Regularization:
-<ul>
-<li>Dropout in attention</li>
-<li>Weight decay</li>
-<li>Label smoothing</li>
-</ul></li>
-<li>Optimization:
-<ul>
-<li>Adam with weight decay</li>
-<li>Gradient clipping</li>
-<li>Mixed precision training</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Architecture:
-<ul>
-<li>“Attention Is All You Need” by Vaswani et al.</li>
-<li>“Deep Residual Learning” by He et al.</li>
-<li>“Densely Connected Networks” by Huang et al.</li>
-</ul></li>
-<li>Training:
-<ul>
-<li>“On Layer Normalization in the Transformer Architecture” by Xiong et al.</li>
-<li>“Understanding the Difficulty of Training Deep Feedforward Neural Networks” by Glorot and Bengio</li>
-<li>“Mixed Precision Training” by Micikevicius et al.</li>
-</ul></li>
-<li>Analysis:
-<ul>
-<li>“On the Relationship between Self-Attention and Convolutional Layers” by Cordonnier et al.</li>
-<li>“The Transformer Family” by Tay et al.</li>
-<li>“What Does BERT Look At?” by Clark et al.</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
- ]]></description>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="machine-learning,theory,mathematics,stability" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023240221" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2619">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/algorithmic-stability/index.html" class="no-external">Algorithmic Stability and Learning Theory</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/algorithmic-stability/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/algorithmic-stability/index.html" class="no-external">A beginner-friendly guide to algorithmic stability in machine learning, with interactive visualizations and practical examples.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/algorithmic-stability/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>deep-learning</category>
   <category>neural-networks</category>
   <category>architectures</category>
@@ -1986,226 +1866,66 @@ font-style: inherit;">"</span>)</span></code></pre></div>
 
 
 
-<section id="causal-inference-and-structural-learning" class="level1">
-<h1>Causal Inference and Structural Learning</h1>
-<section id="structural-causal-models" class="level2">
-<h2 class="anchored" data-anchor-id="structural-causal-models">Structural Causal Models</h2>
-<section id="basic-framework" class="level3">
-<h3 class="anchored" data-anchor-id="basic-framework">1. Basic Framework</h3>
-<p>Definition of SCM:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0AX_i%20&amp;=%20f_i(%5Ctext%7BPA%7D_i,%20U_i)%20%5C%5C%0AU_i%20&amp;%5Csim%20P(U_i)%0A%5Cend%7Baligned%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?X_i"> are endogenous variables - <img src="https://latex.codecogs.com/png.latex?%5Ctext%7BPA%7D_i"> are parents of <img src="https://latex.codecogs.com/png.latex?X_i"> - <img src="https://latex.codecogs.com/png.latex?U_i"> are exogenous variables - <img src="https://latex.codecogs.com/png.latex?f_i"> are structural equations</p>
-</section>
-<section id="intervention-calculus" class="level3">
-<h3 class="anchored" data-anchor-id="intervention-calculus">2. Intervention Calculus</h3>
-<p>Do-operator formalization:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(Y%7C%5Ctext%7Bdo%7D(X=x))%20=%20%5Csum_z%20P(Y%7CX=x,Z=z)P(Z=z)%0A"></p>
-<p>Backdoor adjustment:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(Y%7C%5Ctext%7Bdo%7D(X=x))%20=%20%5Csum_z%20P(Y%7CX=x,Z=z)P(Z=z)%0A"></p>
-<p>Where Z satisfies the backdoor criterion.</p>
-</section>
-</section>
-<section id="identification-methods" class="level2">
-<h2 class="anchored" data-anchor-id="identification-methods">Identification Methods</h2>
-<section id="backdoor-criterion" class="level3">
-<h3 class="anchored" data-anchor-id="backdoor-criterion">1. Backdoor Criterion</h3>
-<p>A set Z satisfies the backdoor criterion relative to (X,Y) if: 1. No node in Z is a descendant of X 2. Z blocks all backdoor paths from X to Y</p>
-<p>Formal criterion:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(Y%7C%5Ctext%7Bdo%7D(X))%20=%20%5Csum_z%20P(Y%7CX,Z)P(Z)%0A"></p>
-</section>
-<section id="front-door-criterion" class="level3">
-<h3 class="anchored" data-anchor-id="front-door-criterion">2. Front-door Criterion</h3>
-<p>Three conditions: 1. M blocks all directed paths from X to Y 2. No unblocked backdoor path from X to M 3. All backdoor paths from M to Y are blocked by X</p>
-<p>Formula:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(Y%7C%5Ctext%7Bdo%7D(X))%20=%20%5Csum_m%20P(m%7CX)%5Csum_%7Bx'%7DP(Y%7Cm,x')P(x')%0A"></p>
-</section>
-<section id="do-calculus-rules" class="level3">
-<h3 class="anchored" data-anchor-id="do-calculus-rules">3. Do-Calculus Rules</h3>
-<p>Rule 1 (Insertion/deletion of observations):</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(y%7C%5Ctext%7Bdo%7D(x),z,w)%20=%20P(y%7C%5Ctext%7Bdo%7D(x),w)%0A"></p>
-<p>if (Y ⊥⊥ Z|X,W)<img src="https://latex.codecogs.com/png.latex?_%7BG_%7B%5Coverline%7BX%7D%7D%7D"></p>
-<p>Rule 2 (Action/observation exchange):</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(y%7C%5Ctext%7Bdo%7D(x),%5Ctext%7Bdo%7D(z),w)%20=%20P(y%7C%5Ctext%7Bdo%7D(x),z,w)%0A"></p>
-<p>if (Y ⊥⊥ Z|X,W)<img src="https://latex.codecogs.com/png.latex?_%7BG_%7B%5Coverline%7BX%7D%5Cunderline%7BZ%7D%7D%7D"></p>
-<p>Rule 3 (Insertion/deletion of actions):</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(y%7C%5Ctext%7Bdo%7D(x),%5Ctext%7Bdo%7D(z),w)%20=%20P(y%7C%5Ctext%7Bdo%7D(x),w)%0A"></p>
-<p>if (Y ⊥⊥ Z|X,W)<img src="https://latex.codecogs.com/png.latex?_%7BG_%7B%5Coverline%7BX%7D%5Coverline%7BZ(W)%7D%7D%7D"></p>
-</section>
-</section>
-<section id="estimation-methods" class="level2">
-<h2 class="anchored" data-anchor-id="estimation-methods">Estimation Methods</h2>
-<section id="propensity-score-matching" class="level3">
-<h3 class="anchored" data-anchor-id="propensity-score-matching">1. Propensity Score Matching</h3>
-<p>Propensity score:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ae(X)%20=%20P(T=1%7CX)%0A"></p>
-<p>Average Treatment Effect (ATE):</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BATE%7D%20=%20%5Cmathbb%7BE%7D%5BY(1)%20-%20Y(0)%5D%20=%20%5Cmathbb%7BE%7D%5Cleft%5B%5Cfrac%7BTY%7D%7Be(X)%7D%20-%20%5Cfrac%7B(1-T)Y%7D%7B1-e(X)%7D%5Cright%5D%0A"></p>
-</section>
-<section id="instrumental-variables" class="level3">
-<h3 class="anchored" data-anchor-id="instrumental-variables">2. Instrumental Variables</h3>
-<p>Two-stage least squares (2SLS):</p>
-<p>First stage: <img src="https://latex.codecogs.com/png.latex?%0AX%20=%20%5Cgamma_0%20+%20%5Cgamma_1Z%20+%20%5Ceta%0A"></p>
-<p>Second stage: <img src="https://latex.codecogs.com/png.latex?%0AY%20=%20%5Cbeta_0%20+%20%5Cbeta_1%5Chat%7BX%7D%20+%20%5Cepsilon%0A"></p>
-</section>
-<section id="regression-discontinuity" class="level3">
-<h3 class="anchored" data-anchor-id="regression-discontinuity">3. Regression Discontinuity</h3>
-<p>Sharp RD estimator:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctau_%7BSRD%7D%20=%20%5Clim_%7Bx%20%5Cdownarrow%20c%7D%20%5Cmathbb%7BE%7D%5BY%7CX=x%5D%20-%20%5Clim_%7Bx%20%5Cuparrow%20c%7D%20%5Cmathbb%7BE%7D%5BY%7CX=x%5D%0A"></p>
-<p>Fuzzy RD estimator:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctau_%7BFRD%7D%20=%20%5Cfrac%7B%5Clim_%7Bx%20%5Cdownarrow%20c%7D%20%5Cmathbb%7BE%7D%5BY%7CX=x%5D%20-%20%5Clim_%7Bx%20%5Cuparrow%20c%7D%20%5Cmathbb%7BE%7D%5BY%7CX=x%5D%7D%7B%5Clim_%7Bx%20%5Cdownarrow%20c%7D%20%5Cmathbb%7BE%7D%5BD%7CX=x%5D%20-%20%5Clim_%7Bx%20%5Cuparrow%20c%7D%20%5Cmathbb%7BE%7D%5BD%7CX=x%5D%7D%0A"></p>
-</section>
-</section>
-<section id="structural-learning" class="level2">
-<h2 class="anchored" data-anchor-id="structural-learning">Structural Learning</h2>
-<section id="constraint-based-methods" class="level3">
-<h3 class="anchored" data-anchor-id="constraint-based-methods">1. Constraint-Based Methods</h3>
-<p>PC Algorithm steps: 1. Start with complete undirected graph 2. Remove edges based on conditional independence 3. Orient v-structures 4. Orient remaining edges</p>
-<p>Independence test statistic:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cchi%5E2%20=%20n%5Csum_%7Bi,j%7D%20%5Cfrac%7B(O_%7Bij%7D%20-%20E_%7Bij%7D)%5E2%7D%7BE_%7Bij%7D%7D%0A"></p>
-</section>
-<section id="score-based-methods" class="level3">
-<h3 class="anchored" data-anchor-id="score-based-methods">2. Score-Based Methods</h3>
-<p>BIC score:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BBIC%7D(G)%20=%20%5Cell(D%7CG)%20-%20%5Cfrac%7B%5Clog%20n%7D%7B2%7D%7CG%7C%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cell(D%7CG)"> is log-likelihood - <img src="https://latex.codecogs.com/png.latex?%7CG%7C"> is model complexity - <img src="https://latex.codecogs.com/png.latex?n"> is sample size</p>
-</section>
-<section id="hybrid-methods" class="level3">
-<h3 class="anchored" data-anchor-id="hybrid-methods">3. Hybrid Methods</h3>
-<p>MMHC algorithm: 1. Learn skeleton using constraint-based method 2. Orient edges using score-based method</p>
-<p>Score function:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BScore%7D(G)%20=%20%5Ctext%7BBIC%7D(G)%20+%20%5Clambda%20%5Ctext%7BSparsity%7D(G)%0A"></p>
-</section>
-</section>
-<section id="advanced-topics" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="counterfactual-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="counterfactual-analysis">1. Counterfactual Analysis</h3>
-<p>Fundamental problem of causal inference:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BACE%7D%20=%20%5Cmathbb%7BE%7D%5BY(1)%20-%20Y(0)%5D%0A"></p>
-<p>But we only observe:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AY%20=%20TY(1)%20+%20(1-T)Y(0)%0A"></p>
-</section>
-<section id="mediation-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="mediation-analysis">2. Mediation Analysis</h3>
-<p>Direct and indirect effects:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Ctext%7BNDE%7D%20&amp;=%20%5Cmathbb%7BE%7D%5BY(t,M(t'))%5D%20-%20%5Cmathbb%7BE%7D%5BY(t',M(t'))%5D%20%5C%5C%0A%5Ctext%7BNIE%7D%20&amp;=%20%5Cmathbb%7BE%7D%5BY(t,M(t))%5D%20-%20%5Cmathbb%7BE%7D%5BY(t,M(t'))%5D%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-<section id="time-varying-treatments" class="level3">
-<h3 class="anchored" data-anchor-id="time-varying-treatments">3. Time-Varying Treatments</h3>
-<p>G-computation formula:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5BY_%7B%5Cbar%7Ba%7D%7D%5D%20=%20%5Csum_%7B%5Cbar%7Bl%7D%7D%20%5Cprod_%7Bt=0%7D%5EK%20P(l_t%7Cl_%7Bt-1%7D,a_%7Bt-1%7D)P(y%7C%5Cbar%7Bl%7D,%5Cbar%7Ba%7D)%0A"></p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="sensitivity-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="sensitivity-analysis">1. Sensitivity Analysis</h3>
-<p>Rosenbaum bounds:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B1%7D%7B%5CGamma%7D%20%5Cleq%20%5Cfrac%7BP(Z=1%7CX)P(Z=0%7CX')%7D%7BP(Z=0%7CX)P(Z=1%7CX')%7D%20%5Cleq%20%5CGamma%0A"></p>
-</section>
-<section id="missing-data" class="level3">
-<h3 class="anchored" data-anchor-id="missing-data">2. Missing Data</h3>
-<p>Multiple imputation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7B%5Ctheta%7D%20=%20%5Cfrac%7B1%7D%7BM%7D%5Csum_%7Bm=1%7D%5EM%20%5Chat%7B%5Ctheta%7D_m%0A"></p>
-</section>
-<section id="heterogeneous-effects" class="level3">
-<h3 class="anchored" data-anchor-id="heterogeneous-effects">3. Heterogeneous Effects</h3>
-<p>Conditional average treatment effect:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BCATE%7D(x)%20=%20%5Cmathbb%7BE%7D%5BY(1)%20-%20Y(0)%7CX=x%5D%0A"></p>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="study-design" class="level3">
-<h3 class="anchored" data-anchor-id="study-design">1. Study Design</h3>
-<ol type="1">
-<li>Randomization:
-<ul>
-<li>Complete randomization</li>
-<li>Stratified randomization</li>
-<li>Cluster randomization</li>
-</ul></li>
-<li>Sample Size:
-<ul>
-<li>Power analysis</li>
-<li>Effect size estimation</li>
-<li>Variance components</li>
-</ul></li>
-<li>Measurement:
-<ul>
-<li>Reliability</li>
-<li>Validity</li>
-<li>Missing data handling</li>
-</ul></li>
-</ol>
-</section>
-<section id="analysis-strategy" class="level3">
-<h3 class="anchored" data-anchor-id="analysis-strategy">2. Analysis Strategy</h3>
-<ol type="1">
-<li>Identification:
-<ul>
-<li>Check assumptions</li>
-<li>Sensitivity analysis</li>
-<li>Multiple methods</li>
-</ul></li>
-<li>Estimation:
-<ul>
-<li>Robust methods</li>
-<li>Bootstrap</li>
-<li>Cross-validation</li>
-</ul></li>
-<li>Interpretation:
-<ul>
-<li>Effect sizes</li>
-<li>Confidence intervals</li>
-<li>Multiple testing</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="applications" class="level2">
-<h2 class="anchored" data-anchor-id="applications">Applications</h2>
-<section id="economics" class="level3">
-<h3 class="anchored" data-anchor-id="economics">1. Economics</h3>
-<p>Program evaluation: - Treatment effects - Policy analysis - Market interventions</p>
-</section>
-<section id="healthcare" class="level3">
-<h3 class="anchored" data-anchor-id="healthcare">2. Healthcare</h3>
-<p>Clinical trials: - Drug efficacy - Treatment comparison - Side effects</p>
-</section>
-<section id="social-sciences" class="level3">
-<h3 class="anchored" data-anchor-id="social-sciences">3. Social Sciences</h3>
-<p>Policy research: - Educational interventions - Social programs - Behavioral studies</p>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Theory:
-<ul>
-<li>“Causality” by Pearl</li>
-<li>“Causal Inference in Statistics” by Pearl et al.</li>
-<li>“Elements of Causal Inference” by Peters et al.</li>
-</ul></li>
-<li>Methods:
-<ul>
-<li>“Mostly Harmless Econometrics” by Angrist and Pischke</li>
-<li>“Counterfactuals and Causal Inference” by Morgan and Winship</li>
-<li>“Causal Inference for Statistics” by Hernán and Robins</li>
-</ul></li>
-<li>Applications:
-<ul>
-<li>“Causal Machine Learning” by Athey and Imbens</li>
-<li>“The Book of Why” by Pearl and Mackenzie</li>
-<li>“Observation and Experiment” by Rosenbaum</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
- ]]></description>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>machine-learning</category>
   <category>causality</category>
   <category>statistics</category>
@@ -3001,13 +2721,75 @@ Hands-On Learning
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="related-posts" class="level2">
+<h2 class="anchored" data-anchor-id="related-posts">Related Posts</h2>
+</section>
+<section id="continue-your-learning-journey" class="level2 related-posts-section">
+<h2 class="anchored" data-anchor-id="continue-your-learning-journey">Continue Your Learning Journey</h2>
+<div id="related-posts">
+
+</div>
+</section>
 <p>Remember: Deep learning is powerful but requires patience to learn. Start with simple concepts, practice regularly, and gradually tackle more complex topics. Focus on understanding rather than memorizing, and always experiment with code to reinforce your learning.</p>
 
 
-</section>
-</section>
 
- ]]></description>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>deep-learning</category>
   <category>neural-networks</category>
   <category>beginner</category>
@@ -3025,268 +2807,66 @@ Hands-On Learning
 
 
 
-<section id="generative-models-mathematical-foundations" class="level1">
-<h1>Generative Models: Mathematical Foundations</h1>
-<section id="variational-autoencoders-vaes" class="level2">
-<h2 class="anchored" data-anchor-id="variational-autoencoders-vaes">Variational Autoencoders (VAEs)</h2>
-<section id="evidence-lower-bound-elbo" class="level3">
-<h3 class="anchored" data-anchor-id="evidence-lower-bound-elbo">1. Evidence Lower Bound (ELBO)</h3>
-<p>The VAE objective maximizes the ELBO:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathcal%7BL%7D(%5Ctheta,%20%5Cphi;%20x)%20=%20%5Cmathbb%7BE%7D_%7Bq_%5Cphi(z%7Cx)%7D%5B%5Clog%20p_%5Ctheta(x%7Cz)%5D%20-%20D_%7BKL%7D(q_%5Cphi(z%7Cx)%7C%7Cp(z))%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?q_%5Cphi(z%7Cx)"> is the encoder (inference model) - <img src="https://latex.codecogs.com/png.latex?p_%5Ctheta(x%7Cz)"> is the decoder (generative model) - <img src="https://latex.codecogs.com/png.latex?p(z)"> is the prior distribution - <img src="https://latex.codecogs.com/png.latex?D_%7BKL%7D"> is the Kullback-Leibler divergence</p>
-</section>
-<section id="reparameterization-trick" class="level3">
-<h3 class="anchored" data-anchor-id="reparameterization-trick">2. Reparameterization Trick</h3>
-<p>Enables backpropagation through sampling:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Az%20=%20%5Cmu_%5Cphi(x)%20+%20%5Csigma_%5Cphi(x)%20%5Codot%20%5Cepsilon,%20%5Cquad%20%5Cepsilon%20%5Csim%20%5Cmathcal%7BN%7D(0,%20I)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cmu_%5Cphi(x)"> is the mean encoder network - <img src="https://latex.codecogs.com/png.latex?%5Csigma_%5Cphi(x)"> is the standard deviation encoder network - <img src="https://latex.codecogs.com/png.latex?%5Codot"> denotes element-wise multiplication</p>
-</section>
-</section>
-<section id="generative-adversarial-networks-gans" class="level2">
-<h2 class="anchored" data-anchor-id="generative-adversarial-networks-gans">Generative Adversarial Networks (GANs)</h2>
-<section id="minimax-objective" class="level3">
-<h3 class="anchored" data-anchor-id="minimax-objective">1. Minimax Objective</h3>
-<p>The original GAN formulation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmin_G%20%5Cmax_D%20V(D,G)%20=%20%5Cmathbb%7BE%7D_%7Bx%5Csim%20p_%7Bdata%7D%7D%5B%5Clog%20D(x)%5D%20+%20%5Cmathbb%7BE%7D_%7Bz%5Csim%20p_z%7D%5B%5Clog(1-D(G(z)))%5D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?G"> is the generator - <img src="https://latex.codecogs.com/png.latex?D"> is the discriminator - <img src="https://latex.codecogs.com/png.latex?p_%7Bdata%7D"> is the real data distribution - <img src="https://latex.codecogs.com/png.latex?p_z"> is the latent distribution</p>
-</section>
-<section id="wasserstein-distance" class="level3">
-<h3 class="anchored" data-anchor-id="wasserstein-distance">2. Wasserstein Distance</h3>
-<p>WGAN objective using Kantorovich-Rubinstein duality:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmin_G%20%5Cmax_%7BD%20%5Cin%20%5Cmathcal%7BF%7D_L%7D%20%5Cmathbb%7BE%7D_%7Bx%5Csim%20p_%7Bdata%7D%7D%5BD(x)%5D%20-%20%5Cmathbb%7BE%7D_%7Bz%5Csim%20p_z%7D%5BD(G(z))%5D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BF%7D_L"> is the set of 1-Lipschitz functions</p>
-</section>
-<section id="gradient-penalty" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-penalty">3. Gradient Penalty</h3>
-<p>WGAN-GP regularization term:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Clambda%20%5Cmathbb%7BE%7D_%7B%5Chat%7Bx%7D%5Csim%20p_%7B%5Chat%7Bx%7D%7D%7D%5B(%5C%7C%5Cnabla_%7B%5Chat%7Bx%7D%7DD(%5Chat%7Bx%7D)%5C%7C_2%20-%201)%5E2%5D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Chat%7Bx%7D"> is sampled along straight lines between real and generated samples - <img src="https://latex.codecogs.com/png.latex?%5Clambda"> is the penalty coefficient</p>
-</section>
-</section>
-<section id="diffusion-models" class="level2">
-<h2 class="anchored" data-anchor-id="diffusion-models">Diffusion Models</h2>
-<section id="forward-process" class="level3">
-<h3 class="anchored" data-anchor-id="forward-process">1. Forward Process</h3>
-<p>The forward diffusion process:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aq(x_t%7Cx_%7Bt-1%7D)%20=%20%5Cmathcal%7BN%7D(x_t;%20%5Csqrt%7B1-%5Cbeta_t%7Dx_%7Bt-1%7D,%20%5Cbeta_tI)%0A"></p>
-<p>With closed form for arbitrary timestep:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aq(x_t%7Cx_0)%20=%20%5Cmathcal%7BN%7D(x_t;%20%5Csqrt%7B%5Cbar%7B%5Calpha%7D_t%7Dx_0,%20(1-%5Cbar%7B%5Calpha%7D_t)I)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cbeta_t"> is the noise schedule - <img src="https://latex.codecogs.com/png.latex?%5Calpha_t%20=%201-%5Cbeta_t"> - <img src="https://latex.codecogs.com/png.latex?%5Cbar%7B%5Calpha%7D_t%20=%20%5Cprod_%7Bs=1%7D%5Et%20%5Calpha_s"></p>
-</section>
-<section id="reverse-process" class="level3">
-<h3 class="anchored" data-anchor-id="reverse-process">2. Reverse Process</h3>
-<p>The reverse diffusion process:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ap_%5Ctheta(x_%7Bt-1%7D%7Cx_t)%20=%20%5Cmathcal%7BN%7D(x_%7Bt-1%7D;%20%5Cmu_%5Ctheta(x_t,t),%20%5CSigma_%5Ctheta(x_t,t))%0A"></p>
-<p>Training objective:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathcal%7BL%7D%20=%20%5Cmathbb%7BE%7D_%7Bx_0,%5Cepsilon,t%7D%5Cleft%5B%5C%7C%5Cepsilon%20-%20%5Cepsilon_%5Ctheta(x_t,t)%5C%7C%5E2%5Cright%5D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cepsilon_%5Ctheta"> predicts the noise component - <img src="https://latex.codecogs.com/png.latex?x_t%20=%20%5Csqrt%7B%5Cbar%7B%5Calpha%7D_t%7Dx_0%20+%20%5Csqrt%7B1-%5Cbar%7B%5Calpha%7D_t%7D%5Cepsilon"></p>
-</section>
-</section>
-<section id="advanced-architectures" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-architectures">Advanced Architectures</h2>
-<section id="normalizing-flows" class="level3">
-<h3 class="anchored" data-anchor-id="normalizing-flows">1. Normalizing Flows</h3>
-<p>Change of variables formula:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Clog%20p_X(x)%20=%20%5Clog%20p_Z(f%5E%7B-1%7D(x))%20+%20%5Clog%5Cleft%7C%5Cdet%5Cfrac%7B%5Cpartial%20f%5E%7B-1%7D%7D%7B%5Cpartial%20x%7D%5Cright%7C%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?f"> is an invertible transformation - <img src="https://latex.codecogs.com/png.latex?p_Z"> is a simple base distribution</p>
-</section>
-<section id="autoregressive-models" class="level3">
-<h3 class="anchored" data-anchor-id="autoregressive-models">2. Autoregressive Models</h3>
-<p>Factorized probability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ap(x)%20=%20%5Cprod_%7Bi=1%7D%5En%20p(x_i%7Cx_%7B%3Ci%7D)%0A"></p>
-<p>With masked convolutions:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ay_i%20=%20%5Csum_%7Bj%20%5Cleq%20i%7D%20m_%7Bij%7D(w_%7Bij%7D%20%5Ccdot%20x_j)%0A"></p>
-</section>
-<section id="energy-based-models" class="level3">
-<h3 class="anchored" data-anchor-id="energy-based-models">3. Energy-Based Models</h3>
-<p>Probability density:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ap(x)%20=%20%5Cfrac%7B1%7D%7BZ%7De%5E%7B-E(x)%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?E(x)"> is the energy function - <img src="https://latex.codecogs.com/png.latex?Z%20=%20%5Cint%20e%5E%7B-E(x)%7Ddx"> is the partition function</p>
-</section>
-</section>
-<section id="training-dynamics" class="level2">
-<h2 class="anchored" data-anchor-id="training-dynamics">Training Dynamics</h2>
-<section id="mode-collapse-in-gans" class="level3">
-<h3 class="anchored" data-anchor-id="mode-collapse-in-gans">1. Mode Collapse in GANs</h3>
-<p>Jensen-Shannon divergence:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AJSD(P%5C%7CQ)%20=%20%5Cfrac%7B1%7D%7B2%7DD_%7BKL%7D(P%5C%7C%5Cfrac%7BP+Q%7D%7B2%7D)%20+%20%5Cfrac%7B1%7D%7B2%7DD_%7BKL%7D(Q%5C%7C%5Cfrac%7BP+Q%7D%7B2%7D)%0A"></p>
-</section>
-<section id="vae-posterior-collapse" class="level3">
-<h3 class="anchored" data-anchor-id="vae-posterior-collapse">2. VAE Posterior Collapse</h3>
-<p>KL-divergence analysis:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AD_%7BKL%7D(q_%5Cphi(z%7Cx)%5C%7Cp(z))%20=%20%5Cfrac%7B1%7D%7B2%7D%5Csum_%7Bj=1%7D%5Ed(%5Csigma_j%5E2%20+%20%5Cmu_j%5E2%20-%20%5Clog%5Csigma_j%5E2%20-%201)%0A"></p>
-</section>
-<section id="diffusion-model-training" class="level3">
-<h3 class="anchored" data-anchor-id="diffusion-model-training">3. Diffusion Model Training</h3>
-<p>Denoising score matching:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cnabla_x%20%5Clog%20p(x)%20=%20%5Cmathbb%7BE%7D_%7Bp(t%7Cx)%7D%5B%5Cnabla_x%20%5Clog%20p(x%7Cx_t)%5D%0A"></p>
-</section>
-</section>
-<section id="advanced-training-techniques" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-training-techniques">Advanced Training Techniques</h2>
-<section id="progressive-growing" class="level3">
-<h3 class="anchored" data-anchor-id="progressive-growing">1. Progressive Growing</h3>
-<p>Resolution-dependent loss:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathcal%7BL%7D_%5Ctext%7Btotal%7D%20=%20%5Csum_%7Br%7D%20%5Calpha_r%20%5Cmathcal%7BL%7D_r%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?r"> is the resolution level - <img src="https://latex.codecogs.com/png.latex?%5Calpha_r"> is the weighting factor</p>
-</section>
-<section id="style-mixing" class="level3">
-<h3 class="anchored" data-anchor-id="style-mixing">2. Style Mixing</h3>
-<p>Style transfer in latent space:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw%20=%20%5Cmathcal%7BM%7D(z)%20=%20f(z%20+%20%5CDelta%20z)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BM%7D"> is the mapping network - <img src="https://latex.codecogs.com/png.latex?f"> is a non-linear transformation</p>
-</section>
-<section id="adaptive-instance-normalization-adain" class="level3">
-<h3 class="anchored" data-anchor-id="adaptive-instance-normalization-adain">3. Adaptive Instance Normalization (AdaIN)</h3>
-<p>Style transfer operation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BAdaIN%7D(x,y)%20=%20%5Csigma(y)%5Cleft(%5Cfrac%7Bx-%5Cmu(x)%7D%7B%5Csigma(x)%7D%5Cright)%20+%20%5Cmu(y)%0A"></p>
-</section>
-</section>
-<section id="evaluation-metrics" class="level2">
-<h2 class="anchored" data-anchor-id="evaluation-metrics">Evaluation Metrics</h2>
-<section id="inception-score" class="level3">
-<h3 class="anchored" data-anchor-id="inception-score">1. Inception Score</h3>
-<p>Measures quality and diversity:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AIS%20=%20%5Cexp(%5Cmathbb%7BE%7D_%7Bx%5Csim%20p_g%7D%5BD_%7BKL%7D(p(y%7Cx)%5C%7Cp(y))%5D)%0A"></p>
-</section>
-<section id="fréchet-inception-distance" class="level3">
-<h3 class="anchored" data-anchor-id="fréchet-inception-distance">2. Fréchet Inception Distance</h3>
-<p>Distribution similarity metric:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AFID%20=%20%5C%7C%5Cmu_r%20-%20%5Cmu_g%5C%7C%5E2%20+%20Tr(%5CSigma_r%20+%20%5CSigma_g%20-%202(%5CSigma_r%5CSigma_g)%5E%7B1/2%7D)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cmu_r,%20%5CSigma_r"> are real data statistics - <img src="https://latex.codecogs.com/png.latex?%5Cmu_g,%20%5CSigma_g"> are generated data statistics</p>
-</section>
-<section id="precision-and-recall" class="level3">
-<h3 class="anchored" data-anchor-id="precision-and-recall">3. Precision and Recall</h3>
-<p>Two-way evaluation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Ctext%7BPrecision%7D%20&amp;=%20%5Cmathbb%7BE%7D_%7Bx%5Csim%20p_g%7D%5B%5Cmax_%7By%5Csim%20p_r%7D%20s(x,y)%5D%20%5C%5C%0A%5Ctext%7BRecall%7D%20&amp;=%20%5Cmathbb%7BE%7D_%7By%5Csim%20p_r%7D%5B%5Cmax_%7Bx%5Csim%20p_g%7D%20s(x,y)%5D%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="architectural-choices" class="level3">
-<h3 class="anchored" data-anchor-id="architectural-choices">1. Architectural Choices</h3>
-<ol type="1">
-<li>Generator Design:
-<ul>
-<li>Transposed convolutions vs upsampling</li>
-<li>Skip connections</li>
-<li>Attention mechanisms</li>
-</ul></li>
-<li>Discriminator Design:
-<ul>
-<li>Spectral normalization</li>
-<li>Residual blocks</li>
-<li>Multi-scale discrimination</li>
-</ul></li>
-<li>Loss Functions:
-<ul>
-<li>Adversarial loss</li>
-<li>Reconstruction loss</li>
-<li>Perceptual loss</li>
-</ul></li>
-</ol>
-</section>
-<section id="training-stability" class="level3">
-<h3 class="anchored" data-anchor-id="training-stability">2. Training Stability</h3>
-<ol type="1">
-<li>Gradient Penalties:
-<ul>
-<li>R1 regularization</li>
-<li>Path length regularization</li>
-<li>Consistency regularization</li>
-</ul></li>
-<li>Learning Rate:
-<ul>
-<li>Two time-scale update rule</li>
-<li>Adaptive learning rates</li>
-<li>Warmup scheduling</li>
-</ul></li>
-<li>Batch Size:
-<ul>
-<li>Gradient accumulation</li>
-<li>Mixed precision training</li>
-<li>Memory-efficient backprop</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="model-selection" class="level3">
-<h3 class="anchored" data-anchor-id="model-selection">1. Model Selection</h3>
-<ol type="1">
-<li>VAEs for:
-<ul>
-<li>Structured latent spaces</li>
-<li>Reconstruction tasks</li>
-<li>Interpretable representations</li>
-</ul></li>
-<li>GANs for:
-<ul>
-<li>High-quality generation</li>
-<li>Style transfer</li>
-<li>Domain translation</li>
-</ul></li>
-<li>Diffusion Models for:
-<ul>
-<li>High-fidelity generation</li>
-<li>Controlled generation</li>
-<li>Robust training</li>
-</ul></li>
-</ol>
-</section>
-<section id="hyperparameter-tuning" class="level3">
-<h3 class="anchored" data-anchor-id="hyperparameter-tuning">2. Hyperparameter Tuning</h3>
-<ol type="1">
-<li>Learning Rates:
-<ul>
-<li>Generator: 1e-4 to 1e-3</li>
-<li>Discriminator: 2e-4 to 2e-3</li>
-<li>VAE: 1e-3 to 1e-2</li>
-</ul></li>
-<li>Batch Sizes:
-<ul>
-<li>GANs: 32 to 128</li>
-<li>VAEs: 64 to 256</li>
-<li>Diffusion: 32 to 64</li>
-</ul></li>
-<li>Architecture:
-<ul>
-<li>Layer depth</li>
-<li>Channel width</li>
-<li>Attention layers</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Theory:
-<ul>
-<li>“Auto-Encoding Variational Bayes” by Kingma and Welling</li>
-<li>“Generative Adversarial Networks” by Goodfellow et al.</li>
-<li>“Denoising Diffusion Probabilistic Models” by Ho et al.</li>
-</ul></li>
-<li>Architecture:
-<ul>
-<li>“Progressive Growing of GANs” by Karras et al.</li>
-<li>“StyleGAN” by Karras et al.</li>
-<li>“Normalizing Flows” by Rezende and Mohamed</li>
-</ul></li>
-<li>Training:
-<ul>
-<li>“Improved Training of Wasserstein GANs” by Gulrajani et al.</li>
-<li>“Large Scale GAN Training for High Fidelity Natural Image Synthesis” by Brock et al.</li>
-<li>“Improved VQGAN for Image Generation” by Esser et al.</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
- ]]></description>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>machine-learning</category>
   <category>generative-models</category>
   <category>deep-learning</category>
@@ -4348,13 +3928,75 @@ For Better Results
 </div>
 </div>
 </div>
+</section>
+<section id="related-posts" class="level2">
+<h2 class="anchored" data-anchor-id="related-posts">Related Posts</h2>
+</section>
+<section id="continue-your-learning-journey" class="level2 related-posts-section">
+<h2 class="anchored" data-anchor-id="continue-your-learning-journey">Continue Your Learning Journey</h2>
+<div id="related-posts">
+
+</div>
+</section>
 <p>Remember: Information theory provides powerful tools for understanding and improving machine learning models. Start with simple concepts and gradually build up to more complex applications!</p>
 
 
-</section>
+
 </section>
 
- ]]></description>
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>machine-learning</category>
   <category>information-theory</category>
   <category>mathematics</category>
@@ -5749,105 +5391,31 @@ Remember
 </section>
 <section id="quick-reference-python-for-ml" class="level2">
 <h2 class="anchored" data-anchor-id="quick-reference-python-for-ml">Quick Reference: Python for ML</h2>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Common patterns you'll use often:</span></span>
-<span id="cb8-2"></span>
-<span id="cb8-3"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 1. Load and prepare data</span></span>
-<span id="cb8-4">data <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'your_data.csv'</span>)</span>
-<span id="cb8-5">X <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> data.drop(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'target_column'</span>, axis<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span>
-<span id="cb8-6">y <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> data[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'target_column'</span>]</span>
-<span id="cb8-7"></span>
-<span id="cb8-8"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 2. Split data</span></span>
-<span id="cb8-9">X_train, X_test, y_train, y_test <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> train_test_split(X, y, test_size<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.2</span>)</span>
-<span id="cb8-10"></span>
-<span id="cb8-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 3. Scale features</span></span>
-<span id="cb8-12">scaler <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> StandardScaler()</span>
-<span id="cb8-13">X_train_scaled <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> scaler.fit_transform(X_train)</span>
-<span id="cb8-14">X_test_scaled <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> scaler.transform(X_test)</span>
-<span id="cb8-15"></span>
-<span id="cb8-16"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 4. Train model</span></span>
-<span id="cb8-17">model <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> LinearRegression()  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># or any other model</span></span>
-<span id="cb8-18">model.fit(X_train_scaled, y_train)</span>
-<span id="cb8-19"></span>
-<span id="cb8-20"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 5. Make predictions</span></span>
-<span id="cb8-21">predictions <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> model.predict(X_test_scaled)</span>
-<span id="cb8-22"></span>
-<span id="cb8-23"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 6. Evaluate</span></span>
-<span id="cb8-24"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> sklearn.metrics <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> accuracy_score  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># for classification</span></span>
-<span id="cb8-25">accuracy <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> accuracy_score(y_test, predictions)</span></code></pre></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Need Help?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li>Check the scikit-learn documentation</li>
-<li>Join ML communities on Reddit or Discord</li>
-<li>Share your code on GitHub</li>
-<li>Ask questions on Stack Overflow</li>
-</ul>
-</div>
-</div>
+<p>```python # Common patterns you’ll use often:</p>
+</section>
+<section id="load-and-prepare-data" class="level1">
+<h1>1. Load and prepare data</h1>
+<p>data = pd.read_csv(‘your_data.csv’) X = data.drop(‘target_column’, axis=1) y = data[‘target_column’]</p>
+</section>
+<section id="split-data" class="level1">
+<h1>2. Split data</h1>
+<p>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)</p>
+</section>
+<section id="scale-features" class="level1">
+<h1>3. Scale features</h1>
+<p>scaler = StandardScaler() X_train_scaled = scaler.fit_transform(X_train) X_test_scaled = scaler.transform(X_test)</p>
+</section>
+<section id="train-model" class="level1">
+<h1>4. Train model</h1>
+<p>model = LinearRegression() # or any other model model.fit(X_train_scaled, y_train)</p>
+</section>
+<section id="make-predictions" class="level1">
+<h1>5. Make predictions</h1>
+<p>predictions = model.predict(X_test_scaled)</p>
+</section>
+<section id="evaluate" class="level1">
+<h1>6. Evaluate</h1>
+<p>from sklearn.metrics import accuracy_score # for classification accuracy = accuracy_score(y_test, predictions)</p>
 
 
 </section>
@@ -6087,13 +5655,75 @@ Need Help?
 <li>Machine Learning Mastery</li>
 </ul></li>
 </ol>
+</section>
+<section id="related-posts" class="level2">
+<h2 class="anchored" data-anchor-id="related-posts">Related Posts</h2>
+</section>
+<section id="continue-your-learning-journey" class="level2 related-posts-section">
+<h2 class="anchored" data-anchor-id="continue-your-learning-journey">Continue Your Learning Journey</h2>
+<div id="related-posts">
+
+</div>
+</section>
 <p>Remember: Building a strong foundation in these fundamentals is crucial for success in machine learning. Take time to understand these concepts thoroughly before moving on to more advanced topics.</p>
 
 
-</section>
+
 </section>
 
- ]]></description>
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>machine-learning</category>
   <category>fundamentals</category>
   <category>theory</category>
@@ -6523,12 +6153,71 @@ Need Help?
 </ul></li>
 </ol>
 <p>Remember: Machine learning is here to help make your life easier, but it’s important to use it wisely and stay informed about how it affects your daily activities.</p>
+</section>
+<section id="continue-your-learning-journey" class="level2 related-posts-section">
+<h2 class="anchored" data-anchor-id="continue-your-learning-journey">Continue Your Learning Journey</h2>
+<div id="related-posts">
+
+</div>
+</section>
+
 
 
 </section>
-</section>
 
- ]]></description>
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>machine-learning</category>
   <category>applications</category>
   <category>real-world</category>
@@ -7424,13 +7113,75 @@ Watch Out For
 </div>
 </div>
 </div>
+</section>
+<section id="related-posts" class="level2">
+<h2 class="anchored" data-anchor-id="related-posts">Related Posts</h2>
+</section>
+<section id="continue-your-learning-journey" class="level2 related-posts-section">
+<h2 class="anchored" data-anchor-id="continue-your-learning-journey">Continue Your Learning Journey</h2>
+<div id="related-posts">
+
+</div>
+</section>
 <p>Remember: Theory provides the foundation for understanding why ML works, but always combine it with practical implementation for better learning!</p>
 
 
-</section>
+
 </section>
 
- ]]></description>
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733023433492" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="456">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>machine-learning</category>
   <category>theory</category>
   <category>mathematics</category>
@@ -7449,295 +7200,66 @@ Watch Out For
 
 
 
-<section id="online-learning-and-regret-minimization" class="level1">
-<h1>Online Learning and Regret Minimization</h1>
-<section id="fundamental-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="fundamental-concepts">Fundamental Concepts</h2>
-<section id="online-learning-protocol" class="level3">
-<h3 class="anchored" data-anchor-id="online-learning-protocol">1. Online Learning Protocol</h3>
-<p>Learning process: 1. Receive instance <img src="https://latex.codecogs.com/png.latex?x_t"> 2. Predict <img src="https://latex.codecogs.com/png.latex?%5Chat%7By%7D_t"> 3. Observe true outcome <img src="https://latex.codecogs.com/png.latex?y_t"> 4. Suffer loss <img src="https://latex.codecogs.com/png.latex?%5Cell(%7B%5Chat%7By%7D_t,%20y_t%7D)"> 5. Update model</p>
-<p>Regret definition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20=%20%5Csum_%7Bt=1%7D%5ET%20%5Cell(h_t(x_t),%20y_t)%20-%20%5Cmin_%7Bh%20%5Cin%20%5Cmathcal%7BH%7D%7D%5Csum_%7Bt=1%7D%5ET%20%5Cell(h(x_t),%20y_t)%0A"></p>
-</section>
-<section id="types-of-regret" class="level3">
-<h3 class="anchored" data-anchor-id="types-of-regret">2. Types of Regret</h3>
-<p>External regret:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%5E%7B%5Ctext%7Bext%7D%7D%20=%20%5Cmathbb%7BE%7D%5Cleft%5B%5Csum_%7Bt=1%7D%5ET%20%5Cell_t(a_t)%5Cright%5D%20-%20%5Cmin_%7Ba%20%5Cin%20%5Cmathcal%7BA%7D%7D%5Cmathbb%7BE%7D%5Cleft%5B%5Csum_%7Bt=1%7D%5ET%20%5Cell_t(a)%5Cright%5D%0A"></p>
-<p>Internal/swap regret:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%5E%7B%5Ctext%7Bint%7D%7D%20=%20%5Cmathbb%7BE%7D%5Cleft%5B%5Csum_%7Bt=1%7D%5ET%20%5Cell_t(a_t)%5Cright%5D%20-%20%5Cmin_%7B%5Cphi:%20%5Cmathcal%7BA%7D%20%5Cto%20%5Cmathcal%7BA%7D%7D%5Cmathbb%7BE%7D%5Cleft%5B%5Csum_%7Bt=1%7D%5ET%20%5Cell_t(%5Cphi(a_t))%5Cright%5D%0A"></p>
-</section>
-<section id="performance-measures" class="level3">
-<h3 class="anchored" data-anchor-id="performance-measures">3. Performance Measures</h3>
-<p>Average regret:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbar%7BR%7D_T%20=%20%5Cfrac%7BR_T%7D%7BT%7D%0A"></p>
-<p>Competitive ratio:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0ACR_T%20=%20%5Cfrac%7B%5Csum_%7Bt=1%7D%5ET%20%5Cell_t(a_t)%7D%7B%5Cmin_%7Ba%20%5Cin%20%5Cmathcal%7BA%7D%7D%5Csum_%7Bt=1%7D%5ET%20%5Cell_t(a)%7D%0A"></p>
-</section>
-</section>
-<section id="online-convex-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="online-convex-optimization">Online Convex Optimization</h2>
-<section id="online-gradient-descent" class="level3">
-<h3 class="anchored" data-anchor-id="online-gradient-descent">1. Online Gradient Descent</h3>
-<p>Update rule:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_%7Bt+1%7D%20=%20%5CPi_%7B%5Cmathcal%7BW%7D%7D(w_t%20-%20%5Ceta_t%20%5Cnabla%20%5Cell_t(w_t))%0A"></p>
-<p>Regret bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20%5Cleq%20%5Cfrac%7BD%5E2%7D%7B2%5Ceta%7D%20+%20%5Cfrac%7B%5Ceta%20G%5E2T%7D%7B2%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?D"> is diameter of feasible set - <img src="https://latex.codecogs.com/png.latex?G"> is gradient bound - <img src="https://latex.codecogs.com/png.latex?%5Ceta"> is learning rate</p>
-</section>
-<section id="follow-the-regularized-leader" class="level3">
-<h3 class="anchored" data-anchor-id="follow-the-regularized-leader">2. Follow The Regularized Leader</h3>
-<p>FTRL update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_%7Bt+1%7D%20=%20%5Carg%5Cmin_%7Bw%20%5Cin%20%5Cmathcal%7BW%7D%7D%5C%7B%5Ceta%5Csum_%7Bs=1%7D%5Et%20%5Cell_s(w)%20+%20R(w)%5C%7D%0A"></p>
-<p>Regret bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20%5Cleq%20%5Cfrac%7BR(w%5E*)%7D%7B%5Ceta%7D%20+%20%5Cfrac%7B%5Ceta%20G%5E2T%7D%7B2%7D%0A"></p>
-</section>
-<section id="mirror-descent" class="level3">
-<h3 class="anchored" data-anchor-id="mirror-descent">3. Mirror Descent</h3>
-<p>Update rule:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cnabla%20%5Cpsi(w_%7Bt+1%7D)%20=%20%5Cnabla%20%5Cpsi(w_t)%20-%20%5Ceta_t%20%5Cnabla%20%5Cell_t(w_t)%0A"></p>
-<p>Regret bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20%5Cleq%20%5Cfrac%7BD_%5Cpsi(w%5E*%5C%7Cw_1)%7D%7B%5Ceta%7D%20+%20%5Cfrac%7B%5Ceta%20G%5E2T%7D%7B2%7D%0A"></p>
-</section>
-</section>
-<section id="multi-armed-bandits" class="level2">
-<h2 class="anchored" data-anchor-id="multi-armed-bandits">Multi-Armed Bandits</h2>
-<section id="ucb-algorithm" class="level3">
-<h3 class="anchored" data-anchor-id="ucb-algorithm">1. UCB Algorithm</h3>
-<p>UCB index:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AUCB_i(t)%20=%20%5Chat%7B%5Cmu%7D_i(t)%20+%20%5Csqrt%7B%5Cfrac%7B2%5Cln%20t%7D%7BN_i(t)%7D%7D%0A"></p>
-<p>Regret bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20%5Cleq%20%5Csum_%7Bi:%5CDelta_i%3E0%7D%5Cleft(%5Cfrac%7B8%5Cln%20T%7D%7B%5CDelta_i%7D%20+%20(1+%5Cpi%5E2/3)%5CDelta_i%5Cright)%0A"></p>
-</section>
-<section id="thompson-sampling" class="level3">
-<h3 class="anchored" data-anchor-id="thompson-sampling">2. Thompson Sampling</h3>
-<p>Posterior sampling:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta_i(t)%20%5Csim%20Beta(%5Calpha_i(t),%20%5Cbeta_i(t))%0A"></p>
-<p>Regret bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20%5Cleq%20O(%5Csqrt%7BKT%5Cln%20T%7D)%0A"></p>
-</section>
-<section id="exp3-algorithm" class="level3">
-<h3 class="anchored" data-anchor-id="exp3-algorithm">3. Exp3 Algorithm</h3>
-<p>Probability update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ap_i(t)%20=%20%5Cfrac%7B(1-%5Cgamma)%5Cexp(%5Ceta%20G_i(t))%7D%7B%5Csum_%7Bj=1%7D%5EK%20%5Cexp(%5Ceta%20G_j(t))%7D%20+%20%5Cfrac%7B%5Cgamma%7D%7BK%7D%0A"></p>
-<p>Regret bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20%5Cleq%202%5Csqrt%7BKT%5Cln%20K%7D%0A"></p>
-</section>
-</section>
-<section id="expert-algorithms" class="level2">
-<h2 class="anchored" data-anchor-id="expert-algorithms">Expert Algorithms</h2>
-<section id="weighted-majority" class="level3">
-<h3 class="anchored" data-anchor-id="weighted-majority">1. Weighted Majority</h3>
-<p>Weight update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_i(t+1)%20=%20w_i(t)(1-%5Ceta)%5E%7B%5Cell_i(t)%7D%0A"></p>
-<p>Regret bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20%5Cleq%20%5Csqrt%7BT%5Cln%20N%7D%0A"></p>
-</section>
-<section id="hedge-algorithm" class="level3">
-<h3 class="anchored" data-anchor-id="hedge-algorithm">2. Hedge Algorithm</h3>
-<p>Probability update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ap_i(t+1)%20=%20%5Cfrac%7B%5Cexp(-%5Ceta%20L_i(t))%7D%7B%5Csum_%7Bj=1%7D%5EN%20%5Cexp(-%5Ceta%20L_j(t))%7D%0A"></p>
-<p>Regret bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20%5Cleq%20%5Csqrt%7B2T%5Cln%20N%7D%0A"></p>
-</section>
-<section id="adahedge" class="level3">
-<h3 class="anchored" data-anchor-id="adahedge">3. AdaHedge</h3>
-<p>Adaptive learning rate:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ceta_t%20=%20%5Cfrac%7B%5Cln%20N%7D%7BV_t%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?V_t"> is cumulative variance - <img src="https://latex.codecogs.com/png.latex?N"> is number of experts</p>
-</section>
-</section>
-<section id="advanced-topics" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="adaptive-algorithms" class="level3">
-<h3 class="anchored" data-anchor-id="adaptive-algorithms">1. Adaptive Algorithms</h3>
-<p>AdaGrad update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_%7Bt+1,i%7D%20=%20w_%7Bt,i%7D%20-%20%5Cfrac%7B%5Ceta%7D%7B%5Csqrt%7B%5Csum_%7Bs=1%7D%5Et%20g_%7Bs,i%7D%5E2%7D%7Dg_%7Bt,i%7D%0A"></p>
-<p>Regret bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20%5Cleq%20O(%5Csqrt%7BT%7D%5C%7Cw%5E*%5C%7C_2%5Csqrt%7B%5Csum_%7Bi=1%7D%5Ed%5Csum_%7Bt=1%7D%5ET%20g_%7Bt,i%7D%5E2%7D)%0A"></p>
-</section>
-<section id="second-order-methods" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-methods">2. Second-Order Methods</h3>
-<p>ONS update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_%7Bt+1%7D%20=%20w_t%20-%20%5Ceta%20A_t%5E%7B-1%7D%5Cnabla%20%5Cell_t(w_t)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?A_t%20=%20%5Csum_%7Bs=1%7D%5Et%20%5Cnabla%20%5Cell_s(w_s)%5Cnabla%20%5Cell_s(w_s)%5ET"></p>
-</section>
-<section id="parameter-free-methods" class="level3">
-<h3 class="anchored" data-anchor-id="parameter-free-methods">3. Parameter-Free Methods</h3>
-<p>MetaGrad update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_%7Bt+1%7D%20=%20w_t%20-%20%5Ceta_t%20H_t%5E%7B-1/2%7D%5Cnabla%20%5Cell_t(w_t)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?H_t"> is preconditioner matrix</p>
-</section>
-</section>
-<section id="applications" class="level2">
-<h2 class="anchored" data-anchor-id="applications">Applications</h2>
-<section id="portfolio-selection" class="level3">
-<h3 class="anchored" data-anchor-id="portfolio-selection">1. Portfolio Selection</h3>
-<p>Objective:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmax_%7Bw%20%5Cin%20%5CDelta_n%7D%20%5Csum_%7Bt=1%7D%5ET%20%5Clog(w%5ET%20r_t)%0A"></p>
-<p>Universal portfolio:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_%7Bt+1%7D%20=%20%5Cint_%7B%5CDelta_n%7D%20w%20P_t(w)dw%0A"></p>
-</section>
-<section id="online-routing" class="level3">
-<h3 class="anchored" data-anchor-id="online-routing">2. Online Routing</h3>
-<p>Flow update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af_%7Bt+1%7D(e)%20=%20f_t(e)%5Cexp(-%5Ceta%20%5Cell_t(e))%0A"></p>
-<p>Path selection:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(p)%20=%20%5Cfrac%7B%5Cprod_%7Be%20%5Cin%20p%7Df_t(e)%7D%7B%5Csum_%7Bp'%20%5Cin%20%5Cmathcal%7BP%7D%7D%5Cprod_%7Be%20%5Cin%20p'%7Df_t(e)%7D%0A"></p>
-</section>
-<section id="online-classification" class="level3">
-<h3 class="anchored" data-anchor-id="online-classification">3. Online Classification</h3>
-<p>Perceptron update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aw_%7Bt+1%7D%20=%20w_t%20+%20y_tx_t%5Cmathbb%7B1%7D%5By_tw_t%5ETx_t%20%5Cleq%200%5D%0A"></p>
-<p>Mistake bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AM%20%5Cleq%20%5Cleft(%5Cfrac%7BR%7D%7B%5Cgamma%7D%5Cright)%5E2%0A"></p>
-</section>
-</section>
-<section id="theoretical-results" class="level2">
-<h2 class="anchored" data-anchor-id="theoretical-results">Theoretical Results</h2>
-<section id="lower-bounds" class="level3">
-<h3 class="anchored" data-anchor-id="lower-bounds">1. Lower Bounds</h3>
-<p>Minimax regret:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmin_%7B%5Ctext%7BALG%7D%7D%5Cmax_%7B%5Ctext%7BADV%7D%7D%20R_T%20=%20%5COmega(%5Csqrt%7BT%7D)%0A"></p>
-<p>Expert setting:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20=%20%5COmega(%5Csqrt%7BT%5Cln%20N%7D)%0A"></p>
-</section>
-<section id="information-theory" class="level3">
-<h3 class="anchored" data-anchor-id="information-theory">2. Information Theory</h3>
-<p>Redundancy bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20%5Cleq%20%5Cfrac%7BKL(P%5C%7CQ)%20+%20%5Cln(1/%5Cdelta)%7D%7B%5Ceta%7D%20+%20%5Cfrac%7B%5Ceta%20T%7D%7B8%7D%0A"></p>
-</section>
-<section id="game-theory" class="level3">
-<h3 class="anchored" data-anchor-id="game-theory">3. Game Theory</h3>
-<p>Nash equilibrium:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmax_P%20%5Cmin_Q%20%5Cmathbb%7BE%7D_%7Bp%20%5Csim%20P,%20q%20%5Csim%20Q%7D%5BM(p,q)%5D%20=%20%5Cmin_Q%20%5Cmax_P%20%5Cmathbb%7BE%7D_%7Bp%20%5Csim%20P,%20q%20%5Csim%20Q%7D%5BM(p,q)%5D%0A"></p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="algorithm-selection" class="level3">
-<h3 class="anchored" data-anchor-id="algorithm-selection">1. Algorithm Selection</h3>
-<ol type="1">
-<li>Problem Structure:
-<ul>
-<li>Convexity</li>
-<li>Smoothness</li>
-<li>Sparsity</li>
-</ul></li>
-<li>Computational Constraints:
-<ul>
-<li>Memory limits</li>
-<li>Update time</li>
-<li>Parallelization</li>
-</ul></li>
-<li>Performance Requirements:
-<ul>
-<li>Regret bounds</li>
-<li>Adaptation speed</li>
-<li>Robustness</li>
-</ul></li>
-</ol>
-</section>
-<section id="parameter-tuning" class="level3">
-<h3 class="anchored" data-anchor-id="parameter-tuning">2. Parameter Tuning</h3>
-<ol type="1">
-<li>Learning Rates:
-<ul>
-<li>Fixed vs adaptive</li>
-<li>Schedule design</li>
-<li>Initialization</li>
-</ul></li>
-<li>Exploration:
-<ul>
-<li>Exploration rate</li>
-<li>Decay schedule</li>
-<li>Adaptive schemes</li>
-</ul></li>
-<li>Regularization:
-<ul>
-<li>Strength</li>
-<li>Type selection</li>
-<li>Adaptation</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="algorithm-design" class="level3">
-<h3 class="anchored" data-anchor-id="algorithm-design">1. Algorithm Design</h3>
-<ol type="1">
-<li>Robustness:
-<ul>
-<li>Adversarial scenarios</li>
-<li>Noise handling</li>
-<li>Distribution shifts</li>
-</ul></li>
-<li>Efficiency:
-<ul>
-<li>Memory usage</li>
-<li>Update complexity</li>
-<li>Parallelization</li>
-</ul></li>
-<li>Adaptivity:
-<ul>
-<li>Parameter tuning</li>
-<li>Distribution changes</li>
-<li>Model selection</li>
-</ul></li>
-</ol>
-</section>
-<section id="implementation" class="level3">
-<h3 class="anchored" data-anchor-id="implementation">2. Implementation</h3>
-<ol type="1">
-<li>Data Handling:
-<ul>
-<li>Streaming processing</li>
-<li>Feature extraction</li>
-<li>Preprocessing</li>
-</ul></li>
-<li>Monitoring:
-<ul>
-<li>Regret tracking</li>
-<li>Performance metrics</li>
-<li>Resource usage</li>
-</ul></li>
-<li>Deployment:
-<ul>
-<li>System integration</li>
-<li>Error handling</li>
-<li>Scaling strategy</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Theory:
-<ul>
-<li>“Introduction to Online Convex Optimization” by Hazan</li>
-<li>“Bandit Algorithms” by Lattimore and Szepesvári</li>
-<li>“Prediction, Learning, and Games” by Cesa-Bianchi and Lugosi</li>
-</ul></li>
-<li>Methods:
-<ul>
-<li>“Online Learning and Online Convex Optimization” by Shalev-Shwartz</li>
-<li>“A Modern Introduction to Online Learning” by Orabona</li>
-<li>“Regret Analysis of Stochastic and Nonstochastic Multi-armed Bandit Problems” by Bubeck and Cesa-Bianchi</li>
-</ul></li>
-<li>Applications:
-<ul>
-<li>“Online Portfolio Selection” by Li and Hoi</li>
-<li>“Online Learning in Routing Games” by Roughgarden</li>
-<li>“Online Methods in Machine Learning” by Bottou</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
- ]]></description>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>machine-learning</category>
   <category>theory</category>
   <category>mathematics</category>
@@ -7756,259 +7278,66 @@ Watch Out For
 
 
 
-<section id="optimization-algorithms-in-machine-learning" class="level1">
-<h1>Optimization Algorithms in Machine Learning</h1>
-<section id="mathematical-foundations" class="level2">
-<h2 class="anchored" data-anchor-id="mathematical-foundations">Mathematical Foundations</h2>
-<section id="objective-functions" class="level3">
-<h3 class="anchored" data-anchor-id="objective-functions">1. Objective Functions</h3>
-<p>The core of optimization in machine learning is minimizing (or maximizing) an objective function:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmin_%7B%5Ctheta%7D%20J(%5Ctheta)%20=%20%5Cfrac%7B1%7D%7BN%7D%20%5Csum_%7Bi=1%7D%5EN%20L(f_%5Ctheta(x_i),%20y_i)%20+%20%5Clambda%20R(%5Ctheta)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?J(%5Ctheta)"> is the objective function</p>
-<ul>
-<li><p><img src="https://latex.codecogs.com/png.latex?%5Ctheta"> represents model parameters</p></li>
-<li><p><img src="https://latex.codecogs.com/png.latex?L"> is the loss function</p></li>
-<li><p><img src="https://latex.codecogs.com/png.latex?f_%5Ctheta"> is the model prediction</p></li>
-<li><p><img src="https://latex.codecogs.com/png.latex?R(%5Ctheta)"> is the regularization term</p></li>
-<li><p><img src="https://latex.codecogs.com/png.latex?%5Clambda"> is the regularization strength</p></li>
-</ul>
-</section>
-<section id="gradient-descent-fundamentals" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-descent-fundamentals">2. Gradient Descent Fundamentals</h3>
-<p>The basic update rule for gradient descent:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta_%7Bt+1%7D%20=%20%5Ctheta_t%20-%20%5Ceta%20%5Cnabla_%5Ctheta%20J(%5Ctheta_t)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Ctheta_t"> is the parameter at iteration t</p>
-<ul>
-<li><p><img src="https://latex.codecogs.com/png.latex?%5Ceta"> is the learning rate</p></li>
-<li><p><img src="https://latex.codecogs.com/png.latex?%5Cnabla_%5Ctheta%20J(%5Ctheta_t)"> is the gradient of the objective function</p></li>
-</ul>
-</section>
-<section id="convergence-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="convergence-analysis">3. Convergence Analysis</h3>
-<p>For convex functions, gradient descent converges at rate:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AJ(%5Ctheta_t)%20-%20J(%5Ctheta%5E*)%20%5Cleq%20%5Cfrac%7B%5C%7C%5Ctheta_0%20-%20%5Ctheta%5E*%5C%7C%5E2%7D%7B2%5Ceta%20t%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Ctheta%5E*"> is the optimal parameter</p>
-<ul>
-<li><p><img src="https://latex.codecogs.com/png.latex?%5Ctheta_0"> is the initial parameter</p></li>
-<li><p><img src="https://latex.codecogs.com/png.latex?t"> is the number of iterations</p></li>
-</ul>
-</section>
-</section>
-<section id="first-order-methods" class="level2">
-<h2 class="anchored" data-anchor-id="first-order-methods">First-Order Methods</h2>
-<section id="stochastic-gradient-descent-sgd" class="level3">
-<h3 class="anchored" data-anchor-id="stochastic-gradient-descent-sgd">1. Stochastic Gradient Descent (SGD)</h3>
-<p>Update rule:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta_%7Bt+1%7D%20=%20%5Ctheta_t%20-%20%5Ceta_t%20%5Cnabla_%5Ctheta%20L(f_%5Ctheta(x_i),%20y_i)%0A"></p>
-<p>Convergence rate for strongly convex functions:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5BJ(%5Ctheta_t)%20-%20J(%5Ctheta%5E*)%5D%20%5Cleq%20%5Cfrac%7BL%7D%7B2%5Cmu%20t%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?L"> is the Lipschitz constant</p>
-<ul>
-<li><img src="https://latex.codecogs.com/png.latex?%5Cmu"> is the strong convexity parameter</li>
-</ul>
-</section>
-<section id="momentum" class="level3">
-<h3 class="anchored" data-anchor-id="momentum">2. Momentum</h3>
-<p>Incorporates velocity in updates:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0Av_%7Bt+1%7D%20&amp;=%20%5Cgamma%20v_t%20+%20%5Ceta%20%5Cnabla_%5Ctheta%20J(%5Ctheta_t)%20%5C%5C%0A%5Ctheta_%7Bt+1%7D%20&amp;=%20%5Ctheta_t%20-%20v_%7Bt+1%7D%0A%5Cend%7Baligned%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?v_t"> is the velocity at time t</p>
-<ul>
-<li><img src="https://latex.codecogs.com/png.latex?%5Cgamma"> is the momentum coefficient</li>
-</ul>
-</section>
-<section id="nesterov-accelerated-gradient-nag" class="level3">
-<h3 class="anchored" data-anchor-id="nesterov-accelerated-gradient-nag">3. Nesterov Accelerated Gradient (NAG)</h3>
-<p>Looks ahead for gradient computation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0Av_%7Bt+1%7D%20&amp;=%20%5Cgamma%20v_t%20+%20%5Ceta%20%5Cnabla_%5Ctheta%20J(%5Ctheta_t%20+%20%5Cgamma%20v_t)%20%5C%5C%0A%5Ctheta_%7Bt+1%7D%20&amp;=%20%5Ctheta_t%20-%20v_%7Bt+1%7D%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-</section>
-<section id="adaptive-methods" class="level2">
-<h2 class="anchored" data-anchor-id="adaptive-methods">Adaptive Methods</h2>
-<section id="adagrad" class="level3">
-<h3 class="anchored" data-anchor-id="adagrad">1. AdaGrad</h3>
-<p>Adapts learning rates per parameter:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta_%7Bt+1%7D%20=%20%5Ctheta_t%20-%20%5Cfrac%7B%5Ceta%7D%7B%5Csqrt%7BG_t%20+%20%5Cepsilon%7D%7D%20%5Codot%20g_t%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?G_t"> is the sum of squared gradients up to time t</p>
-<ul>
-<li><p><img src="https://latex.codecogs.com/png.latex?g_t"> is the current gradient</p></li>
-<li><p><img src="https://latex.codecogs.com/png.latex?%5Codot"> represents element-wise multiplication</p></li>
-</ul>
-</section>
-<section id="rmsprop" class="level3">
-<h3 class="anchored" data-anchor-id="rmsprop">2. RMSprop</h3>
-<p>Exponentially decaying average of squared gradients:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0AG_t%20&amp;=%20%5Cgamma%20G_%7Bt-1%7D%20+%20(1-%5Cgamma)g_t%5E2%20%5C%5C%0A%5Ctheta_%7Bt+1%7D%20&amp;=%20%5Ctheta_t%20-%20%5Cfrac%7B%5Ceta%7D%7B%5Csqrt%7BG_t%20+%20%5Cepsilon%7D%7D%20%5Codot%20g_t%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-<section id="adam" class="level3">
-<h3 class="anchored" data-anchor-id="adam">3. Adam</h3>
-<p>Combines momentum and adaptive learning rates:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0Am_t%20&amp;=%20%5Cbeta_1%20m_%7Bt-1%7D%20+%20(1-%5Cbeta_1)g_t%20%5C%5C%0Av_t%20&amp;=%20%5Cbeta_2%20v_%7Bt-1%7D%20+%20(1-%5Cbeta_2)g_t%5E2%20%5C%5C%0A%5Chat%7Bm%7D_t%20&amp;=%20%5Cfrac%7Bm_t%7D%7B1-%5Cbeta_1%5Et%7D%20%5C%5C%0A%5Chat%7Bv%7D_t%20&amp;=%20%5Cfrac%7Bv_t%7D%7B1-%5Cbeta_2%5Et%7D%20%5C%5C%0A%5Ctheta_%7Bt+1%7D%20&amp;=%20%5Ctheta_t%20-%20%5Cfrac%7B%5Ceta%7D%7B%5Csqrt%7B%5Chat%7Bv%7D_t%7D%20+%20%5Cepsilon%7D%20%5Codot%20%5Chat%7Bm%7D_t%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-</section>
-<section id="second-order-methods" class="level2">
-<h2 class="anchored" data-anchor-id="second-order-methods">Second-Order Methods</h2>
-<section id="newtons-method" class="level3">
-<h3 class="anchored" data-anchor-id="newtons-method">1. Newton’s Method</h3>
-<p>Update rule using Hessian:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta_%7Bt+1%7D%20=%20%5Ctheta_t%20-%20%5Ceta%20H%5E%7B-1%7D%5Cnabla_%5Ctheta%20J(%5Ctheta_t)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?H"> is the Hessian matrix of second derivatives</p>
-</section>
-<section id="quasi-newton-methods-bfgs" class="level3">
-<h3 class="anchored" data-anchor-id="quasi-newton-methods-bfgs">2. Quasi-Newton Methods (BFGS)</h3>
-<p>Approximates Hessian inverse:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0As_k%20&amp;=%20%5Ctheta_%7Bk+1%7D%20-%20%5Ctheta_k%20%5C%5C%0Ay_k%20&amp;=%20%5Cnabla%20J(%5Ctheta_%7Bk+1%7D)%20-%20%5Cnabla%20J(%5Ctheta_k)%20%5C%5C%0AB_%7Bk+1%7D%20&amp;=%20B_k%20+%20%5Cfrac%7By_ky_k%5ET%7D%7By_k%5ETs_k%7D%20-%20%5Cfrac%7BB_ks_ks_k%5ETB_k%7D%7Bs_k%5ETB_ks_k%7D%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="learning-rate-scheduling" class="level3">
-<h3 class="anchored" data-anchor-id="learning-rate-scheduling">1. Learning Rate Scheduling</h3>
-<p>Common schedules include:</p>
-<ol type="1">
-<li><p>Step decay: <img src="https://latex.codecogs.com/png.latex?%0A%5Ceta_t%20=%20%5Ceta_0%20%5Cgamma%5E%7B%5Clfloor%20t/k%20%5Crfloor%7D%0A"></p></li>
-<li><p>Exponential decay: <img src="https://latex.codecogs.com/png.latex?%0A%5Ceta_t%20=%20%5Ceta_0%20e%5E%7B-kt%7D%0A"></p></li>
-<li><p>Cosine annealing: <img src="https://latex.codecogs.com/png.latex?%0A%5Ceta_t%20=%20%5Ceta_%7Bmin%7D%20+%20%5Cfrac%7B1%7D%7B2%7D(%5Ceta_%7Bmax%7D%20-%20%5Ceta_%7Bmin%7D)(1%20+%20%5Ccos(%5Cfrac%7Bt%5Cpi%7D%7BT%7D))%0A"></p></li>
-</ol>
-</section>
-<section id="batch-size-selection" class="level3">
-<h3 class="anchored" data-anchor-id="batch-size-selection">2. Batch Size Selection</h3>
-<p>The relationship between batch size and learning rate:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ceta_%7Beffective%7D%20=%20%5Ceta%20%5Csqrt%7B%5Cfrac%7Bb%7D%7Bb_%7Bbase%7D%7D%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?b"> is the current batch size</p>
-<ul>
-<li><img src="https://latex.codecogs.com/png.latex?b_%7Bbase%7D"> is the reference batch size</li>
-</ul>
-</section>
-<section id="gradient-clipping" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-clipping">3. Gradient Clipping</h3>
-<p>For handling exploding gradients:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ag_t%20=%20%5Cbegin%7Bcases%7D%0Ag_t%20&amp;%20%5Ctext%7Bif%20%7D%20%5C%7Cg_t%5C%7C%20%5Cleq%20c%20%5C%5C%0Ac%5Cfrac%7Bg_t%7D%7B%5C%7Cg_t%5C%7C%7D%20&amp;%20%5Ctext%7Botherwise%7D%0A%5Cend%7Bcases%7D%0A"></p>
-</section>
-</section>
-<section id="advanced-topics" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="natural-gradient-descent" class="level3">
-<h3 class="anchored" data-anchor-id="natural-gradient-descent">1. Natural Gradient Descent</h3>
-<p>Update rule using Fisher Information Matrix:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta_%7Bt+1%7D%20=%20%5Ctheta_t%20-%20%5Ceta%20F%5E%7B-1%7D%5Cnabla_%5Ctheta%20J(%5Ctheta_t)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?F"> is the Fisher Information Matrix</p>
-</section>
-<section id="distributed-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="distributed-optimization">2. Distributed Optimization</h3>
-<p>For parallel SGD with K workers:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta_%7Bt+1%7D%20=%20%5Ctheta_t%20-%20%5Cfrac%7B%5Ceta%7D%7BK%7D%5Csum_%7Bk=1%7D%5EK%20%5Cnabla_%5Ctheta%20J_k(%5Ctheta_t)%0A"></p>
-</section>
-<section id="stochastic-weight-averaging-swa" class="level3">
-<h3 class="anchored" data-anchor-id="stochastic-weight-averaging-swa">3. Stochastic Weight Averaging (SWA)</h3>
-<p>Averaging weights along the trajectory:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta_%7BSWA%7D%20=%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi=1%7D%5En%20%5Ctheta_i%0A"></p>
-</section>
-</section>
-<section id="practical-guidelines" class="level2">
-<h2 class="anchored" data-anchor-id="practical-guidelines">Practical Guidelines</h2>
-<section id="algorithm-selection" class="level3">
-<h3 class="anchored" data-anchor-id="algorithm-selection">1. Algorithm Selection</h3>
-<ol type="1">
-<li>First try Adam with default parameters:
-<ul>
-<li>Learning rate: <img src="https://latex.codecogs.com/png.latex?10%5E%7B-3%7D"></li>
-<li><img src="https://latex.codecogs.com/png.latex?%5Cbeta_1%20=%200.9"></li>
-<li><img src="https://latex.codecogs.com/png.latex?%5Cbeta_2%20=%200.999"></li>
-<li><img src="https://latex.codecogs.com/png.latex?%5Cepsilon%20=%2010%5E%7B-8%7D"></li>
-</ul></li>
-<li>If training is unstable, try:
-<ul>
-<li>Reducing learning rate</li>
-<li>Gradient clipping</li>
-<li>Layer normalization</li>
-</ul></li>
-<li>For fine-tuning, consider:
-<ul>
-<li>SGD with momentum</li>
-<li>Cosine annealing</li>
-<li>SWA</li>
-</ul></li>
-</ol>
-</section>
-<section id="hyperparameter-tuning" class="level3">
-<h3 class="anchored" data-anchor-id="hyperparameter-tuning">2. Hyperparameter Tuning</h3>
-<ol type="1">
-<li>Learning rate search:
-<ul>
-<li>Start with logarithmic grid</li>
-<li>Use learning rate finder algorithm</li>
-</ul></li>
-<li>Batch size selection:
-<ul>
-<li>Start with power of 2</li>
-<li>Consider memory constraints</li>
-<li>Scale learning rate accordingly</li>
-</ul></li>
-<li>Momentum tuning:
-<ul>
-<li>Default: 0.9</li>
-<li>Increase for noisy gradients</li>
-<li>Decrease for stable training</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="common-issues-and-solutions" class="level2">
-<h2 class="anchored" data-anchor-id="common-issues-and-solutions">Common Issues and Solutions</h2>
-<section id="vanishingexploding-gradients" class="level3">
-<h3 class="anchored" data-anchor-id="vanishingexploding-gradients">1. Vanishing/Exploding Gradients</h3>
-<p>Solutions: 1. Proper initialization: <img src="https://latex.codecogs.com/png.latex?%0AW%20%5Csim%20%5Cmathcal%7BN%7D(0,%20%5Csqrt%7B%5Cfrac%7B2%7D%7Bn_%7Bin%7D%20+%20n_%7Bout%7D%7D%7D)%0A"></p>
-<ol start="2" type="1">
-<li><p>Gradient clipping</p></li>
-<li><p>Layer normalization: <img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7Bx%7D%20=%20%5Cfrac%7Bx%20-%20%5Cmu%7D%7B%5Csqrt%7B%5Csigma%5E2%20+%20%5Cepsilon%7D%7D%0A"></p></li>
-</ol>
-</section>
-<section id="saddle-points" class="level3">
-<h3 class="anchored" data-anchor-id="saddle-points">2. Saddle Points</h3>
-<p>Solutions: 1. Add noise to gradients: <img src="https://latex.codecogs.com/png.latex?%0Ag_t%20=%20%5Cnabla_%5Ctheta%20J(%5Ctheta_t)%20+%20%5Cmathcal%7BN%7D(0,%20%5Csigma%5E2)%0A"></p>
-<ol start="2" type="1">
-<li>Use momentum-based methods</li>
-<li>Implement trust region methods</li>
-</ol>
-</section>
-<section id="poor-conditioning" class="level3">
-<h3 class="anchored" data-anchor-id="poor-conditioning">3. Poor Conditioning</h3>
-<p>Solutions: 1. Preconditioning: <img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta_%7Bt+1%7D%20=%20%5Ctheta_t%20-%20%5Ceta%20P%5E%7B-1%7D%5Cnabla_%5Ctheta%20J(%5Ctheta_t)%0A"></p>
-<ol start="2" type="1">
-<li>Adaptive methods (Adam, RMSprop)</li>
-<li>Second-order methods when feasible</li>
-</ol>
-</section>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>Key takeaways: 1. Understanding optimization fundamentals is crucial 2. Different algorithms suit different problems 3. Practical considerations often outweigh theoretical guarantees 4. Monitoring and debugging optimization is essential</p>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Mathematical Foundations:
-<ul>
-<li>“Convex Optimization” by Boyd and Vandenberghe</li>
-<li>“Optimization Methods for Large-Scale Machine Learning” by Bottou et al.</li>
-</ul></li>
-<li>Implementation Details:
-<ul>
-<li>“Deep Learning” by Goodfellow et al.</li>
-<li>“Adaptive Methods for Machine Learning” by Duchi et al.</li>
-</ul></li>
-<li>Advanced Topics:
-<ul>
-<li>“Natural Gradient Works Efficiently in Learning” by Amari</li>
-<li>“On the Convergence of Adam and Beyond” by Reddi et al.</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
- ]]></description>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>machine-learning</category>
   <category>optimization</category>
   <category>mathematics</category>
@@ -8027,249 +7356,66 @@ Watch Out For
 
 
 
-<section id="optimization-theory-in-machine-learning" class="level1">
-<h1>Optimization Theory in Machine Learning</h1>
-<section id="convex-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="convex-analysis">Convex Analysis</h2>
-<section id="convex-sets-and-functions" class="level3">
-<h3 class="anchored" data-anchor-id="convex-sets-and-functions">1. Convex Sets and Functions</h3>
-<p>Convex set definition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta%20x%20+%20(1-%5Ctheta)y%20%5Cin%20C,%20%5Cforall%20x,y%20%5Cin%20C,%20%5Ctheta%20%5Cin%20%5B0,1%5D%0A"></p>
-<p>Convex function:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(%5Ctheta%20x%20+%20(1-%5Ctheta)y)%20%5Cleq%20%5Ctheta%20f(x)%20+%20(1-%5Ctheta)f(y)%0A"></p>
-</section>
-<section id="properties" class="level3">
-<h3 class="anchored" data-anchor-id="properties">2. Properties</h3>
-<p>First-order characterization:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(y)%20%5Cgeq%20f(x)%20+%20%5Cnabla%20f(x)%5ET(y-x)%0A"></p>
-<p>Second-order characterization:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cnabla%5E2%20f(x)%20%5Csucceq%200%0A"></p>
-</section>
-<section id="strong-convexity" class="level3">
-<h3 class="anchored" data-anchor-id="strong-convexity">3. Strong Convexity</h3>
-<p>Definition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(y)%20%5Cgeq%20f(x)%20+%20%5Cnabla%20f(x)%5ET(y-x)%20+%20%5Cfrac%7B%5Cmu%7D%7B2%7D%5C%7Cy-x%5C%7C%5E2%0A"></p>
-<p>Quadratic growth:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(x)%20-%20f(x%5E*)%20%5Cgeq%20%5Cfrac%7B%5Cmu%7D%7B2%7D%5C%7Cx-x%5E*%5C%7C%5E2%0A"></p>
-</section>
-</section>
-<section id="optimality-conditions" class="level2">
-<h2 class="anchored" data-anchor-id="optimality-conditions">Optimality Conditions</h2>
-<section id="first-order-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="first-order-conditions">1. First-Order Conditions</h3>
-<p>Unconstrained:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cnabla%20f(x%5E*)%20=%200%0A"></p>
-<p>Constrained (KKT):</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Cnabla_x%20%5Cmathcal%7BL%7D(x%5E*,%5Clambda%5E*)%20&amp;=%200%20%5C%5C%0Ag_i(x%5E*)%20&amp;%5Cleq%200%20%5C%5C%0A%5Clambda_i%5E*%20g_i(x%5E*)%20&amp;=%200%20%5C%5C%0A%5Clambda_i%5E*%20&amp;%5Cgeq%200%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-<section id="second-order-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-conditions">2. Second-Order Conditions</h3>
-<p>Unconstrained:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cnabla%5E2%20f(x%5E*)%20%5Csucceq%200%0A"></p>
-<p>Constrained:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ay%5ET%5Cnabla%5E2_%7Bxx%7D%5Cmathcal%7BL%7D(x%5E*,%5Clambda%5E*)y%20%5Cgeq%200%0A"></p>
-</section>
-<section id="saddle-point-conditions" class="level3">
-<h3 class="anchored" data-anchor-id="saddle-point-conditions">3. Saddle Point Conditions</h3>
-<p>Minimax:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathcal%7BL%7D(x%5E*,%5Clambda)%20%5Cleq%20%5Cmathcal%7BL%7D(x%5E*,%5Clambda%5E*)%20%5Cleq%20%5Cmathcal%7BL%7D(x,%5Clambda%5E*)%0A"></p>
-<p>Duality gap:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(x%5E*)%20-%20g(%5Clambda%5E*)%20=%200%0A"></p>
-</section>
-</section>
-<section id="gradient-methods" class="level2">
-<h2 class="anchored" data-anchor-id="gradient-methods">Gradient Methods</h2>
-<section id="gradient-descent" class="level3">
-<h3 class="anchored" data-anchor-id="gradient-descent">1. Gradient Descent</h3>
-<p>Update rule:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ax_%7Bk+1%7D%20=%20x_k%20-%20%5Ceta_k%5Cnabla%20f(x_k)%0A"></p>
-<p>Convergence rate (convex):</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(x_k)%20-%20f(x%5E*)%20%5Cleq%20%5Cfrac%7B%5C%7Cx_0-x%5E*%5C%7C%5E2%7D%7B2%5Ceta%20k%7D%0A"></p>
-</section>
-<section id="accelerated-methods" class="level3">
-<h3 class="anchored" data-anchor-id="accelerated-methods">2. Accelerated Methods</h3>
-<p>Nesterov’s acceleration:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0Ay_k%20&amp;=%20x_k%20+%20%5Cbeta_k(x_k%20-%20x_%7Bk-1%7D)%20%5C%5C%0Ax_%7Bk+1%7D%20&amp;=%20y_k%20-%20%5Ceta_k%5Cnabla%20f(y_k)%0A%5Cend%7Baligned%7D%0A"></p>
-<p>Convergence rate:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(x_k)%20-%20f(x%5E*)%20%5Cleq%20%5Cfrac%7B2L%5C%7Cx_0-x%5E*%5C%7C%5E2%7D%7B(k+1)%5E2%7D%0A"></p>
-</section>
-<section id="stochastic-methods" class="level3">
-<h3 class="anchored" data-anchor-id="stochastic-methods">3. Stochastic Methods</h3>
-<p>SGD update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ax_%7Bk+1%7D%20=%20x_k%20-%20%5Ceta_k%5Cnabla%20f_%7Bi_k%7D(x_k)%0A"></p>
-<p>Convergence rate:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5Bf(x_k)%20-%20f(x%5E*)%5D%20%5Cleq%20%5Cfrac%7BL%5C%7Cx_0-x%5E*%5C%7C%5E2%7D%7B2k%7D%20+%20%5Cfrac%7BL%5Csigma%5E2%7D%7B2%7D%5Csum_%7Bt=1%7D%5Ek%20%5Ceta_t%5E2%0A"></p>
-</section>
-</section>
-<section id="non-convex-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="non-convex-optimization">Non-Convex Optimization</h2>
-<section id="local-minima" class="level3">
-<h3 class="anchored" data-anchor-id="local-minima">1. Local Minima</h3>
-<p>First-order condition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5C%7C%5Cnabla%20f(x%5E*)%5C%7C%20%5Cleq%20%5Cepsilon%0A"></p>
-<p>Second-order condition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Clambda_%7B%5Cmin%7D(%5Cnabla%5E2%20f(x%5E*))%20%5Cgeq%20-%5Csqrt%7B%5Cepsilon%7D%0A"></p>
-</section>
-<section id="escape-from-saddle-points" class="level3">
-<h3 class="anchored" data-anchor-id="escape-from-saddle-points">2. Escape from Saddle Points</h3>
-<p>Perturbed gradient descent:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ax_%7Bk+1%7D%20=%20x_k%20-%20%5Ceta%5Cnabla%20f(x_k)%20+%20%5Cxi_k%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cxi_k%20%5Csim%20%5Cmathcal%7BN%7D(0,%5Csigma%5E2I)"></p>
-</section>
-<section id="global-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="global-optimization">3. Global Optimization</h3>
-<p>Branch and bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BLB%7D(R)%20%5Cleq%20%5Cmin_%7Bx%20%5Cin%20R%7D%20f(x)%20%5Cleq%20%5Ctext%7BUB%7D(R)%0A"></p>
-<p>Simulated annealing:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Baccept%7D)%20=%20%5Cexp(-%5Cfrac%7B%5CDelta%20E%7D%7BT_k%7D)%0A"></p>
-</section>
-</section>
-<section id="modern-optimization-methods" class="level2">
-<h2 class="anchored" data-anchor-id="modern-optimization-methods">Modern Optimization Methods</h2>
-<section id="adaptive-methods" class="level3">
-<h3 class="anchored" data-anchor-id="adaptive-methods">1. Adaptive Methods</h3>
-<p>AdaGrad:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ax_%7Bt+1,i%7D%20=%20x_%7Bt,i%7D%20-%20%5Cfrac%7B%5Ceta%7D%7B%5Csqrt%7B%5Csum_%7Bs=1%7D%5Et%20g_%7Bs,i%7D%5E2%7D%7Dg_%7Bt,i%7D%0A"></p>
-<p>Adam:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0Am_t%20&amp;=%20%5Cbeta_1%20m_%7Bt-1%7D%20+%20(1-%5Cbeta_1)g_t%20%5C%5C%0Av_t%20&amp;=%20%5Cbeta_2%20v_%7Bt-1%7D%20+%20(1-%5Cbeta_2)g_t%5E2%20%5C%5C%0A%5Chat%7Bm%7D_t%20&amp;=%20%5Cfrac%7Bm_t%7D%7B1-%5Cbeta_1%5Et%7D%20%5C%5C%0A%5Chat%7Bv%7D_t%20&amp;=%20%5Cfrac%7Bv_t%7D%7B1-%5Cbeta_2%5Et%7D%20%5C%5C%0Ax_%7Bt+1%7D%20&amp;=%20x_t%20-%20%5Cfrac%7B%5Ceta%7D%7B%5Csqrt%7B%5Chat%7Bv%7D_t%7D%20+%20%5Cepsilon%7D%5Chat%7Bm%7D_t%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-<section id="natural-gradient" class="level3">
-<h3 class="anchored" data-anchor-id="natural-gradient">2. Natural Gradient</h3>
-<p>Fisher information:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AF(x)%20=%20%5Cmathbb%7BE%7D_%7Bp(y%7Cx)%7D%5B%5Cnabla%20%5Clog%20p(y%7Cx)%5Cnabla%20%5Clog%20p(y%7Cx)%5ET%5D%0A"></p>
-<p>Update rule:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ax_%7Bk+1%7D%20=%20x_k%20-%20%5Ceta%20F(x_k)%5E%7B-1%7D%5Cnabla%20f(x_k)%0A"></p>
-</section>
-<section id="second-order-methods" class="level3">
-<h3 class="anchored" data-anchor-id="second-order-methods">3. Second-Order Methods</h3>
-<p>Newton’s method:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ax_%7Bk+1%7D%20=%20x_k%20-%20%5B%5Cnabla%5E2%20f(x_k)%5D%5E%7B-1%7D%5Cnabla%20f(x_k)%0A"></p>
-<p>BFGS update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AB_%7Bk+1%7D%20=%20B_k%20+%20%5Cfrac%7By_ky_k%5ET%7D%7By_k%5ETs_k%7D%20-%20%5Cfrac%7BB_ks_ks_k%5ETB_k%7D%7Bs_k%5ETB_ks_k%7D%0A"></p>
-</section>
-</section>
-<section id="constrained-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="constrained-optimization">Constrained Optimization</h2>
-<section id="projected-gradient" class="level3">
-<h3 class="anchored" data-anchor-id="projected-gradient">1. Projected Gradient</h3>
-<p>Update rule:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ax_%7Bk+1%7D%20=%20%5CPi_C(x_k%20-%20%5Ceta_k%5Cnabla%20f(x_k))%0A"></p>
-<p>Convergence rate:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Af(x_k)%20-%20f(x%5E*)%20%5Cleq%20%5Cfrac%7B%5C%7Cx_0-x%5E*%5C%7C%5E2%7D%7B2%5Ceta%20k%7D%0A"></p>
-</section>
-<section id="proximal-methods" class="level3">
-<h3 class="anchored" data-anchor-id="proximal-methods">2. Proximal Methods</h3>
-<p>Proximal operator:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7Bprox%7D_%7B%5Ceta%20g%7D(x)%20=%20%5Carg%5Cmin_y%20%5C%7Bg(y)%20+%20%5Cfrac%7B1%7D%7B2%5Ceta%7D%5C%7Cy-x%5C%7C%5E2%5C%7D%0A"></p>
-<p>ISTA update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ax_%7Bk+1%7D%20=%20%5Ctext%7Bprox%7D_%7B%5Ceta%20g%7D(x_k%20-%20%5Ceta%5Cnabla%20f(x_k))%0A"></p>
-</section>
-<section id="augmented-lagrangian" class="level3">
-<h3 class="anchored" data-anchor-id="augmented-lagrangian">3. Augmented Lagrangian</h3>
-<p>Function:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathcal%7BL%7D_%5Crho(x,%5Clambda)%20=%20f(x)%20+%20%5Clambda%5ETg(x)%20+%20%5Cfrac%7B%5Crho%7D%7B2%7D%5C%7Cg(x)%5C%7C%5E2%0A"></p>
-<p>Update rules:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0Ax_%7Bk+1%7D%20&amp;=%20%5Carg%5Cmin_x%20%5Cmathcal%7BL%7D_%5Crho(x,%5Clambda_k)%20%5C%5C%0A%5Clambda_%7Bk+1%7D%20&amp;=%20%5Clambda_k%20+%20%5Crho%20g(x_%7Bk+1%7D)%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-</section>
-<section id="advanced-topics" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="distributed-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="distributed-optimization">1. Distributed Optimization</h3>
-<p>ADMM algorithm:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0Ax_%7Bk+1%7D%20&amp;=%20%5Carg%5Cmin_x%20%5Cmathcal%7BL%7D_%5Crho(x,z_k,y_k)%20%5C%5C%0Az_%7Bk+1%7D%20&amp;=%20%5Carg%5Cmin_z%20%5Cmathcal%7BL%7D_%5Crho(x_%7Bk+1%7D,z,y_k)%20%5C%5C%0Ay_%7Bk+1%7D%20&amp;=%20y_k%20+%20%5Crho(Ax_%7Bk+1%7D%20+%20Bz_%7Bk+1%7D%20-%20c)%0A%5Cend%7Baligned%7D%0A"></p>
-</section>
-<section id="online-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="online-optimization">2. Online Optimization</h3>
-<p>Regret bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR_T%20%5Cleq%20O(%5Csqrt%7BT%7D)%0A"></p>
-<p>Follow-the-regularized-leader:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ax_%7Bt+1%7D%20=%20%5Carg%5Cmin_x%20%5C%7B%5Ceta%5Csum_%7Bs=1%7D%5Et%20%5Cell_s(x)%20+%20R(x)%5C%7D%0A"></p>
-</section>
-<section id="zeroth-order-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="zeroth-order-optimization">3. Zeroth-Order Optimization</h3>
-<p>Gradient estimation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7B%5Cnabla%7D%20f(x)%20=%20%5Cfrac%7Bd%7D%7Br%7Df(x+r%5Cxi)%5Cxi%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cxi%20%5Csim%20%5Ctext%7BUnif%7D(%5Cmathbb%7BS%7D%5E%7Bd-1%7D)"></p>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="algorithm-selection" class="level3">
-<h3 class="anchored" data-anchor-id="algorithm-selection">1. Algorithm Selection</h3>
-<ol type="1">
-<li>Problem Structure:
-<ul>
-<li>Convexity</li>
-<li>Smoothness</li>
-<li>Constraints</li>
-</ul></li>
-<li>Data Properties:
-<ul>
-<li>Size</li>
-<li>Dimensionality</li>
-<li>Sparsity</li>
-</ul></li>
-<li>Computational Resources:
-<ul>
-<li>Memory</li>
-<li>Processing power</li>
-<li>Time constraints</li>
-</ul></li>
-</ol>
-</section>
-<section id="implementation" class="level3">
-<h3 class="anchored" data-anchor-id="implementation">2. Implementation</h3>
-<ol type="1">
-<li>Initialization:
-<ul>
-<li>Parameter scaling</li>
-<li>Random seeding</li>
-<li>Warm start</li>
-</ul></li>
-<li>Monitoring:
-<ul>
-<li>Convergence</li>
-<li>Stability</li>
-<li>Resource usage</li>
-</ul></li>
-<li>Tuning:
-<ul>
-<li>Learning rates</li>
-<li>Momentum</li>
-<li>Regularization</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Theory:
-<ul>
-<li>“Convex Optimization” by Boyd and Vandenberghe</li>
-<li>“Introductory Lectures on Convex Optimization” by Nesterov</li>
-<li>“Optimization Methods for Large-Scale Machine Learning” by Bottou et al.</li>
-</ul></li>
-<li>Methods:
-<ul>
-<li>“Numerical Optimization” by Nocedal and Wright</li>
-<li>“First-Order Methods in Optimization” by Beck</li>
-<li>“Proximal Algorithms” by Parikh and Boyd</li>
-</ul></li>
-<li>Applications:
-<ul>
-<li>“Deep Learning” by Goodfellow et al.</li>
-<li>“Optimization for Machine Learning” by Sra et al.</li>
-<li>“Large Scale Optimization in Machine Learning” by Shalev-Shwartz and Zhang</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
- ]]></description>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>machine-learning</category>
   <category>optimization</category>
   <category>mathematics</category>
@@ -9190,131 +8336,53 @@ Practical Application
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-2">
-<div class="g-col-1" data-index="0" data-categories="machine-learning,theory,complexity,algorithms" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732273299984" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1710">
-<a href="../../posts/computational-learning-theory/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="https://ram-polisetti.github.io/BendTheCurve/posts/computational-learning-theory/computational_theory.jpg" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Computational Learning Theory
-</h5>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
-machine-learning
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
-theory
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('complexity'); return false;">
-complexity
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
 </div>
 </div>
-<div class="card-text listing-description">
-A beginner-friendly guide to computational learning theory with interactive visualizations and practical examples.
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
 </div>
-</div>
+<div class="listing-author">
+Ram Polisetti
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="machine-learning,theory,mathematics,statistics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1732267231756" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="645">
-<a href="../../posts/statistical-learning-theory/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="https://ram-polisetti.github.io/BendTheCurve/posts/statistical-learning-theory/statistical_learning.jpg" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Statistical Learning Theory and Concentration Inequalities
-</h5>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
-machine-learning
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
-theory
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
-mathematics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
-statistics
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
 </div>
 </div>
-<div class="card-text listing-description">
-A rigorous exploration of statistical learning theory and concentration inequalities, covering fundamental bounds and their applications in machine learning.
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
 </div>
-</div>
+<div class="listing-author">
+Ram Polisetti
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="2" data-categories="machine-learning,theory,mathematics,statistics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733018642361" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1159">
-<a href="../../posts/ml-theory-foundations/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="https://ram-polisetti.github.io/BendTheCurve/posts/ml-theory-foundations/ml_theory.jpg" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Machine Learning Theory: Mathematical Foundations Made Simple
-</h5>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
-machine-learning
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('theory'); return false;">
-theory
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
-mathematics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
-statistics
-</div>
-</div>
-<div class="card-text listing-description">
-A beginner-friendly guide to machine learning theory, with intuitive explanations and practical examples.
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="3" data-categories="machine-learning,optimization,mathematics,algorithms" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733018675369" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="775">
-<a href="../../posts/optimization-algorithms/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="https://ram-polisetti.github.io/BendTheCurve/posts/optimization-algorithms/optimization.jpg" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Optimization Algorithms in Machine Learning: A Deep Dive
-</h5>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
-machine-learning
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('optimization'); return false;">
-optimization
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
-mathematics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="card-text listing-description">
-A comprehensive technical exploration of optimization algorithms in machine learning, covering mathematical foundations and implementation details.
-</div>
-</div>
-</div>
-</a>
 </div>
 </div>
 <div class="listing-no-matching d-none">
@@ -9339,230 +8407,66 @@ No matching items
 
 
 
-<section id="probabilistic-graphical-models" class="level1">
-<h1>Probabilistic Graphical Models</h1>
-<section id="bayesian-networks" class="level2">
-<h2 class="anchored" data-anchor-id="bayesian-networks">Bayesian Networks</h2>
-<section id="factorization" class="level3">
-<h3 class="anchored" data-anchor-id="factorization">1. Factorization</h3>
-<p>Joint probability factorization:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(X_1,%20...,%20X_n)%20=%20%5Cprod_%7Bi=1%7D%5En%20P(X_i%20%7C%20%5Ctext%7BPa%7D(X_i))%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?X_i"> are random variables - <img src="https://latex.codecogs.com/png.latex?%5Ctext%7BPa%7D(X_i)"> are parents of <img src="https://latex.codecogs.com/png.latex?X_i"> in the graph</p>
-</section>
-<section id="conditional-independence" class="level3">
-<h3 class="anchored" data-anchor-id="conditional-independence">2. Conditional Independence</h3>
-<p>D-separation criterion: - Two nodes are d-separated if all paths between them are blocked - A path is blocked if: * Contains a collider not in evidence * Contains a non-collider in evidence</p>
-<p>Formal definition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AX%20%5Cperp%5C!%5C!%5C!%5Cperp%20Y%20%7C%20Z%20%5Ciff%20P(X%7CY,Z)%20=%20P(X%7CZ)%0A"></p>
-</section>
-</section>
-<section id="markov-random-fields" class="level2">
-<h2 class="anchored" data-anchor-id="markov-random-fields">Markov Random Fields</h2>
-<section id="gibbs-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="gibbs-distribution">1. Gibbs Distribution</h3>
-<p>Joint distribution representation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(X%20=%20x)%20=%20%5Cfrac%7B1%7D%7BZ%7D%5Cexp%5Cleft(-%5Csum_%7Bc%20%5Cin%20%5Cmathcal%7BC%7D%7D%20%5Cpsi_c(x_c)%5Cright)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BC%7D"> is the set of cliques - <img src="https://latex.codecogs.com/png.latex?%5Cpsi_c"> are potential functions - <img src="https://latex.codecogs.com/png.latex?Z"> is the partition function:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AZ%20=%20%5Csum_x%20%5Cexp%5Cleft(-%5Csum_%7Bc%20%5Cin%20%5Cmathcal%7BC%7D%7D%20%5Cpsi_c(x_c)%5Cright)%0A"></p>
-</section>
-<section id="hammersley-clifford-theorem" class="level3">
-<h3 class="anchored" data-anchor-id="hammersley-clifford-theorem">2. Hammersley-Clifford Theorem</h3>
-<p>Equivalence between positive distributions and Gibbs distributions:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(X%20=%20x)%20%3E%200%20%5Ciff%20P(X%20=%20x)%20=%20%5Cfrac%7B1%7D%7BZ%7D%5Cprod_%7Bc%20%5Cin%20%5Cmathcal%7BC%7D%7D%20%5Cphi_c(x_c)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cphi_c"> are non-negative factors</p>
-</section>
-</section>
-<section id="inference-algorithms" class="level2">
-<h2 class="anchored" data-anchor-id="inference-algorithms">Inference Algorithms</h2>
-<section id="variable-elimination" class="level3">
-<h3 class="anchored" data-anchor-id="variable-elimination">1. Variable Elimination</h3>
-<p>Complexity for tree-structured graphs:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AO(n%20%5Ccdot%20d%5E%7Bw%7D)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?n"> is number of variables - <img src="https://latex.codecogs.com/png.latex?d"> is domain size - <img src="https://latex.codecogs.com/png.latex?w"> is tree width</p>
-<p>Algorithm steps: 1. Choose elimination ordering 2. For each variable: - Multiply relevant factors - Sum out variable</p>
-</section>
-<section id="belief-propagation" class="level3">
-<h3 class="anchored" data-anchor-id="belief-propagation">2. Belief Propagation</h3>
-<p>Message passing equations:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Cmu_%7Bi%20%5Cto%20j%7D(x_j)%20&amp;=%20%5Csum_%7Bx_i%7D%20%5Cphi_i(x_i)%5Cphi_%7Bij%7D(x_i,x_j)%5Cprod_%7Bk%20%5Cin%20N(i)%5Cbackslash%20j%7D%20%5Cmu_%7Bk%20%5Cto%20i%7D(x_i)%20%5C%5C%0Ab_i(x_i)%20&amp;%5Cpropto%20%5Cphi_i(x_i)%5Cprod_%7Bj%20%5Cin%20N(i)%7D%20%5Cmu_%7Bj%20%5Cto%20i%7D(x_i)%0A%5Cend%7Baligned%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cmu_%7Bi%20%5Cto%20j%7D"> is message from i to j - <img src="https://latex.codecogs.com/png.latex?b_i"> is belief at node i - <img src="https://latex.codecogs.com/png.latex?N(i)"> is neighbors of i</p>
-</section>
-<section id="junction-tree-algorithm" class="level3">
-<h3 class="anchored" data-anchor-id="junction-tree-algorithm">3. Junction Tree Algorithm</h3>
-<p>Clique tree construction: 1. Moralize graph 2. Triangulate 3. Find maximal cliques 4. Build junction tree</p>
-<p>Running intersection property:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AS_%7Bij%7D%20=%20C_i%20%5Ccap%20C_j%20%5Csubseteq%20C_k%0A"></p>
-<p>For any cliques <img src="https://latex.codecogs.com/png.latex?C_i">, <img src="https://latex.codecogs.com/png.latex?C_j">, and clique <img src="https://latex.codecogs.com/png.latex?C_k"> on path between them.</p>
-</section>
-</section>
-<section id="learning-methods" class="level2">
-<h2 class="anchored" data-anchor-id="learning-methods">Learning Methods</h2>
-<section id="maximum-likelihood-estimation" class="level3">
-<h3 class="anchored" data-anchor-id="maximum-likelihood-estimation">1. Maximum Likelihood Estimation</h3>
-<p>Objective function:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7B%5Ctheta%7D_%7BMLE%7D%20=%20%5Carg%5Cmax_%5Ctheta%20%5Csum_%7Bi=1%7D%5EN%20%5Clog%20P(x%5E%7B(i)%7D%7C%5Ctheta)%0A"></p>
-<p>For complete data in Bayesian networks:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7B%5Ctheta%7D_%7Bijk%7D%20=%20%5Cfrac%7BN_%7Bijk%7D%7D%7B%5Csum_k%20N_%7Bijk%7D%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?N_%7Bijk%7D"> is count of <img src="https://latex.codecogs.com/png.latex?X_i=k"> with parent configuration j</p>
-</section>
-<section id="bayesian-parameter-learning" class="level3">
-<h3 class="anchored" data-anchor-id="bayesian-parameter-learning">2. Bayesian Parameter Learning</h3>
-<p>Posterior distribution:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctheta%7CD)%20%5Cpropto%20P(D%7C%5Ctheta)P(%5Ctheta)%0A"></p>
-<p>With Dirichlet prior:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctheta_%7Bijk%7D%20%5Csim%20%5Ctext%7BDir%7D(%5Calpha_%7Bijk%7D)%0A"></p>
-<p>Posterior parameters:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Calpha_%7Bijk%7D%5E%7B%5Ctext%7Bpost%7D%7D%20=%20%5Calpha_%7Bijk%7D%20+%20N_%7Bijk%7D%0A"></p>
-</section>
-<section id="structure-learning" class="level3">
-<h3 class="anchored" data-anchor-id="structure-learning">3. Structure Learning</h3>
-<p>Score-based learning objective:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AG%5E*%20=%20%5Carg%5Cmax_G%20%5Ctext%7Bscore%7D(G:D)%0A"></p>
-<p>Common scores: 1. BIC score:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BBIC%7D(G:D)%20=%20%5Cell(D%7C%5Chat%7B%5Ctheta%7D,%20G)%20-%20%5Cfrac%7B%5Clog%20N%7D%7B2%7D%7CG%7C%0A"></p>
-<ol start="2" type="1">
-<li>Bayesian score:</li>
-</ol>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(G%7CD)%20%5Cpropto%20P(D%7CG)P(G)%0A"></p>
-</section>
-</section>
-<section id="advanced-topics" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
-<section id="variational-inference" class="level3">
-<h3 class="anchored" data-anchor-id="variational-inference">1. Variational Inference</h3>
-<p>Evidence lower bound (ELBO):</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathcal%7BL%7D(q)%20=%20%5Cmathbb%7BE%7D_q%5B%5Clog%20p(x,z)%5D%20-%20%5Cmathbb%7BE%7D_q%5B%5Clog%20q(z)%5D%0A"></p>
-<p>Mean field approximation:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aq(z)%20=%20%5Cprod_i%20q_i(z_i)%0A"></p>
-<p>Update equations:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Clog%20q_j%5E*(z_j)%20=%20%5Cmathbb%7BE%7D_%7Bq_%7B-j%7D%7D%5B%5Clog%20p(x,z)%5D%20+%20%5Ctext%7Bconst%7D%0A"></p>
-</section>
-<section id="mcmc-methods" class="level3">
-<h3 class="anchored" data-anchor-id="mcmc-methods">2. MCMC Methods</h3>
-<p>Metropolis-Hastings acceptance ratio:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Calpha%20=%20%5Cmin%5Cleft(1,%20%5Cfrac%7Bp(x')q(x%7Cx')%7D%7Bp(x)q(x'%7Cx)%7D%5Cright)%0A"></p>
-<p>Gibbs sampling update:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ax_i%5E%7B(t+1)%7D%20%5Csim%20p(x_i%7Cx_%7B-i%7D%5E%7B(t)%7D)%0A"></p>
-</section>
-<section id="conditional-random-fields" class="level3">
-<h3 class="anchored" data-anchor-id="conditional-random-fields">3. Conditional Random Fields</h3>
-<p>Linear-chain CRF probability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(y%7Cx)%20=%20%5Cfrac%7B1%7D%7BZ(x)%7D%5Cexp%5Cleft(%5Csum_%7Bt=1%7D%5ET%5Csum_k%20%5Clambda_k%20f_k(y_t,y_%7Bt-1%7D,x_t)%5Cright)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?f_k"> are feature functions - <img src="https://latex.codecogs.com/png.latex?%5Clambda_k"> are weights - <img src="https://latex.codecogs.com/png.latex?Z(x)"> is normalization factor</p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="numerical-stability" class="level3">
-<h3 class="anchored" data-anchor-id="numerical-stability">1. Numerical Stability</h3>
-<p>Log-space computations:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Clog%5Csum_i%20%5Cexp(x_i)%20=%20%5Cmax_i%20x_i%20+%20%5Clog%5Csum_i%20%5Cexp(x_i%20-%20%5Cmax_i%20x_i)%0A"></p>
-</section>
-<section id="sparse-representations" class="level3">
-<h3 class="anchored" data-anchor-id="sparse-representations">2. Sparse Representations</h3>
-<p>Efficient factor operations: - Sparse matrices for CPTs - Vectorized operations - Caching intermediate results</p>
-</section>
-<section id="parallelization" class="level3">
-<h3 class="anchored" data-anchor-id="parallelization">3. Parallelization</h3>
-<p>Parallel message passing: - Tree-structured graphs - Junction tree clusters - Mini-batch learning</p>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="model-selection" class="level3">
-<h3 class="anchored" data-anchor-id="model-selection">1. Model Selection</h3>
-<ol type="1">
-<li>Network Structure:
-<ul>
-<li>Expert knowledge</li>
-<li>Causal relationships</li>
-<li>Data-driven learning</li>
-</ul></li>
-<li>Inference Method:
-<ul>
-<li>Exact vs approximate</li>
-<li>Graph structure</li>
-<li>Domain size</li>
-</ul></li>
-<li>Learning Approach:
-<ul>
-<li>Data completeness</li>
-<li>Prior knowledge</li>
-<li>Computational resources</li>
-</ul></li>
-</ol>
-</section>
-<section id="performance-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="performance-optimization">2. Performance Optimization</h3>
-<ol type="1">
-<li>Variable Ordering:
-<ul>
-<li>Min-fill heuristic</li>
-<li>Min-degree ordering</li>
-<li>Weighted variants</li>
-</ul></li>
-<li>Message Scheduling:
-<ul>
-<li>Residual belief propagation</li>
-<li>Priority-based updates</li>
-<li>Asynchronous methods</li>
-</ul></li>
-<li>Memory Management:
-<ul>
-<li>Factor caching</li>
-<li>Message memoization</li>
-<li>Sparse representations</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="applications" class="level2">
-<h2 class="anchored" data-anchor-id="applications">Applications</h2>
-<section id="medical-diagnosis" class="level3">
-<h3 class="anchored" data-anchor-id="medical-diagnosis">1. Medical Diagnosis</h3>
-<p>Network structure: - Diseases as root nodes - Symptoms as leaf nodes - Test results as intermediate nodes</p>
-<p>Inference tasks: - Diagnostic reasoning - Predictive reasoning - Intercausal reasoning</p>
-</section>
-<section id="computer-vision" class="level3">
-<h3 class="anchored" data-anchor-id="computer-vision">2. Computer Vision</h3>
-<p>MRF applications: - Image segmentation - Stereo matching - Image restoration</p>
-<p>Energy function:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AE(x)%20=%20%5Csum_i%20%5Cphi_i(x_i)%20+%20%5Csum_%7Bi,j%7D%20%5Cphi_%7Bij%7D(x_i,x_j)%0A"></p>
-</section>
-<section id="natural-language-processing" class="level3">
-<h3 class="anchored" data-anchor-id="natural-language-processing">3. Natural Language Processing</h3>
-<p>Linear-chain CRFs: - Part-of-speech tagging - Named entity recognition - Sequence labeling</p>
-<p>Feature templates: - Word features - Context windows - Transition features</p>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Theory:
-<ul>
-<li>“Probabilistic Graphical Models” by Koller and Friedman</li>
-<li>“Pattern Recognition and Machine Learning” by Bishop</li>
-<li>“Information Theory, Inference, and Learning Algorithms” by MacKay</li>
-</ul></li>
-<li>Algorithms:
-<ul>
-<li>“Understanding Belief Propagation and its Generalizations” by Yedidia et al.</li>
-<li>“An Introduction to MCMC for Machine Learning” by Andrieu et al.</li>
-<li>“Structured Prediction for Natural Language Processing” by Smith</li>
-</ul></li>
-<li>Applications:
-<ul>
-<li>“Medical Applications of Artificial Intelligence” by Dua and Acharya</li>
-<li>“Computer Vision: A Modern Approach” by Forsyth and Ponce</li>
-<li>“Speech and Language Processing” by Jurafsky and Martin</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
- ]]></description>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>machine-learning</category>
   <category>probabilistic-models</category>
   <category>mathematics</category>
@@ -10134,116 +9038,10 @@ font-style: inherit;">return</span> model</span></code></pre></div>
 </section>
 <section id="policy-gradients" class="level3">
 <h3 class="anchored" data-anchor-id="policy-gradients">2. Policy Gradients</h3>
-<p>Learning the policy directly:</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> policy_network(state_size, action_size):</span>
-<span id="cb6-2">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> tf.keras.Sequential([</span>
-<span id="cb6-3">        tf.keras.layers.Dense(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">128</span>, activation<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'relu'</span>),</span>
-<span id="cb6-4">        tf.keras.layers.Dense(action_size, activation<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'softmax'</span>)</span>
-<span id="cb6-5">    ])</span></code></pre></div>
-</section>
-</section>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Learning Path
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><strong>Basics</strong>: Start with Q-learning</li>
-<li><strong>Practice</strong>: Implement simple environments</li>
-<li><strong>Tools</strong>: Learn OpenAI Gym</li>
-<li><strong>Advanced</strong>: Move to deep RL</li>
-</ol>
-</div>
-</div>
-<section id="resources" class="level3">
-<h3 class="anchored" data-anchor-id="resources">Resources</h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" aria-controls="tabset-4-1" aria-selected="true">Online Courses</a></li><li class="nav-item"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" aria-controls="tabset-4-2" aria-selected="false">Libraries</a></li><li class="nav-item"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" aria-controls="tabset-4-3" aria-selected="false">Books</a></li></ul>
-<div class="tab-content">
-<div id="tabset-4-1" class="tab-pane active" aria-labelledby="tabset-4-1-tab">
-<ul>
-<li>Coursera’s RL Specialization</li>
-<li>David Silver’s RL Course</li>
-<li>Fast.ai’s Practical Deep Learning</li>
-</ul>
-</div>
-<div id="tabset-4-2" class="tab-pane" aria-labelledby="tabset-4-2-tab">
-<ul>
-<li>OpenAI Gym</li>
-<li>Stable Baselines3</li>
-<li>TensorFlow Agents</li>
-</ul>
-</div>
-<div id="tabset-4-3" class="tab-pane" aria-labelledby="tabset-4-3-tab">
-<ul>
-<li>“Reinforcement Learning: An Introduction” by Sutton &amp; Barto</li>
-<li>“Deep Reinforcement Learning Hands-On”</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="practice-projects" class="level2">
-<h2 class="anchored" data-anchor-id="practice-projects">Practice Projects</h2>
-<ol type="1">
-<li><strong>Simple Games</strong>
-<ul>
-<li>Tic-tac-toe</li>
-<li>Cart-pole balancing</li>
-<li>Grid world navigation</li>
-</ul></li>
-<li><strong>Advanced Projects</strong>
-<ul>
-<li>Stock trading bot</li>
-<li>Robot simulation</li>
-<li>Game AI development</li>
-</ul></li>
-</ol>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Common Pitfalls
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li>Starting too complex</li>
-<li>Ignoring exploration</li>
-<li>Poor reward design</li>
-<li>Insufficient training time</li>
-</ul>
-</div>
-</div>
-<p>Remember: Start simple, experiment often, and gradually increase complexity. Reinforcement learning is a powerful tool, but it requires patience and practice to master!</p>
+<p>Learning the policy directly: ```python def policy_network(state_size, action_size): return tf.keras.Sequential([ tf.keras.layers.Dense(128, activation=‘relu’), tf.keras.layers.Dense(action_size, activation=‘softmax’) ])</p>
 
 
+</section>
 </section>
 </section>
 
@@ -10266,265 +9064,66 @@ Common Pitfalls
 
 
 
-<section id="statistical-learning-theory-and-concentration-inequalities" class="level1">
-<h1>Statistical Learning Theory and Concentration Inequalities</h1>
-<section id="concentration-inequalities" class="level2">
-<h2 class="anchored" data-anchor-id="concentration-inequalities">Concentration Inequalities</h2>
-<section id="markovs-inequality" class="level3">
-<h3 class="anchored" data-anchor-id="markovs-inequality">1. Markov’s Inequality</h3>
-<p>Basic form:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(X%20%5Cgeq%20a)%20%5Cleq%20%5Cfrac%7B%5Cmathbb%7BE%7D%5BX%5D%7D%7Ba%7D%0A"></p>
-<p>For non-negative random variables.</p>
-<p>Moment version:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%7CX%7C%20%5Cgeq%20a)%20%5Cleq%20%5Cfrac%7B%5Cmathbb%7BE%7D%5B%7CX%7C%5Er%5D%7D%7Ba%5Er%7D%0A"></p>
-</section>
-<section id="chebyshevs-inequality" class="level3">
-<h3 class="anchored" data-anchor-id="chebyshevs-inequality">2. Chebyshev’s Inequality</h3>
-<p>Basic form:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%7CX%20-%20%5Cmu%7C%20%5Cgeq%20t)%20%5Cleq%20%5Cfrac%7B%5Csigma%5E2%7D%7Bt%5E2%7D%0A"></p>
-<p>Moment version:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%7CX%20-%20%5Cmathbb%7BE%7D%5BX%5D%7C%20%5Cgeq%20t)%20%5Cleq%20%5Cfrac%7B%5Ctext%7BVar%7D(X)%7D%7Bt%5E2%7D%0A"></p>
-</section>
-<section id="hoeffdings-inequality" class="level3">
-<h3 class="anchored" data-anchor-id="hoeffdings-inequality">3. Hoeffding’s Inequality</h3>
-<p>Sum of bounded variables:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi=1%7D%5En%20X_i%20-%20%5Cmathbb%7BE%7D%5BX%5D%20%5Cgeq%20t)%20%5Cleq%20%5Cexp(-%5Cfrac%7B2nt%5E2%7D%7B(b-a)%5E2%7D)%0A"></p>
-<p>Martingale version:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(S_n%20-%20S_0%20%5Cgeq%20t)%20%5Cleq%20%5Cexp(-%5Cfrac%7B2t%5E2%7D%7B%5Csum_%7Bi=1%7D%5En%20(b_i-a_i)%5E2%7D)%0A"></p>
-</section>
-</section>
-<section id="advanced-concentration-results" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-concentration-results">Advanced Concentration Results</h2>
-<section id="bernsteins-inequality" class="level3">
-<h3 class="anchored" data-anchor-id="bernsteins-inequality">1. Bernstein’s Inequality</h3>
-<p>Variance-based bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi=1%7D%5En%20(X_i%20-%20%5Cmathbb%7BE%7D%5BX_i%5D)%20%5Cgeq%20t)%20%5Cleq%20%5Cexp(-%5Cfrac%7Bnt%5E2%7D%7B2%5Csigma%5E2%20+%202Mt/3%7D)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%7CX_i%7C%20%5Cleq%20M"> - <img src="https://latex.codecogs.com/png.latex?%5Ctext%7BVar%7D(X_i)%20%5Cleq%20%5Csigma%5E2"></p>
-</section>
-<section id="mcdiarmids-inequality" class="level3">
-<h3 class="anchored" data-anchor-id="mcdiarmids-inequality">2. McDiarmid’s Inequality</h3>
-<p>Bounded differences:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(f(X_1,...,X_n)%20-%20%5Cmathbb%7BE%7D%5Bf%5D%20%5Cgeq%20t)%20%5Cleq%20%5Cexp(-%5Cfrac%7B2t%5E2%7D%7B%5Csum_%7Bi=1%7D%5En%20c_i%5E2%7D)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%7Cf(x)%20-%20f(x')%7C%20%5Cleq%20c_i"> when <img src="https://latex.codecogs.com/png.latex?x,x'"> differ in i-th coordinate</p>
-</section>
-<section id="talagrands-inequality" class="level3">
-<h3 class="anchored" data-anchor-id="talagrands-inequality">3. Talagrand’s Inequality</h3>
-<p>Convex distance:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%7CZ%20-%20M(Z)%7C%20%5Cgeq%20t)%20%5Cleq%204%5Cexp(-%5Cfrac%7Bt%5E2%7D%7B4%5Csigma%5E2%7D)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?Z"> is supremum of empirical process - <img src="https://latex.codecogs.com/png.latex?M(Z)"> is median</p>
-</section>
-</section>
-<section id="statistical-learning-bounds" class="level2">
-<h2 class="anchored" data-anchor-id="statistical-learning-bounds">Statistical Learning Bounds</h2>
-<section id="uniform-convergence" class="level3">
-<h3 class="anchored" data-anchor-id="uniform-convergence">1. Uniform Convergence</h3>
-<p>Fundamental theorem:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Csup_%7Bh%20%5Cin%20%5Cmathcal%7BH%7D%7D%7C%5Chat%7BR%7D_n(h)%20-%20R(h)%7C%20%3E%20%5Cepsilon)%20%5Cleq%208%5Cmathcal%7BN%7D(%5Cepsilon/8)%5Cexp(-n%5Cepsilon%5E2/128)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BN%7D(%5Cepsilon)"> is covering number - <img src="https://latex.codecogs.com/png.latex?R(h)"> is true risk - <img src="https://latex.codecogs.com/png.latex?%5Chat%7BR%7D_n(h)"> is empirical risk</p>
-</section>
-<section id="symmetrization" class="level3">
-<h3 class="anchored" data-anchor-id="symmetrization">2. Symmetrization</h3>
-<p>Basic inequality:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Csup_%7Bh%20%5Cin%20%5Cmathcal%7BH%7D%7D%7CR(h)%20-%20%5Chat%7BR%7D_n(h)%7C%20%3E%202%5Cepsilon)%20%5Cleq%202P(%5Csup_%7Bh%20%5Cin%20%5Cmathcal%7BH%7D%7D%7C%5Chat%7BR%7D_n(h)%20-%20%5Chat%7BR%7D'_n(h)%7C%20%3E%20%5Cepsilon)%0A"></p>
-<p>Ghost sample technique:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5B%5Csup_%7Bh%20%5Cin%20%5Cmathcal%7BH%7D%7D%7CR(h)%20-%20%5Chat%7BR%7D_n(h)%7C%5D%20%5Cleq%202%5Cmathbb%7BE%7D%5B%5Csup_%7Bh%20%5Cin%20%5Cmathcal%7BH%7D%7D%7C%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi=1%7D%5En%20%5Csigma_i%20h(X_i)%7C%5D%0A"></p>
-</section>
-<section id="rademacher-complexity" class="level3">
-<h3 class="anchored" data-anchor-id="rademacher-complexity">3. Rademacher Complexity</h3>
-<p>Definition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathfrak%7BR%7D_n(%5Cmathcal%7BH%7D)%20=%20%5Cmathbb%7BE%7D_%7B%5Csigma,S%7D%5B%5Csup_%7Bh%20%5Cin%20%5Cmathcal%7BH%7D%7D%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi=1%7D%5En%20%5Csigma_i%20h(x_i)%5D%0A"></p>
-<p>Generalization bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Csup_%7Bh%20%5Cin%20%5Cmathcal%7BH%7D%7D%7CR(h)%20-%20%5Chat%7BR%7D_n(h)%7C%20%5Cleq%202%5Cmathfrak%7BR%7D_n(%5Cmathcal%7BH%7D)%20+%20%5Csqrt%7B%5Cfrac%7B%5Cln(2/%5Cdelta)%7D%7B2n%7D%7D)%20%5Cgeq%201-%5Cdelta%0A"></p>
-</section>
-</section>
-<section id="local-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="local-analysis">Local Analysis</h2>
-<section id="local-rademacher-complexity" class="level3">
-<h3 class="anchored" data-anchor-id="local-rademacher-complexity">1. Local Rademacher Complexity</h3>
-<p>Definition:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathfrak%7BR%7D_n(%5Cmathcal%7BH%7D,%20r)%20=%20%5Cmathbb%7BE%7D_%7B%5Csigma%7D%5B%5Csup_%7Bh%20%5Cin%20%5Cmathcal%7BH%7D:%20P(h-h%5E*)%5E2%20%5Cleq%20r%7D%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi=1%7D%5En%20%5Csigma_i%20h(X_i)%5D%0A"></p>
-<p>Fixed point:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ar%5E*%20=%20%5Cinf%5C%7Br%20%3E%200:%20%5Cmathfrak%7BR%7D_n(%5Cmathcal%7BH%7D,%20r)%20%5Cleq%20r/4%5C%7D%0A"></p>
-</section>
-<section id="localized-uniform-convergence" class="level3">
-<h3 class="anchored" data-anchor-id="localized-uniform-convergence">2. Localized Uniform Convergence</h3>
-<p>Bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Csup_%7Bh%20%5Cin%20B(h%5E*,r)%7D%7CR(h)%20-%20%5Chat%7BR%7D_n(h)%7C%20%3E%20%5Cepsilon)%20%5Cleq%20%5Cmathcal%7BN%7D(r,%5Cepsilon/4)%5Cexp(-n%5Cepsilon%5E2/8)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?B(h%5E*,r)"> is ball around optimal hypothesis</p>
-</section>
-<section id="peeling" class="level3">
-<h3 class="anchored" data-anchor-id="peeling">3. Peeling</h3>
-<p>Geometric slicing:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Cexists%20h:%20%7CR(h)%20-%20%5Chat%7BR%7D_n(h)%7C%20%3E%20%5Cepsilon%5Csqrt%7BR(h)%7D)%20%5Cleq%20%5Csum_%7Bj=0%7D%5E%5Cinfty%20P(%5Csup_%7Bh:%20R(h)%20%5Cin%20%5B2%5Ej%5Calpha,2%5E%7Bj+1%7D%5Calpha%5D%7D%7CR(h)%20-%20%5Chat%7BR%7D_n(h)%7C%20%3E%20%5Cepsilon%5Csqrt%7B2%5Ej%5Calpha%7D)%0A"></p>
-</section>
-</section>
-<section id="advanced-theory" class="level2">
-<h2 class="anchored" data-anchor-id="advanced-theory">Advanced Theory</h2>
-<section id="stability-theory" class="level3">
-<h3 class="anchored" data-anchor-id="stability-theory">1. Stability Theory</h3>
-<p>Algorithmic stability:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%7C%5Cell(A_S,z)%20-%20%5Cell(A_%7BS%5Ei%7D,z)%7C%20%5Cleq%20%5Cbeta%0A"></p>
-<p>Generalization bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%7CR(A_S)%20-%20%5Chat%7BR%7D_n(A_S)%7C%20%3E%20%5Cepsilon)%20%5Cleq%202%5Cexp(-%5Cfrac%7Bn%5Cepsilon%5E2%7D%7B2%5Cbeta%5E2%7D)%0A"></p>
-</section>
-<section id="compression-schemes" class="level3">
-<h3 class="anchored" data-anchor-id="compression-schemes">2. Compression Schemes</h3>
-<p>Sample compression:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Am%20%5Cgeq%20k%5Clog%5Cfrac%7Bem%7D%7Bk%7D%20+%20%5Clog%5Cfrac%7B1%7D%7B%5Cdelta%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?k"> is size of compression set - <img src="https://latex.codecogs.com/png.latex?m"> is sample size</p>
-</section>
-<section id="pac-bayesian-theory" class="level3">
-<h3 class="anchored" data-anchor-id="pac-bayesian-theory">3. PAC-Bayesian Theory</h3>
-<p>KL-divergence bound:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AR(Q)%20%5Cleq%20%5Chat%7BR%7D_n(Q)%20+%20%5Csqrt%7B%5Cfrac%7BKL(Q%5C%7CP)%20+%20%5Cln%5Cfrac%7B2%5Csqrt%7Bn%7D%7D%7B%5Cdelta%7D%7D%7B2n%7D%7D%0A"></p>
-</section>
-</section>
-<section id="applications" class="level2">
-<h2 class="anchored" data-anchor-id="applications">Applications</h2>
-<section id="high-dimensional-statistics" class="level3">
-<h3 class="anchored" data-anchor-id="high-dimensional-statistics">1. High-Dimensional Statistics</h3>
-<p>Sparse recovery:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5C%7C%5Chat%7B%5Cbeta%7D%20-%20%5Cbeta%5E*%5C%7C_2%20%5Cleq%20%5Csqrt%7B%5Cfrac%7Bs%5Clog%20p%7D%7Bn%7D%7D%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?s"> is sparsity - <img src="https://latex.codecogs.com/png.latex?p"> is dimension</p>
-</section>
-<section id="random-matrices" class="level3">
-<h3 class="anchored" data-anchor-id="random-matrices">2. Random Matrices</h3>
-<p>Matrix Bernstein:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5C%7C%5Csum_%7Bi=1%7D%5En%20X_i%5C%7C%20%5Cgeq%20t)%20%5Cleq%202d%5Cexp(-%5Cfrac%7Bt%5E2/2%7D%7B%5Csigma%5E2%20+%20Mt/3%7D)%0A"></p>
-<p>Where: - <img src="https://latex.codecogs.com/png.latex?%5C%7CX_i%5C%7C%20%5Cleq%20M"> - <img src="https://latex.codecogs.com/png.latex?%5C%7C%5Cmathbb%7BE%7D%5BX_iX_i%5ET%5D%5C%7C%20%5Cleq%20%5Csigma%5E2"></p>
-</section>
-<section id="empirical-processes" class="level3">
-<h3 class="anchored" data-anchor-id="empirical-processes">3. Empirical Processes</h3>
-<p>Maximal inequality:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5B%5Csup_%7Bf%20%5Cin%20%5Cmathcal%7BF%7D%7D%7C%5Csum_%7Bi=1%7D%5En%20%5Cepsilon_i%20f(X_i)%7C%5D%20%5Cleq%20K%5Csqrt%7Bn%7D%5Cint_0%5E%5Cinfty%20%5Csqrt%7B%5Clog%20N(%5Cepsilon,%5Cmathcal%7BF%7D,L_2)%7Dd%5Cepsilon%0A"></p>
-</section>
-</section>
-<section id="implementation-considerations" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-considerations">Implementation Considerations</h2>
-<section id="sample-size-selection" class="level3">
-<h3 class="anchored" data-anchor-id="sample-size-selection">1. Sample Size Selection</h3>
-<ol type="1">
-<li>Fixed Confidence:
-<ul>
-<li>Error tolerance</li>
-<li>Confidence level</li>
-<li>Complexity measure</li>
-</ul></li>
-<li>Fixed Width:
-<ul>
-<li>Precision requirement</li>
-<li>Coverage probability</li>
-<li>Dimension impact</li>
-</ul></li>
-<li>Sequential:
-<ul>
-<li>Stopping rules</li>
-<li>Error control</li>
-<li>Efficiency</li>
-</ul></li>
-</ol>
-</section>
-<section id="bound-selection" class="level3">
-<h3 class="anchored" data-anchor-id="bound-selection">2. Bound Selection</h3>
-<ol type="1">
-<li>Problem Structure:
-<ul>
-<li>Independence</li>
-<li>Boundedness</li>
-<li>Moment conditions</li>
-</ul></li>
-<li>Sample Properties:
-<ul>
-<li>Size</li>
-<li>Distribution</li>
-<li>Dependence</li>
-</ul></li>
-<li>Computational:
-<ul>
-<li>Tightness</li>
-<li>Simplicity</li>
-<li>Tractability</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
-<section id="analysis-strategy" class="level3">
-<h3 class="anchored" data-anchor-id="analysis-strategy">1. Analysis Strategy</h3>
-<ol type="1">
-<li>Problem Formulation:
-<ul>
-<li>Identify assumptions</li>
-<li>Choose metrics</li>
-<li>Set objectives</li>
-</ul></li>
-<li>Bound Selection:
-<ul>
-<li>Match assumptions</li>
-<li>Consider tightness</li>
-<li>Balance complexity</li>
-</ul></li>
-<li>Implementation:
-<ul>
-<li>Numerical stability</li>
-<li>Computational efficiency</li>
-<li>Error handling</li>
-</ul></li>
-</ol>
-</section>
-<section id="practical-guidelines" class="level3">
-<h3 class="anchored" data-anchor-id="practical-guidelines">2. Practical Guidelines</h3>
-<ol type="1">
-<li>Sample Size:
-<ul>
-<li>Conservative estimates</li>
-<li>Safety margins</li>
-<li>Power analysis</li>
-</ul></li>
-<li>Validation:
-<ul>
-<li>Cross-validation</li>
-<li>Bootstrap</li>
-<li>Permutation tests</li>
-</ul></li>
-<li>Monitoring:
-<ul>
-<li>Convergence checks</li>
-<li>Stability measures</li>
-<li>Error tracking</li>
-</ul></li>
-</ol>
-</section>
-</section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li>Theory:
-<ul>
-<li>“Concentration Inequalities” by Boucheron et al.</li>
-<li>“Statistical Learning Theory” by Vapnik</li>
-<li>“High-Dimensional Probability” by Vershynin</li>
-</ul></li>
-<li>Methods:
-<ul>
-<li>“Empirical Processes in M-Estimation” by van der Vaart and Wellner</li>
-<li>“Random Matrices: High Dimensional Phenomena” by Davidson and Szarek</li>
-<li>“Theory of Classification” by Devroye et al.</li>
-</ul></li>
-<li>Applications:
-<ul>
-<li>“Statistical Learning Theory and Applications” by Bousquet et al.</li>
-<li>“High-Dimensional Statistics” by Wainwright</li>
-<li>“Machine Learning Theory” by Mohri et al.</li>
-</ul></li>
-</ol>
+<p>listing: contents: “../**/index.qmd” type: default fields: [title, description, date, author] sort: “date desc” max-items: 2 filter-ui: false categories: false include-in-header: false feed: true date-format: “MMMM D, YYYY”</p>
+<hr>
+<p>::: :::</p>
 
 
-</section>
-</section>
 
- ]]></description>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733018198103" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
+<div class="listing-date">
+November 20, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733023128090" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
+<div class="listing-date">
+March 19, 2024
+</div>
+<div class="listing-author">
+Ram Polisetti
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div> ]]></description>
   <category>machine-learning</category>
   <category>theory</category>
   <category>mathematics</category>

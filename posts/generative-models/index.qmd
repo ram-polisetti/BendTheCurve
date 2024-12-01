@@ -338,3 +338,23 @@ $$
    - "Improved Training of Wasserstein GANs" by Gulrajani et al.
    - "Large Scale GAN Training for High Fidelity Natural Image Synthesis" by Brock et al.
    - "Improved VQGAN for Image Generation" by Esser et al.
+
+::: {.related-posts-section}
+## Continue Your Learning Journey
+
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
+:::
+:::

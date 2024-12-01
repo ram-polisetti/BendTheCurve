@@ -147,6 +147,28 @@ Here's what we're working on:
 Everyone starts somewhere! Don't feel overwhelmed - we'll break everything down into manageable pieces.
 :::
 
+## Related Posts
+
+::: {.related-posts-section}
+## Continue Your Learning Journey
+
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
+:::
+:::
+
 Let's start this exciting journey together! Choose your first article from the learning paths above, or check out our [latest posts](/posts).
 
 Happy Learning! 🚀

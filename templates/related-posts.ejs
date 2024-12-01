@@ -1,0 +1,28 @@
+<%
+// Get tags from the current page
+const currentTags = meta.tags || [];
+
+// Filter items that share at least one tag with the current page
+const relatedItems = items.filter(item => {
+  const itemTags = item.tags || [];
+  return itemTags.some(tag => currentTags.includes(tag));
+}).slice(0, 2); // Only show top 2 related posts
+%>
+
+<div class="related-posts">
+<% for (const item of relatedItems) { %>
+  <div class="related-post">
+    <h3><a href="<%- item.path %>"><%- item.title %></a></h3>
+    <% if (item.description) { %>
+      <p><%- item.description %></p>
+    <% } %>
+    <% if (item.categories && item.categories.length) { %>
+      <div class="categories">
+        <% for (const category of item.categories) { %>
+          <span class="category"><%- category %></span>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+<% } %>
+</div>

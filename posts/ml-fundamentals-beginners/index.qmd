@@ -484,13 +484,3 @@ predictions = model.predict(X_test_scaled)
 # 6. Evaluate
 from sklearn.metrics import accuracy_score  # for classification
 accuracy = accuracy_score(y_test, predictions)
-```
-
-::: {.callout-note}
-## Need Help?
-- Check the scikit-learn documentation
-- Join ML communities on Reddit or Discord
-- Share your code on GitHub
-- Ask questions on Stack Overflow
-
-:::

@@ -662,21 +662,3 @@ class StabilityMonitor:
 monitor = StabilityMonitor(Ridge(alpha=1.0))
 is_stable = monitor.check_stability(X, y)
 print(f"Model is stable: {is_stable}")
-```
-
-## References
-
-1. Theory:
-   - "Stability and Generalization" by Bousquet and Elisseeff
-   - "Learning, Testing, and the Stability Approach" by Shalev-Shwartz et al.
-   - "Stability and Learning Theory" by Mukherjee et al.
-
-2. Methods:
-   - "Algorithmic Stability and Uniform Convergence" by Kearns and Ron
-   - "Stability and Instance-Based Learning" by Devroye and Wagner
-   - "Stable Learning Algorithms" by Kutin and Niyogi
-
-3. Applications:
-   - "Stability in Machine Learning" by Hardt et al.
-   - "Deep Learning and Stability" by Hardt and Ma
-   - "Stability-Based Generalization Analysis" by Poggio et al.

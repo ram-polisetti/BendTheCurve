@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/index.html</loc>
-    <lastmod>2024-11-22T11:13:56.378Z</lastmod>
+    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/computational-learning-theory/index.html</loc>
+    <lastmod>2024-12-01T03:24:03.215Z</lastmod>
   </url>
   <url>
     <loc>https://ram-polisetti.github.io/BendTheCurve/posts/pac-learning-theory/index.html</loc>
-    <lastmod>2024-12-01T02:46:58.706Z</lastmod>
+    <lastmod>2024-12-01T03:10:30.046Z</lastmod>
   </url>
   <url>
-    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/reinforcement-learning-basics/index.html</loc>
-    <lastmod>2024-12-01T02:04:14.283Z</lastmod>
+    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/probabilistic-graphical-models/index.html</loc>
+    <lastmod>2024-12-01T03:20:48.364Z</lastmod>
   </url>
   <url>
-    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/optimization-theory/index.html</loc>
-    <lastmod>2024-11-22T09:21:27.603Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/online-learning/index.html</loc>
-    <lastmod>2024-11-22T09:19:42.502Z</lastmod>
+    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/optimization-algorithms/index.html</loc>
+    <lastmod>2024-12-01T03:20:56.667Z</lastmod>
   </url>
   <url>
     <loc>https://ram-polisetti.github.io/BendTheCurve/posts/ml-in-everyday-life/index.html</loc>
-    <lastmod>2024-12-01T01:58:28.109Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/ml-fundamentals-beginners/index.html</loc>
-    <lastmod>2024-12-01T01:57:45.386Z</lastmod>
+    <lastmod>2024-12-01T03:19:04.890Z</lastmod>
   </url>
   <url>
     <loc>https://ram-polisetti.github.io/BendTheCurve/posts/information-theory-ml/index.html</loc>
-    <lastmod>2024-11-22T10:58:22.576Z</lastmod>
+    <lastmod>2024-12-01T03:14:48.095Z</lastmod>
   </url>
   <url>
     <loc>https://ram-polisetti.github.io/BendTheCurve/posts/deep-learning-beginners/index.html</loc>
-    <lastmod>2024-12-01T01:58:01.044Z</lastmod>
+    <lastmod>2024-12-01T03:19:12.520Z</lastmod>
   </url>
   <url>
-    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/bend-the-curve-intro/index.html</loc>
-    <lastmod>2024-12-01T01:56:38.103Z</lastmod>
+    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/advanced-neural-architectures/index.html</loc>
+    <lastmod>2024-12-01T03:18:48.090Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/ml-theory-foundations/index.html</loc>
+    <lastmod>2024-12-01T03:24:13.074Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/machine_learning_concepts.html</loc>
+    <lastmod>2024-12-01T02:02:23.806Z</lastmod>
   </url>
   <url>
     <loc>https://ram-polisetti.github.io/BendTheCurve/posts.html</loc>
@@ -53,43 +53,43 @@
     <lastmod>2024-11-22T10:38:56.176Z</lastmod>
   </url>
   <url>
-    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/advanced-neural-architectures/index.html</loc>
-    <lastmod>2024-11-22T09:05:30.748Z</lastmod>
+    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/bend-the-curve-intro/index.html</loc>
+    <lastmod>2024-12-01T03:23:53.492Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/ml-fundamentals-beginners/index.html</loc>
+    <lastmod>2024-12-01T03:19:23.502Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/reinforcement-learning-basics/index.html</loc>
+    <lastmod>2024-12-01T03:21:22.382Z</lastmod>
   </url>
   <url>
     <loc>https://ram-polisetti.github.io/BendTheCurve/posts/causal-inference/index.html</loc>
-    <lastmod>2024-11-22T09:08:58.002Z</lastmod>
+    <lastmod>2024-12-01T03:21:06.098Z</lastmod>
   </url>
   <url>
     <loc>https://ram-polisetti.github.io/BendTheCurve/posts/generative-models/index.html</loc>
-    <lastmod>2024-11-22T09:06:47.922Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/machine_learning_concepts.html</loc>
-    <lastmod>2024-12-01T02:02:23.806Z</lastmod>
+    <lastmod>2024-12-01T03:14:56.366Z</lastmod>
   </url>
   <url>
     <loc>https://ram-polisetti.github.io/BendTheCurve/posts/ml-fundamentals/index.html</loc>
-    <lastmod>2024-11-22T08:49:48.063Z</lastmod>
+    <lastmod>2024-12-01T03:21:14.446Z</lastmod>
   </url>
   <url>
-    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/ml-theory-foundations/index.html</loc>
-    <lastmod>2024-12-01T02:04:02.361Z</lastmod>
+    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/online-learning/index.html</loc>
+    <lastmod>2024-12-01T03:18:56.570Z</lastmod>
   </url>
   <url>
-    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/optimization-algorithms/index.html</loc>
-    <lastmod>2024-12-01T02:04:35.369Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/probabilistic-graphical-models/index.html</loc>
-    <lastmod>2024-11-22T09:07:53.594Z</lastmod>
+    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/optimization-theory/index.html</loc>
+    <lastmod>2024-12-01T03:14:38.768Z</lastmod>
   </url>
   <url>
     <loc>https://ram-polisetti.github.io/BendTheCurve/posts/statistical-learning-theory/index.html</loc>
-    <lastmod>2024-11-22T09:20:31.756Z</lastmod>
+    <lastmod>2024-12-01T03:19:31.094Z</lastmod>
   </url>
   <url>
-    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/computational-learning-theory/index.html</loc>
-    <lastmod>2024-11-22T11:01:39.984Z</lastmod>
+    <loc>https://ram-polisetti.github.io/BendTheCurve/posts/algorithmic-stability/index.html</loc>
+    <lastmod>2024-12-01T03:20:40.221Z</lastmod>
   </url>
 </urlset>

@@ -3,6 +3,7 @@ title: "Optimization Algorithms in Machine Learning: A Deep Dive"
 author: "Ram Polisetti"
 date: "2024-03-19"
 categories: [machine-learning, optimization, mathematics, algorithms]
+tags: [machine-learning-theory, optimization, algorithms]
 image: "optimization.jpg"
 description: "A comprehensive technical exploration of optimization algorithms in machine learning, covering mathematical foundations and implementation details."
 jupyter: python3
@@ -348,3 +349,25 @@ Key takeaways:
 3. Advanced Topics:
    - "Natural Gradient Works Efficiently in Learning" by Amari
    - "On the Convergence of Adam and Beyond" by Reddi et al.
+
+## Related Posts
+
+::: {.related-posts-section}
+## Continue Your Learning Journey
+
+:::{#related-posts}
+---
+listing:
+  contents: "../**/index.qmd"
+  type: default
+  fields: [title, description, date, author]
+  sort: "date desc"
+  max-items: 2
+  filter-ui: false
+  categories: false
+  include-in-header: false
+  feed: true
+  date-format: "MMMM D, YYYY"
+---
+:::
+:::
