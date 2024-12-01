@@ -532,326 +532,53 @@
     "text": "Quick Reference: Python for ML\n# Common patterns you'll use often:\n\n# 1. Load and prepare data\ndata = pd.read_csv('your_data.csv')\nX = data.drop('target_column', axis=1)\ny = data['target_column']\n\n# 2. Split data\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)\n\n# 3. Scale features\nscaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)\n\n# 4. Train model\nmodel = LinearRegression()  # or any other model\nmodel.fit(X_train_scaled, y_train)\n\n# 5. Make predictions\npredictions = model.predict(X_test_scaled)\n\n# 6. Evaluate\nfrom sklearn.metrics import accuracy_score  # for classification\naccuracy = accuracy_score(y_test, predictions)\n\n\n\n\n\n\nNeed Help?\n\n\n\n\nCheck the scikit-learn documentation\nJoin ML communities on Reddit or Discord\nShare your code on GitHub\nAsk questions on Stack Overflow"
   },
   {
-    "objectID": "posts/generative-models/index.html",
-    "href": "posts/generative-models/index.html",
-    "title": "Generative Models: Mathematical Foundations and Architectures",
+    "objectID": "posts/information-theory-ml/index.html",
+    "href": "posts/information-theory-ml/index.html",
+    "title": "Information Theory in Machine Learning: A Practical Guide",
     "section": "",
-    "text": "The VAE objective maximizes the ELBO:\n\\[\n\\mathcal{L}(\\theta, \\phi; x) = \\mathbb{E}_{q_\\phi(z|x)}[\\log p_\\theta(x|z)] - D_{KL}(q_\\phi(z|x)||p(z))\n\\]\nWhere: - \\(q_\\phi(z|x)\\) is the encoder (inference model) - \\(p_\\theta(x|z)\\) is the decoder (generative model) - \\(p(z)\\) is the prior distribution - \\(D_{KL}\\) is the Kullback-Leibler divergence\n\n\n\nEnables backpropagation through sampling:\n\\[\nz = \\mu_\\phi(x) + \\sigma_\\phi(x) \\odot \\epsilon, \\quad \\epsilon \\sim \\mathcal{N}(0, I)\n\\]\nWhere: - \\(\\mu_\\phi(x)\\) is the mean encoder network - \\(\\sigma_\\phi(x)\\) is the standard deviation encoder network - \\(\\odot\\) denotes element-wise multiplication\n\n\n\n\n\n\nThe original GAN formulation:\n\\[\n\\min_G \\max_D V(D,G) = \\mathbb{E}_{x\\sim p_{data}}[\\log D(x)] + \\mathbb{E}_{z\\sim p_z}[\\log(1-D(G(z)))]\n\\]\nWhere: - \\(G\\) is the generator - \\(D\\) is the discriminator - \\(p_{data}\\) is the real data distribution - \\(p_z\\) is the latent distribution\n\n\n\nWGAN objective using Kantorovich-Rubinstein duality:\n\\[\n\\min_G \\max_{D \\in \\mathcal{F}_L} \\mathbb{E}_{x\\sim p_{data}}[D(x)] - \\mathbb{E}_{z\\sim p_z}[D(G(z))]\n\\]\nWhere: - \\(\\mathcal{F}_L\\) is the set of 1-Lipschitz functions\n\n\n\nWGAN-GP regularization term:\n\\[\n\\lambda \\mathbb{E}_{\\hat{x}\\sim p_{\\hat{x}}}[(\\|\\nabla_{\\hat{x}}D(\\hat{x})\\|_2 - 1)^2]\n\\]\nWhere: - \\(\\hat{x}\\) is sampled along straight lines between real and generated samples - \\(\\lambda\\) is the penalty coefficient\n\n\n\n\n\n\nThe forward diffusion process:\n\\[\nq(x_t|x_{t-1}) = \\mathcal{N}(x_t; \\sqrt{1-\\beta_t}x_{t-1}, \\beta_tI)\n\\]\nWith closed form for arbitrary timestep:\n\\[\nq(x_t|x_0) = \\mathcal{N}(x_t; \\sqrt{\\bar{\\alpha}_t}x_0, (1-\\bar{\\alpha}_t)I)\n\\]\nWhere: - \\(\\beta_t\\) is the noise schedule - \\(\\alpha_t = 1-\\beta_t\\) - \\(\\bar{\\alpha}_t = \\prod_{s=1}^t \\alpha_s\\)\n\n\n\nThe reverse diffusion process:\n\\[\np_\\theta(x_{t-1}|x_t) = \\mathcal{N}(x_{t-1}; \\mu_\\theta(x_t,t), \\Sigma_\\theta(x_t,t))\n\\]\nTraining objective:\n\\[\n\\mathcal{L} = \\mathbb{E}_{x_0,\\epsilon,t}\\left[\\|\\epsilon - \\epsilon_\\theta(x_t,t)\\|^2\\right]\n\\]\nWhere: - \\(\\epsilon_\\theta\\) predicts the noise component - \\(x_t = \\sqrt{\\bar{\\alpha}_t}x_0 + \\sqrt{1-\\bar{\\alpha}_t}\\epsilon\\)\n\n\n\n\n\n\nChange of variables formula:\n\\[\n\\log p_X(x) = \\log p_Z(f^{-1}(x)) + \\log\\left|\\det\\frac{\\partial f^{-1}}{\\partial x}\\right|\n\\]\nWhere: - \\(f\\) is an invertible transformation - \\(p_Z\\) is a simple base distribution\n\n\n\nFactorized probability:\n\\[\np(x) = \\prod_{i=1}^n p(x_i|x_{&lt;i})\n\\]\nWith masked convolutions:\n\\[\ny_i = \\sum_{j \\leq i} m_{ij}(w_{ij} \\cdot x_j)\n\\]\n\n\n\nProbability density:\n\\[\np(x) = \\frac{1}{Z}e^{-E(x)}\n\\]\nWhere: - \\(E(x)\\) is the energy function - \\(Z = \\int e^{-E(x)}dx\\) is the partition function\n\n\n\n\n\n\nJensen-Shannon divergence:\n\\[\nJSD(P\\|Q) = \\frac{1}{2}D_{KL}(P\\|\\frac{P+Q}{2}) + \\frac{1}{2}D_{KL}(Q\\|\\frac{P+Q}{2})\n\\]\n\n\n\nKL-divergence analysis:\n\\[\nD_{KL}(q_\\phi(z|x)\\|p(z)) = \\frac{1}{2}\\sum_{j=1}^d(\\sigma_j^2 + \\mu_j^2 - \\log\\sigma_j^2 - 1)\n\\]\n\n\n\nDenoising score matching:\n\\[\n\\nabla_x \\log p(x) = \\mathbb{E}_{p(t|x)}[\\nabla_x \\log p(x|x_t)]\n\\]\n\n\n\n\n\n\nResolution-dependent loss:\n\\[\n\\mathcal{L}_\\text{total} = \\sum_{r} \\alpha_r \\mathcal{L}_r\n\\]\nWhere: - \\(r\\) is the resolution level - \\(\\alpha_r\\) is the weighting factor\n\n\n\nStyle transfer in latent space:\n\\[\nw = \\mathcal{M}(z) = f(z + \\Delta z)\n\\]\nWhere: - \\(\\mathcal{M}\\) is the mapping network - \\(f\\) is a non-linear transformation\n\n\n\nStyle transfer operation:\n\\[\n\\text{AdaIN}(x,y) = \\sigma(y)\\left(\\frac{x-\\mu(x)}{\\sigma(x)}\\right) + \\mu(y)\n\\]\n\n\n\n\n\n\nMeasures quality and diversity:\n\\[\nIS = \\exp(\\mathbb{E}_{x\\sim p_g}[D_{KL}(p(y|x)\\|p(y))])\n\\]\n\n\n\nDistribution similarity metric:\n\\[\nFID = \\|\\mu_r - \\mu_g\\|^2 + Tr(\\Sigma_r + \\Sigma_g - 2(\\Sigma_r\\Sigma_g)^{1/2})\n\\]\nWhere: - \\(\\mu_r, \\Sigma_r\\) are real data statistics - \\(\\mu_g, \\Sigma_g\\) are generated data statistics\n\n\n\nTwo-way evaluation:\n\\[\n\\begin{aligned}\n\\text{Precision} &= \\mathbb{E}_{x\\sim p_g}[\\max_{y\\sim p_r} s(x,y)] \\\\\n\\text{Recall} &= \\mathbb{E}_{y\\sim p_r}[\\max_{x\\sim p_g} s(x,y)]\n\\end{aligned}\n\\]\n\n\n\n\n\n\n\nGenerator Design:\n\nTransposed convolutions vs upsampling\nSkip connections\nAttention mechanisms\n\nDiscriminator Design:\n\nSpectral normalization\nResidual blocks\nMulti-scale discrimination\n\nLoss Functions:\n\nAdversarial loss\nReconstruction loss\nPerceptual loss\n\n\n\n\n\n\nGradient Penalties:\n\nR1 regularization\nPath length regularization\nConsistency regularization\n\nLearning Rate:\n\nTwo time-scale update rule\nAdaptive learning rates\nWarmup scheduling\n\nBatch Size:\n\nGradient accumulation\nMixed precision training\nMemory-efficient backprop\n\n\n\n\n\n\n\n\n\nVAEs for:\n\nStructured latent spaces\nReconstruction tasks\nInterpretable representations\n\nGANs for:\n\nHigh-quality generation\nStyle transfer\nDomain translation\n\nDiffusion Models for:\n\nHigh-fidelity generation\nControlled generation\nRobust training\n\n\n\n\n\n\nLearning Rates:\n\nGenerator: 1e-4 to 1e-3\nDiscriminator: 2e-4 to 2e-3\nVAE: 1e-3 to 1e-2\n\nBatch Sizes:\n\nGANs: 32 to 128\nVAEs: 64 to 256\nDiffusion: 32 to 64\n\nArchitecture:\n\nLayer depth\nChannel width\nAttention layers\n\n\n\n\n\n\n\nTheory:\n\n“Auto-Encoding Variational Bayes” by Kingma and Welling\n“Generative Adversarial Networks” by Goodfellow et al.\n“Denoising Diffusion Probabilistic Models” by Ho et al.\n\nArchitecture:\n\n“Progressive Growing of GANs” by Karras et al.\n“StyleGAN” by Karras et al.\n“Normalizing Flows” by Rezende and Mohamed\n\nTraining:\n\n“Improved Training of Wasserstein GANs” by Gulrajani et al.\n“Large Scale GAN Training for High Fidelity Natural Image Synthesis” by Brock et al.\n“Improved VQGAN for Image Generation” by Esser et al."
+    "text": "What You’ll Learn\n\n\n\nBy the end of this guide, you’ll understand: - How information is measured in machine learning - Why entropy matters in data science - How to use information theory for feature selection - Practical applications in deep learning"
   },
   {
-    "objectID": "posts/generative-models/index.html#variational-autoencoders-vaes",
-    "href": "posts/generative-models/index.html#variational-autoencoders-vaes",
-    "title": "Generative Models: Mathematical Foundations and Architectures",
-    "section": "",
-    "text": "The VAE objective maximizes the ELBO:\n\\[\n\\mathcal{L}(\\theta, \\phi; x) = \\mathbb{E}_{q_\\phi(z|x)}[\\log p_\\theta(x|z)] - D_{KL}(q_\\phi(z|x)||p(z))\n\\]\nWhere: - \\(q_\\phi(z|x)\\) is the encoder (inference model) - \\(p_\\theta(x|z)\\) is the decoder (generative model) - \\(p(z)\\) is the prior distribution - \\(D_{KL}\\) is the Kullback-Leibler divergence\n\n\n\nEnables backpropagation through sampling:\n\\[\nz = \\mu_\\phi(x) + \\sigma_\\phi(x) \\odot \\epsilon, \\quad \\epsilon \\sim \\mathcal{N}(0, I)\n\\]\nWhere: - \\(\\mu_\\phi(x)\\) is the mean encoder network - \\(\\sigma_\\phi(x)\\) is the standard deviation encoder network - \\(\\odot\\) denotes element-wise multiplication"
+    "objectID": "posts/information-theory-ml/index.html#understanding-information-theory-through-examples",
+    "href": "posts/information-theory-ml/index.html#understanding-information-theory-through-examples",
+    "title": "Information Theory in Machine Learning: A Practical Guide",
+    "section": "Understanding Information Theory Through Examples",
+    "text": "Understanding Information Theory Through Examples\nLet’s start with a practical example:\n\nCodeExplanation\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import entropy\nimport seaborn as sns\n\ndef calculate_entropy(probabilities):\n    \"\"\"Calculate Shannon entropy of a probability distribution\"\"\"\n    return -np.sum(probabilities * np.log2(probabilities + 1e-10))\n\n# Example: Fair vs Loaded Dice\nfair_die = np.ones(6) / 6  # Fair die probabilities\nloaded_die = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.5])  # Loaded die probabilities\n\nprint(f\"Fair Die Entropy: {calculate_entropy(fair_die):.2f} bits\")\nprint(f\"Loaded Die Entropy: {calculate_entropy(loaded_die):.2f} bits\")\n\n# Visualize probabilities and entropy\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))\n\n# Plot probability distributions\nx = np.arange(1, 7)\nwidth = 0.35\nax1.bar(x - width/2, fair_die, width, label='Fair Die')\nax1.bar(x + width/2, loaded_die, width, label='Loaded Die')\nax1.set_xlabel('Outcome')\nax1.set_ylabel('Probability')\nax1.set_title('Probability Distributions')\nax1.legend()\n\n# Plot entropy comparison\nentropies = [calculate_entropy(fair_die), calculate_entropy(loaded_die)]\nax2.bar(['Fair Die', 'Loaded Die'], entropies)\nax2.set_ylabel('Entropy (bits)')\nax2.set_title('Entropy Comparison')\n\nplt.tight_layout()\nplt.show()\n\n\nThis example shows how entropy measures uncertainty: - Fair die: Maximum uncertainty = Higher entropy - Loaded die: More predictable = Lower entropy - Entropy quantifies the average “surprise” in the distribution"
   },
   {
-    "objectID": "posts/generative-models/index.html#generative-adversarial-networks-gans",
-    "href": "posts/generative-models/index.html#generative-adversarial-networks-gans",
-    "title": "Generative Models: Mathematical Foundations and Architectures",
-    "section": "",
-    "text": "The original GAN formulation:\n\\[\n\\min_G \\max_D V(D,G) = \\mathbb{E}_{x\\sim p_{data}}[\\log D(x)] + \\mathbb{E}_{z\\sim p_z}[\\log(1-D(G(z)))]\n\\]\nWhere: - \\(G\\) is the generator - \\(D\\) is the discriminator - \\(p_{data}\\) is the real data distribution - \\(p_z\\) is the latent distribution\n\n\n\nWGAN objective using Kantorovich-Rubinstein duality:\n\\[\n\\min_G \\max_{D \\in \\mathcal{F}_L} \\mathbb{E}_{x\\sim p_{data}}[D(x)] - \\mathbb{E}_{z\\sim p_z}[D(G(z))]\n\\]\nWhere: - \\(\\mathcal{F}_L\\) is the set of 1-Lipschitz functions\n\n\n\nWGAN-GP regularization term:\n\\[\n\\lambda \\mathbb{E}_{\\hat{x}\\sim p_{\\hat{x}}}[(\\|\\nabla_{\\hat{x}}D(\\hat{x})\\|_2 - 1)^2]\n\\]\nWhere: - \\(\\hat{x}\\) is sampled along straight lines between real and generated samples - \\(\\lambda\\) is the penalty coefficient"
+    "objectID": "posts/information-theory-ml/index.html#fundamental-concepts",
+    "href": "posts/information-theory-ml/index.html#fundamental-concepts",
+    "title": "Information Theory in Machine Learning: A Practical Guide",
+    "section": "Fundamental Concepts",
+    "text": "Fundamental Concepts\n\n1. Shannon Entropy: Measuring Uncertainty\n\n\n\n\n\n\nKey Insight\n\n\n\nEntropy measures the average amount of surprise or uncertainty in a random variable. Higher entropy means more unpredictable outcomes.\n\n\nLet’s visualize how entropy changes with probability:\ndef plot_binary_entropy():\n    \"\"\"Plot entropy of a binary event\"\"\"\n    p = np.linspace(0.01, 0.99, 100)\n    H = -(p * np.log2(p) + (1-p) * np.log2(1-p))\n    \n    plt.figure(figsize=(10, 5))\n    plt.plot(p, H)\n    plt.fill_between(p, H, alpha=0.3)\n    plt.xlabel('Probability of Event')\n    plt.ylabel('Entropy (bits)')\n    plt.title('Binary Entropy Function')\n    plt.grid(True)\n    plt.show()\n\nplot_binary_entropy()\n\n\n2. Mutual Information: Measuring Relationships\nLet’s implement a practical example of mutual information for feature selection:\n\nCodeVisualization\n\n\nfrom sklearn.datasets import make_classification\nfrom sklearn.feature_selection import mutual_info_classif\n\n# Generate synthetic dataset\nX, y = make_classification(n_samples=1000, n_features=20, n_informative=5,\n                         n_redundant=5, n_repeated=0, n_classes=2,\n                         random_state=42)\n\n# Calculate mutual information\nmi_scores = mutual_info_classif(X, y)\n\n# Plot feature importance\nplt.figure(figsize=(12, 5))\nplt.bar(range(len(mi_scores)), mi_scores)\nplt.xlabel('Feature Index')\nplt.ylabel('Mutual Information')\nplt.title('Feature Importance using Mutual Information')\nplt.show()\n\n# Select top features\ntop_features = np.argsort(mi_scores)[-5:]\nprint(\"Top 5 most informative features:\", top_features)\n\n\ndef plot_feature_relationship(X, y, feature_idx):\n    \"\"\"Visualize relationship between feature and target\"\"\"\n    plt.figure(figsize=(10, 5))\n    \n    # Plot distributions\n    for class_label in [0, 1]:\n        sns.kdeplot(X[y == class_label, feature_idx], \n                   label=f'Class {class_label}')\n    \n    plt.xlabel(f'Feature {feature_idx} Value')\n    plt.ylabel('Density')\n    plt.title(f'Feature {feature_idx} Distribution by Class')\n    plt.legend()\n    plt.show()\n\n# Visualize top feature\nplot_feature_relationship(X, y, top_features[-1])\n\n\n\n\n\n3. KL Divergence: Comparing Distributions\nLet’s visualize KL divergence between different distributions:\ndef plot_kl_divergence():\n    \"\"\"Visualize KL divergence between Gaussians\"\"\"\n    x = np.linspace(-5, 5, 1000)\n    \n    # Create two Gaussian distributions\n    mu1, sigma1 = 0, 1\n    mu2, sigma2 = 1, 1.5\n    p = np.exp(-(x - mu1)**2 / (2*sigma1**2)) / (sigma1 * np.sqrt(2*np.pi))\n    q = np.exp(-(x - mu2)**2 / (2*sigma2**2)) / (sigma2 * np.sqrt(2*np.pi))\n    \n    # Calculate KL divergence\n    kl = np.sum(p * np.log(p/q)) * (x[1] - x[0])\n    \n    # Plot\n    plt.figure(figsize=(12, 5))\n    plt.plot(x, p, label='P(x)')\n    plt.plot(x, q, label='Q(x)')\n    plt.fill_between(x, p, q, alpha=0.3)\n    plt.xlabel('x')\n    plt.ylabel('Probability Density')\n    plt.title(f'KL(P||Q) = {kl:.2f}')\n    plt.legend()\n    plt.grid(True)\n    plt.show()\n\nplot_kl_divergence()"
   },
   {
-    "objectID": "posts/generative-models/index.html#diffusion-models",
-    "href": "posts/generative-models/index.html#diffusion-models",
-    "title": "Generative Models: Mathematical Foundations and Architectures",
-    "section": "",
-    "text": "The forward diffusion process:\n\\[\nq(x_t|x_{t-1}) = \\mathcal{N}(x_t; \\sqrt{1-\\beta_t}x_{t-1}, \\beta_tI)\n\\]\nWith closed form for arbitrary timestep:\n\\[\nq(x_t|x_0) = \\mathcal{N}(x_t; \\sqrt{\\bar{\\alpha}_t}x_0, (1-\\bar{\\alpha}_t)I)\n\\]\nWhere: - \\(\\beta_t\\) is the noise schedule - \\(\\alpha_t = 1-\\beta_t\\) - \\(\\bar{\\alpha}_t = \\prod_{s=1}^t \\alpha_s\\)\n\n\n\nThe reverse diffusion process:\n\\[\np_\\theta(x_{t-1}|x_t) = \\mathcal{N}(x_{t-1}; \\mu_\\theta(x_t,t), \\Sigma_\\theta(x_t,t))\n\\]\nTraining objective:\n\\[\n\\mathcal{L} = \\mathbb{E}_{x_0,\\epsilon,t}\\left[\\|\\epsilon - \\epsilon_\\theta(x_t,t)\\|^2\\right]\n\\]\nWhere: - \\(\\epsilon_\\theta\\) predicts the noise component - \\(x_t = \\sqrt{\\bar{\\alpha}_t}x_0 + \\sqrt{1-\\bar{\\alpha}_t}\\epsilon\\)"
+    "objectID": "posts/information-theory-ml/index.html#applications-in-machine-learning",
+    "href": "posts/information-theory-ml/index.html#applications-in-machine-learning",
+    "title": "Information Theory in Machine Learning: A Practical Guide",
+    "section": "Applications in Machine Learning",
+    "text": "Applications in Machine Learning\n\n1. Information Bottleneck in Deep Learning\nLet’s visualize the information plane:\ndef plot_information_plane():\n    \"\"\"Visualize Information Bottleneck principle\"\"\"\n    # Simulate layer-wise mutual information\n    layers = np.arange(1, 6)\n    I_X = np.array([4.5, 3.8, 3.2, 2.8, 2.5])  # I(T;X)\n    I_Y = np.array([0.8, 1.5, 1.8, 1.9, 1.95])  # I(T;Y)\n    \n    plt.figure(figsize=(10, 6))\n    plt.scatter(I_X, I_Y, c=layers, cmap='viridis', s=100)\n    \n    # Add arrows to show progression\n    for i in range(len(layers)-1):\n        plt.arrow(I_X[i], I_Y[i], I_X[i+1]-I_X[i], I_Y[i+1]-I_Y[i],\n                 head_width=0.05, head_length=0.1, fc='k', ec='k')\n    \n    plt.xlabel('I(T;X) - Information about input')\n    plt.ylabel('I(T;Y) - Information about output')\n    plt.title('Information Plane Dynamics')\n    plt.colorbar(label='Layer')\n    plt.grid(True)\n    plt.show()\n\nplot_information_plane()\n\n\n2. Cross-Entropy Loss in Neural Networks\nLet’s implement and visualize cross-entropy loss:\n\nImplementationVisualization\n\n\ndef cross_entropy_loss(y_true, y_pred):\n    \"\"\"Calculate cross-entropy loss\"\"\"\n    return -np.sum(y_true * np.log(y_pred + 1e-10))\n\n# Example with binary classification\ny_true = np.array([1, 0, 1, 1, 0])\ny_pred = np.array([0.9, 0.1, 0.8, 0.7, 0.3])\n\nloss = cross_entropy_loss(y_true, y_pred)\nprint(f\"Cross-Entropy Loss: {loss:.4f}\")\n\n\ndef plot_cross_entropy():\n    \"\"\"Visualize cross-entropy loss\"\"\"\n    p = np.linspace(0.01, 0.99, 100)\n    ce_0 = -np.log(1-p)  # Loss when true label is 0\n    ce_1 = -np.log(p)    # Loss when true label is 1\n    \n    plt.figure(figsize=(10, 5))\n    plt.plot(p, ce_0, label='True Label = 0')\n    plt.plot(p, ce_1, label='True Label = 1')\n    plt.xlabel('Predicted Probability')\n    plt.ylabel('Cross-Entropy Loss')\n    plt.title('Cross-Entropy Loss vs Predicted Probability')\n    plt.legend()\n    plt.grid(True)\n    plt.show()\n\nplot_cross_entropy()"
   },
   {
-    "objectID": "posts/generative-models/index.html#advanced-architectures",
-    "href": "posts/generative-models/index.html#advanced-architectures",
-    "title": "Generative Models: Mathematical Foundations and Architectures",
-    "section": "",
-    "text": "Change of variables formula:\n\\[\n\\log p_X(x) = \\log p_Z(f^{-1}(x)) + \\log\\left|\\det\\frac{\\partial f^{-1}}{\\partial x}\\right|\n\\]\nWhere: - \\(f\\) is an invertible transformation - \\(p_Z\\) is a simple base distribution\n\n\n\nFactorized probability:\n\\[\np(x) = \\prod_{i=1}^n p(x_i|x_{&lt;i})\n\\]\nWith masked convolutions:\n\\[\ny_i = \\sum_{j \\leq i} m_{ij}(w_{ij} \\cdot x_j)\n\\]\n\n\n\nProbability density:\n\\[\np(x) = \\frac{1}{Z}e^{-E(x)}\n\\]\nWhere: - \\(E(x)\\) is the energy function - \\(Z = \\int e^{-E(x)}dx\\) is the partition function"
+    "objectID": "posts/information-theory-ml/index.html#best-practices-and-common-pitfalls",
+    "href": "posts/information-theory-ml/index.html#best-practices-and-common-pitfalls",
+    "title": "Information Theory in Machine Learning: A Practical Guide",
+    "section": "Best Practices and Common Pitfalls",
+    "text": "Best Practices and Common Pitfalls\n\n\n\n\n\n\nWatch Out For\n\n\n\n\nNumerical Stability\n\nAlways add small epsilon to log\nUse stable implementations\n\nDistribution Assumptions\n\nCheck if data matches assumptions\nConsider data transformations\n\nInterpretation\n\nEntropy is relative to features\nMI doesn’t imply causation"
   },
   {
-    "objectID": "posts/generative-models/index.html#training-dynamics",
-    "href": "posts/generative-models/index.html#training-dynamics",
-    "title": "Generative Models: Mathematical Foundations and Architectures",
-    "section": "",
-    "text": "Jensen-Shannon divergence:\n\\[\nJSD(P\\|Q) = \\frac{1}{2}D_{KL}(P\\|\\frac{P+Q}{2}) + \\frac{1}{2}D_{KL}(Q\\|\\frac{P+Q}{2})\n\\]\n\n\n\nKL-divergence analysis:\n\\[\nD_{KL}(q_\\phi(z|x)\\|p(z)) = \\frac{1}{2}\\sum_{j=1}^d(\\sigma_j^2 + \\mu_j^2 - \\log\\sigma_j^2 - 1)\n\\]\n\n\n\nDenoising score matching:\n\\[\n\\nabla_x \\log p(x) = \\mathbb{E}_{p(t|x)}[\\nabla_x \\log p(x|x_t)]\n\\]"
+    "objectID": "posts/information-theory-ml/index.html#practical-tips",
+    "href": "posts/information-theory-ml/index.html#practical-tips",
+    "title": "Information Theory in Machine Learning: A Practical Guide",
+    "section": "Practical Tips",
+    "text": "Practical Tips\n\n\n\n\n\n\nFor Better Results\n\n\n\n\nFeature Selection\n\nUse MI for initial screening\nCombine with other methods\n\nModel Evaluation\n\nMonitor information flow\nUse cross-entropy properly\n\nDistribution Matching\n\nStart with simpler metrics\nProgress to KL/JS divergence"
   },
   {
-    "objectID": "posts/generative-models/index.html#advanced-training-techniques",
-    "href": "posts/generative-models/index.html#advanced-training-techniques",
-    "title": "Generative Models: Mathematical Foundations and Architectures",
-    "section": "",
-    "text": "Resolution-dependent loss:\n\\[\n\\mathcal{L}_\\text{total} = \\sum_{r} \\alpha_r \\mathcal{L}_r\n\\]\nWhere: - \\(r\\) is the resolution level - \\(\\alpha_r\\) is the weighting factor\n\n\n\nStyle transfer in latent space:\n\\[\nw = \\mathcal{M}(z) = f(z + \\Delta z)\n\\]\nWhere: - \\(\\mathcal{M}\\) is the mapping network - \\(f\\) is a non-linear transformation\n\n\n\nStyle transfer operation:\n\\[\n\\text{AdaIN}(x,y) = \\sigma(y)\\left(\\frac{x-\\mu(x)}{\\sigma(x)}\\right) + \\mu(y)\n\\]"
-  },
-  {
-    "objectID": "posts/generative-models/index.html#evaluation-metrics",
-    "href": "posts/generative-models/index.html#evaluation-metrics",
-    "title": "Generative Models: Mathematical Foundations and Architectures",
-    "section": "",
-    "text": "Measures quality and diversity:\n\\[\nIS = \\exp(\\mathbb{E}_{x\\sim p_g}[D_{KL}(p(y|x)\\|p(y))])\n\\]\n\n\n\nDistribution similarity metric:\n\\[\nFID = \\|\\mu_r - \\mu_g\\|^2 + Tr(\\Sigma_r + \\Sigma_g - 2(\\Sigma_r\\Sigma_g)^{1/2})\n\\]\nWhere: - \\(\\mu_r, \\Sigma_r\\) are real data statistics - \\(\\mu_g, \\Sigma_g\\) are generated data statistics\n\n\n\nTwo-way evaluation:\n\\[\n\\begin{aligned}\n\\text{Precision} &= \\mathbb{E}_{x\\sim p_g}[\\max_{y\\sim p_r} s(x,y)] \\\\\n\\text{Recall} &= \\mathbb{E}_{y\\sim p_r}[\\max_{x\\sim p_g} s(x,y)]\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "posts/generative-models/index.html#implementation-considerations",
-    "href": "posts/generative-models/index.html#implementation-considerations",
-    "title": "Generative Models: Mathematical Foundations and Architectures",
-    "section": "",
-    "text": "Generator Design:\n\nTransposed convolutions vs upsampling\nSkip connections\nAttention mechanisms\n\nDiscriminator Design:\n\nSpectral normalization\nResidual blocks\nMulti-scale discrimination\n\nLoss Functions:\n\nAdversarial loss\nReconstruction loss\nPerceptual loss\n\n\n\n\n\n\nGradient Penalties:\n\nR1 regularization\nPath length regularization\nConsistency regularization\n\nLearning Rate:\n\nTwo time-scale update rule\nAdaptive learning rates\nWarmup scheduling\n\nBatch Size:\n\nGradient accumulation\nMixed precision training\nMemory-efficient backprop"
-  },
-  {
-    "objectID": "posts/generative-models/index.html#best-practices",
-    "href": "posts/generative-models/index.html#best-practices",
-    "title": "Generative Models: Mathematical Foundations and Architectures",
-    "section": "",
-    "text": "VAEs for:\n\nStructured latent spaces\nReconstruction tasks\nInterpretable representations\n\nGANs for:\n\nHigh-quality generation\nStyle transfer\nDomain translation\n\nDiffusion Models for:\n\nHigh-fidelity generation\nControlled generation\nRobust training\n\n\n\n\n\n\nLearning Rates:\n\nGenerator: 1e-4 to 1e-3\nDiscriminator: 2e-4 to 2e-3\nVAE: 1e-3 to 1e-2\n\nBatch Sizes:\n\nGANs: 32 to 128\nVAEs: 64 to 256\nDiffusion: 32 to 64\n\nArchitecture:\n\nLayer depth\nChannel width\nAttention layers"
-  },
-  {
-    "objectID": "posts/generative-models/index.html#references",
-    "href": "posts/generative-models/index.html#references",
-    "title": "Generative Models: Mathematical Foundations and Architectures",
-    "section": "",
-    "text": "Theory:\n\n“Auto-Encoding Variational Bayes” by Kingma and Welling\n“Generative Adversarial Networks” by Goodfellow et al.\n“Denoising Diffusion Probabilistic Models” by Ho et al.\n\nArchitecture:\n\n“Progressive Growing of GANs” by Karras et al.\n“StyleGAN” by Karras et al.\n“Normalizing Flows” by Rezende and Mohamed\n\nTraining:\n\n“Improved Training of Wasserstein GANs” by Gulrajani et al.\n“Large Scale GAN Training for High Fidelity Natural Image Synthesis” by Brock et al.\n“Improved VQGAN for Image Generation” by Esser et al."
-  },
-  {
-    "objectID": "posts/causal-inference/index.html",
-    "href": "posts/causal-inference/index.html",
-    "title": "Causal Inference and Structural Learning",
-    "section": "",
-    "text": "Definition of SCM:\n\\[\n\\begin{aligned}\nX_i &= f_i(\\text{PA}_i, U_i) \\\\\nU_i &\\sim P(U_i)\n\\end{aligned}\n\\]\nWhere: - \\(X_i\\) are endogenous variables - \\(\\text{PA}_i\\) are parents of \\(X_i\\) - \\(U_i\\) are exogenous variables - \\(f_i\\) are structural equations\n\n\n\nDo-operator formalization:\n\\[\nP(Y|\\text{do}(X=x)) = \\sum_z P(Y|X=x,Z=z)P(Z=z)\n\\]\nBackdoor adjustment:\n\\[\nP(Y|\\text{do}(X=x)) = \\sum_z P(Y|X=x,Z=z)P(Z=z)\n\\]\nWhere Z satisfies the backdoor criterion.\n\n\n\n\n\n\nA set Z satisfies the backdoor criterion relative to (X,Y) if: 1. No node in Z is a descendant of X 2. Z blocks all backdoor paths from X to Y\nFormal criterion:\n\\[\nP(Y|\\text{do}(X)) = \\sum_z P(Y|X,Z)P(Z)\n\\]\n\n\n\nThree conditions: 1. M blocks all directed paths from X to Y 2. No unblocked backdoor path from X to M 3. All backdoor paths from M to Y are blocked by X\nFormula:\n\\[\nP(Y|\\text{do}(X)) = \\sum_m P(m|X)\\sum_{x'}P(Y|m,x')P(x')\n\\]\n\n\n\nRule 1 (Insertion/deletion of observations):\n\\[\nP(y|\\text{do}(x),z,w) = P(y|\\text{do}(x),w)\n\\]\nif (Y ⊥⊥ Z|X,W)\\(_{G_{\\overline{X}}}\\)\nRule 2 (Action/observation exchange):\n\\[\nP(y|\\text{do}(x),\\text{do}(z),w) = P(y|\\text{do}(x),z,w)\n\\]\nif (Y ⊥⊥ Z|X,W)\\(_{G_{\\overline{X}\\underline{Z}}}\\)\nRule 3 (Insertion/deletion of actions):\n\\[\nP(y|\\text{do}(x),\\text{do}(z),w) = P(y|\\text{do}(x),w)\n\\]\nif (Y ⊥⊥ Z|X,W)\\(_{G_{\\overline{X}\\overline{Z(W)}}}\\)\n\n\n\n\n\n\nPropensity score:\n\\[\ne(X) = P(T=1|X)\n\\]\nAverage Treatment Effect (ATE):\n\\[\n\\text{ATE} = \\mathbb{E}[Y(1) - Y(0)] = \\mathbb{E}\\left[\\frac{TY}{e(X)} - \\frac{(1-T)Y}{1-e(X)}\\right]\n\\]\n\n\n\nTwo-stage least squares (2SLS):\nFirst stage: \\[\nX = \\gamma_0 + \\gamma_1Z + \\eta\n\\]\nSecond stage: \\[\nY = \\beta_0 + \\beta_1\\hat{X} + \\epsilon\n\\]\n\n\n\nSharp RD estimator:\n\\[\n\\tau_{SRD} = \\lim_{x \\downarrow c} \\mathbb{E}[Y|X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[Y|X=x]\n\\]\nFuzzy RD estimator:\n\\[\n\\tau_{FRD} = \\frac{\\lim_{x \\downarrow c} \\mathbb{E}[Y|X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[Y|X=x]}{\\lim_{x \\downarrow c} \\mathbb{E}[D|X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[D|X=x]}\n\\]\n\n\n\n\n\n\nPC Algorithm steps: 1. Start with complete undirected graph 2. Remove edges based on conditional independence 3. Orient v-structures 4. Orient remaining edges\nIndependence test statistic:\n\\[\n\\chi^2 = n\\sum_{i,j} \\frac{(O_{ij} - E_{ij})^2}{E_{ij}}\n\\]\n\n\n\nBIC score:\n\\[\n\\text{BIC}(G) = \\ell(D|G) - \\frac{\\log n}{2}|G|\n\\]\nWhere: - \\(\\ell(D|G)\\) is log-likelihood - \\(|G|\\) is model complexity - \\(n\\) is sample size\n\n\n\nMMHC algorithm: 1. Learn skeleton using constraint-based method 2. Orient edges using score-based method\nScore function:\n\\[\n\\text{Score}(G) = \\text{BIC}(G) + \\lambda \\text{Sparsity}(G)\n\\]\n\n\n\n\n\n\nFundamental problem of causal inference:\n\\[\n\\text{ACE} = \\mathbb{E}[Y(1) - Y(0)]\n\\]\nBut we only observe:\n\\[\nY = TY(1) + (1-T)Y(0)\n\\]\n\n\n\nDirect and indirect effects:\n\\[\n\\begin{aligned}\n\\text{NDE} &= \\mathbb{E}[Y(t,M(t'))] - \\mathbb{E}[Y(t',M(t'))] \\\\\n\\text{NIE} &= \\mathbb{E}[Y(t,M(t))] - \\mathbb{E}[Y(t,M(t'))]\n\\end{aligned}\n\\]\n\n\n\nG-computation formula:\n\\[\n\\mathbb{E}[Y_{\\bar{a}}] = \\sum_{\\bar{l}} \\prod_{t=0}^K P(l_t|l_{t-1},a_{t-1})P(y|\\bar{l},\\bar{a})\n\\]\n\n\n\n\n\n\nRosenbaum bounds:\n\\[\n\\frac{1}{\\Gamma} \\leq \\frac{P(Z=1|X)P(Z=0|X')}{P(Z=0|X)P(Z=1|X')} \\leq \\Gamma\n\\]\n\n\n\nMultiple imputation:\n\\[\n\\hat{\\theta} = \\frac{1}{M}\\sum_{m=1}^M \\hat{\\theta}_m\n\\]\n\n\n\nConditional average treatment effect:\n\\[\n\\text{CATE}(x) = \\mathbb{E}[Y(1) - Y(0)|X=x]\n\\]\n\n\n\n\n\n\n\nRandomization:\n\nComplete randomization\nStratified randomization\nCluster randomization\n\nSample Size:\n\nPower analysis\nEffect size estimation\nVariance components\n\nMeasurement:\n\nReliability\nValidity\nMissing data handling\n\n\n\n\n\n\nIdentification:\n\nCheck assumptions\nSensitivity analysis\nMultiple methods\n\nEstimation:\n\nRobust methods\nBootstrap\nCross-validation\n\nInterpretation:\n\nEffect sizes\nConfidence intervals\nMultiple testing\n\n\n\n\n\n\n\n\nProgram evaluation: - Treatment effects - Policy analysis - Market interventions\n\n\n\nClinical trials: - Drug efficacy - Treatment comparison - Side effects\n\n\n\nPolicy research: - Educational interventions - Social programs - Behavioral studies\n\n\n\n\n\nTheory:\n\n“Causality” by Pearl\n“Causal Inference in Statistics” by Pearl et al.\n“Elements of Causal Inference” by Peters et al.\n\nMethods:\n\n“Mostly Harmless Econometrics” by Angrist and Pischke\n“Counterfactuals and Causal Inference” by Morgan and Winship\n“Causal Inference for Statistics” by Hernán and Robins\n\nApplications:\n\n“Causal Machine Learning” by Athey and Imbens\n“The Book of Why” by Pearl and Mackenzie\n“Observation and Experiment” by Rosenbaum"
-  },
-  {
-    "objectID": "posts/causal-inference/index.html#structural-causal-models",
-    "href": "posts/causal-inference/index.html#structural-causal-models",
-    "title": "Causal Inference and Structural Learning",
-    "section": "",
-    "text": "Definition of SCM:\n\\[\n\\begin{aligned}\nX_i &= f_i(\\text{PA}_i, U_i) \\\\\nU_i &\\sim P(U_i)\n\\end{aligned}\n\\]\nWhere: - \\(X_i\\) are endogenous variables - \\(\\text{PA}_i\\) are parents of \\(X_i\\) - \\(U_i\\) are exogenous variables - \\(f_i\\) are structural equations\n\n\n\nDo-operator formalization:\n\\[\nP(Y|\\text{do}(X=x)) = \\sum_z P(Y|X=x,Z=z)P(Z=z)\n\\]\nBackdoor adjustment:\n\\[\nP(Y|\\text{do}(X=x)) = \\sum_z P(Y|X=x,Z=z)P(Z=z)\n\\]\nWhere Z satisfies the backdoor criterion."
-  },
-  {
-    "objectID": "posts/causal-inference/index.html#identification-methods",
-    "href": "posts/causal-inference/index.html#identification-methods",
-    "title": "Causal Inference and Structural Learning",
-    "section": "",
-    "text": "A set Z satisfies the backdoor criterion relative to (X,Y) if: 1. No node in Z is a descendant of X 2. Z blocks all backdoor paths from X to Y\nFormal criterion:\n\\[\nP(Y|\\text{do}(X)) = \\sum_z P(Y|X,Z)P(Z)\n\\]\n\n\n\nThree conditions: 1. M blocks all directed paths from X to Y 2. No unblocked backdoor path from X to M 3. All backdoor paths from M to Y are blocked by X\nFormula:\n\\[\nP(Y|\\text{do}(X)) = \\sum_m P(m|X)\\sum_{x'}P(Y|m,x')P(x')\n\\]\n\n\n\nRule 1 (Insertion/deletion of observations):\n\\[\nP(y|\\text{do}(x),z,w) = P(y|\\text{do}(x),w)\n\\]\nif (Y ⊥⊥ Z|X,W)\\(_{G_{\\overline{X}}}\\)\nRule 2 (Action/observation exchange):\n\\[\nP(y|\\text{do}(x),\\text{do}(z),w) = P(y|\\text{do}(x),z,w)\n\\]\nif (Y ⊥⊥ Z|X,W)\\(_{G_{\\overline{X}\\underline{Z}}}\\)\nRule 3 (Insertion/deletion of actions):\n\\[\nP(y|\\text{do}(x),\\text{do}(z),w) = P(y|\\text{do}(x),w)\n\\]\nif (Y ⊥⊥ Z|X,W)\\(_{G_{\\overline{X}\\overline{Z(W)}}}\\)"
-  },
-  {
-    "objectID": "posts/causal-inference/index.html#estimation-methods",
-    "href": "posts/causal-inference/index.html#estimation-methods",
-    "title": "Causal Inference and Structural Learning",
-    "section": "",
-    "text": "Propensity score:\n\\[\ne(X) = P(T=1|X)\n\\]\nAverage Treatment Effect (ATE):\n\\[\n\\text{ATE} = \\mathbb{E}[Y(1) - Y(0)] = \\mathbb{E}\\left[\\frac{TY}{e(X)} - \\frac{(1-T)Y}{1-e(X)}\\right]\n\\]\n\n\n\nTwo-stage least squares (2SLS):\nFirst stage: \\[\nX = \\gamma_0 + \\gamma_1Z + \\eta\n\\]\nSecond stage: \\[\nY = \\beta_0 + \\beta_1\\hat{X} + \\epsilon\n\\]\n\n\n\nSharp RD estimator:\n\\[\n\\tau_{SRD} = \\lim_{x \\downarrow c} \\mathbb{E}[Y|X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[Y|X=x]\n\\]\nFuzzy RD estimator:\n\\[\n\\tau_{FRD} = \\frac{\\lim_{x \\downarrow c} \\mathbb{E}[Y|X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[Y|X=x]}{\\lim_{x \\downarrow c} \\mathbb{E}[D|X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[D|X=x]}\n\\]"
-  },
-  {
-    "objectID": "posts/causal-inference/index.html#structural-learning",
-    "href": "posts/causal-inference/index.html#structural-learning",
-    "title": "Causal Inference and Structural Learning",
-    "section": "",
-    "text": "PC Algorithm steps: 1. Start with complete undirected graph 2. Remove edges based on conditional independence 3. Orient v-structures 4. Orient remaining edges\nIndependence test statistic:\n\\[\n\\chi^2 = n\\sum_{i,j} \\frac{(O_{ij} - E_{ij})^2}{E_{ij}}\n\\]\n\n\n\nBIC score:\n\\[\n\\text{BIC}(G) = \\ell(D|G) - \\frac{\\log n}{2}|G|\n\\]\nWhere: - \\(\\ell(D|G)\\) is log-likelihood - \\(|G|\\) is model complexity - \\(n\\) is sample size\n\n\n\nMMHC algorithm: 1. Learn skeleton using constraint-based method 2. Orient edges using score-based method\nScore function:\n\\[\n\\text{Score}(G) = \\text{BIC}(G) + \\lambda \\text{Sparsity}(G)\n\\]"
-  },
-  {
-    "objectID": "posts/causal-inference/index.html#advanced-topics",
-    "href": "posts/causal-inference/index.html#advanced-topics",
-    "title": "Causal Inference and Structural Learning",
-    "section": "",
-    "text": "Fundamental problem of causal inference:\n\\[\n\\text{ACE} = \\mathbb{E}[Y(1) - Y(0)]\n\\]\nBut we only observe:\n\\[\nY = TY(1) + (1-T)Y(0)\n\\]\n\n\n\nDirect and indirect effects:\n\\[\n\\begin{aligned}\n\\text{NDE} &= \\mathbb{E}[Y(t,M(t'))] - \\mathbb{E}[Y(t',M(t'))] \\\\\n\\text{NIE} &= \\mathbb{E}[Y(t,M(t))] - \\mathbb{E}[Y(t,M(t'))]\n\\end{aligned}\n\\]\n\n\n\nG-computation formula:\n\\[\n\\mathbb{E}[Y_{\\bar{a}}] = \\sum_{\\bar{l}} \\prod_{t=0}^K P(l_t|l_{t-1},a_{t-1})P(y|\\bar{l},\\bar{a})\n\\]"
-  },
-  {
-    "objectID": "posts/causal-inference/index.html#implementation-considerations",
-    "href": "posts/causal-inference/index.html#implementation-considerations",
-    "title": "Causal Inference and Structural Learning",
-    "section": "",
-    "text": "Rosenbaum bounds:\n\\[\n\\frac{1}{\\Gamma} \\leq \\frac{P(Z=1|X)P(Z=0|X')}{P(Z=0|X)P(Z=1|X')} \\leq \\Gamma\n\\]\n\n\n\nMultiple imputation:\n\\[\n\\hat{\\theta} = \\frac{1}{M}\\sum_{m=1}^M \\hat{\\theta}_m\n\\]\n\n\n\nConditional average treatment effect:\n\\[\n\\text{CATE}(x) = \\mathbb{E}[Y(1) - Y(0)|X=x]\n\\]"
-  },
-  {
-    "objectID": "posts/causal-inference/index.html#best-practices",
-    "href": "posts/causal-inference/index.html#best-practices",
-    "title": "Causal Inference and Structural Learning",
-    "section": "",
-    "text": "Randomization:\n\nComplete randomization\nStratified randomization\nCluster randomization\n\nSample Size:\n\nPower analysis\nEffect size estimation\nVariance components\n\nMeasurement:\n\nReliability\nValidity\nMissing data handling\n\n\n\n\n\n\nIdentification:\n\nCheck assumptions\nSensitivity analysis\nMultiple methods\n\nEstimation:\n\nRobust methods\nBootstrap\nCross-validation\n\nInterpretation:\n\nEffect sizes\nConfidence intervals\nMultiple testing"
-  },
-  {
-    "objectID": "posts/causal-inference/index.html#applications",
-    "href": "posts/causal-inference/index.html#applications",
-    "title": "Causal Inference and Structural Learning",
-    "section": "",
-    "text": "Program evaluation: - Treatment effects - Policy analysis - Market interventions\n\n\n\nClinical trials: - Drug efficacy - Treatment comparison - Side effects\n\n\n\nPolicy research: - Educational interventions - Social programs - Behavioral studies"
-  },
-  {
-    "objectID": "posts/causal-inference/index.html#references",
-    "href": "posts/causal-inference/index.html#references",
-    "title": "Causal Inference and Structural Learning",
-    "section": "",
-    "text": "Theory:\n\n“Causality” by Pearl\n“Causal Inference in Statistics” by Pearl et al.\n“Elements of Causal Inference” by Peters et al.\n\nMethods:\n\n“Mostly Harmless Econometrics” by Angrist and Pischke\n“Counterfactuals and Causal Inference” by Morgan and Winship\n“Causal Inference for Statistics” by Hernán and Robins\n\nApplications:\n\n“Causal Machine Learning” by Athey and Imbens\n“The Book of Why” by Pearl and Mackenzie\n“Observation and Experiment” by Rosenbaum"
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html",
-    "href": "posts/advanced-neural-architectures/index.html",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "The fundamental building block of modern architectures:\n\\[\n\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V\n\\]\nWhere: - \\(Q \\in \\mathbb{R}^{n \\times d_k}\\) is the query matrix - \\(K \\in \\mathbb{R}^{m \\times d_k}\\) is the key matrix - \\(V \\in \\mathbb{R}^{m \\times d_v}\\) is the value matrix - \\(d_k\\) is the dimension of keys - \\(\\sqrt{d_k}\\) is the scaling factor\n\n\n\nParallel attention computations:\n\\[\n\\begin{aligned}\n\\text{MultiHead}(Q, K, V) &= \\text{Concat}(\\text{head}_1, ..., \\text{head}_h)W^O \\\\\n\\text{where head}_i &= \\text{Attention}(QW_i^Q, KW_i^K, VW_i^V)\n\\end{aligned}\n\\]\nWhere: - \\(W_i^Q \\in \\mathbb{R}^{d_{model} \\times d_k}\\) - \\(W_i^K \\in \\mathbb{R}^{d_{model} \\times d_k}\\) - \\(W_i^V \\in \\mathbb{R}^{d_{model} \\times d_v}\\) - \\(W^O \\in \\mathbb{R}^{hd_v \\times d_{model}}\\)\n\n\n\n\n\n\nComplete encoder block computation:\n\\[\n\\begin{aligned}\n\\text{MultiHeadAttn} &= \\text{LayerNorm}(x + \\text{MultiHead}(x, x, x)) \\\\\n\\text{FFN}(x) &= \\text{max}(0, xW_1 + b_1)W_2 + b_2 \\\\\n\\text{Output} &= \\text{LayerNorm}(\\text{MultiHeadAttn} + \\text{FFN}(\\text{MultiHeadAttn}))\n\\end{aligned}\n\\]\n\n\n\nSinusoidal position encoding:\n\\[\n\\begin{aligned}\nPE_{(pos,2i)} &= \\sin(pos/10000^{2i/d_{model}}) \\\\\nPE_{(pos,2i+1)} &= \\cos(pos/10000^{2i/d_{model}})\n\\end{aligned}\n\\]\nWhere: - \\(pos\\) is the position - \\(i\\) is the dimension\n\n\n\n\n\n\nResNet block formulation:\n\\[\ny = F(x, \\{W_i\\}) + x\n\\]\nWith pre-activation variant:\n\\[\n\\begin{aligned}\nh &= \\text{ReLU}(\\text{BN}(x)) \\\\\ny &= W_2\\text{ReLU}(\\text{BN}(W_1h)) + x\n\\end{aligned}\n\\]\n\n\n\nDenseNet connectivity pattern:\n\\[\nx_l = H_l([x_0, x_1, ..., x_{l-1}])\n\\]\nWhere: - \\(x_l\\) is the output of layer \\(l\\) - \\(H_l\\) is a composite function - \\([...]\\) represents concatenation\n\n\n\nChannel attention mechanism:\n\\[\n\\begin{aligned}\nz &= F_{sq}(u) = \\frac{1}{H \\times W}\\sum_{i=1}^H\\sum_{j=1}^W u_c(i,j) \\\\\ns &= F_{ex}(z) = \\sigma(W_2\\text{ReLU}(W_1z))\n\\end{aligned}\n\\]\n\n\n\n\n\n\nPosition-aware attention scoring:\n\\[\n\\text{Attention}(Q, K, V, R) = \\text{softmax}\\left(\\frac{QK^T + QR^T}{\\sqrt{d_k}}\\right)V\n\\]\nWhere: - \\(R\\) is the relative position encoding matrix\n\n\n\nEfficient attention computation:\n\\[\n\\text{LinearAttention}(Q, K, V) = \\phi(Q)(\\phi(K)^TV)\n\\]\nWhere: - \\(\\phi\\) is a feature map (e.g., elu(x) + 1)\n\n\n\nStructured sparsity pattern:\n\\[\n\\text{SparseAttention}(Q, K, V) = \\text{softmax}\\left(\\frac{M \\odot (QK^T)}{\\sqrt{d_k}}\\right)V\n\\]\nWhere: - \\(M\\) is a binary mask matrix - \\(\\odot\\) is element-wise multiplication\n\n\n\n\n\n\nComputation across features:\n\\[\n\\text{LN}(x) = \\gamma \\odot \\frac{x - \\mu}{\\sqrt{\\sigma^2 + \\epsilon}} + \\beta\n\\]\nWhere: - \\(\\mu\\) and \\(\\sigma\\) are computed across feature dimension\n\n\n\nFeature group normalization:\n\\[\n\\text{GN}(x) = \\gamma \\odot \\frac{x - \\mu_g}{\\sqrt{\\sigma_g^2 + \\epsilon}} + \\beta\n\\]\nWhere: - \\(\\mu_g\\) and \\(\\sigma_g\\) are computed within groups\n\n\n\n\n\n\nSmooth approximation:\n\\[\n\\text{GELU}(x) = x\\Phi(x) = x \\cdot \\frac{1}{2}\\left[1 + \\text{erf}\\left(\\frac{x}{\\sqrt{2}}\\right)\\right]\n\\]\n\n\n\nSelf-gated activation:\n\\[\n\\text{Swish}(x) = x \\cdot \\sigma(\\beta x)\n\\]\nWhere: - \\(\\sigma\\) is the sigmoid function - \\(\\beta\\) is a learnable parameter\n\n\n\n\n\n\nOptimization objective:\n\\[\n\\begin{aligned}\n\\min_{\\alpha} & \\quad \\mathcal{L}_{val}(w^*(\\alpha), \\alpha) \\\\\n\\text{s.t.} & \\quad w^*(\\alpha) = \\argmin_w \\mathcal{L}_{train}(w, \\alpha)\n\\end{aligned}\n\\]\n\n\n\nRouting probability:\n\\[\np_{ij} = \\frac{\\exp(\\hat{u}_j|u_i)}{\\sum_k \\exp(\\hat{u}_k|u_i)}\n\\]\nWhere: - \\(u_i\\) is the input capsule - \\(\\hat{u}_j\\) is the prediction vector\n\n\n\n\n\n\nGradient checkpointing:\n\\[\n\\text{memory} = O(\\sqrt{N}) \\text{ instead of } O(N)\n\\]\nWhere: - \\(N\\) is the number of layers\n\n\n\nMixed precision training:\n\\[\n\\begin{aligned}\n\\text{FP16 Forward} &: y = \\text{cast}_{\\text{FP16}}(Wx) \\\\\n\\text{FP32 Master} &: w_{\\text{master}} = w_{\\text{FP32}}\n\\end{aligned}\n\\]\n\n\n\nGradient clipping with norm:\n\\[\ng = \\min\\left(1, \\frac{\\theta}{\\|g\\|}\\right)g\n\\]\nWhere: - \\(\\theta\\) is the clipping threshold - \\(g\\) is the gradient\n\n\n\n\n\n\nDistillation objective:\n\\[\n\\mathcal{L} = \\alpha T^2 \\text{KL}\\left(\\text{softmax}\\left(\\frac{z_t}{T}\\right), \\text{softmax}\\left(\\frac{z_s}{T}\\right)\\right) + (1-\\alpha)\\mathcal{L}_{\\text{CE}}\n\\]\nWhere: - \\(z_t\\) and \\(z_s\\) are teacher and student logits - \\(T\\) is temperature - \\(\\alpha\\) is balancing factor\n\n\n\nCurriculum learning schedule:\n\\[\n\\lambda(t) = \\min\\left(1, \\frac{t}{\\tau}\\right)\n\\]\nWhere: - \\(t\\) is current step - \\(\\tau\\) is ramp-up period\n\n\n\n\n\n\nAttention complexity:\n\\[\n\\begin{aligned}\n\\text{Space} &: O(n^2d) \\\\\n\\text{Time} &: O(n^2d)\n\\end{aligned}\n\\]\nWhere: - \\(n\\) is sequence length - \\(d\\) is hidden dimension\n\n\n\nMaximum path length:\n\\[\n\\text{PathLength} = \\begin{cases}\nO(1) & \\text{for transformers} \\\\\nO(n) & \\text{for RNNs}\n\\end{cases}\n\\]\n\n\n\n\n\n\n\nResidual Connections:\n\nUse in deep networks\nMaintain gradient flow\nEnable deeper architectures\n\nNormalization:\n\nPre-normalization for stability\nLayer normalization for transformers\nBatch normalization for CNNs\n\nAttention Mechanisms:\n\nMulti-head attention for diverse features\nRelative position encoding for sequences\nSparse attention for long sequences\n\n\n\n\n\n\nLearning Rate:\n\nLinear warmup\nCosine decay\nLayer-wise learning rates\n\nRegularization:\n\nDropout in attention\nWeight decay\nLabel smoothing\n\nOptimization:\n\nAdam with weight decay\nGradient clipping\nMixed precision training\n\n\n\n\n\n\n\nArchitecture:\n\n“Attention Is All You Need” by Vaswani et al.\n“Deep Residual Learning” by He et al.\n“Densely Connected Networks” by Huang et al.\n\nTraining:\n\n“On Layer Normalization in the Transformer Architecture” by Xiong et al.\n“Understanding the Difficulty of Training Deep Feedforward Neural Networks” by Glorot and Bengio\n“Mixed Precision Training” by Micikevicius et al.\n\nAnalysis:\n\n“On the Relationship between Self-Attention and Convolutional Layers” by Cordonnier et al.\n“The Transformer Family” by Tay et al.\n“What Does BERT Look At?” by Clark et al."
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html#self-attention-mechanisms",
-    "href": "posts/advanced-neural-architectures/index.html#self-attention-mechanisms",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "The fundamental building block of modern architectures:\n\\[\n\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V\n\\]\nWhere: - \\(Q \\in \\mathbb{R}^{n \\times d_k}\\) is the query matrix - \\(K \\in \\mathbb{R}^{m \\times d_k}\\) is the key matrix - \\(V \\in \\mathbb{R}^{m \\times d_v}\\) is the value matrix - \\(d_k\\) is the dimension of keys - \\(\\sqrt{d_k}\\) is the scaling factor\n\n\n\nParallel attention computations:\n\\[\n\\begin{aligned}\n\\text{MultiHead}(Q, K, V) &= \\text{Concat}(\\text{head}_1, ..., \\text{head}_h)W^O \\\\\n\\text{where head}_i &= \\text{Attention}(QW_i^Q, KW_i^K, VW_i^V)\n\\end{aligned}\n\\]\nWhere: - \\(W_i^Q \\in \\mathbb{R}^{d_{model} \\times d_k}\\) - \\(W_i^K \\in \\mathbb{R}^{d_{model} \\times d_k}\\) - \\(W_i^V \\in \\mathbb{R}^{d_{model} \\times d_v}\\) - \\(W^O \\in \\mathbb{R}^{hd_v \\times d_{model}}\\)"
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html#transformer-architecture",
-    "href": "posts/advanced-neural-architectures/index.html#transformer-architecture",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "Complete encoder block computation:\n\\[\n\\begin{aligned}\n\\text{MultiHeadAttn} &= \\text{LayerNorm}(x + \\text{MultiHead}(x, x, x)) \\\\\n\\text{FFN}(x) &= \\text{max}(0, xW_1 + b_1)W_2 + b_2 \\\\\n\\text{Output} &= \\text{LayerNorm}(\\text{MultiHeadAttn} + \\text{FFN}(\\text{MultiHeadAttn}))\n\\end{aligned}\n\\]\n\n\n\nSinusoidal position encoding:\n\\[\n\\begin{aligned}\nPE_{(pos,2i)} &= \\sin(pos/10000^{2i/d_{model}}) \\\\\nPE_{(pos,2i+1)} &= \\cos(pos/10000^{2i/d_{model}})\n\\end{aligned}\n\\]\nWhere: - \\(pos\\) is the position - \\(i\\) is the dimension"
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html#modern-architectural-patterns",
-    "href": "posts/advanced-neural-architectures/index.html#modern-architectural-patterns",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "ResNet block formulation:\n\\[\ny = F(x, \\{W_i\\}) + x\n\\]\nWith pre-activation variant:\n\\[\n\\begin{aligned}\nh &= \\text{ReLU}(\\text{BN}(x)) \\\\\ny &= W_2\\text{ReLU}(\\text{BN}(W_1h)) + x\n\\end{aligned}\n\\]\n\n\n\nDenseNet connectivity pattern:\n\\[\nx_l = H_l([x_0, x_1, ..., x_{l-1}])\n\\]\nWhere: - \\(x_l\\) is the output of layer \\(l\\) - \\(H_l\\) is a composite function - \\([...]\\) represents concatenation\n\n\n\nChannel attention mechanism:\n\\[\n\\begin{aligned}\nz &= F_{sq}(u) = \\frac{1}{H \\times W}\\sum_{i=1}^H\\sum_{j=1}^W u_c(i,j) \\\\\ns &= F_{ex}(z) = \\sigma(W_2\\text{ReLU}(W_1z))\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html#advanced-attention-variants",
-    "href": "posts/advanced-neural-architectures/index.html#advanced-attention-variants",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "Position-aware attention scoring:\n\\[\n\\text{Attention}(Q, K, V, R) = \\text{softmax}\\left(\\frac{QK^T + QR^T}{\\sqrt{d_k}}\\right)V\n\\]\nWhere: - \\(R\\) is the relative position encoding matrix\n\n\n\nEfficient attention computation:\n\\[\n\\text{LinearAttention}(Q, K, V) = \\phi(Q)(\\phi(K)^TV)\n\\]\nWhere: - \\(\\phi\\) is a feature map (e.g., elu(x) + 1)\n\n\n\nStructured sparsity pattern:\n\\[\n\\text{SparseAttention}(Q, K, V) = \\text{softmax}\\left(\\frac{M \\odot (QK^T)}{\\sqrt{d_k}}\\right)V\n\\]\nWhere: - \\(M\\) is a binary mask matrix - \\(\\odot\\) is element-wise multiplication"
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html#advanced-normalization-techniques",
-    "href": "posts/advanced-neural-architectures/index.html#advanced-normalization-techniques",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "Computation across features:\n\\[\n\\text{LN}(x) = \\gamma \\odot \\frac{x - \\mu}{\\sqrt{\\sigma^2 + \\epsilon}} + \\beta\n\\]\nWhere: - \\(\\mu\\) and \\(\\sigma\\) are computed across feature dimension\n\n\n\nFeature group normalization:\n\\[\n\\text{GN}(x) = \\gamma \\odot \\frac{x - \\mu_g}{\\sqrt{\\sigma_g^2 + \\epsilon}} + \\beta\n\\]\nWhere: - \\(\\mu_g\\) and \\(\\sigma_g\\) are computed within groups"
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html#advanced-activation-functions",
-    "href": "posts/advanced-neural-architectures/index.html#advanced-activation-functions",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "Smooth approximation:\n\\[\n\\text{GELU}(x) = x\\Phi(x) = x \\cdot \\frac{1}{2}\\left[1 + \\text{erf}\\left(\\frac{x}{\\sqrt{2}}\\right)\\right]\n\\]\n\n\n\nSelf-gated activation:\n\\[\n\\text{Swish}(x) = x \\cdot \\sigma(\\beta x)\n\\]\nWhere: - \\(\\sigma\\) is the sigmoid function - \\(\\beta\\) is a learnable parameter"
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html#architectural-optimization",
-    "href": "posts/advanced-neural-architectures/index.html#architectural-optimization",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "Optimization objective:\n\\[\n\\begin{aligned}\n\\min_{\\alpha} & \\quad \\mathcal{L}_{val}(w^*(\\alpha), \\alpha) \\\\\n\\text{s.t.} & \\quad w^*(\\alpha) = \\argmin_w \\mathcal{L}_{train}(w, \\alpha)\n\\end{aligned}\n\\]\n\n\n\nRouting probability:\n\\[\np_{ij} = \\frac{\\exp(\\hat{u}_j|u_i)}{\\sum_k \\exp(\\hat{u}_k|u_i)}\n\\]\nWhere: - \\(u_i\\) is the input capsule - \\(\\hat{u}_j\\) is the prediction vector"
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html#implementation-considerations",
-    "href": "posts/advanced-neural-architectures/index.html#implementation-considerations",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "Gradient checkpointing:\n\\[\n\\text{memory} = O(\\sqrt{N}) \\text{ instead of } O(N)\n\\]\nWhere: - \\(N\\) is the number of layers\n\n\n\nMixed precision training:\n\\[\n\\begin{aligned}\n\\text{FP16 Forward} &: y = \\text{cast}_{\\text{FP16}}(Wx) \\\\\n\\text{FP32 Master} &: w_{\\text{master}} = w_{\\text{FP32}}\n\\end{aligned}\n\\]\n\n\n\nGradient clipping with norm:\n\\[\ng = \\min\\left(1, \\frac{\\theta}{\\|g\\|}\\right)g\n\\]\nWhere: - \\(\\theta\\) is the clipping threshold - \\(g\\) is the gradient"
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html#advanced-training-techniques",
-    "href": "posts/advanced-neural-architectures/index.html#advanced-training-techniques",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "Distillation objective:\n\\[\n\\mathcal{L} = \\alpha T^2 \\text{KL}\\left(\\text{softmax}\\left(\\frac{z_t}{T}\\right), \\text{softmax}\\left(\\frac{z_s}{T}\\right)\\right) + (1-\\alpha)\\mathcal{L}_{\\text{CE}}\n\\]\nWhere: - \\(z_t\\) and \\(z_s\\) are teacher and student logits - \\(T\\) is temperature - \\(\\alpha\\) is balancing factor\n\n\n\nCurriculum learning schedule:\n\\[\n\\lambda(t) = \\min\\left(1, \\frac{t}{\\tau}\\right)\n\\]\nWhere: - \\(t\\) is current step - \\(\\tau\\) is ramp-up period"
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html#performance-analysis",
-    "href": "posts/advanced-neural-architectures/index.html#performance-analysis",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "Attention complexity:\n\\[\n\\begin{aligned}\n\\text{Space} &: O(n^2d) \\\\\n\\text{Time} &: O(n^2d)\n\\end{aligned}\n\\]\nWhere: - \\(n\\) is sequence length - \\(d\\) is hidden dimension\n\n\n\nMaximum path length:\n\\[\n\\text{PathLength} = \\begin{cases}\nO(1) & \\text{for transformers} \\\\\nO(n) & \\text{for RNNs}\n\\end{cases}\n\\]"
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html#best-practices",
-    "href": "posts/advanced-neural-architectures/index.html#best-practices",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "Residual Connections:\n\nUse in deep networks\nMaintain gradient flow\nEnable deeper architectures\n\nNormalization:\n\nPre-normalization for stability\nLayer normalization for transformers\nBatch normalization for CNNs\n\nAttention Mechanisms:\n\nMulti-head attention for diverse features\nRelative position encoding for sequences\nSparse attention for long sequences\n\n\n\n\n\n\nLearning Rate:\n\nLinear warmup\nCosine decay\nLayer-wise learning rates\n\nRegularization:\n\nDropout in attention\nWeight decay\nLabel smoothing\n\nOptimization:\n\nAdam with weight decay\nGradient clipping\nMixed precision training"
-  },
-  {
-    "objectID": "posts/advanced-neural-architectures/index.html#references",
-    "href": "posts/advanced-neural-architectures/index.html#references",
-    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
-    "section": "",
-    "text": "Architecture:\n\n“Attention Is All You Need” by Vaswani et al.\n“Deep Residual Learning” by He et al.\n“Densely Connected Networks” by Huang et al.\n\nTraining:\n\n“On Layer Normalization in the Transformer Architecture” by Xiong et al.\n“Understanding the Difficulty of Training Deep Feedforward Neural Networks” by Glorot and Bengio\n“Mixed Precision Training” by Micikevicius et al.\n\nAnalysis:\n\n“On the Relationship between Self-Attention and Convolutional Layers” by Cordonnier et al.\n“The Transformer Family” by Tay et al.\n“What Does BERT Look At?” by Clark et al."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BendThe-Curve",
-    "section": "",
-    "text": "I’ve always wanted to start a blog, but something held me back. The thought of not having a fixed topic or wondering if it would be interesting enough kept me from taking that first step. As time passed, my interests evolved, and I gained more experience in different areas.\nNow, after diving deep into AI, machine learning, and data science, I’ve finally decided to take the leap. This blog isn’t just about sharing knowledge - it’s about documenting this exciting journey through the ever-evolving world of artificial intelligence and helping others who might be on a similar path.\n\n\nCheck out recent posts below. Find more in the Posts section."
-  },
-  {
-    "objectID": "index.html#why-this-blog",
-    "href": "index.html#why-this-blog",
-    "title": "BendThe-Curve",
-    "section": "",
-    "text": "I’ve always wanted to start a blog, but something held me back. The thought of not having a fixed topic or wondering if it would be interesting enough kept me from taking that first step. As time passed, my interests evolved, and I gained more experience in different areas.\nNow, after diving deep into AI, machine learning, and data science, I’ve finally decided to take the leap. This blog isn’t just about sharing knowledge - it’s about documenting this exciting journey through the ever-evolving world of artificial intelligence and helping others who might be on a similar path.\n\n\nCheck out recent posts below. Find more in the Posts section."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "Hi! I’m Ram Polisetti, a passionate learner exploring the world of Machine Learning and Data Science. Through BendThe-Curve, I document my learning journey, share insights, and build a community of fellow ML enthusiasts."
-  },
-  {
-    "objectID": "posts.html",
-    "href": "posts.html",
-    "title": "ML Journey Posts",
-    "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nWelcome to BendTheCurve\n\n\n\n\n\n\nwelcome\n\n\nintroduction\n\n\n\nYour friendly guide to the exciting world of data science and machine learning\n\n\n\n\n\nNov 20, 2024\n\n\n3 min\n\n\n\n\n\n\n\nAdvanced Neural Network Architectures: A Technical Deep Dive\n\n\n\n\n\n\ndeep-learning\n\n\nneural-networks\n\n\narchitectures\n\n\nmathematics\n\n\n\nA comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\n\nAlgorithmic Stability and Learning Theory\n\n\n\n\n\n\nmachine-learning\n\n\ntheory\n\n\nmathematics\n\n\nstability\n\n\n\nA beginner-friendly guide to algorithmic stability in machine learning, with interactive visualizations and practical examples.\n\n\n\n\n\nMar 19, 2024\n\n\n14 min\n\n\n\n\n\n\n\nCausal Inference and Structural Learning\n\n\n\n\n\n\nmachine-learning\n\n\ncausality\n\n\nstatistics\n\n\nmathematics\n\n\n\nA rigorous exploration of causal inference and structural learning, covering identification, estimation, and structural causal models.\n\n\n\n\n\nMar 19, 2024\n\n\n3 min\n\n\n\n\n\n\n\nComputational Learning Theory\n\n\n\n\n\n\nmachine-learning\n\n\ntheory\n\n\ncomplexity\n\n\nalgorithms\n\n\n\nA beginner-friendly guide to computational learning theory with interactive visualizations and practical examples.\n\n\n\n\n\nMar 19, 2024\n\n\n9 min\n\n\n\n\n\n\n\nDeep Learning: The Technology Behind AI’s Recent Breakthroughs\n\n\n\n\n\n\ndeep-learning\n\n\nneural-networks\n\n\nbeginner\n\n\n\nDiscover how deep learning is revolutionizing artificial intelligence and why it’s become the driving force behind recent AI breakthroughs.\n\n\n\n\n\nMar 19, 2024\n\n\n6 min\n\n\n\n\n\n\n\nGenerative Models: Mathematical Foundations and Architectures\n\n\n\n\n\n\nmachine-learning\n\n\ngenerative-models\n\n\ndeep-learning\n\n\nmathematics\n\n\n\nA rigorous mathematical exploration of generative models, including GANs, VAEs, and diffusion models.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\n\nInformation Theory in Machine Learning: A Practical Guide\n\n\n\n\n\n\nmachine-learning\n\n\ninformation-theory\n\n\nmathematics\n\n\ntheory\n\n\n\nA beginner-friendly guide to information theory in machine learning, with practical examples and intuitive explanations.\n\n\n\n\n\nMar 19, 2024\n\n\n7 min\n\n\n\n\n\n\n\nMachine Learning: A Beginner’s Guide\n\n\n\n\n\n\nmachine-learning\n\n\nfundamentals\n\n\npython\n\n\nhands-on\n\n\n\nA beginner-friendly guide to machine learning with clear explanations and practical examples.\n\n\n\n\n\nMar 19, 2024\n\n\n9 min\n\n\n\n\n\n\n\nML Fundamentals: Understanding the Basics\n\n\n\n\n\n\nmachine-learning\n\n\nfundamentals\n\n\ntheory\n\n\n\nA comprehensive introduction to machine learning fundamentals, core concepts, and essential terminology that every aspiring ML practitioner should know.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\n\nMachine Learning in Everyday Life: A Practical Guide\n\n\n\n\n\n\nmachine-learning\n\n\napplications\n\n\nreal-world\n\n\nbeginner\n\n\n\nDiscover how machine learning is already part of your daily life and how it makes things easier, explained in simple terms with real-world examples.\n\n\n\n\n\nMar 19, 2024\n\n\n5 min\n\n\n\n\n\n\n\nMachine Learning Theory: Mathematical Foundations Made Simple\n\n\n\n\n\n\nmachine-learning\n\n\ntheory\n\n\nmathematics\n\n\nstatistics\n\n\n\nA beginner-friendly guide to machine learning theory, with intuitive explanations and practical examples.\n\n\n\n\n\nMar 19, 2024\n\n\n6 min\n\n\n\n\n\n\n\nOnline Learning and Regret Minimization\n\n\n\n\n\n\nmachine-learning\n\n\ntheory\n\n\nmathematics\n\n\nonline-learning\n\n\n\nA rigorous exploration of online learning theory and regret minimization, covering fundamental algorithms, bounds, and applications.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\n\nOptimization Algorithms in Machine Learning: A Deep Dive\n\n\n\n\n\n\nmachine-learning\n\n\noptimization\n\n\nmathematics\n\n\nalgorithms\n\n\n\nA comprehensive technical exploration of optimization algorithms in machine learning, covering mathematical foundations and implementation details.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\n\nOptimization Theory in Machine Learning\n\n\n\n\n\n\nmachine-learning\n\n\noptimization\n\n\nmathematics\n\n\ntheory\n\n\n\nA rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.\n\n\n\n\n\nMar 19, 2024\n\n\n3 min\n\n\n\n\n\n\n\nPAC Learning Theory and VC Dimension\n\n\n\n\n\n\nmachine-learning\n\n\ntheory\n\n\nmathematics\n\n\nstatistics\n\n\n\nA beginner-friendly guide to PAC learning theory and VC dimension with interactive visualizations and practical examples.\n\n\n\n\n\nMar 19, 2024\n\n\n10 min\n\n\n\n\n\n\n\nProbabilistic Graphical Models: Mathematical Foundations\n\n\n\n\n\n\nmachine-learning\n\n\nprobabilistic-models\n\n\nmathematics\n\n\nbayesian\n\n\n\nA rigorous exploration of probabilistic graphical models, covering mathematical foundations, inference algorithms, and learning methods.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\n\nUnderstanding Reinforcement Learning: A Beginner’s Guide\n\n\n\n\n\n\nmachine-learning\n\n\nreinforcement-learning\n\n\ntheory\n\n\nbeginner\n\n\n\nA beginner-friendly introduction to reinforcement learning concepts, explained through simple analogies and real-world examples.\n\n\n\n\n\nMar 19, 2024\n\n\n6 min\n\n\n\n\n\n\n\nStatistical Learning Theory and Concentration Inequalities\n\n\n\n\n\n\nmachine-learning\n\n\ntheory\n\n\nmathematics\n\n\nstatistics\n\n\n\nA rigorous exploration of statistical learning theory and concentration inequalities, covering fundamental bounds and their applications in machine learning.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/bend-the-curve-intro/index.html",
-    "href": "posts/bend-the-curve-intro/index.html",
-    "title": "Welcome to BendTheCurve",
-    "section": "",
-    "text": "What is BendTheCurve?\n\n\n\nA learning platform where we break down complex data science and machine learning concepts into simple, understandable pieces. No PhD required! 🎓"
-  },
-  {
-    "objectID": "posts/bend-the-curve-intro/index.html#why-bendthecurve",
-    "href": "posts/bend-the-curve-intro/index.html#why-bendthecurve",
-    "title": "Welcome to BendTheCurve",
-    "section": "Why BendTheCurve?",
-    "text": "Why BendTheCurve?\nHave you ever: - Wondered how Netflix knows exactly what show you’ll like? 🎬 - Been curious about how self-driving cars work? 🚗 - Wanted to learn data science but felt overwhelmed? 📊\nYou’re in the right place! BendTheCurve is designed to make these fascinating topics accessible to everyone."
-  },
-  {
-    "objectID": "posts/bend-the-curve-intro/index.html#what-well-cover",
-    "href": "posts/bend-the-curve-intro/index.html#what-well-cover",
-    "title": "Welcome to BendTheCurve",
-    "section": "What We’ll Cover",
-    "text": "What We’ll Cover\n\n🌱 For Beginners\n\nPython Basics: Start from zero\nData Analysis: Learn to tell stories with data\nMachine Learning 101: Build your first AI models\n\n\n\n🚀 For Intermediate Learners\n\nDeep Learning: Understand neural networks\nNatural Language Processing: Make computers understand text\nComputer Vision: Teach machines to see\n\n\n\n💡 For Advanced Practitioners\n\nResearch Papers Explained: Latest developments in simple terms\nIndustry Best Practices: Real-world applications\nAdvanced Techniques: Cutting-edge methods"
-  },
-  {
-    "objectID": "posts/bend-the-curve-intro/index.html#how-to-use-this-blog",
-    "href": "posts/bend-the-curve-intro/index.html#how-to-use-this-blog",
-    "title": "Welcome to BendTheCurve",
-    "section": "How to Use This Blog",
-    "text": "How to Use This Blog\n\n1. Start with the Fundamentals\nBegin with our beginner-friendly series: - Machine Learning Fundamentals - Python for Data Science - Statistics Made Simple\n\n\n2. Choose Your Path\nWe’ve organized content into clear learning paths:\n\n\n\n\n\n\nLearning Paths\n\n\n\n🔰 Beginner Path 1. Python Basics 2. Data Analysis Fundamentals 3. Intro to Machine Learning\n📚 Data Science Path 1. Statistical Methods 2. Data Visualization 3. Advanced Analytics\n🤖 Machine Learning Path 1. ML Algorithms 2. Deep Learning 3. AI Applications\n\n\n\n\n3. Practice with Real Projects\nEvery concept comes with: - 💻 Hands-on code examples - 🎯 Practice exercises - 🏗️ Project ideas"
-  },
-  {
-    "objectID": "posts/bend-the-curve-intro/index.html#what-makes-us-different",
-    "href": "posts/bend-the-curve-intro/index.html#what-makes-us-different",
-    "title": "Welcome to BendTheCurve",
-    "section": "What Makes Us Different",
-    "text": "What Makes Us Different\n\nSimple Explanations\n\nNo unnecessary jargon\nReal-world analogies\nVisual learning aids\n\nPractical Focus\n\nIndustry-relevant skills\nReal-world examples\nReady-to-use code\n\nCommunity Support\n\nActive discussions\nQuestion & Answer sessions\nProject sharing"
-  },
-  {
-    "objectID": "posts/bend-the-curve-intro/index.html#join-our-community",
-    "href": "posts/bend-the-curve-intro/index.html#join-our-community",
-    "title": "Welcome to BendTheCurve",
-    "section": "Join Our Community",
-    "text": "Join Our Community\n\n💬 Comment on posts\n🤝 Share your projects\n📧 Subscribe to updates\n🐦 Follow on Twitter\n\n\n\n\n\n\n\nGetting Started\n\n\n\n\nPick a learning path that matches your level\nStart with the fundamentals\nPractice with provided examples\nJoin the discussion"
-  },
-  {
-    "objectID": "posts/bend-the-curve-intro/index.html#coming-up-next",
-    "href": "posts/bend-the-curve-intro/index.html#coming-up-next",
-    "title": "Welcome to BendTheCurve",
-    "section": "Coming Up Next",
-    "text": "Coming Up Next\nHere’s what we’re working on: - 📊 Data Visualization Masterclass - 🤖 Building Your First Neural Network - 📱 Machine Learning for Mobile Apps"
-  },
-  {
-    "objectID": "posts/bend-the-curve-intro/index.html#resources",
-    "href": "posts/bend-the-curve-intro/index.html#resources",
-    "title": "Welcome to BendTheCurve",
-    "section": "Resources",
-    "text": "Resources\n\n🛠️ Tools We’ll Use\n\nPython\nJupyter Notebooks\nPopular ML Libraries\n\n\n\n📚 Recommended Reading\n\nFree online resources\nBook recommendations\nResearch papers explained\n\n\n\n💻 Practice Materials\n\nDatasets\nCode templates\nProject starters\n\n\n\n\n\n\n\nRemember\n\n\n\nEveryone starts somewhere! Don’t feel overwhelmed - we’ll break everything down into manageable pieces.\n\n\nLet’s start this exciting journey together! Choose your first article from the learning paths above, or check out our latest posts.\nHappy Learning! 🚀"
+    "objectID": "posts/information-theory-ml/index.html#further-reading",
+    "href": "posts/information-theory-ml/index.html#further-reading",
+    "title": "Information Theory in Machine Learning: A Practical Guide",
+    "section": "Further Reading",
+    "text": "Further Reading\n\nBooksOnline ResourcesTools\n\n\n\n“Elements of Information Theory” by Cover & Thomas\n“Information Theory, Inference, and Learning Algorithms” by MacKay\n“Deep Learning” by Goodfellow et al. (Chapter 3)\n\n\n\n\nInformation Theory Course (Stanford)\nDeep Learning Information Theory Blog\nPyTorch Documentation on Losses\n\n\n\n\nscipy.stats.entropy\nsklearn.feature_selection\ntensorflow.keras.losses\n\n\n\n\nRemember: Information theory provides powerful tools for understanding and improving machine learning models. Start with simple concepts and gradually build up to more complex applications!"
   },
   {
     "objectID": "posts/deep-learning-beginners/index.html",
@@ -945,53 +672,375 @@
     "text": "Projects to Try\n\n\n\n\n\n\nHands-On Learning\n\n\n\nStart with these beginner-friendly projects: 1. Image Classification: Identify handwritten digits using MNIST dataset 2. Text Classification: Build a simple sentiment analyzer 3. Prediction: Create a basic price prediction model\n\n\n\nResources for Learning\n\nOnline CoursesBooksTools\n\n\n\nFast.ai - Practical Deep Learning for Coders\nCoursera - Deep Learning Specialization\nTensorFlow’s Official Tutorials\n\n\n\n\n“Deep Learning with Python” by François Chollet\n“Grokking Deep Learning” by Andrew Trask\n\n\n\n\nGoogle Colab (free GPU access)\nTensorFlow and Keras\nPyTorch\n\n\n\n\nRemember: Deep learning is powerful but requires patience to learn. Start with simple concepts, practice regularly, and gradually tackle more complex topics. Focus on understanding rather than memorizing, and always experiment with code to reinforce your learning."
   },
   {
-    "objectID": "posts/information-theory-ml/index.html",
-    "href": "posts/information-theory-ml/index.html",
-    "title": "Information Theory in Machine Learning: A Practical Guide",
+    "objectID": "posts/bend-the-curve-intro/index.html",
+    "href": "posts/bend-the-curve-intro/index.html",
+    "title": "Welcome to BendTheCurve",
     "section": "",
-    "text": "What You’ll Learn\n\n\n\nBy the end of this guide, you’ll understand: - How information is measured in machine learning - Why entropy matters in data science - How to use information theory for feature selection - Practical applications in deep learning"
+    "text": "What is BendTheCurve?\n\n\n\nA learning platform where we break down complex data science and machine learning concepts into simple, understandable pieces. No PhD required! 🎓"
   },
   {
-    "objectID": "posts/information-theory-ml/index.html#understanding-information-theory-through-examples",
-    "href": "posts/information-theory-ml/index.html#understanding-information-theory-through-examples",
-    "title": "Information Theory in Machine Learning: A Practical Guide",
-    "section": "Understanding Information Theory Through Examples",
-    "text": "Understanding Information Theory Through Examples\nLet’s start with a practical example:\n\nCodeExplanation\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import entropy\nimport seaborn as sns\n\ndef calculate_entropy(probabilities):\n    \"\"\"Calculate Shannon entropy of a probability distribution\"\"\"\n    return -np.sum(probabilities * np.log2(probabilities + 1e-10))\n\n# Example: Fair vs Loaded Dice\nfair_die = np.ones(6) / 6  # Fair die probabilities\nloaded_die = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.5])  # Loaded die probabilities\n\nprint(f\"Fair Die Entropy: {calculate_entropy(fair_die):.2f} bits\")\nprint(f\"Loaded Die Entropy: {calculate_entropy(loaded_die):.2f} bits\")\n\n# Visualize probabilities and entropy\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))\n\n# Plot probability distributions\nx = np.arange(1, 7)\nwidth = 0.35\nax1.bar(x - width/2, fair_die, width, label='Fair Die')\nax1.bar(x + width/2, loaded_die, width, label='Loaded Die')\nax1.set_xlabel('Outcome')\nax1.set_ylabel('Probability')\nax1.set_title('Probability Distributions')\nax1.legend()\n\n# Plot entropy comparison\nentropies = [calculate_entropy(fair_die), calculate_entropy(loaded_die)]\nax2.bar(['Fair Die', 'Loaded Die'], entropies)\nax2.set_ylabel('Entropy (bits)')\nax2.set_title('Entropy Comparison')\n\nplt.tight_layout()\nplt.show()\n\n\nThis example shows how entropy measures uncertainty: - Fair die: Maximum uncertainty = Higher entropy - Loaded die: More predictable = Lower entropy - Entropy quantifies the average “surprise” in the distribution"
+    "objectID": "posts/bend-the-curve-intro/index.html#why-bendthecurve",
+    "href": "posts/bend-the-curve-intro/index.html#why-bendthecurve",
+    "title": "Welcome to BendTheCurve",
+    "section": "Why BendTheCurve?",
+    "text": "Why BendTheCurve?\nHave you ever: - Wondered how Netflix knows exactly what show you’ll like? 🎬 - Been curious about how self-driving cars work? 🚗 - Wanted to learn data science but felt overwhelmed? 📊\nYou’re in the right place! BendTheCurve is designed to make these fascinating topics accessible to everyone."
   },
   {
-    "objectID": "posts/information-theory-ml/index.html#fundamental-concepts",
-    "href": "posts/information-theory-ml/index.html#fundamental-concepts",
-    "title": "Information Theory in Machine Learning: A Practical Guide",
-    "section": "Fundamental Concepts",
-    "text": "Fundamental Concepts\n\n1. Shannon Entropy: Measuring Uncertainty\n\n\n\n\n\n\nKey Insight\n\n\n\nEntropy measures the average amount of surprise or uncertainty in a random variable. Higher entropy means more unpredictable outcomes.\n\n\nLet’s visualize how entropy changes with probability:\ndef plot_binary_entropy():\n    \"\"\"Plot entropy of a binary event\"\"\"\n    p = np.linspace(0.01, 0.99, 100)\n    H = -(p * np.log2(p) + (1-p) * np.log2(1-p))\n    \n    plt.figure(figsize=(10, 5))\n    plt.plot(p, H)\n    plt.fill_between(p, H, alpha=0.3)\n    plt.xlabel('Probability of Event')\n    plt.ylabel('Entropy (bits)')\n    plt.title('Binary Entropy Function')\n    plt.grid(True)\n    plt.show()\n\nplot_binary_entropy()\n\n\n2. Mutual Information: Measuring Relationships\nLet’s implement a practical example of mutual information for feature selection:\n\nCodeVisualization\n\n\nfrom sklearn.datasets import make_classification\nfrom sklearn.feature_selection import mutual_info_classif\n\n# Generate synthetic dataset\nX, y = make_classification(n_samples=1000, n_features=20, n_informative=5,\n                         n_redundant=5, n_repeated=0, n_classes=2,\n                         random_state=42)\n\n# Calculate mutual information\nmi_scores = mutual_info_classif(X, y)\n\n# Plot feature importance\nplt.figure(figsize=(12, 5))\nplt.bar(range(len(mi_scores)), mi_scores)\nplt.xlabel('Feature Index')\nplt.ylabel('Mutual Information')\nplt.title('Feature Importance using Mutual Information')\nplt.show()\n\n# Select top features\ntop_features = np.argsort(mi_scores)[-5:]\nprint(\"Top 5 most informative features:\", top_features)\n\n\ndef plot_feature_relationship(X, y, feature_idx):\n    \"\"\"Visualize relationship between feature and target\"\"\"\n    plt.figure(figsize=(10, 5))\n    \n    # Plot distributions\n    for class_label in [0, 1]:\n        sns.kdeplot(X[y == class_label, feature_idx], \n                   label=f'Class {class_label}')\n    \n    plt.xlabel(f'Feature {feature_idx} Value')\n    plt.ylabel('Density')\n    plt.title(f'Feature {feature_idx} Distribution by Class')\n    plt.legend()\n    plt.show()\n\n# Visualize top feature\nplot_feature_relationship(X, y, top_features[-1])\n\n\n\n\n\n3. KL Divergence: Comparing Distributions\nLet’s visualize KL divergence between different distributions:\ndef plot_kl_divergence():\n    \"\"\"Visualize KL divergence between Gaussians\"\"\"\n    x = np.linspace(-5, 5, 1000)\n    \n    # Create two Gaussian distributions\n    mu1, sigma1 = 0, 1\n    mu2, sigma2 = 1, 1.5\n    p = np.exp(-(x - mu1)**2 / (2*sigma1**2)) / (sigma1 * np.sqrt(2*np.pi))\n    q = np.exp(-(x - mu2)**2 / (2*sigma2**2)) / (sigma2 * np.sqrt(2*np.pi))\n    \n    # Calculate KL divergence\n    kl = np.sum(p * np.log(p/q)) * (x[1] - x[0])\n    \n    # Plot\n    plt.figure(figsize=(12, 5))\n    plt.plot(x, p, label='P(x)')\n    plt.plot(x, q, label='Q(x)')\n    plt.fill_between(x, p, q, alpha=0.3)\n    plt.xlabel('x')\n    plt.ylabel('Probability Density')\n    plt.title(f'KL(P||Q) = {kl:.2f}')\n    plt.legend()\n    plt.grid(True)\n    plt.show()\n\nplot_kl_divergence()"
+    "objectID": "posts/bend-the-curve-intro/index.html#what-well-cover",
+    "href": "posts/bend-the-curve-intro/index.html#what-well-cover",
+    "title": "Welcome to BendTheCurve",
+    "section": "What We’ll Cover",
+    "text": "What We’ll Cover\n\n🌱 For Beginners\n\nPython Basics: Start from zero\nData Analysis: Learn to tell stories with data\nMachine Learning 101: Build your first AI models\n\n\n\n🚀 For Intermediate Learners\n\nDeep Learning: Understand neural networks\nNatural Language Processing: Make computers understand text\nComputer Vision: Teach machines to see\n\n\n\n💡 For Advanced Practitioners\n\nResearch Papers Explained: Latest developments in simple terms\nIndustry Best Practices: Real-world applications\nAdvanced Techniques: Cutting-edge methods"
   },
   {
-    "objectID": "posts/information-theory-ml/index.html#applications-in-machine-learning",
-    "href": "posts/information-theory-ml/index.html#applications-in-machine-learning",
-    "title": "Information Theory in Machine Learning: A Practical Guide",
-    "section": "Applications in Machine Learning",
-    "text": "Applications in Machine Learning\n\n1. Information Bottleneck in Deep Learning\nLet’s visualize the information plane:\ndef plot_information_plane():\n    \"\"\"Visualize Information Bottleneck principle\"\"\"\n    # Simulate layer-wise mutual information\n    layers = np.arange(1, 6)\n    I_X = np.array([4.5, 3.8, 3.2, 2.8, 2.5])  # I(T;X)\n    I_Y = np.array([0.8, 1.5, 1.8, 1.9, 1.95])  # I(T;Y)\n    \n    plt.figure(figsize=(10, 6))\n    plt.scatter(I_X, I_Y, c=layers, cmap='viridis', s=100)\n    \n    # Add arrows to show progression\n    for i in range(len(layers)-1):\n        plt.arrow(I_X[i], I_Y[i], I_X[i+1]-I_X[i], I_Y[i+1]-I_Y[i],\n                 head_width=0.05, head_length=0.1, fc='k', ec='k')\n    \n    plt.xlabel('I(T;X) - Information about input')\n    plt.ylabel('I(T;Y) - Information about output')\n    plt.title('Information Plane Dynamics')\n    plt.colorbar(label='Layer')\n    plt.grid(True)\n    plt.show()\n\nplot_information_plane()\n\n\n2. Cross-Entropy Loss in Neural Networks\nLet’s implement and visualize cross-entropy loss:\n\nImplementationVisualization\n\n\ndef cross_entropy_loss(y_true, y_pred):\n    \"\"\"Calculate cross-entropy loss\"\"\"\n    return -np.sum(y_true * np.log(y_pred + 1e-10))\n\n# Example with binary classification\ny_true = np.array([1, 0, 1, 1, 0])\ny_pred = np.array([0.9, 0.1, 0.8, 0.7, 0.3])\n\nloss = cross_entropy_loss(y_true, y_pred)\nprint(f\"Cross-Entropy Loss: {loss:.4f}\")\n\n\ndef plot_cross_entropy():\n    \"\"\"Visualize cross-entropy loss\"\"\"\n    p = np.linspace(0.01, 0.99, 100)\n    ce_0 = -np.log(1-p)  # Loss when true label is 0\n    ce_1 = -np.log(p)    # Loss when true label is 1\n    \n    plt.figure(figsize=(10, 5))\n    plt.plot(p, ce_0, label='True Label = 0')\n    plt.plot(p, ce_1, label='True Label = 1')\n    plt.xlabel('Predicted Probability')\n    plt.ylabel('Cross-Entropy Loss')\n    plt.title('Cross-Entropy Loss vs Predicted Probability')\n    plt.legend()\n    plt.grid(True)\n    plt.show()\n\nplot_cross_entropy()"
+    "objectID": "posts/bend-the-curve-intro/index.html#how-to-use-this-blog",
+    "href": "posts/bend-the-curve-intro/index.html#how-to-use-this-blog",
+    "title": "Welcome to BendTheCurve",
+    "section": "How to Use This Blog",
+    "text": "How to Use This Blog\n\n1. Start with the Fundamentals\nBegin with our beginner-friendly series: - Machine Learning Fundamentals - Python for Data Science - Statistics Made Simple\n\n\n2. Choose Your Path\nWe’ve organized content into clear learning paths:\n\n\n\n\n\n\nLearning Paths\n\n\n\n🔰 Beginner Path 1. Python Basics 2. Data Analysis Fundamentals 3. Intro to Machine Learning\n📚 Data Science Path 1. Statistical Methods 2. Data Visualization 3. Advanced Analytics\n🤖 Machine Learning Path 1. ML Algorithms 2. Deep Learning 3. AI Applications\n\n\n\n\n3. Practice with Real Projects\nEvery concept comes with: - 💻 Hands-on code examples - 🎯 Practice exercises - 🏗️ Project ideas"
   },
   {
-    "objectID": "posts/information-theory-ml/index.html#best-practices-and-common-pitfalls",
-    "href": "posts/information-theory-ml/index.html#best-practices-and-common-pitfalls",
-    "title": "Information Theory in Machine Learning: A Practical Guide",
-    "section": "Best Practices and Common Pitfalls",
-    "text": "Best Practices and Common Pitfalls\n\n\n\n\n\n\nWatch Out For\n\n\n\n\nNumerical Stability\n\nAlways add small epsilon to log\nUse stable implementations\n\nDistribution Assumptions\n\nCheck if data matches assumptions\nConsider data transformations\n\nInterpretation\n\nEntropy is relative to features\nMI doesn’t imply causation"
+    "objectID": "posts/bend-the-curve-intro/index.html#what-makes-us-different",
+    "href": "posts/bend-the-curve-intro/index.html#what-makes-us-different",
+    "title": "Welcome to BendTheCurve",
+    "section": "What Makes Us Different",
+    "text": "What Makes Us Different\n\nSimple Explanations\n\nNo unnecessary jargon\nReal-world analogies\nVisual learning aids\n\nPractical Focus\n\nIndustry-relevant skills\nReal-world examples\nReady-to-use code\n\nCommunity Support\n\nActive discussions\nQuestion & Answer sessions\nProject sharing"
   },
   {
-    "objectID": "posts/information-theory-ml/index.html#practical-tips",
-    "href": "posts/information-theory-ml/index.html#practical-tips",
-    "title": "Information Theory in Machine Learning: A Practical Guide",
-    "section": "Practical Tips",
-    "text": "Practical Tips\n\n\n\n\n\n\nFor Better Results\n\n\n\n\nFeature Selection\n\nUse MI for initial screening\nCombine with other methods\n\nModel Evaluation\n\nMonitor information flow\nUse cross-entropy properly\n\nDistribution Matching\n\nStart with simpler metrics\nProgress to KL/JS divergence"
+    "objectID": "posts/bend-the-curve-intro/index.html#join-our-community",
+    "href": "posts/bend-the-curve-intro/index.html#join-our-community",
+    "title": "Welcome to BendTheCurve",
+    "section": "Join Our Community",
+    "text": "Join Our Community\n\n💬 Comment on posts\n🤝 Share your projects\n📧 Subscribe to updates\n🐦 Follow on Twitter\n\n\n\n\n\n\n\nGetting Started\n\n\n\n\nPick a learning path that matches your level\nStart with the fundamentals\nPractice with provided examples\nJoin the discussion"
   },
   {
-    "objectID": "posts/information-theory-ml/index.html#further-reading",
-    "href": "posts/information-theory-ml/index.html#further-reading",
-    "title": "Information Theory in Machine Learning: A Practical Guide",
-    "section": "Further Reading",
-    "text": "Further Reading\n\nBooksOnline ResourcesTools\n\n\n\n“Elements of Information Theory” by Cover & Thomas\n“Information Theory, Inference, and Learning Algorithms” by MacKay\n“Deep Learning” by Goodfellow et al. (Chapter 3)\n\n\n\n\nInformation Theory Course (Stanford)\nDeep Learning Information Theory Blog\nPyTorch Documentation on Losses\n\n\n\n\nscipy.stats.entropy\nsklearn.feature_selection\ntensorflow.keras.losses\n\n\n\n\nRemember: Information theory provides powerful tools for understanding and improving machine learning models. Start with simple concepts and gradually build up to more complex applications!"
+    "objectID": "posts/bend-the-curve-intro/index.html#coming-up-next",
+    "href": "posts/bend-the-curve-intro/index.html#coming-up-next",
+    "title": "Welcome to BendTheCurve",
+    "section": "Coming Up Next",
+    "text": "Coming Up Next\nHere’s what we’re working on: - 📊 Data Visualization Masterclass - 🤖 Building Your First Neural Network - 📱 Machine Learning for Mobile Apps"
+  },
+  {
+    "objectID": "posts/bend-the-curve-intro/index.html#resources",
+    "href": "posts/bend-the-curve-intro/index.html#resources",
+    "title": "Welcome to BendTheCurve",
+    "section": "Resources",
+    "text": "Resources\n\n🛠️ Tools We’ll Use\n\nPython\nJupyter Notebooks\nPopular ML Libraries\n\n\n\n📚 Recommended Reading\n\nFree online resources\nBook recommendations\nResearch papers explained\n\n\n\n💻 Practice Materials\n\nDatasets\nCode templates\nProject starters\n\n\n\n\n\n\n\nRemember\n\n\n\nEveryone starts somewhere! Don’t feel overwhelmed - we’ll break everything down into manageable pieces.\n\n\nLet’s start this exciting journey together! Choose your first article from the learning paths above, or check out our latest posts.\nHappy Learning! 🚀"
+  },
+  {
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "ML Journey Posts",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nWelcome to BendTheCurve\n\n\n\n\n\n\nwelcome\n\n\nintroduction\n\n\n\nYour friendly guide to the exciting world of data science and machine learning\n\n\n\n\n\nNov 20, 2024\n\n\n3 min\n\n\n\n\n\n\n\nAdvanced Neural Network Architectures: A Technical Deep Dive\n\n\n\n\n\n\ndeep-learning\n\n\nneural-networks\n\n\narchitectures\n\n\nmathematics\n\n\n\nA comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\n\nAlgorithmic Stability and Learning Theory\n\n\n\n\n\n\nmachine-learning\n\n\ntheory\n\n\nmathematics\n\n\nstability\n\n\n\nA beginner-friendly guide to algorithmic stability in machine learning, with interactive visualizations and practical examples.\n\n\n\n\n\nMar 19, 2024\n\n\n14 min\n\n\n\n\n\n\n\nCausal Inference and Structural Learning\n\n\n\n\n\n\nmachine-learning\n\n\ncausality\n\n\nstatistics\n\n\nmathematics\n\n\n\nA rigorous exploration of causal inference and structural learning, covering identification, estimation, and structural causal models.\n\n\n\n\n\nMar 19, 2024\n\n\n3 min\n\n\n\n\n\n\n\nComputational Learning Theory\n\n\n\n\n\n\nmachine-learning\n\n\ntheory\n\n\ncomplexity\n\n\nalgorithms\n\n\n\nA beginner-friendly guide to computational learning theory with interactive visualizations and practical examples.\n\n\n\n\n\nMar 19, 2024\n\n\n9 min\n\n\n\n\n\n\n\nDeep Learning: The Technology Behind AI’s Recent Breakthroughs\n\n\n\n\n\n\ndeep-learning\n\n\nneural-networks\n\n\nbeginner\n\n\n\nDiscover how deep learning is revolutionizing artificial intelligence and why it’s become the driving force behind recent AI breakthroughs.\n\n\n\n\n\nMar 19, 2024\n\n\n6 min\n\n\n\n\n\n\n\nGenerative Models: Mathematical Foundations and Architectures\n\n\n\n\n\n\nmachine-learning\n\n\ngenerative-models\n\n\ndeep-learning\n\n\nmathematics\n\n\n\nA rigorous mathematical exploration of generative models, including GANs, VAEs, and diffusion models.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\n\nInformation Theory in Machine Learning: A Practical Guide\n\n\n\n\n\n\nmachine-learning\n\n\ninformation-theory\n\n\nmathematics\n\n\ntheory\n\n\n\nA beginner-friendly guide to information theory in machine learning, with practical examples and intuitive explanations.\n\n\n\n\n\nMar 19, 2024\n\n\n7 min\n\n\n\n\n\n\n\nMachine Learning: A Beginner’s Guide\n\n\n\n\n\n\nmachine-learning\n\n\nfundamentals\n\n\npython\n\n\nhands-on\n\n\n\nA beginner-friendly guide to machine learning with clear explanations and practical examples.\n\n\n\n\n\nMar 19, 2024\n\n\n9 min\n\n\n\n\n\n\n\nML Fundamentals: Understanding the Basics\n\n\n\n\n\n\nmachine-learning\n\n\nfundamentals\n\n\ntheory\n\n\n\nA comprehensive introduction to machine learning fundamentals, core concepts, and essential terminology that every aspiring ML practitioner should know.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\n\nMachine Learning in Everyday Life: A Practical Guide\n\n\n\n\n\n\nmachine-learning\n\n\napplications\n\n\nreal-world\n\n\nbeginner\n\n\n\nDiscover how machine learning is already part of your daily life and how it makes things easier, explained in simple terms with real-world examples.\n\n\n\n\n\nMar 19, 2024\n\n\n5 min\n\n\n\n\n\n\n\nMachine Learning Theory: Mathematical Foundations Made Simple\n\n\n\n\n\n\nmachine-learning\n\n\ntheory\n\n\nmathematics\n\n\nstatistics\n\n\n\nA beginner-friendly guide to machine learning theory, with intuitive explanations and practical examples.\n\n\n\n\n\nMar 19, 2024\n\n\n6 min\n\n\n\n\n\n\n\nOnline Learning and Regret Minimization\n\n\n\n\n\n\nmachine-learning\n\n\ntheory\n\n\nmathematics\n\n\nonline-learning\n\n\n\nA rigorous exploration of online learning theory and regret minimization, covering fundamental algorithms, bounds, and applications.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\n\nOptimization Algorithms in Machine Learning: A Deep Dive\n\n\n\n\n\n\nmachine-learning\n\n\noptimization\n\n\nmathematics\n\n\nalgorithms\n\n\n\nA comprehensive technical exploration of optimization algorithms in machine learning, covering mathematical foundations and implementation details.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\n\nOptimization Theory in Machine Learning\n\n\n\n\n\n\nmachine-learning\n\n\noptimization\n\n\nmathematics\n\n\ntheory\n\n\n\nA rigorous exploration of optimization theory in machine learning, covering convex optimization, non-convex optimization, and modern algorithms.\n\n\n\n\n\nMar 19, 2024\n\n\n3 min\n\n\n\n\n\n\n\nPAC Learning Theory and VC Dimension\n\n\n\n\n\n\nmachine-learning\n\n\ntheory\n\n\nmathematics\n\n\nstatistics\n\n\n\nA beginner-friendly guide to PAC learning theory and VC dimension with interactive visualizations and practical examples.\n\n\n\n\n\nMar 19, 2024\n\n\n10 min\n\n\n\n\n\n\n\nProbabilistic Graphical Models: Mathematical Foundations\n\n\n\n\n\n\nmachine-learning\n\n\nprobabilistic-models\n\n\nmathematics\n\n\nbayesian\n\n\n\nA rigorous exploration of probabilistic graphical models, covering mathematical foundations, inference algorithms, and learning methods.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\n\nUnderstanding Reinforcement Learning: A Beginner’s Guide\n\n\n\n\n\n\nmachine-learning\n\n\nreinforcement-learning\n\n\ntheory\n\n\nbeginner\n\n\n\nA beginner-friendly introduction to reinforcement learning concepts, explained through simple analogies and real-world examples.\n\n\n\n\n\nMar 19, 2024\n\n\n6 min\n\n\n\n\n\n\n\nStatistical Learning Theory and Concentration Inequalities\n\n\n\n\n\n\nmachine-learning\n\n\ntheory\n\n\nmathematics\n\n\nstatistics\n\n\n\nA rigorous exploration of statistical learning theory and concentration inequalities, covering fundamental bounds and their applications in machine learning.\n\n\n\n\n\nMar 19, 2024\n\n\n4 min\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Hi! I’m Ram Polisetti, a passionate learner exploring the world of Machine Learning and Data Science. Through BendThe-Curve, I document my learning journey, share insights, and build a community of fellow ML enthusiasts."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BendThe-Curve",
+    "section": "",
+    "text": "I’ve always wanted to start a blog, but something held me back. The thought of not having a fixed topic or wondering if it would be interesting enough kept me from taking that first step. As time passed, my interests evolved, and I gained more experience in different areas.\nNow, after diving deep into AI, machine learning, and data science, I’ve finally decided to take the leap. This blog isn’t just about sharing knowledge - it’s about documenting this exciting journey through the ever-evolving world of artificial intelligence and helping others who might be on a similar path.\n\n\nCheck out recent posts below. Find more in the Posts section."
+  },
+  {
+    "objectID": "index.html#why-this-blog",
+    "href": "index.html#why-this-blog",
+    "title": "BendThe-Curve",
+    "section": "",
+    "text": "I’ve always wanted to start a blog, but something held me back. The thought of not having a fixed topic or wondering if it would be interesting enough kept me from taking that first step. As time passed, my interests evolved, and I gained more experience in different areas.\nNow, after diving deep into AI, machine learning, and data science, I’ve finally decided to take the leap. This blog isn’t just about sharing knowledge - it’s about documenting this exciting journey through the ever-evolving world of artificial intelligence and helping others who might be on a similar path.\n\n\nCheck out recent posts below. Find more in the Posts section."
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html",
+    "href": "posts/advanced-neural-architectures/index.html",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "The fundamental building block of modern architectures:\n\\[\n\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V\n\\]\nWhere: - \\(Q \\in \\mathbb{R}^{n \\times d_k}\\) is the query matrix - \\(K \\in \\mathbb{R}^{m \\times d_k}\\) is the key matrix - \\(V \\in \\mathbb{R}^{m \\times d_v}\\) is the value matrix - \\(d_k\\) is the dimension of keys - \\(\\sqrt{d_k}\\) is the scaling factor\n\n\n\nParallel attention computations:\n\\[\n\\begin{aligned}\n\\text{MultiHead}(Q, K, V) &= \\text{Concat}(\\text{head}_1, ..., \\text{head}_h)W^O \\\\\n\\text{where head}_i &= \\text{Attention}(QW_i^Q, KW_i^K, VW_i^V)\n\\end{aligned}\n\\]\nWhere: - \\(W_i^Q \\in \\mathbb{R}^{d_{model} \\times d_k}\\) - \\(W_i^K \\in \\mathbb{R}^{d_{model} \\times d_k}\\) - \\(W_i^V \\in \\mathbb{R}^{d_{model} \\times d_v}\\) - \\(W^O \\in \\mathbb{R}^{hd_v \\times d_{model}}\\)\n\n\n\n\n\n\nComplete encoder block computation:\n\\[\n\\begin{aligned}\n\\text{MultiHeadAttn} &= \\text{LayerNorm}(x + \\text{MultiHead}(x, x, x)) \\\\\n\\text{FFN}(x) &= \\text{max}(0, xW_1 + b_1)W_2 + b_2 \\\\\n\\text{Output} &= \\text{LayerNorm}(\\text{MultiHeadAttn} + \\text{FFN}(\\text{MultiHeadAttn}))\n\\end{aligned}\n\\]\n\n\n\nSinusoidal position encoding:\n\\[\n\\begin{aligned}\nPE_{(pos,2i)} &= \\sin(pos/10000^{2i/d_{model}}) \\\\\nPE_{(pos,2i+1)} &= \\cos(pos/10000^{2i/d_{model}})\n\\end{aligned}\n\\]\nWhere: - \\(pos\\) is the position - \\(i\\) is the dimension\n\n\n\n\n\n\nResNet block formulation:\n\\[\ny = F(x, \\{W_i\\}) + x\n\\]\nWith pre-activation variant:\n\\[\n\\begin{aligned}\nh &= \\text{ReLU}(\\text{BN}(x)) \\\\\ny &= W_2\\text{ReLU}(\\text{BN}(W_1h)) + x\n\\end{aligned}\n\\]\n\n\n\nDenseNet connectivity pattern:\n\\[\nx_l = H_l([x_0, x_1, ..., x_{l-1}])\n\\]\nWhere: - \\(x_l\\) is the output of layer \\(l\\) - \\(H_l\\) is a composite function - \\([...]\\) represents concatenation\n\n\n\nChannel attention mechanism:\n\\[\n\\begin{aligned}\nz &= F_{sq}(u) = \\frac{1}{H \\times W}\\sum_{i=1}^H\\sum_{j=1}^W u_c(i,j) \\\\\ns &= F_{ex}(z) = \\sigma(W_2\\text{ReLU}(W_1z))\n\\end{aligned}\n\\]\n\n\n\n\n\n\nPosition-aware attention scoring:\n\\[\n\\text{Attention}(Q, K, V, R) = \\text{softmax}\\left(\\frac{QK^T + QR^T}{\\sqrt{d_k}}\\right)V\n\\]\nWhere: - \\(R\\) is the relative position encoding matrix\n\n\n\nEfficient attention computation:\n\\[\n\\text{LinearAttention}(Q, K, V) = \\phi(Q)(\\phi(K)^TV)\n\\]\nWhere: - \\(\\phi\\) is a feature map (e.g., elu(x) + 1)\n\n\n\nStructured sparsity pattern:\n\\[\n\\text{SparseAttention}(Q, K, V) = \\text{softmax}\\left(\\frac{M \\odot (QK^T)}{\\sqrt{d_k}}\\right)V\n\\]\nWhere: - \\(M\\) is a binary mask matrix - \\(\\odot\\) is element-wise multiplication\n\n\n\n\n\n\nComputation across features:\n\\[\n\\text{LN}(x) = \\gamma \\odot \\frac{x - \\mu}{\\sqrt{\\sigma^2 + \\epsilon}} + \\beta\n\\]\nWhere: - \\(\\mu\\) and \\(\\sigma\\) are computed across feature dimension\n\n\n\nFeature group normalization:\n\\[\n\\text{GN}(x) = \\gamma \\odot \\frac{x - \\mu_g}{\\sqrt{\\sigma_g^2 + \\epsilon}} + \\beta\n\\]\nWhere: - \\(\\mu_g\\) and \\(\\sigma_g\\) are computed within groups\n\n\n\n\n\n\nSmooth approximation:\n\\[\n\\text{GELU}(x) = x\\Phi(x) = x \\cdot \\frac{1}{2}\\left[1 + \\text{erf}\\left(\\frac{x}{\\sqrt{2}}\\right)\\right]\n\\]\n\n\n\nSelf-gated activation:\n\\[\n\\text{Swish}(x) = x \\cdot \\sigma(\\beta x)\n\\]\nWhere: - \\(\\sigma\\) is the sigmoid function - \\(\\beta\\) is a learnable parameter\n\n\n\n\n\n\nOptimization objective:\n\\[\n\\begin{aligned}\n\\min_{\\alpha} & \\quad \\mathcal{L}_{val}(w^*(\\alpha), \\alpha) \\\\\n\\text{s.t.} & \\quad w^*(\\alpha) = \\argmin_w \\mathcal{L}_{train}(w, \\alpha)\n\\end{aligned}\n\\]\n\n\n\nRouting probability:\n\\[\np_{ij} = \\frac{\\exp(\\hat{u}_j|u_i)}{\\sum_k \\exp(\\hat{u}_k|u_i)}\n\\]\nWhere: - \\(u_i\\) is the input capsule - \\(\\hat{u}_j\\) is the prediction vector\n\n\n\n\n\n\nGradient checkpointing:\n\\[\n\\text{memory} = O(\\sqrt{N}) \\text{ instead of } O(N)\n\\]\nWhere: - \\(N\\) is the number of layers\n\n\n\nMixed precision training:\n\\[\n\\begin{aligned}\n\\text{FP16 Forward} &: y = \\text{cast}_{\\text{FP16}}(Wx) \\\\\n\\text{FP32 Master} &: w_{\\text{master}} = w_{\\text{FP32}}\n\\end{aligned}\n\\]\n\n\n\nGradient clipping with norm:\n\\[\ng = \\min\\left(1, \\frac{\\theta}{\\|g\\|}\\right)g\n\\]\nWhere: - \\(\\theta\\) is the clipping threshold - \\(g\\) is the gradient\n\n\n\n\n\n\nDistillation objective:\n\\[\n\\mathcal{L} = \\alpha T^2 \\text{KL}\\left(\\text{softmax}\\left(\\frac{z_t}{T}\\right), \\text{softmax}\\left(\\frac{z_s}{T}\\right)\\right) + (1-\\alpha)\\mathcal{L}_{\\text{CE}}\n\\]\nWhere: - \\(z_t\\) and \\(z_s\\) are teacher and student logits - \\(T\\) is temperature - \\(\\alpha\\) is balancing factor\n\n\n\nCurriculum learning schedule:\n\\[\n\\lambda(t) = \\min\\left(1, \\frac{t}{\\tau}\\right)\n\\]\nWhere: - \\(t\\) is current step - \\(\\tau\\) is ramp-up period\n\n\n\n\n\n\nAttention complexity:\n\\[\n\\begin{aligned}\n\\text{Space} &: O(n^2d) \\\\\n\\text{Time} &: O(n^2d)\n\\end{aligned}\n\\]\nWhere: - \\(n\\) is sequence length - \\(d\\) is hidden dimension\n\n\n\nMaximum path length:\n\\[\n\\text{PathLength} = \\begin{cases}\nO(1) & \\text{for transformers} \\\\\nO(n) & \\text{for RNNs}\n\\end{cases}\n\\]\n\n\n\n\n\n\n\nResidual Connections:\n\nUse in deep networks\nMaintain gradient flow\nEnable deeper architectures\n\nNormalization:\n\nPre-normalization for stability\nLayer normalization for transformers\nBatch normalization for CNNs\n\nAttention Mechanisms:\n\nMulti-head attention for diverse features\nRelative position encoding for sequences\nSparse attention for long sequences\n\n\n\n\n\n\nLearning Rate:\n\nLinear warmup\nCosine decay\nLayer-wise learning rates\n\nRegularization:\n\nDropout in attention\nWeight decay\nLabel smoothing\n\nOptimization:\n\nAdam with weight decay\nGradient clipping\nMixed precision training\n\n\n\n\n\n\n\nArchitecture:\n\n“Attention Is All You Need” by Vaswani et al.\n“Deep Residual Learning” by He et al.\n“Densely Connected Networks” by Huang et al.\n\nTraining:\n\n“On Layer Normalization in the Transformer Architecture” by Xiong et al.\n“Understanding the Difficulty of Training Deep Feedforward Neural Networks” by Glorot and Bengio\n“Mixed Precision Training” by Micikevicius et al.\n\nAnalysis:\n\n“On the Relationship between Self-Attention and Convolutional Layers” by Cordonnier et al.\n“The Transformer Family” by Tay et al.\n“What Does BERT Look At?” by Clark et al."
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html#self-attention-mechanisms",
+    "href": "posts/advanced-neural-architectures/index.html#self-attention-mechanisms",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "The fundamental building block of modern architectures:\n\\[\n\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V\n\\]\nWhere: - \\(Q \\in \\mathbb{R}^{n \\times d_k}\\) is the query matrix - \\(K \\in \\mathbb{R}^{m \\times d_k}\\) is the key matrix - \\(V \\in \\mathbb{R}^{m \\times d_v}\\) is the value matrix - \\(d_k\\) is the dimension of keys - \\(\\sqrt{d_k}\\) is the scaling factor\n\n\n\nParallel attention computations:\n\\[\n\\begin{aligned}\n\\text{MultiHead}(Q, K, V) &= \\text{Concat}(\\text{head}_1, ..., \\text{head}_h)W^O \\\\\n\\text{where head}_i &= \\text{Attention}(QW_i^Q, KW_i^K, VW_i^V)\n\\end{aligned}\n\\]\nWhere: - \\(W_i^Q \\in \\mathbb{R}^{d_{model} \\times d_k}\\) - \\(W_i^K \\in \\mathbb{R}^{d_{model} \\times d_k}\\) - \\(W_i^V \\in \\mathbb{R}^{d_{model} \\times d_v}\\) - \\(W^O \\in \\mathbb{R}^{hd_v \\times d_{model}}\\)"
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html#transformer-architecture",
+    "href": "posts/advanced-neural-architectures/index.html#transformer-architecture",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "Complete encoder block computation:\n\\[\n\\begin{aligned}\n\\text{MultiHeadAttn} &= \\text{LayerNorm}(x + \\text{MultiHead}(x, x, x)) \\\\\n\\text{FFN}(x) &= \\text{max}(0, xW_1 + b_1)W_2 + b_2 \\\\\n\\text{Output} &= \\text{LayerNorm}(\\text{MultiHeadAttn} + \\text{FFN}(\\text{MultiHeadAttn}))\n\\end{aligned}\n\\]\n\n\n\nSinusoidal position encoding:\n\\[\n\\begin{aligned}\nPE_{(pos,2i)} &= \\sin(pos/10000^{2i/d_{model}}) \\\\\nPE_{(pos,2i+1)} &= \\cos(pos/10000^{2i/d_{model}})\n\\end{aligned}\n\\]\nWhere: - \\(pos\\) is the position - \\(i\\) is the dimension"
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html#modern-architectural-patterns",
+    "href": "posts/advanced-neural-architectures/index.html#modern-architectural-patterns",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "ResNet block formulation:\n\\[\ny = F(x, \\{W_i\\}) + x\n\\]\nWith pre-activation variant:\n\\[\n\\begin{aligned}\nh &= \\text{ReLU}(\\text{BN}(x)) \\\\\ny &= W_2\\text{ReLU}(\\text{BN}(W_1h)) + x\n\\end{aligned}\n\\]\n\n\n\nDenseNet connectivity pattern:\n\\[\nx_l = H_l([x_0, x_1, ..., x_{l-1}])\n\\]\nWhere: - \\(x_l\\) is the output of layer \\(l\\) - \\(H_l\\) is a composite function - \\([...]\\) represents concatenation\n\n\n\nChannel attention mechanism:\n\\[\n\\begin{aligned}\nz &= F_{sq}(u) = \\frac{1}{H \\times W}\\sum_{i=1}^H\\sum_{j=1}^W u_c(i,j) \\\\\ns &= F_{ex}(z) = \\sigma(W_2\\text{ReLU}(W_1z))\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html#advanced-attention-variants",
+    "href": "posts/advanced-neural-architectures/index.html#advanced-attention-variants",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "Position-aware attention scoring:\n\\[\n\\text{Attention}(Q, K, V, R) = \\text{softmax}\\left(\\frac{QK^T + QR^T}{\\sqrt{d_k}}\\right)V\n\\]\nWhere: - \\(R\\) is the relative position encoding matrix\n\n\n\nEfficient attention computation:\n\\[\n\\text{LinearAttention}(Q, K, V) = \\phi(Q)(\\phi(K)^TV)\n\\]\nWhere: - \\(\\phi\\) is a feature map (e.g., elu(x) + 1)\n\n\n\nStructured sparsity pattern:\n\\[\n\\text{SparseAttention}(Q, K, V) = \\text{softmax}\\left(\\frac{M \\odot (QK^T)}{\\sqrt{d_k}}\\right)V\n\\]\nWhere: - \\(M\\) is a binary mask matrix - \\(\\odot\\) is element-wise multiplication"
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html#advanced-normalization-techniques",
+    "href": "posts/advanced-neural-architectures/index.html#advanced-normalization-techniques",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "Computation across features:\n\\[\n\\text{LN}(x) = \\gamma \\odot \\frac{x - \\mu}{\\sqrt{\\sigma^2 + \\epsilon}} + \\beta\n\\]\nWhere: - \\(\\mu\\) and \\(\\sigma\\) are computed across feature dimension\n\n\n\nFeature group normalization:\n\\[\n\\text{GN}(x) = \\gamma \\odot \\frac{x - \\mu_g}{\\sqrt{\\sigma_g^2 + \\epsilon}} + \\beta\n\\]\nWhere: - \\(\\mu_g\\) and \\(\\sigma_g\\) are computed within groups"
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html#advanced-activation-functions",
+    "href": "posts/advanced-neural-architectures/index.html#advanced-activation-functions",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "Smooth approximation:\n\\[\n\\text{GELU}(x) = x\\Phi(x) = x \\cdot \\frac{1}{2}\\left[1 + \\text{erf}\\left(\\frac{x}{\\sqrt{2}}\\right)\\right]\n\\]\n\n\n\nSelf-gated activation:\n\\[\n\\text{Swish}(x) = x \\cdot \\sigma(\\beta x)\n\\]\nWhere: - \\(\\sigma\\) is the sigmoid function - \\(\\beta\\) is a learnable parameter"
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html#architectural-optimization",
+    "href": "posts/advanced-neural-architectures/index.html#architectural-optimization",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "Optimization objective:\n\\[\n\\begin{aligned}\n\\min_{\\alpha} & \\quad \\mathcal{L}_{val}(w^*(\\alpha), \\alpha) \\\\\n\\text{s.t.} & \\quad w^*(\\alpha) = \\argmin_w \\mathcal{L}_{train}(w, \\alpha)\n\\end{aligned}\n\\]\n\n\n\nRouting probability:\n\\[\np_{ij} = \\frac{\\exp(\\hat{u}_j|u_i)}{\\sum_k \\exp(\\hat{u}_k|u_i)}\n\\]\nWhere: - \\(u_i\\) is the input capsule - \\(\\hat{u}_j\\) is the prediction vector"
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html#implementation-considerations",
+    "href": "posts/advanced-neural-architectures/index.html#implementation-considerations",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "Gradient checkpointing:\n\\[\n\\text{memory} = O(\\sqrt{N}) \\text{ instead of } O(N)\n\\]\nWhere: - \\(N\\) is the number of layers\n\n\n\nMixed precision training:\n\\[\n\\begin{aligned}\n\\text{FP16 Forward} &: y = \\text{cast}_{\\text{FP16}}(Wx) \\\\\n\\text{FP32 Master} &: w_{\\text{master}} = w_{\\text{FP32}}\n\\end{aligned}\n\\]\n\n\n\nGradient clipping with norm:\n\\[\ng = \\min\\left(1, \\frac{\\theta}{\\|g\\|}\\right)g\n\\]\nWhere: - \\(\\theta\\) is the clipping threshold - \\(g\\) is the gradient"
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html#advanced-training-techniques",
+    "href": "posts/advanced-neural-architectures/index.html#advanced-training-techniques",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "Distillation objective:\n\\[\n\\mathcal{L} = \\alpha T^2 \\text{KL}\\left(\\text{softmax}\\left(\\frac{z_t}{T}\\right), \\text{softmax}\\left(\\frac{z_s}{T}\\right)\\right) + (1-\\alpha)\\mathcal{L}_{\\text{CE}}\n\\]\nWhere: - \\(z_t\\) and \\(z_s\\) are teacher and student logits - \\(T\\) is temperature - \\(\\alpha\\) is balancing factor\n\n\n\nCurriculum learning schedule:\n\\[\n\\lambda(t) = \\min\\left(1, \\frac{t}{\\tau}\\right)\n\\]\nWhere: - \\(t\\) is current step - \\(\\tau\\) is ramp-up period"
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html#performance-analysis",
+    "href": "posts/advanced-neural-architectures/index.html#performance-analysis",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "Attention complexity:\n\\[\n\\begin{aligned}\n\\text{Space} &: O(n^2d) \\\\\n\\text{Time} &: O(n^2d)\n\\end{aligned}\n\\]\nWhere: - \\(n\\) is sequence length - \\(d\\) is hidden dimension\n\n\n\nMaximum path length:\n\\[\n\\text{PathLength} = \\begin{cases}\nO(1) & \\text{for transformers} \\\\\nO(n) & \\text{for RNNs}\n\\end{cases}\n\\]"
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html#best-practices",
+    "href": "posts/advanced-neural-architectures/index.html#best-practices",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "Residual Connections:\n\nUse in deep networks\nMaintain gradient flow\nEnable deeper architectures\n\nNormalization:\n\nPre-normalization for stability\nLayer normalization for transformers\nBatch normalization for CNNs\n\nAttention Mechanisms:\n\nMulti-head attention for diverse features\nRelative position encoding for sequences\nSparse attention for long sequences\n\n\n\n\n\n\nLearning Rate:\n\nLinear warmup\nCosine decay\nLayer-wise learning rates\n\nRegularization:\n\nDropout in attention\nWeight decay\nLabel smoothing\n\nOptimization:\n\nAdam with weight decay\nGradient clipping\nMixed precision training"
+  },
+  {
+    "objectID": "posts/advanced-neural-architectures/index.html#references",
+    "href": "posts/advanced-neural-architectures/index.html#references",
+    "title": "Advanced Neural Network Architectures: A Technical Deep Dive",
+    "section": "",
+    "text": "Architecture:\n\n“Attention Is All You Need” by Vaswani et al.\n“Deep Residual Learning” by He et al.\n“Densely Connected Networks” by Huang et al.\n\nTraining:\n\n“On Layer Normalization in the Transformer Architecture” by Xiong et al.\n“Understanding the Difficulty of Training Deep Feedforward Neural Networks” by Glorot and Bengio\n“Mixed Precision Training” by Micikevicius et al.\n\nAnalysis:\n\n“On the Relationship between Self-Attention and Convolutional Layers” by Cordonnier et al.\n“The Transformer Family” by Tay et al.\n“What Does BERT Look At?” by Clark et al."
+  },
+  {
+    "objectID": "posts/causal-inference/index.html",
+    "href": "posts/causal-inference/index.html",
+    "title": "Causal Inference and Structural Learning",
+    "section": "",
+    "text": "Definition of SCM:\n\\[\n\\begin{aligned}\nX_i &= f_i(\\text{PA}_i, U_i) \\\\\nU_i &\\sim P(U_i)\n\\end{aligned}\n\\]\nWhere: - \\(X_i\\) are endogenous variables - \\(\\text{PA}_i\\) are parents of \\(X_i\\) - \\(U_i\\) are exogenous variables - \\(f_i\\) are structural equations\n\n\n\nDo-operator formalization:\n\\[\nP(Y|\\text{do}(X=x)) = \\sum_z P(Y|X=x,Z=z)P(Z=z)\n\\]\nBackdoor adjustment:\n\\[\nP(Y|\\text{do}(X=x)) = \\sum_z P(Y|X=x,Z=z)P(Z=z)\n\\]\nWhere Z satisfies the backdoor criterion.\n\n\n\n\n\n\nA set Z satisfies the backdoor criterion relative to (X,Y) if: 1. No node in Z is a descendant of X 2. Z blocks all backdoor paths from X to Y\nFormal criterion:\n\\[\nP(Y|\\text{do}(X)) = \\sum_z P(Y|X,Z)P(Z)\n\\]\n\n\n\nThree conditions: 1. M blocks all directed paths from X to Y 2. No unblocked backdoor path from X to M 3. All backdoor paths from M to Y are blocked by X\nFormula:\n\\[\nP(Y|\\text{do}(X)) = \\sum_m P(m|X)\\sum_{x'}P(Y|m,x')P(x')\n\\]\n\n\n\nRule 1 (Insertion/deletion of observations):\n\\[\nP(y|\\text{do}(x),z,w) = P(y|\\text{do}(x),w)\n\\]\nif (Y ⊥⊥ Z|X,W)\\(_{G_{\\overline{X}}}\\)\nRule 2 (Action/observation exchange):\n\\[\nP(y|\\text{do}(x),\\text{do}(z),w) = P(y|\\text{do}(x),z,w)\n\\]\nif (Y ⊥⊥ Z|X,W)\\(_{G_{\\overline{X}\\underline{Z}}}\\)\nRule 3 (Insertion/deletion of actions):\n\\[\nP(y|\\text{do}(x),\\text{do}(z),w) = P(y|\\text{do}(x),w)\n\\]\nif (Y ⊥⊥ Z|X,W)\\(_{G_{\\overline{X}\\overline{Z(W)}}}\\)\n\n\n\n\n\n\nPropensity score:\n\\[\ne(X) = P(T=1|X)\n\\]\nAverage Treatment Effect (ATE):\n\\[\n\\text{ATE} = \\mathbb{E}[Y(1) - Y(0)] = \\mathbb{E}\\left[\\frac{TY}{e(X)} - \\frac{(1-T)Y}{1-e(X)}\\right]\n\\]\n\n\n\nTwo-stage least squares (2SLS):\nFirst stage: \\[\nX = \\gamma_0 + \\gamma_1Z + \\eta\n\\]\nSecond stage: \\[\nY = \\beta_0 + \\beta_1\\hat{X} + \\epsilon\n\\]\n\n\n\nSharp RD estimator:\n\\[\n\\tau_{SRD} = \\lim_{x \\downarrow c} \\mathbb{E}[Y|X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[Y|X=x]\n\\]\nFuzzy RD estimator:\n\\[\n\\tau_{FRD} = \\frac{\\lim_{x \\downarrow c} \\mathbb{E}[Y|X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[Y|X=x]}{\\lim_{x \\downarrow c} \\mathbb{E}[D|X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[D|X=x]}\n\\]\n\n\n\n\n\n\nPC Algorithm steps: 1. Start with complete undirected graph 2. Remove edges based on conditional independence 3. Orient v-structures 4. Orient remaining edges\nIndependence test statistic:\n\\[\n\\chi^2 = n\\sum_{i,j} \\frac{(O_{ij} - E_{ij})^2}{E_{ij}}\n\\]\n\n\n\nBIC score:\n\\[\n\\text{BIC}(G) = \\ell(D|G) - \\frac{\\log n}{2}|G|\n\\]\nWhere: - \\(\\ell(D|G)\\) is log-likelihood - \\(|G|\\) is model complexity - \\(n\\) is sample size\n\n\n\nMMHC algorithm: 1. Learn skeleton using constraint-based method 2. Orient edges using score-based method\nScore function:\n\\[\n\\text{Score}(G) = \\text{BIC}(G) + \\lambda \\text{Sparsity}(G)\n\\]\n\n\n\n\n\n\nFundamental problem of causal inference:\n\\[\n\\text{ACE} = \\mathbb{E}[Y(1) - Y(0)]\n\\]\nBut we only observe:\n\\[\nY = TY(1) + (1-T)Y(0)\n\\]\n\n\n\nDirect and indirect effects:\n\\[\n\\begin{aligned}\n\\text{NDE} &= \\mathbb{E}[Y(t,M(t'))] - \\mathbb{E}[Y(t',M(t'))] \\\\\n\\text{NIE} &= \\mathbb{E}[Y(t,M(t))] - \\mathbb{E}[Y(t,M(t'))]\n\\end{aligned}\n\\]\n\n\n\nG-computation formula:\n\\[\n\\mathbb{E}[Y_{\\bar{a}}] = \\sum_{\\bar{l}} \\prod_{t=0}^K P(l_t|l_{t-1},a_{t-1})P(y|\\bar{l},\\bar{a})\n\\]\n\n\n\n\n\n\nRosenbaum bounds:\n\\[\n\\frac{1}{\\Gamma} \\leq \\frac{P(Z=1|X)P(Z=0|X')}{P(Z=0|X)P(Z=1|X')} \\leq \\Gamma\n\\]\n\n\n\nMultiple imputation:\n\\[\n\\hat{\\theta} = \\frac{1}{M}\\sum_{m=1}^M \\hat{\\theta}_m\n\\]\n\n\n\nConditional average treatment effect:\n\\[\n\\text{CATE}(x) = \\mathbb{E}[Y(1) - Y(0)|X=x]\n\\]\n\n\n\n\n\n\n\nRandomization:\n\nComplete randomization\nStratified randomization\nCluster randomization\n\nSample Size:\n\nPower analysis\nEffect size estimation\nVariance components\n\nMeasurement:\n\nReliability\nValidity\nMissing data handling\n\n\n\n\n\n\nIdentification:\n\nCheck assumptions\nSensitivity analysis\nMultiple methods\n\nEstimation:\n\nRobust methods\nBootstrap\nCross-validation\n\nInterpretation:\n\nEffect sizes\nConfidence intervals\nMultiple testing\n\n\n\n\n\n\n\n\nProgram evaluation: - Treatment effects - Policy analysis - Market interventions\n\n\n\nClinical trials: - Drug efficacy - Treatment comparison - Side effects\n\n\n\nPolicy research: - Educational interventions - Social programs - Behavioral studies\n\n\n\n\n\nTheory:\n\n“Causality” by Pearl\n“Causal Inference in Statistics” by Pearl et al.\n“Elements of Causal Inference” by Peters et al.\n\nMethods:\n\n“Mostly Harmless Econometrics” by Angrist and Pischke\n“Counterfactuals and Causal Inference” by Morgan and Winship\n“Causal Inference for Statistics” by Hernán and Robins\n\nApplications:\n\n“Causal Machine Learning” by Athey and Imbens\n“The Book of Why” by Pearl and Mackenzie\n“Observation and Experiment” by Rosenbaum"
+  },
+  {
+    "objectID": "posts/causal-inference/index.html#structural-causal-models",
+    "href": "posts/causal-inference/index.html#structural-causal-models",
+    "title": "Causal Inference and Structural Learning",
+    "section": "",
+    "text": "Definition of SCM:\n\\[\n\\begin{aligned}\nX_i &= f_i(\\text{PA}_i, U_i) \\\\\nU_i &\\sim P(U_i)\n\\end{aligned}\n\\]\nWhere: - \\(X_i\\) are endogenous variables - \\(\\text{PA}_i\\) are parents of \\(X_i\\) - \\(U_i\\) are exogenous variables - \\(f_i\\) are structural equations\n\n\n\nDo-operator formalization:\n\\[\nP(Y|\\text{do}(X=x)) = \\sum_z P(Y|X=x,Z=z)P(Z=z)\n\\]\nBackdoor adjustment:\n\\[\nP(Y|\\text{do}(X=x)) = \\sum_z P(Y|X=x,Z=z)P(Z=z)\n\\]\nWhere Z satisfies the backdoor criterion."
+  },
+  {
+    "objectID": "posts/causal-inference/index.html#identification-methods",
+    "href": "posts/causal-inference/index.html#identification-methods",
+    "title": "Causal Inference and Structural Learning",
+    "section": "",
+    "text": "A set Z satisfies the backdoor criterion relative to (X,Y) if: 1. No node in Z is a descendant of X 2. Z blocks all backdoor paths from X to Y\nFormal criterion:\n\\[\nP(Y|\\text{do}(X)) = \\sum_z P(Y|X,Z)P(Z)\n\\]\n\n\n\nThree conditions: 1. M blocks all directed paths from X to Y 2. No unblocked backdoor path from X to M 3. All backdoor paths from M to Y are blocked by X\nFormula:\n\\[\nP(Y|\\text{do}(X)) = \\sum_m P(m|X)\\sum_{x'}P(Y|m,x')P(x')\n\\]\n\n\n\nRule 1 (Insertion/deletion of observations):\n\\[\nP(y|\\text{do}(x),z,w) = P(y|\\text{do}(x),w)\n\\]\nif (Y ⊥⊥ Z|X,W)\\(_{G_{\\overline{X}}}\\)\nRule 2 (Action/observation exchange):\n\\[\nP(y|\\text{do}(x),\\text{do}(z),w) = P(y|\\text{do}(x),z,w)\n\\]\nif (Y ⊥⊥ Z|X,W)\\(_{G_{\\overline{X}\\underline{Z}}}\\)\nRule 3 (Insertion/deletion of actions):\n\\[\nP(y|\\text{do}(x),\\text{do}(z),w) = P(y|\\text{do}(x),w)\n\\]\nif (Y ⊥⊥ Z|X,W)\\(_{G_{\\overline{X}\\overline{Z(W)}}}\\)"
+  },
+  {
+    "objectID": "posts/causal-inference/index.html#estimation-methods",
+    "href": "posts/causal-inference/index.html#estimation-methods",
+    "title": "Causal Inference and Structural Learning",
+    "section": "",
+    "text": "Propensity score:\n\\[\ne(X) = P(T=1|X)\n\\]\nAverage Treatment Effect (ATE):\n\\[\n\\text{ATE} = \\mathbb{E}[Y(1) - Y(0)] = \\mathbb{E}\\left[\\frac{TY}{e(X)} - \\frac{(1-T)Y}{1-e(X)}\\right]\n\\]\n\n\n\nTwo-stage least squares (2SLS):\nFirst stage: \\[\nX = \\gamma_0 + \\gamma_1Z + \\eta\n\\]\nSecond stage: \\[\nY = \\beta_0 + \\beta_1\\hat{X} + \\epsilon\n\\]\n\n\n\nSharp RD estimator:\n\\[\n\\tau_{SRD} = \\lim_{x \\downarrow c} \\mathbb{E}[Y|X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[Y|X=x]\n\\]\nFuzzy RD estimator:\n\\[\n\\tau_{FRD} = \\frac{\\lim_{x \\downarrow c} \\mathbb{E}[Y|X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[Y|X=x]}{\\lim_{x \\downarrow c} \\mathbb{E}[D|X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[D|X=x]}\n\\]"
+  },
+  {
+    "objectID": "posts/causal-inference/index.html#structural-learning",
+    "href": "posts/causal-inference/index.html#structural-learning",
+    "title": "Causal Inference and Structural Learning",
+    "section": "",
+    "text": "PC Algorithm steps: 1. Start with complete undirected graph 2. Remove edges based on conditional independence 3. Orient v-structures 4. Orient remaining edges\nIndependence test statistic:\n\\[\n\\chi^2 = n\\sum_{i,j} \\frac{(O_{ij} - E_{ij})^2}{E_{ij}}\n\\]\n\n\n\nBIC score:\n\\[\n\\text{BIC}(G) = \\ell(D|G) - \\frac{\\log n}{2}|G|\n\\]\nWhere: - \\(\\ell(D|G)\\) is log-likelihood - \\(|G|\\) is model complexity - \\(n\\) is sample size\n\n\n\nMMHC algorithm: 1. Learn skeleton using constraint-based method 2. Orient edges using score-based method\nScore function:\n\\[\n\\text{Score}(G) = \\text{BIC}(G) + \\lambda \\text{Sparsity}(G)\n\\]"
+  },
+  {
+    "objectID": "posts/causal-inference/index.html#advanced-topics",
+    "href": "posts/causal-inference/index.html#advanced-topics",
+    "title": "Causal Inference and Structural Learning",
+    "section": "",
+    "text": "Fundamental problem of causal inference:\n\\[\n\\text{ACE} = \\mathbb{E}[Y(1) - Y(0)]\n\\]\nBut we only observe:\n\\[\nY = TY(1) + (1-T)Y(0)\n\\]\n\n\n\nDirect and indirect effects:\n\\[\n\\begin{aligned}\n\\text{NDE} &= \\mathbb{E}[Y(t,M(t'))] - \\mathbb{E}[Y(t',M(t'))] \\\\\n\\text{NIE} &= \\mathbb{E}[Y(t,M(t))] - \\mathbb{E}[Y(t,M(t'))]\n\\end{aligned}\n\\]\n\n\n\nG-computation formula:\n\\[\n\\mathbb{E}[Y_{\\bar{a}}] = \\sum_{\\bar{l}} \\prod_{t=0}^K P(l_t|l_{t-1},a_{t-1})P(y|\\bar{l},\\bar{a})\n\\]"
+  },
+  {
+    "objectID": "posts/causal-inference/index.html#implementation-considerations",
+    "href": "posts/causal-inference/index.html#implementation-considerations",
+    "title": "Causal Inference and Structural Learning",
+    "section": "",
+    "text": "Rosenbaum bounds:\n\\[\n\\frac{1}{\\Gamma} \\leq \\frac{P(Z=1|X)P(Z=0|X')}{P(Z=0|X)P(Z=1|X')} \\leq \\Gamma\n\\]\n\n\n\nMultiple imputation:\n\\[\n\\hat{\\theta} = \\frac{1}{M}\\sum_{m=1}^M \\hat{\\theta}_m\n\\]\n\n\n\nConditional average treatment effect:\n\\[\n\\text{CATE}(x) = \\mathbb{E}[Y(1) - Y(0)|X=x]\n\\]"
+  },
+  {
+    "objectID": "posts/causal-inference/index.html#best-practices",
+    "href": "posts/causal-inference/index.html#best-practices",
+    "title": "Causal Inference and Structural Learning",
+    "section": "",
+    "text": "Randomization:\n\nComplete randomization\nStratified randomization\nCluster randomization\n\nSample Size:\n\nPower analysis\nEffect size estimation\nVariance components\n\nMeasurement:\n\nReliability\nValidity\nMissing data handling\n\n\n\n\n\n\nIdentification:\n\nCheck assumptions\nSensitivity analysis\nMultiple methods\n\nEstimation:\n\nRobust methods\nBootstrap\nCross-validation\n\nInterpretation:\n\nEffect sizes\nConfidence intervals\nMultiple testing"
+  },
+  {
+    "objectID": "posts/causal-inference/index.html#applications",
+    "href": "posts/causal-inference/index.html#applications",
+    "title": "Causal Inference and Structural Learning",
+    "section": "",
+    "text": "Program evaluation: - Treatment effects - Policy analysis - Market interventions\n\n\n\nClinical trials: - Drug efficacy - Treatment comparison - Side effects\n\n\n\nPolicy research: - Educational interventions - Social programs - Behavioral studies"
+  },
+  {
+    "objectID": "posts/causal-inference/index.html#references",
+    "href": "posts/causal-inference/index.html#references",
+    "title": "Causal Inference and Structural Learning",
+    "section": "",
+    "text": "Theory:\n\n“Causality” by Pearl\n“Causal Inference in Statistics” by Pearl et al.\n“Elements of Causal Inference” by Peters et al.\n\nMethods:\n\n“Mostly Harmless Econometrics” by Angrist and Pischke\n“Counterfactuals and Causal Inference” by Morgan and Winship\n“Causal Inference for Statistics” by Hernán and Robins\n\nApplications:\n\n“Causal Machine Learning” by Athey and Imbens\n“The Book of Why” by Pearl and Mackenzie\n“Observation and Experiment” by Rosenbaum"
+  },
+  {
+    "objectID": "posts/generative-models/index.html",
+    "href": "posts/generative-models/index.html",
+    "title": "Generative Models: Mathematical Foundations and Architectures",
+    "section": "",
+    "text": "The VAE objective maximizes the ELBO:\n\\[\n\\mathcal{L}(\\theta, \\phi; x) = \\mathbb{E}_{q_\\phi(z|x)}[\\log p_\\theta(x|z)] - D_{KL}(q_\\phi(z|x)||p(z))\n\\]\nWhere: - \\(q_\\phi(z|x)\\) is the encoder (inference model) - \\(p_\\theta(x|z)\\) is the decoder (generative model) - \\(p(z)\\) is the prior distribution - \\(D_{KL}\\) is the Kullback-Leibler divergence\n\n\n\nEnables backpropagation through sampling:\n\\[\nz = \\mu_\\phi(x) + \\sigma_\\phi(x) \\odot \\epsilon, \\quad \\epsilon \\sim \\mathcal{N}(0, I)\n\\]\nWhere: - \\(\\mu_\\phi(x)\\) is the mean encoder network - \\(\\sigma_\\phi(x)\\) is the standard deviation encoder network - \\(\\odot\\) denotes element-wise multiplication\n\n\n\n\n\n\nThe original GAN formulation:\n\\[\n\\min_G \\max_D V(D,G) = \\mathbb{E}_{x\\sim p_{data}}[\\log D(x)] + \\mathbb{E}_{z\\sim p_z}[\\log(1-D(G(z)))]\n\\]\nWhere: - \\(G\\) is the generator - \\(D\\) is the discriminator - \\(p_{data}\\) is the real data distribution - \\(p_z\\) is the latent distribution\n\n\n\nWGAN objective using Kantorovich-Rubinstein duality:\n\\[\n\\min_G \\max_{D \\in \\mathcal{F}_L} \\mathbb{E}_{x\\sim p_{data}}[D(x)] - \\mathbb{E}_{z\\sim p_z}[D(G(z))]\n\\]\nWhere: - \\(\\mathcal{F}_L\\) is the set of 1-Lipschitz functions\n\n\n\nWGAN-GP regularization term:\n\\[\n\\lambda \\mathbb{E}_{\\hat{x}\\sim p_{\\hat{x}}}[(\\|\\nabla_{\\hat{x}}D(\\hat{x})\\|_2 - 1)^2]\n\\]\nWhere: - \\(\\hat{x}\\) is sampled along straight lines between real and generated samples - \\(\\lambda\\) is the penalty coefficient\n\n\n\n\n\n\nThe forward diffusion process:\n\\[\nq(x_t|x_{t-1}) = \\mathcal{N}(x_t; \\sqrt{1-\\beta_t}x_{t-1}, \\beta_tI)\n\\]\nWith closed form for arbitrary timestep:\n\\[\nq(x_t|x_0) = \\mathcal{N}(x_t; \\sqrt{\\bar{\\alpha}_t}x_0, (1-\\bar{\\alpha}_t)I)\n\\]\nWhere: - \\(\\beta_t\\) is the noise schedule - \\(\\alpha_t = 1-\\beta_t\\) - \\(\\bar{\\alpha}_t = \\prod_{s=1}^t \\alpha_s\\)\n\n\n\nThe reverse diffusion process:\n\\[\np_\\theta(x_{t-1}|x_t) = \\mathcal{N}(x_{t-1}; \\mu_\\theta(x_t,t), \\Sigma_\\theta(x_t,t))\n\\]\nTraining objective:\n\\[\n\\mathcal{L} = \\mathbb{E}_{x_0,\\epsilon,t}\\left[\\|\\epsilon - \\epsilon_\\theta(x_t,t)\\|^2\\right]\n\\]\nWhere: - \\(\\epsilon_\\theta\\) predicts the noise component - \\(x_t = \\sqrt{\\bar{\\alpha}_t}x_0 + \\sqrt{1-\\bar{\\alpha}_t}\\epsilon\\)\n\n\n\n\n\n\nChange of variables formula:\n\\[\n\\log p_X(x) = \\log p_Z(f^{-1}(x)) + \\log\\left|\\det\\frac{\\partial f^{-1}}{\\partial x}\\right|\n\\]\nWhere: - \\(f\\) is an invertible transformation - \\(p_Z\\) is a simple base distribution\n\n\n\nFactorized probability:\n\\[\np(x) = \\prod_{i=1}^n p(x_i|x_{&lt;i})\n\\]\nWith masked convolutions:\n\\[\ny_i = \\sum_{j \\leq i} m_{ij}(w_{ij} \\cdot x_j)\n\\]\n\n\n\nProbability density:\n\\[\np(x) = \\frac{1}{Z}e^{-E(x)}\n\\]\nWhere: - \\(E(x)\\) is the energy function - \\(Z = \\int e^{-E(x)}dx\\) is the partition function\n\n\n\n\n\n\nJensen-Shannon divergence:\n\\[\nJSD(P\\|Q) = \\frac{1}{2}D_{KL}(P\\|\\frac{P+Q}{2}) + \\frac{1}{2}D_{KL}(Q\\|\\frac{P+Q}{2})\n\\]\n\n\n\nKL-divergence analysis:\n\\[\nD_{KL}(q_\\phi(z|x)\\|p(z)) = \\frac{1}{2}\\sum_{j=1}^d(\\sigma_j^2 + \\mu_j^2 - \\log\\sigma_j^2 - 1)\n\\]\n\n\n\nDenoising score matching:\n\\[\n\\nabla_x \\log p(x) = \\mathbb{E}_{p(t|x)}[\\nabla_x \\log p(x|x_t)]\n\\]\n\n\n\n\n\n\nResolution-dependent loss:\n\\[\n\\mathcal{L}_\\text{total} = \\sum_{r} \\alpha_r \\mathcal{L}_r\n\\]\nWhere: - \\(r\\) is the resolution level - \\(\\alpha_r\\) is the weighting factor\n\n\n\nStyle transfer in latent space:\n\\[\nw = \\mathcal{M}(z) = f(z + \\Delta z)\n\\]\nWhere: - \\(\\mathcal{M}\\) is the mapping network - \\(f\\) is a non-linear transformation\n\n\n\nStyle transfer operation:\n\\[\n\\text{AdaIN}(x,y) = \\sigma(y)\\left(\\frac{x-\\mu(x)}{\\sigma(x)}\\right) + \\mu(y)\n\\]\n\n\n\n\n\n\nMeasures quality and diversity:\n\\[\nIS = \\exp(\\mathbb{E}_{x\\sim p_g}[D_{KL}(p(y|x)\\|p(y))])\n\\]\n\n\n\nDistribution similarity metric:\n\\[\nFID = \\|\\mu_r - \\mu_g\\|^2 + Tr(\\Sigma_r + \\Sigma_g - 2(\\Sigma_r\\Sigma_g)^{1/2})\n\\]\nWhere: - \\(\\mu_r, \\Sigma_r\\) are real data statistics - \\(\\mu_g, \\Sigma_g\\) are generated data statistics\n\n\n\nTwo-way evaluation:\n\\[\n\\begin{aligned}\n\\text{Precision} &= \\mathbb{E}_{x\\sim p_g}[\\max_{y\\sim p_r} s(x,y)] \\\\\n\\text{Recall} &= \\mathbb{E}_{y\\sim p_r}[\\max_{x\\sim p_g} s(x,y)]\n\\end{aligned}\n\\]\n\n\n\n\n\n\n\nGenerator Design:\n\nTransposed convolutions vs upsampling\nSkip connections\nAttention mechanisms\n\nDiscriminator Design:\n\nSpectral normalization\nResidual blocks\nMulti-scale discrimination\n\nLoss Functions:\n\nAdversarial loss\nReconstruction loss\nPerceptual loss\n\n\n\n\n\n\nGradient Penalties:\n\nR1 regularization\nPath length regularization\nConsistency regularization\n\nLearning Rate:\n\nTwo time-scale update rule\nAdaptive learning rates\nWarmup scheduling\n\nBatch Size:\n\nGradient accumulation\nMixed precision training\nMemory-efficient backprop\n\n\n\n\n\n\n\n\n\nVAEs for:\n\nStructured latent spaces\nReconstruction tasks\nInterpretable representations\n\nGANs for:\n\nHigh-quality generation\nStyle transfer\nDomain translation\n\nDiffusion Models for:\n\nHigh-fidelity generation\nControlled generation\nRobust training\n\n\n\n\n\n\nLearning Rates:\n\nGenerator: 1e-4 to 1e-3\nDiscriminator: 2e-4 to 2e-3\nVAE: 1e-3 to 1e-2\n\nBatch Sizes:\n\nGANs: 32 to 128\nVAEs: 64 to 256\nDiffusion: 32 to 64\n\nArchitecture:\n\nLayer depth\nChannel width\nAttention layers\n\n\n\n\n\n\n\nTheory:\n\n“Auto-Encoding Variational Bayes” by Kingma and Welling\n“Generative Adversarial Networks” by Goodfellow et al.\n“Denoising Diffusion Probabilistic Models” by Ho et al.\n\nArchitecture:\n\n“Progressive Growing of GANs” by Karras et al.\n“StyleGAN” by Karras et al.\n“Normalizing Flows” by Rezende and Mohamed\n\nTraining:\n\n“Improved Training of Wasserstein GANs” by Gulrajani et al.\n“Large Scale GAN Training for High Fidelity Natural Image Synthesis” by Brock et al.\n“Improved VQGAN for Image Generation” by Esser et al."
+  },
+  {
+    "objectID": "posts/generative-models/index.html#variational-autoencoders-vaes",
+    "href": "posts/generative-models/index.html#variational-autoencoders-vaes",
+    "title": "Generative Models: Mathematical Foundations and Architectures",
+    "section": "",
+    "text": "The VAE objective maximizes the ELBO:\n\\[\n\\mathcal{L}(\\theta, \\phi; x) = \\mathbb{E}_{q_\\phi(z|x)}[\\log p_\\theta(x|z)] - D_{KL}(q_\\phi(z|x)||p(z))\n\\]\nWhere: - \\(q_\\phi(z|x)\\) is the encoder (inference model) - \\(p_\\theta(x|z)\\) is the decoder (generative model) - \\(p(z)\\) is the prior distribution - \\(D_{KL}\\) is the Kullback-Leibler divergence\n\n\n\nEnables backpropagation through sampling:\n\\[\nz = \\mu_\\phi(x) + \\sigma_\\phi(x) \\odot \\epsilon, \\quad \\epsilon \\sim \\mathcal{N}(0, I)\n\\]\nWhere: - \\(\\mu_\\phi(x)\\) is the mean encoder network - \\(\\sigma_\\phi(x)\\) is the standard deviation encoder network - \\(\\odot\\) denotes element-wise multiplication"
+  },
+  {
+    "objectID": "posts/generative-models/index.html#generative-adversarial-networks-gans",
+    "href": "posts/generative-models/index.html#generative-adversarial-networks-gans",
+    "title": "Generative Models: Mathematical Foundations and Architectures",
+    "section": "",
+    "text": "The original GAN formulation:\n\\[\n\\min_G \\max_D V(D,G) = \\mathbb{E}_{x\\sim p_{data}}[\\log D(x)] + \\mathbb{E}_{z\\sim p_z}[\\log(1-D(G(z)))]\n\\]\nWhere: - \\(G\\) is the generator - \\(D\\) is the discriminator - \\(p_{data}\\) is the real data distribution - \\(p_z\\) is the latent distribution\n\n\n\nWGAN objective using Kantorovich-Rubinstein duality:\n\\[\n\\min_G \\max_{D \\in \\mathcal{F}_L} \\mathbb{E}_{x\\sim p_{data}}[D(x)] - \\mathbb{E}_{z\\sim p_z}[D(G(z))]\n\\]\nWhere: - \\(\\mathcal{F}_L\\) is the set of 1-Lipschitz functions\n\n\n\nWGAN-GP regularization term:\n\\[\n\\lambda \\mathbb{E}_{\\hat{x}\\sim p_{\\hat{x}}}[(\\|\\nabla_{\\hat{x}}D(\\hat{x})\\|_2 - 1)^2]\n\\]\nWhere: - \\(\\hat{x}\\) is sampled along straight lines between real and generated samples - \\(\\lambda\\) is the penalty coefficient"
+  },
+  {
+    "objectID": "posts/generative-models/index.html#diffusion-models",
+    "href": "posts/generative-models/index.html#diffusion-models",
+    "title": "Generative Models: Mathematical Foundations and Architectures",
+    "section": "",
+    "text": "The forward diffusion process:\n\\[\nq(x_t|x_{t-1}) = \\mathcal{N}(x_t; \\sqrt{1-\\beta_t}x_{t-1}, \\beta_tI)\n\\]\nWith closed form for arbitrary timestep:\n\\[\nq(x_t|x_0) = \\mathcal{N}(x_t; \\sqrt{\\bar{\\alpha}_t}x_0, (1-\\bar{\\alpha}_t)I)\n\\]\nWhere: - \\(\\beta_t\\) is the noise schedule - \\(\\alpha_t = 1-\\beta_t\\) - \\(\\bar{\\alpha}_t = \\prod_{s=1}^t \\alpha_s\\)\n\n\n\nThe reverse diffusion process:\n\\[\np_\\theta(x_{t-1}|x_t) = \\mathcal{N}(x_{t-1}; \\mu_\\theta(x_t,t), \\Sigma_\\theta(x_t,t))\n\\]\nTraining objective:\n\\[\n\\mathcal{L} = \\mathbb{E}_{x_0,\\epsilon,t}\\left[\\|\\epsilon - \\epsilon_\\theta(x_t,t)\\|^2\\right]\n\\]\nWhere: - \\(\\epsilon_\\theta\\) predicts the noise component - \\(x_t = \\sqrt{\\bar{\\alpha}_t}x_0 + \\sqrt{1-\\bar{\\alpha}_t}\\epsilon\\)"
+  },
+  {
+    "objectID": "posts/generative-models/index.html#advanced-architectures",
+    "href": "posts/generative-models/index.html#advanced-architectures",
+    "title": "Generative Models: Mathematical Foundations and Architectures",
+    "section": "",
+    "text": "Change of variables formula:\n\\[\n\\log p_X(x) = \\log p_Z(f^{-1}(x)) + \\log\\left|\\det\\frac{\\partial f^{-1}}{\\partial x}\\right|\n\\]\nWhere: - \\(f\\) is an invertible transformation - \\(p_Z\\) is a simple base distribution\n\n\n\nFactorized probability:\n\\[\np(x) = \\prod_{i=1}^n p(x_i|x_{&lt;i})\n\\]\nWith masked convolutions:\n\\[\ny_i = \\sum_{j \\leq i} m_{ij}(w_{ij} \\cdot x_j)\n\\]\n\n\n\nProbability density:\n\\[\np(x) = \\frac{1}{Z}e^{-E(x)}\n\\]\nWhere: - \\(E(x)\\) is the energy function - \\(Z = \\int e^{-E(x)}dx\\) is the partition function"
+  },
+  {
+    "objectID": "posts/generative-models/index.html#training-dynamics",
+    "href": "posts/generative-models/index.html#training-dynamics",
+    "title": "Generative Models: Mathematical Foundations and Architectures",
+    "section": "",
+    "text": "Jensen-Shannon divergence:\n\\[\nJSD(P\\|Q) = \\frac{1}{2}D_{KL}(P\\|\\frac{P+Q}{2}) + \\frac{1}{2}D_{KL}(Q\\|\\frac{P+Q}{2})\n\\]\n\n\n\nKL-divergence analysis:\n\\[\nD_{KL}(q_\\phi(z|x)\\|p(z)) = \\frac{1}{2}\\sum_{j=1}^d(\\sigma_j^2 + \\mu_j^2 - \\log\\sigma_j^2 - 1)\n\\]\n\n\n\nDenoising score matching:\n\\[\n\\nabla_x \\log p(x) = \\mathbb{E}_{p(t|x)}[\\nabla_x \\log p(x|x_t)]\n\\]"
+  },
+  {
+    "objectID": "posts/generative-models/index.html#advanced-training-techniques",
+    "href": "posts/generative-models/index.html#advanced-training-techniques",
+    "title": "Generative Models: Mathematical Foundations and Architectures",
+    "section": "",
+    "text": "Resolution-dependent loss:\n\\[\n\\mathcal{L}_\\text{total} = \\sum_{r} \\alpha_r \\mathcal{L}_r\n\\]\nWhere: - \\(r\\) is the resolution level - \\(\\alpha_r\\) is the weighting factor\n\n\n\nStyle transfer in latent space:\n\\[\nw = \\mathcal{M}(z) = f(z + \\Delta z)\n\\]\nWhere: - \\(\\mathcal{M}\\) is the mapping network - \\(f\\) is a non-linear transformation\n\n\n\nStyle transfer operation:\n\\[\n\\text{AdaIN}(x,y) = \\sigma(y)\\left(\\frac{x-\\mu(x)}{\\sigma(x)}\\right) + \\mu(y)\n\\]"
+  },
+  {
+    "objectID": "posts/generative-models/index.html#evaluation-metrics",
+    "href": "posts/generative-models/index.html#evaluation-metrics",
+    "title": "Generative Models: Mathematical Foundations and Architectures",
+    "section": "",
+    "text": "Measures quality and diversity:\n\\[\nIS = \\exp(\\mathbb{E}_{x\\sim p_g}[D_{KL}(p(y|x)\\|p(y))])\n\\]\n\n\n\nDistribution similarity metric:\n\\[\nFID = \\|\\mu_r - \\mu_g\\|^2 + Tr(\\Sigma_r + \\Sigma_g - 2(\\Sigma_r\\Sigma_g)^{1/2})\n\\]\nWhere: - \\(\\mu_r, \\Sigma_r\\) are real data statistics - \\(\\mu_g, \\Sigma_g\\) are generated data statistics\n\n\n\nTwo-way evaluation:\n\\[\n\\begin{aligned}\n\\text{Precision} &= \\mathbb{E}_{x\\sim p_g}[\\max_{y\\sim p_r} s(x,y)] \\\\\n\\text{Recall} &= \\mathbb{E}_{y\\sim p_r}[\\max_{x\\sim p_g} s(x,y)]\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "posts/generative-models/index.html#implementation-considerations",
+    "href": "posts/generative-models/index.html#implementation-considerations",
+    "title": "Generative Models: Mathematical Foundations and Architectures",
+    "section": "",
+    "text": "Generator Design:\n\nTransposed convolutions vs upsampling\nSkip connections\nAttention mechanisms\n\nDiscriminator Design:\n\nSpectral normalization\nResidual blocks\nMulti-scale discrimination\n\nLoss Functions:\n\nAdversarial loss\nReconstruction loss\nPerceptual loss\n\n\n\n\n\n\nGradient Penalties:\n\nR1 regularization\nPath length regularization\nConsistency regularization\n\nLearning Rate:\n\nTwo time-scale update rule\nAdaptive learning rates\nWarmup scheduling\n\nBatch Size:\n\nGradient accumulation\nMixed precision training\nMemory-efficient backprop"
+  },
+  {
+    "objectID": "posts/generative-models/index.html#best-practices",
+    "href": "posts/generative-models/index.html#best-practices",
+    "title": "Generative Models: Mathematical Foundations and Architectures",
+    "section": "",
+    "text": "VAEs for:\n\nStructured latent spaces\nReconstruction tasks\nInterpretable representations\n\nGANs for:\n\nHigh-quality generation\nStyle transfer\nDomain translation\n\nDiffusion Models for:\n\nHigh-fidelity generation\nControlled generation\nRobust training\n\n\n\n\n\n\nLearning Rates:\n\nGenerator: 1e-4 to 1e-3\nDiscriminator: 2e-4 to 2e-3\nVAE: 1e-3 to 1e-2\n\nBatch Sizes:\n\nGANs: 32 to 128\nVAEs: 64 to 256\nDiffusion: 32 to 64\n\nArchitecture:\n\nLayer depth\nChannel width\nAttention layers"
+  },
+  {
+    "objectID": "posts/generative-models/index.html#references",
+    "href": "posts/generative-models/index.html#references",
+    "title": "Generative Models: Mathematical Foundations and Architectures",
+    "section": "",
+    "text": "Theory:\n\n“Auto-Encoding Variational Bayes” by Kingma and Welling\n“Generative Adversarial Networks” by Goodfellow et al.\n“Denoising Diffusion Probabilistic Models” by Ho et al.\n\nArchitecture:\n\n“Progressive Growing of GANs” by Karras et al.\n“StyleGAN” by Karras et al.\n“Normalizing Flows” by Rezende and Mohamed\n\nTraining:\n\n“Improved Training of Wasserstein GANs” by Gulrajani et al.\n“Large Scale GAN Training for High Fidelity Natural Image Synthesis” by Brock et al.\n“Improved VQGAN for Image Generation” by Esser et al."
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html",
+    "href": "posts/machine_learning_concepts.html",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "",
+    "text": "Hey there! 👋 Ever wondered how Netflix knows exactly what show you might like next? Or how your phone can recognize your face? That’s machine learning in action! Today, let’s break down this fascinating technology in simple terms."
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#whats-machine-learning-really",
+    "href": "posts/machine_learning_concepts.html#whats-machine-learning-really",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "What’s Machine Learning, Really?",
+    "text": "What’s Machine Learning, Really?\nYou know how we humans learn from experience? Like how you learned to ride a bike by practicing, falling down a few times, and getting better with each try? Well, machine learning is kind of like that, but for computers!\nInstead of writing strict rules like “if this happens, do that,” we’re basically teaching computers to learn from examples and get better over time. Cool, right?"
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#lets-break-it-down-with-a-simple-example",
+    "href": "posts/machine_learning_concepts.html#lets-break-it-down-with-a-simple-example",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "Let’s Break It Down with a Simple Example",
+    "text": "Let’s Break It Down with a Simple Example\nImagine you’re teaching your little sister to identify dogs and cats: - First, you show her lots of pictures of dogs and cats - She might make mistakes at first (calling a dog a cat) - But the more pictures she sees, the better she gets at telling them apart - Eventually, she can identify animals she’s never seen before!\nThis is exactly how machine learning works! We show computers lots of examples, and they learn to recognize patterns, just like your sister did."
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#the-smart-people-who-explained-it-first",
+    "href": "posts/machine_learning_concepts.html#the-smart-people-who-explained-it-first",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "The Smart People Who Explained It First",
+    "text": "The Smart People Who Explained It First\n\nArthur Samuel’s Take (1959)\nHe said: “Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed.”\nIn everyday words: Instead of telling a computer exactly what to do (like we usually do), we let it figure things out on its own by learning from data. Just like how you learned to walk without someone programming your brain with exact instructions for each muscle movement!\n\n\nTom Mitchell’s Version (1997)\nHe got a bit more specific and said: “A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.”\nOkay, that sounds complicated! But let’s break it down with a fun example:\nImagine teaching a computer to play Mario Kart: - Task (T): Playing Mario Kart - Experience (E): Playing lots of races - Performance (P): How often it wins races\nThe more races it plays (E), the better it gets at winning (P) the game (T). Simple as that!"
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#where-do-we-see-machine-learning-in-real-life",
+    "href": "posts/machine_learning_concepts.html#where-do-we-see-machine-learning-in-real-life",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "Where Do We See Machine Learning in Real Life?",
+    "text": "Where Do We See Machine Learning in Real Life?\nIt’s everywhere! Here are some cool examples: - 📱 Face ID on your phone - 🎵 Spotify suggesting songs you might like - 📺 Netflix recommending your next binge-worthy show - 🚗 Self-driving cars learning to navigate roads - 📧 Gmail filtering out spam"
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#why-should-you-care",
+    "href": "posts/machine_learning_concepts.html#why-should-you-care",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "Why Should You Care?",
+    "text": "Why Should You Care?\nMachine learning is changing the world in amazing ways: - Making our devices smarter and more helpful - Helping doctors diagnose diseases earlier - Creating awesome video game experiences - Even helping fight climate change!"
+  },
+  {
+    "objectID": "posts/machine_learning_concepts.html#wrapping-up",
+    "href": "posts/machine_learning_concepts.html#wrapping-up",
+    "title": "Machine Learning Explained: A Beginner’s Guide",
+    "section": "Wrapping Up",
+    "text": "Wrapping Up\nSo there you have it! Machine learning isn’t just some complicated tech jargon - it’s a way to make computers learn from experience, just like we do. And the best part? We’re just getting started with what it can do!\nRemember: Every time you use a filter on Snapchat, ask Siri a question, or get a product recommendation on Amazon, you’re interacting with machine learning. Pretty amazing, right?\nGot questions? Feel free to drop them in the comments below! Learning about machine learning is a journey, and we’re all in it together! 🚀"
   },
   {
     "objectID": "posts/ml-fundamentals/index.html",
@@ -1405,82 +1454,5 @@
     "title": "Computational Learning Theory",
     "section": "",
     "text": "Theory:\n\n“Foundations of Machine Learning” by Mohri et al.\n“Understanding Machine Learning” by Shalev-Shwartz and Ben-David\n“Computational Learning Theory” by Kearns and Vazirani\n\nComplexity:\n\n“Computational Complexity” by Arora and Barak\n“Communication Complexity” by Kushilevitz and Nisan\n“The Nature of Computation” by Moore and Mertens\n\nApplications:\n\n“Algorithmic Learning Theory” by Anthony and Biggs\n“Learning with Kernels” by Schölkopf and Smola\n“Theoretical Computer Science” by Hopcroft and Ullman"
-  },
-  {
-    "objectID": "posts/machine_learning_concepts.html",
-    "href": "posts/machine_learning_concepts.html",
-    "title": "Machine Learning Explained: A Beginner’s Guide",
-    "section": "",
-    "text": "Hey there! 👋 Ever wondered how Netflix knows exactly what show you might like next? Or how your phone can recognize your face? That’s machine learning in action! Today, let’s break down this fascinating technology in simple terms."
-  },
-  {
-    "objectID": "posts/machine_learning_concepts.html#introduction",
-    "href": "posts/machine_learning_concepts.html#introduction",
-    "title": "Understanding Machine Learning",
-    "section": "",
-    "text": "Machine learning is a fascinating field that has revolutionized the way we interact with technology. It enables computers to learn from data and make decisions without being explicitly programmed. This post explores two foundational definitions that capture the essence of machine learning."
-  },
-  {
-    "objectID": "posts/machine_learning_concepts.html#definitions",
-    "href": "posts/machine_learning_concepts.html#definitions",
-    "title": "Understanding Machine Learning",
-    "section": "Definitions",
-    "text": "Definitions\n\nArthur Samuel, 1959\n“Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed.” —Arthur Samuel, 1959\nArthur Samuel’s definition highlights the core idea of machine learning: enabling computers to learn autonomously from data. This concept laid the groundwork for the development of algorithms that can adapt and improve over time.\n\n\nTom Mitchell, 1997\n“A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.” —Tom Mitchell, 1997\nTom Mitchell’s definition provides a more structured approach to understanding machine learning. It emphasizes the importance of experience (E), task (T), and performance measure (P) in evaluating a machine learning model’s effectiveness.\nTo put it simply, if a computer program gets better at a task the more it does it, then it’s learning! For example, if a program is designed to recognize cats in photos, it will get better at this task the more cat photos it sees."
-  },
-  {
-    "objectID": "posts/machine_learning_concepts.html#conclusion",
-    "href": "posts/machine_learning_concepts.html#conclusion",
-    "title": "Understanding Machine Learning",
-    "section": "Conclusion",
-    "text": "Conclusion\nThese definitions underscore the transformative potential of machine learning. By enabling computers to learn and improve from experience, machine learning opens up a world of possibilities for innovation and problem-solving across various domains.\nMachine learning is everywhere—from recommending movies and products to predicting weather and diagnosing diseases. As you continue to explore this field, you’ll discover how it can be applied to solve real-world problems and create new opportunities."
-  },
-  {
-    "objectID": "posts/machine_learning_concepts.html#what-is-machine-learning",
-    "href": "posts/machine_learning_concepts.html#what-is-machine-learning",
-    "title": "Understanding Machine Learning",
-    "section": "What is Machine Learning?",
-    "text": "What is Machine Learning?\nMachine learning is like teaching a computer to learn from its own experiences, similar to how humans learn from theirs. Instead of giving the computer a set of rigid instructions, we provide it with data and let it figure out patterns and make decisions on its own.\nImagine teaching a child to recognize animals. Instead of telling them every detail about each animal, you show them pictures and let them learn to identify them over time. Machine learning works in a similar way, using data to help computers “see” patterns and make predictions."
-  },
-  {
-    "objectID": "posts/machine_learning_concepts.html#whats-machine-learning-really",
-    "href": "posts/machine_learning_concepts.html#whats-machine-learning-really",
-    "title": "Machine Learning Explained: A Beginner’s Guide",
-    "section": "What’s Machine Learning, Really?",
-    "text": "What’s Machine Learning, Really?\nYou know how we humans learn from experience? Like how you learned to ride a bike by practicing, falling down a few times, and getting better with each try? Well, machine learning is kind of like that, but for computers!\nInstead of writing strict rules like “if this happens, do that,” we’re basically teaching computers to learn from examples and get better over time. Cool, right?"
-  },
-  {
-    "objectID": "posts/machine_learning_concepts.html#lets-break-it-down-with-a-simple-example",
-    "href": "posts/machine_learning_concepts.html#lets-break-it-down-with-a-simple-example",
-    "title": "Machine Learning Explained: A Beginner’s Guide",
-    "section": "Let’s Break It Down with a Simple Example",
-    "text": "Let’s Break It Down with a Simple Example\nImagine you’re teaching your little sister to identify dogs and cats: - First, you show her lots of pictures of dogs and cats - She might make mistakes at first (calling a dog a cat) - But the more pictures she sees, the better she gets at telling them apart - Eventually, she can identify animals she’s never seen before!\nThis is exactly how machine learning works! We show computers lots of examples, and they learn to recognize patterns, just like your sister did."
-  },
-  {
-    "objectID": "posts/machine_learning_concepts.html#the-smart-people-who-explained-it-first",
-    "href": "posts/machine_learning_concepts.html#the-smart-people-who-explained-it-first",
-    "title": "Machine Learning Explained: A Beginner’s Guide",
-    "section": "The Smart People Who Explained It First",
-    "text": "The Smart People Who Explained It First\n\nArthur Samuel’s Take (1959)\nHe said: “Machine learning is the field of study that gives computers the ability to learn without being explicitly programmed.”\nIn everyday words: Instead of telling a computer exactly what to do (like we usually do), we let it figure things out on its own by learning from data. Just like how you learned to walk without someone programming your brain with exact instructions for each muscle movement!\n\n\nTom Mitchell’s Version (1997)\nHe got a bit more specific and said: “A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.”\nOkay, that sounds complicated! But let’s break it down with a fun example:\nImagine teaching a computer to play Mario Kart: - Task (T): Playing Mario Kart - Experience (E): Playing lots of races - Performance (P): How often it wins races\nThe more races it plays (E), the better it gets at winning (P) the game (T). Simple as that!"
-  },
-  {
-    "objectID": "posts/machine_learning_concepts.html#where-do-we-see-machine-learning-in-real-life",
-    "href": "posts/machine_learning_concepts.html#where-do-we-see-machine-learning-in-real-life",
-    "title": "Machine Learning Explained: A Beginner’s Guide",
-    "section": "Where Do We See Machine Learning in Real Life?",
-    "text": "Where Do We See Machine Learning in Real Life?\nIt’s everywhere! Here are some cool examples: - 📱 Face ID on your phone - 🎵 Spotify suggesting songs you might like - 📺 Netflix recommending your next binge-worthy show - 🚗 Self-driving cars learning to navigate roads - 📧 Gmail filtering out spam"
-  },
-  {
-    "objectID": "posts/machine_learning_concepts.html#why-should-you-care",
-    "href": "posts/machine_learning_concepts.html#why-should-you-care",
-    "title": "Machine Learning Explained: A Beginner’s Guide",
-    "section": "Why Should You Care?",
-    "text": "Why Should You Care?\nMachine learning is changing the world in amazing ways: - Making our devices smarter and more helpful - Helping doctors diagnose diseases earlier - Creating awesome video game experiences - Even helping fight climate change!"
-  },
-  {
-    "objectID": "posts/machine_learning_concepts.html#wrapping-up",
-    "href": "posts/machine_learning_concepts.html#wrapping-up",
-    "title": "Machine Learning Explained: A Beginner’s Guide",
-    "section": "Wrapping Up",
-    "text": "Wrapping Up\nSo there you have it! Machine learning isn’t just some complicated tech jargon - it’s a way to make computers learn from experience, just like we do. And the best part? We’re just getting started with what it can do!\nRemember: Every time you use a filter on Snapchat, ask Siri a question, or get a product recommendation on Amazon, you’re interacting with machine learning. Pretty amazing, right?\nGot questions? Feel free to drop them in the comments below! Learning about machine learning is a journey, and we’re all in it together! 🚀"
   }
 ]
