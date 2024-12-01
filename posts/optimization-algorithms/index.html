@@ -380,7 +380,14 @@ window.Quarto = {
 <p><span class="math display">\[
 \min_{\theta} J(\theta) = \frac{1}{N} \sum_{i=1}^N L(f_\theta(x_i), y_i) + \lambda R(\theta)
 \]</span></p>
-<p>Where: - <span class="math inline">\(J(\theta)\)</span> is the objective function - <span class="math inline">\(\theta\)</span> represents model parameters - <span class="math inline">\(L\)</span> is the loss function - <span class="math inline">\(f_\theta\)</span> is the model prediction - <span class="math inline">\(R(\theta)\)</span> is the regularization term - <span class="math inline">\(\lambda\)</span> is the regularization strength</p>
+<p>Where: - <span class="math inline">\(J(\theta)\)</span> is the objective function</p>
+<ul>
+<li><p><span class="math inline">\(\theta\)</span> represents model parameters</p></li>
+<li><p><span class="math inline">\(L\)</span> is the loss function</p></li>
+<li><p><span class="math inline">\(f_\theta\)</span> is the model prediction</p></li>
+<li><p><span class="math inline">\(R(\theta)\)</span> is the regularization term</p></li>
+<li><p><span class="math inline">\(\lambda\)</span> is the regularization strength</p></li>
+</ul>
 </section>
 <section id="gradient-descent-fundamentals" class="level3">
 <h3 class="anchored" data-anchor-id="gradient-descent-fundamentals">2. Gradient Descent Fundamentals</h3>
@@ -388,7 +395,11 @@ window.Quarto = {
 <p><span class="math display">\[
 \theta_{t+1} = \theta_t - \eta \nabla_\theta J(\theta_t)
 \]</span></p>
-<p>Where: - <span class="math inline">\(\theta_t\)</span> is the parameter at iteration t - <span class="math inline">\(\eta\)</span> is the learning rate - <span class="math inline">\(\nabla_\theta J(\theta_t)\)</span> is the gradient of the objective function</p>
+<p>Where: - <span class="math inline">\(\theta_t\)</span> is the parameter at iteration t</p>
+<ul>
+<li><p><span class="math inline">\(\eta\)</span> is the learning rate</p></li>
+<li><p><span class="math inline">\(\nabla_\theta J(\theta_t)\)</span> is the gradient of the objective function</p></li>
+</ul>
 </section>
 <section id="convergence-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="convergence-analysis">3. Convergence Analysis</h3>
@@ -396,7 +407,11 @@ window.Quarto = {
 <p><span class="math display">\[
 J(\theta_t) - J(\theta^*) \leq \frac{\|\theta_0 - \theta^*\|^2}{2\eta t}
 \]</span></p>
-<p>Where: - <span class="math inline">\(\theta^*\)</span> is the optimal parameter - <span class="math inline">\(\theta_0\)</span> is the initial parameter - <span class="math inline">\(t\)</span> is the number of iterations</p>
+<p>Where: - <span class="math inline">\(\theta^*\)</span> is the optimal parameter</p>
+<ul>
+<li><p><span class="math inline">\(\theta_0\)</span> is the initial parameter</p></li>
+<li><p><span class="math inline">\(t\)</span> is the number of iterations</p></li>
+</ul>
 </section>
 </section>
 <section id="first-order-methods" class="level2">
@@ -411,7 +426,10 @@ J(\theta_t) - J(\theta^*) \leq \frac{\|\theta_0 - \theta^*\|^2}{2\eta t}
 <p><span class="math display">\[
 \mathbb{E}[J(\theta_t) - J(\theta^*)] \leq \frac{L}{2\mu t}
 \]</span></p>
-<p>Where: - <span class="math inline">\(L\)</span> is the Lipschitz constant - <span class="math inline">\(\mu\)</span> is the strong convexity parameter</p>
+<p>Where: - <span class="math inline">\(L\)</span> is the Lipschitz constant</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> is the strong convexity parameter</li>
+</ul>
 </section>
 <section id="momentum" class="level3">
 <h3 class="anchored" data-anchor-id="momentum">2. Momentum</h3>
@@ -422,7 +440,10 @@ v_{t+1} &amp;= \gamma v_t + \eta \nabla_\theta J(\theta_t) \\
 \theta_{t+1} &amp;= \theta_t - v_{t+1}
 \end{aligned}
 \]</span></p>
-<p>Where: - <span class="math inline">\(v_t\)</span> is the velocity at time t - <span class="math inline">\(\gamma\)</span> is the momentum coefficient</p>
+<p>Where: - <span class="math inline">\(v_t\)</span> is the velocity at time t</p>
+<ul>
+<li><span class="math inline">\(\gamma\)</span> is the momentum coefficient</li>
+</ul>
 </section>
 <section id="nesterov-accelerated-gradient-nag" class="level3">
 <h3 class="anchored" data-anchor-id="nesterov-accelerated-gradient-nag">3. Nesterov Accelerated Gradient (NAG)</h3>
@@ -443,7 +464,11 @@ v_{t+1} &amp;= \gamma v_t + \eta \nabla_\theta J(\theta_t + \gamma v_t) \\
 <p><span class="math display">\[
 \theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{G_t + \epsilon}} \odot g_t
 \]</span></p>
-<p>Where: - <span class="math inline">\(G_t\)</span> is the sum of squared gradients up to time t - <span class="math inline">\(g_t\)</span> is the current gradient - <span class="math inline">\(\odot\)</span> represents element-wise multiplication</p>
+<p>Where: - <span class="math inline">\(G_t\)</span> is the sum of squared gradients up to time t</p>
+<ul>
+<li><p><span class="math inline">\(g_t\)</span> is the current gradient</p></li>
+<li><p><span class="math inline">\(\odot\)</span> represents element-wise multiplication</p></li>
+</ul>
 </section>
 <section id="rmsprop" class="level3">
 <h3 class="anchored" data-anchor-id="rmsprop">2. RMSprop</h3>
@@ -514,7 +539,10 @@ B_{k+1} &amp;= B_k + \frac{y_ky_k^T}{y_k^Ts_k} - \frac{B_ks_ks_k^TB_k}{s_k^TB_ks
 <p><span class="math display">\[
 \eta_{effective} = \eta \sqrt{\frac{b}{b_{base}}}
 \]</span></p>
-<p>Where: - <span class="math inline">\(b\)</span> is the current batch size - <span class="math inline">\(b_{base}\)</span> is the reference batch size</p>
+<p>Where: - <span class="math inline">\(b\)</span> is the current batch size</p>
+<ul>
+<li><span class="math inline">\(b_{base}\)</span> is the reference batch size</li>
+</ul>
 </section>
 <section id="gradient-clipping" class="level3">
 <h3 class="anchored" data-anchor-id="gradient-clipping">3. Gradient Clipping</h3>
@@ -609,10 +637,10 @@ c\frac{g_t}{\|g_t\|} &amp; \text{otherwise}
 W \sim \mathcal{N}(0, \sqrt{\frac{2}{n_{in} + n_{out}}})
 \]</span></p>
 <ol start="2" type="1">
-<li>Gradient clipping</li>
-<li>Layer normalization: <span class="math display">\[
+<li><p>Gradient clipping</p></li>
+<li><p>Layer normalization: <span class="math display">\[
 \hat{x} = \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}}
-\]</span></li>
+\]</span></p></li>
 </ol>
 </section>
 <section id="saddle-points" class="level3">
