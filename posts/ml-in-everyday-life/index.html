@@ -33,17 +33,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-listing/list.min.js"></script>
-<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,67 +72,38 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-description','listing-date','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
+  (function() {
+    // Immediately apply the correct theme
+    const getStoredTheme = () => localStorage.getItem('quarto-color-scheme');
+    const getPreferredTheme = () => {
+      const storedTheme = getStoredTheme();
+      if (storedTheme) {
+        return storedTheme;
       }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    
+    const theme = getPreferredTheme();
+    
+    // Apply theme immediately
+    document.documentElement.classList.add(theme);
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+    
+    // Set background color immediately to prevent flash
+    if (theme === 'dark') {
+      document.documentElement.style.backgroundColor = '#222';
+      document.documentElement.style.color = '#fff';
+    } else {
+      document.documentElement.style.backgroundColor = '#fff';
+      document.documentElement.style.color = '#000';
     }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
+  })();
 </script>
 
+
 <link rel="stylesheet" href="../../styles.css">
-<link rel="alternate" type="application/rss+xml" title="BendThe-Curve" href="index.xml" data-external="1"></head>
+</head>
 
 <body class="nav-sidebar docked nav-fixed">
 
@@ -178,6 +149,7 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -373,7 +345,6 @@ window.Quarto = {
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
-  <li><a href="#continue-your-learning-journey" id="toc-continue-your-learning-journey" class="nav-link" data-scroll-target="#continue-your-learning-journey">Continue Your Learning Journey</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -395,17 +366,17 @@ window.Quarto = {
 <ul>
 <li><strong>Smart Thermostats</strong>
 <ul>
-<li><p>Learn your temperature preferences</p></li>
-<li><p>Adjust based on time of day</p></li>
-<li><p>Save energy by predicting when you’re away</p></li>
-<li><p>Example: Nest Learning Thermostat</p></li>
+<li>Learn your temperature preferences</li>
+<li>Adjust based on time of day</li>
+<li>Save energy by predicting when you’re away</li>
+<li>Example: Nest Learning Thermostat</li>
 </ul></li>
 <li><strong>Voice Assistants</strong>
 <ul>
-<li><p>Recognize your voice commands</p></li>
-<li><p>Learn your accent and speaking patterns</p></li>
-<li><p>Improve understanding over time</p></li>
-<li><p>Examples: Alexa, Google Assistant, Siri</p></li>
+<li>Recognize your voice commands</li>
+<li>Learn your accent and speaking patterns</li>
+<li>Improve understanding over time</li>
+<li>Examples: Alexa, Google Assistant, Siri</li>
 </ul></li>
 </ul>
 </section>
@@ -414,15 +385,15 @@ window.Quarto = {
 <ul>
 <li><strong>Face Recognition</strong>
 <ul>
-<li><p>Unlocks your phone securely</p></li>
-<li><p>Adapts to changes in appearance</p></li>
-<li><p>Works in different lighting conditions</p></li>
+<li>Unlocks your phone securely</li>
+<li>Adapts to changes in appearance</li>
+<li>Works in different lighting conditions</li>
 </ul></li>
 <li><strong>Keyboard Predictions</strong>
 <ul>
-<li><p>Learns your typing patterns</p></li>
-<li><p>Suggests words based on context</p></li>
-<li><p>Adapts to your vocabulary</p></li>
+<li>Learns your typing patterns</li>
+<li>Suggests words based on context</li>
+<li>Adapts to your vocabulary</li>
 </ul></li>
 </ul>
 </section>
@@ -434,10 +405,10 @@ window.Quarto = {
 <ul>
 <li><strong>Traffic Prediction</strong>
 <ul>
-<li><p>Analyzes historical traffic patterns</p></li>
-<li><p>Predicts delays in real-time</p></li>
-<li><p>Suggests faster routes</p></li>
-<li><p>Example: Google Maps, Waze</p></li>
+<li>Analyzes historical traffic patterns</li>
+<li>Predicts delays in real-time</li>
+<li>Suggests faster routes</li>
+<li>Example: Google Maps, Waze</li>
 </ul></li>
 </ul>
 </section>
@@ -446,10 +417,10 @@ window.Quarto = {
 <ul>
 <li><strong>Price Optimization</strong>
 <ul>
-<li><p>Adjusts prices based on demand</p></li>
-<li><p>Predicts busy periods</p></li>
-<li><p>Matches drivers efficiently</p></li>
-<li><p>Examples: Uber, Lyft</p></li>
+<li>Adjusts prices based on demand</li>
+<li>Predicts busy periods</li>
+<li>Matches drivers efficiently</li>
+<li>Examples: Uber, Lyft</li>
 </ul></li>
 </ul>
 </section>
@@ -461,15 +432,15 @@ window.Quarto = {
 <ul>
 <li><strong>Spam Filtering</strong>
 <ul>
-<li><p>Identifies unwanted emails</p></li>
-<li><p>Learns from your actions</p></li>
-<li><p>Adapts to new spam patterns</p></li>
+<li>Identifies unwanted emails</li>
+<li>Learns from your actions</li>
+<li>Adapts to new spam patterns</li>
 </ul></li>
 <li><strong>Smart Categorization</strong>
 <ul>
-<li><p>Sorts emails automatically</p></li>
-<li><p>Prioritizes important messages</p></li>
-<li><p>Suggests quick responses</p></li>
+<li>Sorts emails automatically</li>
+<li>Prioritizes important messages</li>
+<li>Suggests quick responses</li>
 </ul></li>
 </ul>
 </section>
@@ -478,15 +449,15 @@ window.Quarto = {
 <ul>
 <li><strong>Document Search</strong>
 <ul>
-<li><p>Understands natural language queries</p></li>
-<li><p>Finds relevant files quickly</p></li>
-<li><p>Improves with usage</p></li>
+<li>Understands natural language queries</li>
+<li>Finds relevant files quickly</li>
+<li>Improves with usage</li>
 </ul></li>
 <li><strong>Meeting Scheduling</strong>
 <ul>
-<li><p>Learns preferred meeting times</p></li>
-<li><p>Suggests optimal slots</p></li>
-<li><p>Considers participants’ schedules</p></li>
+<li>Learns preferred meeting times</li>
+<li>Suggests optimal slots</li>
+<li>Considers participants’ schedules</li>
 </ul></li>
 </ul>
 </section>
@@ -498,16 +469,16 @@ window.Quarto = {
 <ul>
 <li><strong>Product Recommendations</strong>
 <ul>
-<li><p>Based on your browsing history</p></li>
-<li><p>Similar items you might like</p></li>
-<li><p>Personalized deals</p></li>
-<li><p>Example: Amazon’s recommendations</p></li>
+<li>Based on your browsing history</li>
+<li>Similar items you might like</li>
+<li>Personalized deals</li>
+<li>Example: Amazon’s recommendations</li>
 </ul></li>
 <li><strong>Price Tracking</strong>
 <ul>
-<li><p>Predicts price changes</p></li>
-<li><p>Alerts for best buying times</p></li>
-<li><p>Finds similar products</p></li>
+<li>Predicts price changes</li>
+<li>Alerts for best buying times</li>
+<li>Finds similar products</li>
 </ul></li>
 </ul>
 </section>
@@ -516,10 +487,10 @@ window.Quarto = {
 <ul>
 <li><strong>Content Recommendations</strong>
 <ul>
-<li><p>Learns your viewing preferences</p></li>
-<li><p>Suggests new shows/movies</p></li>
-<li><p>Personalizes homepage</p></li>
-<li><p>Examples: Netflix, Spotify</p></li>
+<li>Learns your viewing preferences</li>
+<li>Suggests new shows/movies</li>
+<li>Personalizes homepage</li>
+<li>Examples: Netflix, Spotify</li>
 </ul></li>
 </ul>
 </section>
@@ -528,10 +499,10 @@ window.Quarto = {
 <ul>
 <li><strong>Feed Customization</strong>
 <ul>
-<li><p>Shows relevant content</p></li>
-<li><p>Learns from your interactions</p></li>
-<li><p>Filters unwanted content</p></li>
-<li><p>Examples: Instagram, Facebook</p></li>
+<li>Shows relevant content</li>
+<li>Learns from your interactions</li>
+<li>Filters unwanted content</li>
+<li>Examples: Instagram, Facebook</li>
 </ul></li>
 </ul>
 </section>
@@ -543,15 +514,15 @@ window.Quarto = {
 <ul>
 <li><strong>Activity Recognition</strong>
 <ul>
-<li><p>Identifies exercise types</p></li>
-<li><p>Counts steps accurately</p></li>
-<li><p>Monitors sleep patterns</p></li>
+<li>Identifies exercise types</li>
+<li>Counts steps accurately</li>
+<li>Monitors sleep patterns</li>
 </ul></li>
 <li><strong>Health Insights</strong>
 <ul>
-<li><p>Predicts fitness trends</p></li>
-<li><p>Suggests workout improvements</p></li>
-<li><p>Personalizes goals</p></li>
+<li>Predicts fitness trends</li>
+<li>Suggests workout improvements</li>
+<li>Personalizes goals</li>
 </ul></li>
 </ul>
 </section>
@@ -560,15 +531,15 @@ window.Quarto = {
 <ul>
 <li><strong>Symptom Checking</strong>
 <ul>
-<li><p>Analyzes symptoms</p></li>
-<li><p>Suggests possible causes</p></li>
-<li><p>Recommends actions</p></li>
+<li>Analyzes symptoms</li>
+<li>Suggests possible causes</li>
+<li>Recommends actions</li>
 </ul></li>
 <li><strong>Mental Health Support</strong>
 <ul>
-<li><p>Mood tracking</p></li>
-<li><p>Personalized recommendations</p></li>
-<li><p>Early warning signs</p></li>
+<li>Mood tracking</li>
+<li>Personalized recommendations</li>
+<li>Early warning signs</li>
 </ul></li>
 </ul>
 </section>
@@ -580,15 +551,15 @@ window.Quarto = {
 <ul>
 <li><strong>Fraud Detection</strong>
 <ul>
-<li><p>Spots unusual transactions</p></li>
-<li><p>Prevents unauthorized use</p></li>
-<li><p>Learns spending patterns</p></li>
+<li>Spots unusual transactions</li>
+<li>Prevents unauthorized use</li>
+<li>Learns spending patterns</li>
 </ul></li>
 <li><strong>Automated Banking</strong>
 <ul>
-<li><p>Smart ATMs</p></li>
-<li><p>Chatbot customer service</p></li>
-<li><p>Personalized financial advice</p></li>
+<li>Smart ATMs</li>
+<li>Chatbot customer service</li>
+<li>Personalized financial advice</li>
 </ul></li>
 </ul>
 </section>
@@ -597,9 +568,9 @@ window.Quarto = {
 <ul>
 <li><strong>Budget Apps</strong>
 <ul>
-<li><p>Categorize expenses</p></li>
-<li><p>Predict future spending</p></li>
-<li><p>Suggest savings opportunities</p></li>
+<li>Categorize expenses</li>
+<li>Predict future spending</li>
+<li>Suggest savings opportunities</li>
 </ul></li>
 </ul>
 </section>
@@ -609,31 +580,25 @@ window.Quarto = {
 <section id="pattern-recognition" class="level3">
 <h3 class="anchored" data-anchor-id="pattern-recognition">1. Pattern Recognition</h3>
 <ul>
-<li><p>Identifies regular behaviors</p>
-<ul>
-<li><p>Spots unusual activities</p></li>
-<li><p>Learns from historical data</p></li>
-</ul></li>
+<li>Identifies regular behaviors</li>
+<li>Spots unusual activities</li>
+<li>Learns from historical data</li>
 </ul>
 </section>
 <section id="personalization" class="level3">
 <h3 class="anchored" data-anchor-id="personalization">2. Personalization</h3>
 <ul>
-<li><p>Adapts to individual preferences</p>
-<ul>
-<li><p>Improves with more data</p></li>
-<li><p>Creates unique experiences</p></li>
-</ul></li>
+<li>Adapts to individual preferences</li>
+<li>Improves with more data</li>
+<li>Creates unique experiences</li>
 </ul>
 </section>
 <section id="prediction" class="level3">
 <h3 class="anchored" data-anchor-id="prediction">3. Prediction</h3>
 <ul>
-<li><p>Anticipates needs</p>
-<ul>
-<li><p>Forecasts events</p></li>
-<li><p>Suggests actions</p></li>
-</ul></li>
+<li>Anticipates needs</li>
+<li>Forecasts events</li>
+<li>Suggests actions</li>
 </ul>
 </section>
 </section>
@@ -642,31 +607,25 @@ window.Quarto = {
 <section id="time-saving" class="level3">
 <h3 class="anchored" data-anchor-id="time-saving">1. Time Saving</h3>
 <ul>
-<li><p>Automates routine tasks</p>
-<ul>
-<li><p>Provides quick answers</p></li>
-<li><p>Reduces decision time</p></li>
-</ul></li>
+<li>Automates routine tasks</li>
+<li>Provides quick answers</li>
+<li>Reduces decision time</li>
 </ul>
 </section>
 <section id="better-decisions" class="level3">
 <h3 class="anchored" data-anchor-id="better-decisions">2. Better Decisions</h3>
 <ul>
-<li><p>More informed choices</p>
-<ul>
-<li><p>Personalized recommendations</p></li>
-<li><p>Data-driven insights</p></li>
-</ul></li>
+<li>More informed choices</li>
+<li>Personalized recommendations</li>
+<li>Data-driven insights</li>
 </ul>
 </section>
 <section id="enhanced-experiences" class="level3">
 <h3 class="anchored" data-anchor-id="enhanced-experiences">3. Enhanced Experiences</h3>
 <ul>
-<li><p>Customized content</p>
-<ul>
-<li><p>Smoother interactions</p></li>
-<li><p>Proactive assistance</p></li>
-</ul></li>
+<li>Customized content</li>
+<li>Smoother interactions</li>
+<li>Proactive assistance</li>
 </ul>
 </section>
 </section>
@@ -675,31 +634,25 @@ window.Quarto = {
 <section id="data-collection" class="level3">
 <h3 class="anchored" data-anchor-id="data-collection">1. Data Collection</h3>
 <ul>
-<li><p>What data is collected</p>
-<ul>
-<li><p>How it’s used</p></li>
-<li><p>Storage security</p></li>
-</ul></li>
+<li>What data is collected</li>
+<li>How it’s used</li>
+<li>Storage security</li>
 </ul>
 </section>
 <section id="user-control" class="level3">
 <h3 class="anchored" data-anchor-id="user-control">2. User Control</h3>
 <ul>
-<li><p>Privacy settings</p>
-<ul>
-<li><p>Opt-out options</p></li>
-<li><p>Data access rights</p></li>
-</ul></li>
+<li>Privacy settings</li>
+<li>Opt-out options</li>
+<li>Data access rights</li>
 </ul>
 </section>
 <section id="best-practices" class="level3">
 <h3 class="anchored" data-anchor-id="best-practices">3. Best Practices</h3>
 <ul>
-<li><p>Review app permissions</p>
-<ul>
-<li><p>Regular privacy checks</p></li>
-<li><p>Understand data usage</p></li>
-</ul></li>
+<li>Review app permissions</li>
+<li>Regular privacy checks</li>
+<li>Understand data usage</li>
 </ul>
 </section>
 </section>
@@ -708,31 +661,25 @@ window.Quarto = {
 <section id="more-personalization" class="level3">
 <h3 class="anchored" data-anchor-id="more-personalization">1. More Personalization</h3>
 <ul>
-<li><p>Deeper understanding</p>
-<ul>
-<li><p>Better predictions</p></li>
-<li><p>Tailored experiences</p></li>
-</ul></li>
+<li>Deeper understanding</li>
+<li>Better predictions</li>
+<li>Tailored experiences</li>
 </ul>
 </section>
 <section id="improved-integration" class="level3">
 <h3 class="anchored" data-anchor-id="improved-integration">2. Improved Integration</h3>
 <ul>
-<li><p>Seamless connections</p>
-<ul>
-<li><p>Cross-device harmony</p></li>
-<li><p>Unified experiences</p></li>
-</ul></li>
+<li>Seamless connections</li>
+<li>Cross-device harmony</li>
+<li>Unified experiences</li>
 </ul>
 </section>
 <section id="enhanced-privacy" class="level3">
 <h3 class="anchored" data-anchor-id="enhanced-privacy">3. Enhanced Privacy</h3>
 <ul>
-<li><p>Better data protection</p>
-<ul>
-<li><p>More user control</p></li>
-<li><p>Transparent practices</p></li>
-</ul></li>
+<li>Better data protection</li>
+<li>More user control</li>
+<li>Transparent practices</li>
 </ul>
 </section>
 </section>
@@ -741,31 +688,25 @@ window.Quarto = {
 <section id="be-aware" class="level3">
 <h3 class="anchored" data-anchor-id="be-aware">1. Be Aware</h3>
 <ul>
-<li><p>Notice ML in daily life</p>
-<ul>
-<li><p>Understand basic concepts</p></li>
-<li><p>Stay informed of changes</p></li>
-</ul></li>
+<li>Notice ML in daily life</li>
+<li>Understand basic concepts</li>
+<li>Stay informed of changes</li>
 </ul>
 </section>
 <section id="use-features-wisely" class="level3">
 <h3 class="anchored" data-anchor-id="use-features-wisely">2. Use Features Wisely</h3>
 <ul>
-<li><p>Enable helpful features</p>
-<ul>
-<li><p>Maintain privacy</p></li>
-<li><p>Provide feedback</p></li>
-</ul></li>
+<li>Enable helpful features</li>
+<li>Maintain privacy</li>
+<li>Provide feedback</li>
 </ul>
 </section>
 <section id="stay-safe" class="level3">
 <h3 class="anchored" data-anchor-id="stay-safe">3. Stay Safe</h3>
 <ul>
-<li><p>Review settings regularly</p>
-<ul>
-<li><p>Understand data sharing</p></li>
-<li><p>Make informed choices</p></li>
-</ul></li>
+<li>Review settings regularly</li>
+<li>Understand data sharing</li>
+<li>Make informed choices</li>
 </ul>
 </section>
 </section>
@@ -779,89 +720,30 @@ window.Quarto = {
 <ol type="1">
 <li>For Learning More:
 <ul>
-<li><p>“AI Basics” courses on Coursera</p></li>
-<li><p>YouTube channels about technology</p></li>
-<li><p>Tech news websites</p></li>
+<li>“AI Basics” courses on Coursera</li>
+<li>YouTube channels about technology</li>
+<li>Tech news websites</li>
 </ul></li>
 <li>For Privacy:
 <ul>
-<li><p>Privacy setting guides</p></li>
-<li><p>Data protection websites</p></li>
-<li><p>Security best practices</p></li>
+<li>Privacy setting guides</li>
+<li>Data protection websites</li>
+<li>Security best practices</li>
 </ul></li>
 <li>For Updates:
 <ul>
-<li><p>Technology blogs</p></li>
-<li><p>ML news websites</p></li>
-<li><p>Company update pages</p></li>
+<li>Technology blogs</li>
+<li>ML news websites</li>
+<li>Company update pages</li>
 </ul></li>
 </ol>
 <p>Remember: Machine learning is here to help make your life easier, but it’s important to use it wisely and stay informed about how it affects your daily activities.</p>
-</section>
-<section id="continue-your-learning-journey" class="level2 related-posts-section">
-<h2 class="anchored" data-anchor-id="continue-your-learning-journey">Continue Your Learning Journey</h2>
-<div id="related-posts">
-
-</div>
-</section>
-
 
 
 </section>
+</section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="welcome,introduction" data-listing-date-sort="1732078800000" data-listing-file-modified-sort="1733026469019" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="456">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Welcome to BendTheCurve</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/bend-the-curve-intro/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">Your friendly guide to the exciting world of data science and machine learning</a>
-</div>
-</div>
-<div class="metadata">
-<a href="../../posts/bend-the-curve-intro/index.html" class="no-external">
-<div class="listing-date">
-November 20, 2024
-</div>
-<div class="listing-author">
-Ram Polisetti
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="deep-learning,neural-networks,architectures,mathematics" data-listing-date-sort="1710820800000" data-listing-file-modified-sort="1733026469019" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="799">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">Advanced Neural Network Architectures: A Technical Deep Dive</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/advanced-neural-architectures/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">A comprehensive technical exploration of advanced neural network architectures, including transformers, attention mechanisms, and modern architectural patterns.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="../../posts/advanced-neural-architectures/index.html" class="no-external">
-<div class="listing-date">
-March 19, 2024
-</div>
-<div class="listing-author">
-Ram Polisetti
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -882,6 +764,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
