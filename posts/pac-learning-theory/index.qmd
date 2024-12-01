@@ -6,6 +6,33 @@ categories: [machine-learning, theory, mathematics, statistics]
 image: "pac_learning.jpg"
 description: "A beginner-friendly guide to PAC learning theory and VC dimension with interactive visualizations and practical examples."
 jupyter: python3
+related_posts: |
+  [
+    {
+      "path": "/posts/computational-learning-theory/",
+      "title": "Computational Learning Theory",
+      "description": "Deep dive into the theoretical foundations of machine learning algorithms",
+      "categories": ["theory", "machine-learning"]
+    },
+    {
+      "path": "/posts/statistical-learning-theory/",
+      "title": "Statistical Learning Theory",
+      "description": "Understanding the statistical principles behind machine learning",
+      "categories": ["theory", "statistics", "machine-learning"]
+    },
+    {
+      "path": "/posts/ml-theory-foundations/",
+      "title": "Machine Learning Theory Foundations",
+      "description": "Essential theoretical concepts for understanding machine learning",
+      "categories": ["theory", "machine-learning"]
+    },
+    {
+      "path": "/posts/optimization-algorithms/",
+      "title": "Optimization Algorithms in Machine Learning",
+      "description": "Understanding key optimization algorithms used in machine learning",
+      "categories": ["algorithms", "optimization", "machine-learning"]
+    }
+  ]
 ---
 
 # PAC Learning Theory and VC Dimension

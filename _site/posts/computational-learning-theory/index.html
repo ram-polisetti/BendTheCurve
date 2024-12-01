@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ram Polisetti">
+<meta name="dcterms.date" content="2024-03-19">
+<meta name="description" content="A rigorous exploration of computational learning theory, covering complexity analysis, learnability, and algorithmic efficiency in machine learning.">
+
+<title>Computational Learning Theory – BendThe-Curve</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>
+  window.addEventListener('load', function() {
+    // Function to handle related posts
+    function setupRelatedPosts() {
+      const relatedPostsData = document.querySelector('meta[name="related-posts"]')?.content;
+      if (relatedPostsData) {
+        try {
+          const posts = JSON.parse(relatedPostsData);
+          if (posts && posts.length > 0) {
+            const container = document.createElement('div');
+            container.className = 'related-posts';
+            container.innerHTML = `
+              <h2 class="related-posts-title">Related Posts</h2>
+              <div class="related-posts-grid">
+                ${posts.map(post => `
+                  <div class="related-post-card">
+                    <a href="${post.path}" class="related-post-link">
+                      <h3 class="related-post-title">${post.title}</h3>
+                      ${post.description ? `<p class="related-post-description">${post.description}</p>` : ''}
+                      <div class="related-post-meta">
+                        ${post.categories ? post.categories.map(cat => `
+                          <span class="related-post-category">${cat}</span>
+                        `).join('') : ''}
+                      </div>
+                    </a>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+            document.querySelector('main').appendChild(container);
+          }
+        } catch (e) {
+          console.error('Error setting up related posts:', e);
+        }
+      }
+    }
+    setupRelatedPosts();
+  });
+</script>
+<style>
+  .related-posts {
+    margin-top: 4rem;
+    padding: 2rem;
+    background: var(--bs-body-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .related-posts-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--bs-body-color);
+    border-bottom: 2px solid var(--bs-primary);
+    padding-bottom: 0.5rem;
+  }
+  .related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .related-post-card {
+    background: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+    border-radius: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .related-post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  .related-post-link {
+    display: block;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+  }
+  .related-post-title {
+    font-size: 1.25rem;
+    margin: 0 0 0.75rem 0;
+    color: var(--bs-primary);
+  }
+  .related-post-description {
+    font-size: 0.95rem;
+    color: var(--bs-body-color);
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+  .related-post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+  .related-post-category {
+    background: var(--bs-primary);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">BendThe-Curve</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ram-polisetti/BendTheCurve"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Computational Learning Theory</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Computational Learning Theory</h1>
+                  <div>
+        <div class="description">
+          A rigorous exploration of computational learning theory, covering complexity analysis, learnability, and algorithmic efficiency in machine learning.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">machine-learning</div>
+                <div class="quarto-category">theory</div>
+                <div class="quarto-category">complexity</div>
+                <div class="quarto-category">algorithms</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Ram Polisetti </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 19, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts.html#category=machine-learning" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts.html#category=deep-learning" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Deep Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts.html#category=data-science" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Science</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts.html#category=data-visualization" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Visualization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts.html#category=python" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts.html#category=tutorial" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorials</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+ <span class="menu-text">Note: Advanced posts with heavy computations are currently under maintenance</span>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#computational-learning-theory" id="toc-computational-learning-theory" class="nav-link active" data-scroll-target="#computational-learning-theory">Computational Learning Theory</a>
+  <ul class="collapse">
+  <li><a href="#complexity-measures" id="toc-complexity-measures" class="nav-link" data-scroll-target="#complexity-measures">Complexity Measures</a>
+  <ul class="collapse">
+  <li><a href="#sample-complexity" id="toc-sample-complexity" class="nav-link" data-scroll-target="#sample-complexity">1. Sample Complexity</a></li>
+  <li><a href="#time-complexity" id="toc-time-complexity" class="nav-link" data-scroll-target="#time-complexity">2. Time Complexity</a></li>
+  <li><a href="#space-complexity" id="toc-space-complexity" class="nav-link" data-scroll-target="#space-complexity">3. Space Complexity</a></li>
+  </ul></li>
+  <li><a href="#learnability-analysis" id="toc-learnability-analysis" class="nav-link" data-scroll-target="#learnability-analysis">Learnability Analysis</a>
+  <ul class="collapse">
+  <li><a href="#efficient-learnability" id="toc-efficient-learnability" class="nav-link" data-scroll-target="#efficient-learnability">1. Efficient Learnability</a></li>
+  <li><a href="#hardness-results" id="toc-hardness-results" class="nav-link" data-scroll-target="#hardness-results">2. Hardness Results</a></li>
+  <li><a href="#average-case-analysis" id="toc-average-case-analysis" class="nav-link" data-scroll-target="#average-case-analysis">3. Average-Case Analysis</a></li>
+  </ul></li>
+  <li><a href="#learning-models" id="toc-learning-models" class="nav-link" data-scroll-target="#learning-models">Learning Models</a>
+  <ul class="collapse">
+  <li><a href="#query-learning" id="toc-query-learning" class="nav-link" data-scroll-target="#query-learning">1. Query Learning</a></li>
+  <li><a href="#online-learning" id="toc-online-learning" class="nav-link" data-scroll-target="#online-learning">2. Online Learning</a></li>
+  <li><a href="#active-learning" id="toc-active-learning" class="nav-link" data-scroll-target="#active-learning">3. Active Learning</a></li>
+  </ul></li>
+  <li><a href="#algorithmic-efficiency" id="toc-algorithmic-efficiency" class="nav-link" data-scroll-target="#algorithmic-efficiency">Algorithmic Efficiency</a>
+  <ul class="collapse">
+  <li><a href="#boosting-analysis" id="toc-boosting-analysis" class="nav-link" data-scroll-target="#boosting-analysis">1. Boosting Analysis</a></li>
+  <li><a href="#kernel-methods" id="toc-kernel-methods" class="nav-link" data-scroll-target="#kernel-methods">2. Kernel Methods</a></li>
+  <li><a href="#neural-networks" id="toc-neural-networks" class="nav-link" data-scroll-target="#neural-networks">3. Neural Networks</a></li>
+  </ul></li>
+  <li><a href="#computational-trade-offs" id="toc-computational-trade-offs" class="nav-link" data-scroll-target="#computational-trade-offs">Computational Trade-offs</a>
+  <ul class="collapse">
+  <li><a href="#time-space-trade-offs" id="toc-time-space-trade-offs" class="nav-link" data-scroll-target="#time-space-trade-offs">1. Time-Space Trade-offs</a></li>
+  <li><a href="#sample-computation-trade-offs" id="toc-sample-computation-trade-offs" class="nav-link" data-scroll-target="#sample-computation-trade-offs">2. Sample-Computation Trade-offs</a></li>
+  <li><a href="#accuracy-complexity-trade-offs" id="toc-accuracy-complexity-trade-offs" class="nav-link" data-scroll-target="#accuracy-complexity-trade-offs">3. Accuracy-Complexity Trade-offs</a></li>
+  </ul></li>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics">Advanced Topics</a>
+  <ul class="collapse">
+  <li><a href="#communication-complexity" id="toc-communication-complexity" class="nav-link" data-scroll-target="#communication-complexity">1. Communication Complexity</a></li>
+  <li><a href="#circuit-complexity" id="toc-circuit-complexity" class="nav-link" data-scroll-target="#circuit-complexity">2. Circuit Complexity</a></li>
+  <li><a href="#information-complexity" id="toc-information-complexity" class="nav-link" data-scroll-target="#information-complexity">3. Information Complexity</a></li>
+  </ul></li>
+  <li><a href="#practical-implications" id="toc-practical-implications" class="nav-link" data-scroll-target="#practical-implications">Practical Implications</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-design" id="toc-algorithm-design" class="nav-link" data-scroll-target="#algorithm-design">1. Algorithm Design</a></li>
+  <li><a href="#system-implementation" id="toc-system-implementation" class="nav-link" data-scroll-target="#system-implementation">2. System Implementation</a></li>
+  </ul></li>
+  <li><a href="#theoretical-frameworks" id="toc-theoretical-frameworks" class="nav-link" data-scroll-target="#theoretical-frameworks">Theoretical Frameworks</a>
+  <ul class="collapse">
+  <li><a href="#learning-with-errors" id="toc-learning-with-errors" class="nav-link" data-scroll-target="#learning-with-errors">1. Learning with Errors</a></li>
+  <li><a href="#statistical-query-model" id="toc-statistical-query-model" class="nav-link" data-scroll-target="#statistical-query-model">2. Statistical Query Model</a></li>
+  <li><a href="#property-testing" id="toc-property-testing" class="nav-link" data-scroll-target="#property-testing">3. Property Testing</a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-analysis" id="toc-algorithm-analysis" class="nav-link" data-scroll-target="#algorithm-analysis">1. Algorithm Analysis</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">2. Implementation</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="computational-learning-theory" class="level1">
+<h1>Computational Learning Theory</h1>
+<section id="complexity-measures" class="level2">
+<h2 class="anchored" data-anchor-id="complexity-measures">Complexity Measures</h2>
+<section id="sample-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="sample-complexity">1. Sample Complexity</h3>
+<p>PAC learning bound:</p>
+<p><span class="math display">\[
+m \geq \frac{1}{\epsilon}\left(\ln|\mathcal{H}| + \ln\frac{1}{\delta}\right)
+\]</span></p>
+<p>VC dimension bound:</p>
+<p><span class="math display">\[
+m = O\left(\frac{d}{\epsilon^2}\ln\frac{1}{\epsilon} + \frac{1}{\epsilon^2}\ln\frac{1}{\delta}\right)
+\]</span></p>
+</section>
+<section id="time-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="time-complexity">2. Time Complexity</h3>
+<p>Learning algorithm runtime:</p>
+<p><span class="math display">\[
+T(m,n,\epsilon,\delta) = \text{poly}(m,n,\frac{1}{\epsilon},\frac{1}{\delta})
+\]</span></p>
+<p>Where: - <span class="math inline">\(m\)</span> is sample size - <span class="math inline">\(n\)</span> is input dimension - <span class="math inline">\(\epsilon\)</span> is accuracy - <span class="math inline">\(\delta\)</span> is confidence</p>
+</section>
+<section id="space-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="space-complexity">3. Space Complexity</h3>
+<p>Memory requirements:</p>
+<p><span class="math display">\[
+S(m,n) = O(mn)
+\]</span></p>
+<p>Streaming bound:</p>
+<p><span class="math display">\[
+S = O(\log m + \log n)
+\]</span></p>
+</section>
+</section>
+<section id="learnability-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="learnability-analysis">Learnability Analysis</h2>
+<section id="efficient-learnability" class="level3">
+<h3 class="anchored" data-anchor-id="efficient-learnability">1. Efficient Learnability</h3>
+<p>Definition: - Polynomial sample complexity - Polynomial time complexity - Polynomial space complexity</p>
+<p>Requirements:</p>
+<p><span class="math display">\[
+\begin{aligned}
+m &amp;= \text{poly}(n,\frac{1}{\epsilon},\frac{1}{\delta}) \\
+T &amp;= \text{poly}(n,\frac{1}{\epsilon},\frac{1}{\delta}) \\
+S &amp;= \text{poly}(n,\frac{1}{\epsilon},\frac{1}{\delta})
+\end{aligned}
+\]</span></p>
+</section>
+<section id="hardness-results" class="level3">
+<h3 class="anchored" data-anchor-id="hardness-results">2. Hardness Results</h3>
+<p>Cryptographic assumptions:</p>
+<p><span class="math display">\[
+P \neq NP \implies \text{Not efficiently learnable}
+\]</span></p>
+<p>Reduction techniques:</p>
+<p><span class="math display">\[
+\text{Problem A} \leq_p \text{Problem B}
+\]</span></p>
+</section>
+<section id="average-case-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="average-case-analysis">3. Average-Case Analysis</h3>
+<p>Expected runtime:</p>
+<p><span class="math display">\[
+\mathbb{E}[T(X)] = \sum_{x} T(x)P(x)
+\]</span></p>
+<p>Smoothed analysis:</p>
+<p><span class="math display">\[
+\max_{\text{input } I} \mathbb{E}_{\text{noise } \xi}[T(I + \xi)]
+\]</span></p>
+</section>
+</section>
+<section id="learning-models" class="level2">
+<h2 class="anchored" data-anchor-id="learning-models">Learning Models</h2>
+<section id="query-learning" class="level3">
+<h3 class="anchored" data-anchor-id="query-learning">1. Query Learning</h3>
+<p>Membership queries:</p>
+<p><span class="math display">\[
+\text{MQ}(x) = c(x)
+\]</span></p>
+<p>Equivalence queries:</p>
+<p><span class="math display">\[
+\text{EQ}(h) = \begin{cases}
+\text{Yes} &amp; \text{if } h \equiv c \\
+x &amp; \text{where } h(x) \neq c(x)
+\end{cases}
+\]</span></p>
+</section>
+<section id="online-learning" class="level3">
+<h3 class="anchored" data-anchor-id="online-learning">2. Online Learning</h3>
+<p>Mistake bound:</p>
+<p><span class="math display">\[
+M \leq \text{poly}(n,\text{size}(c))
+\]</span></p>
+<p>Halving algorithm:</p>
+<p><span class="math display">\[
+|\mathcal{H}_t| \leq |\mathcal{H}_0|/2^t
+\]</span></p>
+</section>
+<section id="active-learning" class="level3">
+<h3 class="anchored" data-anchor-id="active-learning">3. Active Learning</h3>
+<p>Label complexity:</p>
+<p><span class="math display">\[
+\Lambda(\epsilon,\delta) = O(\theta d\log(1/\epsilon)\log(1/\delta))
+\]</span></p>
+<p>Where: - <span class="math inline">\(\theta\)</span> is disagreement coefficient - <span class="math inline">\(d\)</span> is VC dimension</p>
+</section>
+</section>
+<section id="algorithmic-efficiency" class="level2">
+<h2 class="anchored" data-anchor-id="algorithmic-efficiency">Algorithmic Efficiency</h2>
+<section id="boosting-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="boosting-analysis">1. Boosting Analysis</h3>
+<p>AdaBoost iterations:</p>
+<p><span class="math display">\[
+T = O\left(\frac{\log(1/\epsilon)}{\gamma^2}\right)
+\]</span></p>
+<p>Where: - <span class="math inline">\(\gamma\)</span> is edge over random</p>
+</section>
+<section id="kernel-methods" class="level3">
+<h3 class="anchored" data-anchor-id="kernel-methods">2. Kernel Methods</h3>
+<p>Kernel evaluation:</p>
+<p><span class="math display">\[
+T = O(m^2n)
+\]</span></p>
+<p>Nyström approximation:</p>
+<p><span class="math display">\[
+\|K - \tilde{K}\|_2 \leq \epsilon
+\]</span></p>
+</section>
+<section id="neural-networks" class="level3">
+<h3 class="anchored" data-anchor-id="neural-networks">3. Neural Networks</h3>
+<p>Backpropagation complexity:</p>
+<p><span class="math display">\[
+T = O(mnd)
+\]</span></p>
+<p>Where: - <span class="math inline">\(d\)</span> is network depth</p>
+</section>
+</section>
+<section id="computational-trade-offs" class="level2">
+<h2 class="anchored" data-anchor-id="computational-trade-offs">Computational Trade-offs</h2>
+<section id="time-space-trade-offs" class="level3">
+<h3 class="anchored" data-anchor-id="time-space-trade-offs">1. Time-Space Trade-offs</h3>
+<p>Memory-runtime relationship:</p>
+<p><span class="math display">\[
+T \cdot S = \Omega(n^2)
+\]</span></p>
+<p>Streaming algorithms:</p>
+<p><span class="math display">\[
+S \cdot \text{passes} = \Omega(n)
+\]</span></p>
+</section>
+<section id="sample-computation-trade-offs" class="level3">
+<h3 class="anchored" data-anchor-id="sample-computation-trade-offs">2. Sample-Computation Trade-offs</h3>
+<p>Active learning:</p>
+<p><span class="math display">\[
+\text{queries} \cdot \text{computation} = O(m\log m)
+\]</span></p>
+<p>Parallel speedup:</p>
+<p><span class="math display">\[
+T_p = \frac{T_1}{p} + O(\log p)
+\]</span></p>
+</section>
+<section id="accuracy-complexity-trade-offs" class="level3">
+<h3 class="anchored" data-anchor-id="accuracy-complexity-trade-offs">3. Accuracy-Complexity Trade-offs</h3>
+<p>Approximation guarantee:</p>
+<p><span class="math display">\[
+f(x) \leq (1+\epsilon)\text{OPT}
+\]</span></p>
+<p>Runtime dependency:</p>
+<p><span class="math display">\[
+T = O(\text{poly}(n,1/\epsilon))
+\]</span></p>
+</section>
+</section>
+<section id="advanced-topics" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-topics">Advanced Topics</h2>
+<section id="communication-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="communication-complexity">1. Communication Complexity</h3>
+<p>Two-party protocol:</p>
+<p><span class="math display">\[
+CC(f) = \min_P \max_{x,y} \text{bits}(P(x,y))
+\]</span></p>
+<p>Lower bound:</p>
+<p><span class="math display">\[
+CC(f) \geq \log_2 \text{rank}(M_f)
+\]</span></p>
+</section>
+<section id="circuit-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="circuit-complexity">2. Circuit Complexity</h3>
+<p>Boolean circuit size:</p>
+<p><span class="math display">\[
+\text{size}(f) = \min_{C: C \text{ computes } f} \text{gates}(C)
+\]</span></p>
+<p>Depth bound:</p>
+<p><span class="math display">\[
+\text{depth}(f) \geq \log_2 \text{sensitivity}(f)
+\]</span></p>
+</section>
+<section id="information-complexity" class="level3">
+<h3 class="anchored" data-anchor-id="information-complexity">3. Information Complexity</h3>
+<p>Information cost:</p>
+<p><span class="math display">\[
+IC(P) = I(X;M|Y) + I(Y;M|X)
+\]</span></p>
+<p>Protocol compression:</p>
+<p><span class="math display">\[
+|P'| \leq O(IC(P)\log|P|)
+\]</span></p>
+</section>
+</section>
+<section id="practical-implications" class="level2">
+<h2 class="anchored" data-anchor-id="practical-implications">Practical Implications</h2>
+<section id="algorithm-design" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-design">1. Algorithm Design</h3>
+<ol type="1">
+<li>Resource Constraints:
+<ul>
+<li>Time efficiency</li>
+<li>Memory usage</li>
+<li>Communication cost</li>
+</ul></li>
+<li>Scalability:
+<ul>
+<li>Input size</li>
+<li>Dimensionality</li>
+<li>Sample complexity</li>
+</ul></li>
+<li>Parallelization:
+<ul>
+<li>Task decomposition</li>
+<li>Communication overhead</li>
+<li>Load balancing</li>
+</ul></li>
+</ol>
+</section>
+<section id="system-implementation" class="level3">
+<h3 class="anchored" data-anchor-id="system-implementation">2. System Implementation</h3>
+<ol type="1">
+<li>Architecture:
+<ul>
+<li>Processing units</li>
+<li>Memory hierarchy</li>
+<li>Network topology</li>
+</ul></li>
+<li>Optimization:
+<ul>
+<li>Caching strategies</li>
+<li>Data structures</li>
+<li>Algorithm selection</li>
+</ul></li>
+<li>Trade-offs:
+<ul>
+<li>Accuracy vs speed</li>
+<li>Memory vs computation</li>
+<li>Communication vs local processing</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="theoretical-frameworks" class="level2">
+<h2 class="anchored" data-anchor-id="theoretical-frameworks">Theoretical Frameworks</h2>
+<section id="learning-with-errors" class="level3">
+<h3 class="anchored" data-anchor-id="learning-with-errors">1. Learning with Errors</h3>
+<p>LWE assumption:</p>
+<p><span class="math display">\[
+(A,As+e) \approx_c (A,u)
+\]</span></p>
+<p>Where: - <span class="math inline">\(A\)</span> is random matrix - <span class="math inline">\(s\)</span> is secret - <span class="math inline">\(e\)</span> is error - <span class="math inline">\(u\)</span> is uniform</p>
+</section>
+<section id="statistical-query-model" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-query-model">2. Statistical Query Model</h3>
+<p>Query complexity:</p>
+<p><span class="math display">\[
+\text{SQ-DIM}(\mathcal{C}) = \min_{D} \max_{f \in \mathcal{C}} |\langle f,D \rangle|
+\]</span></p>
+</section>
+<section id="property-testing" class="level3">
+<h3 class="anchored" data-anchor-id="property-testing">3. Property Testing</h3>
+<p>Query complexity:</p>
+<p><span class="math display">\[
+Q(\epsilon) = O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})
+\]</span></p>
+<p>Distance measure:</p>
+<p><span class="math display">\[
+\text{dist}(f,g) = \text{Pr}_{x}[f(x) \neq g(x)]
+\]</span></p>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<section id="algorithm-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-analysis">1. Algorithm Analysis</h3>
+<ol type="1">
+<li>Complexity Measures:
+<ul>
+<li>Asymptotic bounds</li>
+<li>Average case</li>
+<li>Worst case</li>
+</ul></li>
+<li>Resource Usage:
+<ul>
+<li>Memory footprint</li>
+<li>CPU utilization</li>
+<li>I/O operations</li>
+</ul></li>
+<li>Scalability:
+<ul>
+<li>Data size</li>
+<li>Dimensionality</li>
+<li>Parallelization</li>
+</ul></li>
+</ol>
+</section>
+<section id="implementation" class="level3">
+<h3 class="anchored" data-anchor-id="implementation">2. Implementation</h3>
+<ol type="1">
+<li>Optimization:
+<ul>
+<li>Algorithm choice</li>
+<li>Data structures</li>
+<li>Memory management</li>
+</ul></li>
+<li>Trade-offs:
+<ul>
+<li>Time vs space</li>
+<li>Accuracy vs speed</li>
+<li>Communication vs computation</li>
+</ul></li>
+<li>Evaluation:
+<ul>
+<li>Benchmarking</li>
+<li>Profiling</li>
+<li>Performance analysis</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Theory:
+<ul>
+<li>“Foundations of Machine Learning” by Mohri et al.</li>
+<li>“Understanding Machine Learning” by Shalev-Shwartz and Ben-David</li>
+<li>“Computational Learning Theory” by Kearns and Vazirani</li>
+</ul></li>
+<li>Complexity:
+<ul>
+<li>“Computational Complexity” by Arora and Barak</li>
+<li>“Communication Complexity” by Kushilevitz and Nisan</li>
+<li>“The Nature of Computation” by Moore and Mertens</li>
+</ul></li>
+<li>Applications:
+<ul>
+<li>“Algorithmic Learning Theory” by Anthony and Biggs</li>
+<li>“Learning with Kernels” by Schölkopf and Smola</li>
+<li>“Theoretical Computer Science” by Hopcroft and Ullman</li>
+</ul></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ram-polisetti\.github\.io\/BendTheCurve\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
