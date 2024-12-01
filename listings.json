@@ -1,29 +1,6 @@
 [
   {
-    "listing": "/posts/computational-learning-theory/index.html",
-    "items": [
-      "/posts/bend-the-curve-intro/index.html",
-      "/posts/advanced-neural-architectures/index.html",
-      "/posts/algorithmic-stability/index.html",
-      "/posts/causal-inference/index.html",
-      "/posts/deep-learning-beginners/index.html",
-      "/posts/generative-models/index.html",
-      "/posts/information-theory-ml/index.html",
-      "/posts/ml-fundamentals-beginners/index.html",
-      "/posts/ml-fundamentals/index.html",
-      "/posts/ml-in-everyday-life/index.html",
-      "/posts/ml-theory-foundations/index.html",
-      "/posts/online-learning/index.html",
-      "/posts/optimization-algorithms/index.html",
-      "/posts/optimization-theory/index.html",
-      "/posts/pac-learning-theory/index.html",
-      "/posts/probabilistic-graphical-models/index.html",
-      "/posts/reinforcement-learning-basics/index.html",
-      "/posts/statistical-learning-theory/index.html"
-    ]
-  },
-  {
-    "listing": "/posts/reinforcement-learning-basics/index.html",
+    "listing": "/posts/probabilistic-graphical-models/index.html",
     "items": [
       "/posts/bend-the-curve-intro/index.html",
       "/posts/advanced-neural-architectures/index.html",
@@ -41,12 +18,12 @@
       "/posts/optimization-algorithms/index.html",
       "/posts/optimization-theory/index.html",
       "/posts/pac-learning-theory/index.html",
-      "/posts/probabilistic-graphical-models/index.html",
+      "/posts/reinforcement-learning-basics/index.html",
       "/posts/statistical-learning-theory/index.html"
     ]
   },
   {
-    "listing": "/posts/optimization-theory/index.html",
+    "listing": "/posts/optimization-algorithms/index.html",
     "items": [
       "/posts/bend-the-curve-intro/index.html",
       "/posts/advanced-neural-architectures/index.html",
@@ -61,7 +38,7 @@
       "/posts/ml-in-everyday-life/index.html",
       "/posts/ml-theory-foundations/index.html",
       "/posts/online-learning/index.html",
-      "/posts/optimization-algorithms/index.html",
+      "/posts/optimization-theory/index.html",
       "/posts/pac-learning-theory/index.html",
       "/posts/probabilistic-graphical-models/index.html",
       "/posts/reinforcement-learning-basics/index.html",
@@ -69,7 +46,7 @@
     ]
   },
   {
-    "listing": "/posts/online-learning/index.html",
+    "listing": "/posts/ml-theory-foundations/index.html",
     "items": [
       "/posts/bend-the-curve-intro/index.html",
       "/posts/advanced-neural-architectures/index.html",
@@ -82,29 +59,6 @@
       "/posts/ml-fundamentals-beginners/index.html",
       "/posts/ml-fundamentals/index.html",
       "/posts/ml-in-everyday-life/index.html",
-      "/posts/ml-theory-foundations/index.html",
-      "/posts/optimization-algorithms/index.html",
-      "/posts/optimization-theory/index.html",
-      "/posts/pac-learning-theory/index.html",
-      "/posts/probabilistic-graphical-models/index.html",
-      "/posts/reinforcement-learning-basics/index.html",
-      "/posts/statistical-learning-theory/index.html"
-    ]
-  },
-  {
-    "listing": "/posts/ml-in-everyday-life/index.html",
-    "items": [
-      "/posts/bend-the-curve-intro/index.html",
-      "/posts/advanced-neural-architectures/index.html",
-      "/posts/algorithmic-stability/index.html",
-      "/posts/causal-inference/index.html",
-      "/posts/computational-learning-theory/index.html",
-      "/posts/deep-learning-beginners/index.html",
-      "/posts/generative-models/index.html",
-      "/posts/information-theory-ml/index.html",
-      "/posts/ml-fundamentals-beginners/index.html",
-      "/posts/ml-fundamentals/index.html",
-      "/posts/ml-theory-foundations/index.html",
       "/posts/online-learning/index.html",
       "/posts/optimization-algorithms/index.html",
       "/posts/optimization-theory/index.html",
@@ -115,7 +69,7 @@
     ]
   },
   {
-    "listing": "/posts/ml-fundamentals-beginners/index.html",
+    "listing": "/posts/ml-fundamentals/index.html",
     "items": [
       "/posts/bend-the-curve-intro/index.html",
       "/posts/advanced-neural-architectures/index.html",
@@ -125,7 +79,7 @@
       "/posts/deep-learning-beginners/index.html",
       "/posts/generative-models/index.html",
       "/posts/information-theory-ml/index.html",
-      "/posts/ml-fundamentals/index.html",
+      "/posts/ml-fundamentals-beginners/index.html",
       "/posts/ml-in-everyday-life/index.html",
       "/posts/ml-theory-foundations/index.html",
       "/posts/online-learning/index.html",
@@ -207,7 +161,7 @@
     ]
   },
   {
-    "listing": "/posts/computational-learning-theory/temp.html",
+    "listing": "/posts.html",
     "items": [
       "/posts/bend-the-curve-intro/index.html",
       "/posts/advanced-neural-architectures/index.html",
@@ -233,15 +187,15 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/computational-learning-theory/temp.html",
       "/posts/machine_learning_concepts.html",
       "/posts/bend-the-curve-intro/index.html",
+      "/posts/ml-fundamentals-beginners/index.html",
+      "/posts/reinforcement-learning-basics/index.html",
       "/posts/advanced-neural-architectures/index.html",
       "/posts/causal-inference/index.html",
       "/posts/deep-learning-beginners/index.html",
       "/posts/generative-models/index.html",
       "/posts/information-theory-ml/index.html",
-      "/posts/ml-fundamentals-beginners/index.html",
       "/posts/ml-fundamentals/index.html",
       "/posts/ml-in-everyday-life/index.html",
       "/posts/ml-theory-foundations/index.html",
@@ -249,35 +203,10 @@
       "/posts/optimization-algorithms/index.html",
       "/posts/optimization-theory/index.html",
       "/posts/probabilistic-graphical-models/index.html",
-      "/posts/reinforcement-learning-basics/index.html",
       "/posts/statistical-learning-theory/index.html",
       "/posts/computational-learning-theory/index.html",
       "/posts/pac-learning-theory/index.html",
       "/posts/algorithmic-stability/index.html"
-    ]
-  },
-  {
-    "listing": "/posts.html",
-    "items": [
-      "/posts/bend-the-curve-intro/index.html",
-      "/posts/advanced-neural-architectures/index.html",
-      "/posts/algorithmic-stability/index.html",
-      "/posts/causal-inference/index.html",
-      "/posts/computational-learning-theory/index.html",
-      "/posts/deep-learning-beginners/index.html",
-      "/posts/generative-models/index.html",
-      "/posts/information-theory-ml/index.html",
-      "/posts/ml-fundamentals-beginners/index.html",
-      "/posts/ml-fundamentals/index.html",
-      "/posts/ml-in-everyday-life/index.html",
-      "/posts/ml-theory-foundations/index.html",
-      "/posts/online-learning/index.html",
-      "/posts/optimization-algorithms/index.html",
-      "/posts/optimization-theory/index.html",
-      "/posts/pac-learning-theory/index.html",
-      "/posts/probabilistic-graphical-models/index.html",
-      "/posts/reinforcement-learning-basics/index.html",
-      "/posts/statistical-learning-theory/index.html"
     ]
   },
   {
@@ -350,30 +279,7 @@
     ]
   },
   {
-    "listing": "/posts/ml-fundamentals/index.html",
-    "items": [
-      "/posts/bend-the-curve-intro/index.html",
-      "/posts/advanced-neural-architectures/index.html",
-      "/posts/algorithmic-stability/index.html",
-      "/posts/causal-inference/index.html",
-      "/posts/computational-learning-theory/index.html",
-      "/posts/deep-learning-beginners/index.html",
-      "/posts/generative-models/index.html",
-      "/posts/information-theory-ml/index.html",
-      "/posts/ml-fundamentals-beginners/index.html",
-      "/posts/ml-in-everyday-life/index.html",
-      "/posts/ml-theory-foundations/index.html",
-      "/posts/online-learning/index.html",
-      "/posts/optimization-algorithms/index.html",
-      "/posts/optimization-theory/index.html",
-      "/posts/pac-learning-theory/index.html",
-      "/posts/probabilistic-graphical-models/index.html",
-      "/posts/reinforcement-learning-basics/index.html",
-      "/posts/statistical-learning-theory/index.html"
-    ]
-  },
-  {
-    "listing": "/posts/ml-theory-foundations/index.html",
+    "listing": "/posts/ml-in-everyday-life/index.html",
     "items": [
       "/posts/bend-the-curve-intro/index.html",
       "/posts/advanced-neural-architectures/index.html",
@@ -385,7 +291,7 @@
       "/posts/information-theory-ml/index.html",
       "/posts/ml-fundamentals-beginners/index.html",
       "/posts/ml-fundamentals/index.html",
-      "/posts/ml-in-everyday-life/index.html",
+      "/posts/ml-theory-foundations/index.html",
       "/posts/online-learning/index.html",
       "/posts/optimization-algorithms/index.html",
       "/posts/optimization-theory/index.html",
@@ -396,7 +302,7 @@
     ]
   },
   {
-    "listing": "/posts/optimization-algorithms/index.html",
+    "listing": "/posts/online-learning/index.html",
     "items": [
       "/posts/bend-the-curve-intro/index.html",
       "/posts/advanced-neural-architectures/index.html",
@@ -410,7 +316,7 @@
       "/posts/ml-fundamentals/index.html",
       "/posts/ml-in-everyday-life/index.html",
       "/posts/ml-theory-foundations/index.html",
-      "/posts/online-learning/index.html",
+      "/posts/optimization-algorithms/index.html",
       "/posts/optimization-theory/index.html",
       "/posts/pac-learning-theory/index.html",
       "/posts/probabilistic-graphical-models/index.html",
@@ -419,7 +325,7 @@
     ]
   },
   {
-    "listing": "/posts/probabilistic-graphical-models/index.html",
+    "listing": "/posts/optimization-theory/index.html",
     "items": [
       "/posts/bend-the-curve-intro/index.html",
       "/posts/advanced-neural-architectures/index.html",
@@ -435,8 +341,8 @@
       "/posts/ml-theory-foundations/index.html",
       "/posts/online-learning/index.html",
       "/posts/optimization-algorithms/index.html",
-      "/posts/optimization-theory/index.html",
       "/posts/pac-learning-theory/index.html",
+      "/posts/probabilistic-graphical-models/index.html",
       "/posts/reinforcement-learning-basics/index.html",
       "/posts/statistical-learning-theory/index.html"
     ]
